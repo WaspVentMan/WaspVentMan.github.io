@@ -9,7 +9,19 @@
     <link rel="icon" href="./img/favicon.ico">
 </head>
 <body style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-    <h1>404</h1>
-    <p>You should probably go <a href="./">home</a></p>
+    <h1 style="font-size: 200px; margin: 0px;">FUCK</h1>
+    <p class="homeTimer">You will be sent back to waspventman.co.uk in 5</p>
+    <script>
+        let timer = 5
+        const homeTimer = document.querySelector(".homeTimer")
+        setInterval(async function () {
+            timer--
+            homeTimer.textContent = `You will be sent back to waspventman.co.uk in ${timer}`
+
+            if (timer == 0){
+                window.location.replace("https://waspventman.co.uk")
+            }
+        }, 1000)
+    </script>
 </body>
 </html>
