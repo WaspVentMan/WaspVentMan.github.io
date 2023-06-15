@@ -8,14 +8,6 @@ a{
     text-decoration: none;
 }
 
-.NGIcon{
-    width: 50px;
-}
-
-.TWIcon{
-    width: 50px;
-}
-
-.STIcon{
-    width: 50px;
+.icon{
+    width: 75px;
 }
