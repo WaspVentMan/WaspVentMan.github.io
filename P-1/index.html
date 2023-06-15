@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P-1: SOUL SURVIVOR</title>
+</head>
+<body style="text-align: center; background-color: black; margin: 0px; overflow: hidden; user-select: none;">
+    <div style="width: 100vw; height: 100vh; pointer-events: none; background-color: #fff0; z-index: 1000; position: absolute; top: 0%; visibility: visible; transition: background-color 0.05s ease-out;"></div>
+    <img src="minos.png" alt="minos" style="height: 100vh; pointer-events: none;">
+    <script>
+        let sfx = new Audio('minos.mp3')
+
+        window.addEventListener('click', function () {
+            sfx.play()
+
+            setTimeout(() => {
+                document.querySelector("div").style.backgroundColor = "#fff"
+            }, 730)
+
+            setTimeout(() => {
+                window.location.replace("https://waspventman.co.uk")
+            }, 800)
+        })
+    </script>
+</body>
+</html>
