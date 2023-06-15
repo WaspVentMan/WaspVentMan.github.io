@@ -1,0 +1,21 @@
+body{
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.NGIcon{
+    width: 50px;
+}
+
+.TWIcon{
+    width: 50px;
+}
+
+.STIcon{
+    width: 50px;
+}
