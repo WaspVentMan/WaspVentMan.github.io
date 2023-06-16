@@ -8,19 +8,19 @@
     <title>404</title>
     <link rel="icon" href="./img/favicon.ico">
 </head>
-<body style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-    <h1 style="font-size: 200px; margin: 0px;">FUCK</h1>
-    <p class="homeTimer">You will be sent back to waspventman.co.uk in 5</p>
+<body style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; position: fixed; width: 100vw; margin: 0%;">
+    <h1 style="font-size: 10em; margin: 0px; width: 100%;">FUCK</h1>
+    <p style="font-size: 2em; text-align: center;"><b>You will be sent back to <a href="https://waspventman.co.uk/">waspventman.co.uk</a> in </b><b class="homeTimer">5</b></p>
     
     <script>
         let timer = 5
         const homeTimer = document.querySelector(".homeTimer")
         setInterval(async function () {
             timer--
-            homeTimer.textContent = `You will be sent back to waspventman.co.uk in ${timer}`
+            homeTimer.textContent = timer
 
             if (timer == 0){
-                window.location.replace("https://waspventman.co.uk")
+                window.location.href = "https://waspventman.co.uk"
             }
         }, 1000)
     </script>
