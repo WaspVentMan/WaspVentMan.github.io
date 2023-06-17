@@ -1,4 +1,4 @@
-let version = "0.1.1"
+let version = "0.1.1.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -41,15 +41,22 @@ if (saveData != null){
     saveData = JSON.parse(saveData)
 
     if (saveData.version != version){
-        console.log("balls " + saveData.version)
-        if (saveData.version == "0.1"){
+        try{
+            if (saveData.version == "0.1"){
+                localStorage.clear()
+                textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
+                textNotif.style.opacity = "100"
+                textNotif.style.visibility = "visible"
+                console.log("cum")
+            } else {
+            inventory = saveData.inventory
+            }
+        } catch {
             localStorage.clear()
-            textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
-            textNotif.style.opacity = "100"
-            textNotif.style.visibility = "visible"
-            console.log("cum")
-        } else {
-        inventory = saveData.inventory
+                textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
+                textNotif.style.opacity = "100"
+                textNotif.style.visibility = "visible"
+                console.log("cum")
         }
     } else {
         inventory = saveData.inventory
