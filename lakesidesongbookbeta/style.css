@@ -5,6 +5,7 @@ body{
 
 .gridContainer{
     position: fixed;
+    
 }
 
 .invContainer{
@@ -18,17 +19,7 @@ body{
 }
 
 .inventory{
-    width: 75%;
-    height: 75%;
     background-color: #fff;
-
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    
-    margin: auto;
 }
 
 .bestiary{
@@ -50,6 +41,11 @@ body{
     width: 100%;
 }
 
+.iconTextDiv{
+    height: 8px;
+    background-color: black;
+}
+
 .text{
     margin-left: 8px;
 }
@@ -63,8 +59,7 @@ body{
     width: 56px;
     height: 56px;
     z-index: 100;
-
-    transition: 0.5s cubic-bezier(.18,0,.79,1);
+    
     visibility: visible;
 }
 

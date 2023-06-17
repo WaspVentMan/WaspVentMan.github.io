@@ -1,3 +1,8 @@
+let version = "0.1.1"
+document.title = `Lakeside Songbook v${version}`
+
+const textNotif = document.querySelector(".textNotif")
+
 let gridWidth = 16
 let gridHeight = 10
 
@@ -7,21 +12,56 @@ let ySkew = (screen.height - (64*gridHeight)) / 2
 let PX = 0
 let PY = 0
 
+let map = 0
+
+let cursor = 0
+
 let inventory = {
-    "debug": {
-        "name": "DEBUG.FISH",
-        "count": 0,
-        "size": 0,
-        "description": "The first"
-    }
+    "fish": [
+        {
+            "imgSrc": "invImgs/DEBUGFISH.png",
+            "name": "DEBUG.FISH",
+            "count": 0,
+            "size": 0,
+            "description": "The first"
+        },
+        {
+            "imgSrc": "invImgs/realfakefish.png",
+            "name": "Real fake fish",
+            "count": 0,
+            "size": 0,
+            "description": "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now."
+        }
+    ]
 }
 
 let saveData = localStorage.getItem("savedata")
+
 if (saveData != null){
     saveData = JSON.parse(saveData)
-    inventory = saveData.inventory
-    PX = saveData.PX
-    PY = saveData.PY
+
+    if (saveData.version != version){
+        console.log("balls " + saveData.version)
+        if (saveData.version == "0.1"){
+            localStorage.clear()
+            textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
+            textNotif.style.opacity = "100"
+            textNotif.style.visibility = "visible"
+            console.log("cum")
+        } else {
+        inventory = saveData.inventory
+        }
+    } else {
+        inventory = saveData.inventory
+    }
+
+    inventory["fish"] = inventoryRepair(inventory["fish"])
+
+    if (saveData.version == version){
+        PX = saveData.PX
+        PY = saveData.PY
+        map = saveData.map
+    }
 } else {
     console.log("No save data detected, proceeding with fresh data")
     PX = 4
@@ -36,7 +76,6 @@ document.addEventListener('click', () => {
 
 const player = document.querySelector(".man")
 const cast = document.querySelector(".cast")
-const textNotif = document.querySelector(".textNotif")
 
 const gridContainer = document.querySelector(".gridContainer")
 const grid = document.querySelector(".grid")
@@ -54,39 +93,49 @@ gridContainer.style.top = `${ySkew}px`
 const invContainer = document.querySelector(".invContainer")
 const inv = document.querySelector(".inventory")
 
+inv.style.width = `${64*gridWidth}px`
+inv.style.height = `${64*gridHeight}px`
+
+invContainer.style.left = `${xSkew}px`
+
+const icon = document.querySelector(".icon")
 const invName = document.querySelector(".name")
 const catchCount = document.querySelector(".catchCount")
 const bestWeight = document.querySelector(".bestWeight")
 const description = document.querySelector(".description")
 
-function loadGrid(PX, PY) {
+let gridX = 1
+let gridY = 1
+for (let x = 0; x < (gridWidth * gridHeight); x++) {
+    let gridElement = document.createElement("div")
+
+    gridElement.style.gridArea = `${gridY} / ${gridX}`
+    
+    gridElement.style.backgroundRepeat = "no-repeat"
+    gridElement.style.backgroundSize = "cover"
+    gridElement.style.imageRendering = "pixelated"
+
+    gridElement.className = `gridElement${gridY}_${gridX}`
+
+    grid.appendChild(gridElement)
+
+    gridX++
+
+    if (gridX > gridWidth) {
+        gridY++
+        gridX = 1
+    }
+}
+
+function loadGrid(gridData){
     let gridX = 1
     let gridY = 1
     for (let x = 0; x < (gridWidth * gridHeight); x++) {
-        let gridElement = document.createElement("div")
+        let gridElement = document.querySelector(`.gridElement${gridY}_${gridX}`)
 
-        gridElement.style.gridArea = `${gridY} / ${gridX}`
-        try {
-            gridElement.style.backgroundImage = `url('tiles/${gridData[(gridY - 1) + PY][(gridX - 1) + PX].tile}.png')`
-        } catch {
-            gridElement.style.backgroundImage = `url('tiles/DEBUG.png')`
-            try {
-                gridData[gridY - 1].push({"tile": "DEBUG"})
-            } catch {
-                gridData[gridY - 1] = []
-                gridData[gridY - 1].push({"tile": "DEBUG"})
-            }
-        }
-        gridElement.style.backgroundRepeat = "no-repeat"
-        gridElement.style.backgroundSize = "cover"
-        gridElement.style.imageRendering = "pixelated"
-
-        gridElement.className = `gridElement${gridY}_${gridX}`
-
-        grid.appendChild(gridElement)
+        gridElement.style.backgroundImage = `url('tiles/${gridData[(gridY - 1)][(gridX - 1)].tile}.png')`
 
         gridX++
-
         if (gridX > gridWidth) {
             gridY++
             gridX = 1
@@ -94,7 +143,7 @@ function loadGrid(PX, PY) {
     }
 }
 
-loadGrid(0, 0)
+loadGrid(gridData[map])
 
 player.style.left = `${(64*PX)+xSkew+4}px`
 player.style.top = `${(64*PY)+ySkew}px`
@@ -108,7 +157,7 @@ let FR = 1
 
 let lastFish = 0
 
-textNotif.style.left = `${xSkew}px`
+textNotif.style.left = `${xSkew+4}px`
 textNotif.style.top = `${ySkew}px`
 
 let inInv = false
@@ -117,24 +166,41 @@ window.addEventListener('keydown', function (e) {
     if (e.key == "i") {
         inInv = !inInv
         if (inInv) {
-            invContainer.style.top = "0px"
+            invContainer.style.top = `${ySkew}px`
             textNotif.style.visibility = "hidden"
         } else {
-            invContainer.style.top = "-100%"
+            invContainer.style.top = `-100%`
             textNotif.style.visibility = "visible"
         }
     }
 
     if (inInv){
-        invName.textContent = inventory["debug"]["name"]
-        catchCount.textContent = `Caught: ${inventory["debug"]["count"]}`
-        bestWeight.textContent = `Best weight: ${inventory["debug"]["size"]}g`
-        description.textContent = inventory["debug"]["description"]
+        if (e.key == "ArrowLeft" && cursor > 0) {
+            cursor--
+        }
+
+        if (e.key == "ArrowRight" && cursor < inventory.fish.length-1) {
+            cursor++
+        }
+
+        if (inventory.fish[cursor].count == 0){
+            icon.src = "invImgs/fishless.png"
+            invName.textContent = "You haven't caught this fish yet!"
+            catchCount.textContent = "Caught: 0"
+            bestWeight.textContent = "Best weight: 0g"
+            description.textContent = "???"
+        } else {
+            icon.src = inventory.fish[cursor].imgSrc
+            invName.textContent = inventory.fish[cursor].name
+            catchCount.textContent = `Caught: ${inventory.fish[cursor].count}`
+            bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size}g`
+            description.textContent = inventory.fish[cursor].description
+        }
     } else {
-        if(Date.now() > (lastPress + 500)){
+        if(Date.now() > (lastPress + 100)){
             try{
                 if (e.key == "a") {
-                    if (!gridData[PY][PX-1].solid){
+                    if (!gridData[map][PY][PX-1].solid){
                         PX--
                         lastPress = Date.now()
                         FX = 0
@@ -147,7 +213,7 @@ window.addEventListener('keydown', function (e) {
             
             try{
                 if (e.key == "d") {
-                    if (!gridData[PY][PX+1].solid){
+                    if (!gridData[map][PY][PX+1].solid){
                         PX++
                         lastPress = Date.now()
                         FX = 0
@@ -160,7 +226,7 @@ window.addEventListener('keydown', function (e) {
             
             try{
                 if (e.key == "s") {
-                    if (!gridData[PY+1][PX].solid){
+                    if (!gridData[map][PY+1][PX].solid){
                         PY++
                         lastPress = Date.now()
                         FX = 0
@@ -173,7 +239,7 @@ window.addEventListener('keydown', function (e) {
             
             try{
                 if (e.key == "w") {
-                    if (!gridData[PY-1][PX].solid){
+                    if (!gridData[map][PY-1][PX].solid){
                         PY--
                         lastPress = Date.now()
                         FX = 0
@@ -185,7 +251,7 @@ window.addEventListener('keydown', function (e) {
             } catch {console.log("edge")}
 
             if (e.key == "ArrowUp") {
-                if (gridData[PY-1+FY][PX].water && FY > -FR){
+                if (gridData[map][PY-1+FY][PX].water && FY > -FR){
                     FY--
                     FX = 0
                     FV = true
@@ -194,7 +260,7 @@ window.addEventListener('keydown', function (e) {
             }
 
             if (e.key == "ArrowDown") {
-                if (gridData[PY+1+FY][PX].water && FY < FR){
+                if (gridData[map][PY+1+FY][PX].water && FY < FR){
                     FY++
                     FX = 0
                     FV = true
@@ -203,7 +269,7 @@ window.addEventListener('keydown', function (e) {
             }
 
             if (e.key == "ArrowLeft") {
-                if (gridData[PY][PX-1+FX].water && FX > -FR){
+                if (gridData[map][PY][PX-1+FX].water && FX > -FR){
                     FX--
                     FY = 0
                     FV = true
@@ -212,7 +278,7 @@ window.addEventListener('keydown', function (e) {
             }
 
             if (e.key == "ArrowRight") {
-                if (gridData[PY][PX+1+FX].water && FX < FR){
+                if (gridData[map][PY][PX+1+FX].water && FX < FR){
                     FX++
                     FY = 0
                     FV = true
@@ -222,25 +288,45 @@ window.addEventListener('keydown', function (e) {
 
             if (e.key == " " && Date.now() > (lastFish + 1500)) {
                 if (FV){
-                    inventory.debug.count++
+                    id = Math.floor(Math.random() * 2)
+                    inventory.fish[id].count++
 
-                    newWeight = Math.floor(Math.random() * 900)+99
-                    if (newWeight > inventory.debug.size){
-                        inventory.debug.size = newWeight
+                    if (id == 0){
+                        newWeight = Math.floor(Math.random() * 999)+1
+                    } else if (id == 1){
+                        newWeight = Math.floor(Math.random() * 2)+50
+                    }
+
+                    if (newWeight > inventory.fish[id].size){
+                        inventory.fish[id].size = newWeight
                     }
                     
-                    textNotif.textContent = `+1 DEBUGFISH, Weight: ${newWeight}g`
+                    textNotif.textContent = `+1 ${inventory.fish[id].name}, Weight: ${newWeight}g`
                     textNotif.style.opacity = "100"
                     setTimeout(() => {
                         textNotif.style.opacity = "0"
-                    }, 1000);
+                    }, 1000)
 
                     lastFish = Date.now()
                 }
                 //loadGrid(PX, PY)
             }
 
-            localStorage.setItem("savedata", JSON.stringify({"inventory": inventory, "PX": PX, "PY": PY}))
+            if(map == 0 && PX == 0 && PY == 0 && e.key == "Enter"){
+                map = 1
+                loadGrid(gridData[map])
+                PX = 7
+                PY = 3
+            }
+
+            if(map == 1 && PX >= 6 && PX <= 9 && PY == 9 && e.key == "Enter"){
+                map = 0
+                loadGrid(gridData[map])
+                PX = 4
+                PY = 2
+            }
+
+            localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
 
             player.style.left = `${(64*PX)+xSkew+4}px`
             player.style.top = `${(64*PY)+ySkew}px`

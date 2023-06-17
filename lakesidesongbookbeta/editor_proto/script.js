@@ -1,12 +1,15 @@
 let gridWidth = 16
 let gridHeight = 10
 
+let gridData = []
+
 let PX = 1
 let PY = 1
 
 let cursor = 0
 let tiles = [
     "DEBUG",
+    "EMPTY",
     "PA_FLOOR",
     "PA_PATH_ES",
     "PA_PATH_EW",
@@ -17,7 +20,6 @@ let tiles = [
     "PA_WALL",
     "PA_WATER",
     "PA_WATER_EDGE",
-    "EMPTY",
     "PA_BRIDGE_TOP",
     "PA_BRIDGE_BOTTOM"
 ]
@@ -48,6 +50,8 @@ grid.style.outlineColor = "black"
 grid.style.outlineStyle = "solid"
 grid.style.outlineWidth = "8px"
 
+grid.backgroundColor = "black"
+
 function loadGrid(PX, PY) {
     let gridX = 1
     let gridY = 1
@@ -60,16 +64,12 @@ function loadGrid(PX, PY) {
         } catch {
             gridElement.style.backgroundImage = `url('../tiles/DEBUG.png')`
             try {
-                gridData[gridY - 1].push({"tile": "DEBUG"})
+                gridData[gridY - 1].push({"tile": "DEBUG", "solid": false, "water": false})
             } catch {
                 gridData[gridY - 1] = []
                 gridData[gridY - 1].push({"tile": "DEBUG", "solid": false, "water": false})
             }
         }
-
-        gridData[(gridY - 1) + PY][(gridX - 1) + PX].water = false
-
-        //gridData[gridY - 1][(gridX - 1) + PX].solid = false
 
         gridElement.style.backgroundRepeat = "no-repeat"
         gridElement.style.backgroundSize = "cover"
