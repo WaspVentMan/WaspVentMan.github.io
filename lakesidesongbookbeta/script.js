@@ -1,4 +1,4 @@
-let version = "0.1.1.1"
+let version = "0.1.1.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -62,7 +62,7 @@ if (saveData != null){
         inventory = saveData.inventory
     }
 
-    inventory["fish"] = inventoryRepair(inventory["fish"])
+    //inventory["fish"] = inventoryRepair(inventory["fish"])
 
     if (saveData.version == version){
         PX = saveData.PX
