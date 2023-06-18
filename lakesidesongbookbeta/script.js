@@ -1,4 +1,4 @@
-let version = "0.1.1.2"
+let version = "0.1.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -18,62 +18,67 @@ let cursor = 0
 
 let inventory = {
     "fish": [
-        {
+        {   
             "imgSrc": "invImgs/DEBUGFISH.png",
             "name": "DEBUG.FISH",
+            "description": "The first",
             "count": 0,
-            "size": 0,
-            "description": "The first"
+            "size": 0
         },
-        {
+        {   
             "imgSrc": "invImgs/realfakefish.png",
             "name": "Real fake fish",
+            "description": "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now.",
             "count": 0,
-            "size": 0,
-            "description": "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now."
+            "size": 0
         }
     ]
 }
 
 let saveData = localStorage.getItem("savedata")
 
-if (saveData != null){
-    saveData = JSON.parse(saveData)
+try{
+    if (saveData != null){
+        saveData = JSON.parse(saveData)
 
-    if (saveData.version != version){
-        try{
+        if (saveData.version != version){
             if (saveData.version == "0.1"){
                 localStorage.clear()
                 textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
                 textNotif.style.opacity = "100"
                 textNotif.style.visibility = "visible"
-                console.log("cum")
+                console.log("SaveWipe")
             } else {
-            inventory = saveData.inventory
+                inventory = saveData.inventory
             }
-        } catch {
-            localStorage.clear()
-                textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
-                textNotif.style.opacity = "100"
-                textNotif.style.visibility = "visible"
-                console.log("cum")
+        } else if (inventory.fish.length == 0) {
+            textNotif.textContent = `Your fish from v${saveData.version} have been wiped due to incompatability with a new format, sorry for the inconvenience.`
+            textNotif.style.opacity = "100"
+            textNotif.style.visibility = "visible"
+        } else {
+            inventory = saveData.inventory
+        }
+
+        if (saveData.version == version){
+            PX = saveData.PX
+            PY = saveData.PY
+            map = saveData.map
         }
     } else {
-        inventory = saveData.inventory
+        console.log("No save data detected, proceeding with fresh data")
+        PX = 4
+        PY = 2
     }
-
-    //inventory["fish"] = inventoryRepair(inventory["fish"])
-
-    if (saveData.version == version){
-        PX = saveData.PX
-        PY = saveData.PY
-        map = saveData.map
-    }
-} else {
-    console.log("No save data detected, proceeding with fresh data")
-    PX = 4
-    PY = 2
+} catch {
+    localStorage.clear()
+        textNotif.textContent = `Your save data is corrupt.`
+        textNotif.style.opacity = "100"
+        textNotif.style.visibility = "visible"
+        PX = 4
+        PY = 2
 }
+
+//inventory["fish"] = inventoryRepair(inventory["fish"])
 
 const play = document.getElementById("play")
 
@@ -204,7 +209,15 @@ window.addEventListener('keydown', function (e) {
             description.textContent = inventory.fish[cursor].description
         }
     } else {
-        if(Date.now() > (lastPress + 100)){
+        if(map == 0 && PX == 15 && e.key == "d"){
+            map = 1
+            loadGrid(gridData[map])
+            PX = 0
+        } else if(map == 1 && PX == 0 && e.key == "a"){
+            map = 0
+            loadGrid(gridData[map])
+            PX = 15
+        } else if(Date.now() > (lastPress + 100)){
             try{
                 if (e.key == "a") {
                     if (!gridData[map][PY][PX-1].solid){
@@ -256,96 +269,82 @@ window.addEventListener('keydown', function (e) {
                     //loadGrid(PX, PY)
                 }
             } catch {console.log("edge")}
+        }
 
-            if (e.key == "ArrowUp") {
-                if (gridData[map][PY-1+FY][PX].water && FY > -FR){
-                    FY--
-                    FX = 0
-                    FV = true
+        if (e.key == "ArrowUp") {
+            if (gridData[map][PY-1+FY][PX].water && FY > -FR){
+                FY--
+                FX = 0
+                FV = true
+            }
+            //loadGrid(PX, PY)
+        }
+
+        if (e.key == "ArrowDown") {
+            if (gridData[map][PY+1+FY][PX].water && FY < FR){
+                FY++
+                FX = 0
+                FV = true
+            }
+            //loadGrid(PX, PY)
+        }
+
+        if (e.key == "ArrowLeft") {
+            if (gridData[map][PY][PX-1+FX].water && FX > -FR){
+                FX--
+                FY = 0
+                FV = true
+            }
+            //loadGrid(PX, PY)
+        }
+
+        if (e.key == "ArrowRight") {
+            if (gridData[map][PY][PX+1+FX].water && FX < FR){
+                FX++
+                FY = 0
+                FV = true
+            }
+            //loadGrid(PX, PY)
+        }
+
+        if (e.key == " " && Date.now() > (lastFish + 1500)) {
+            if (FV){
+                id = Math.floor(Math.random() * 2)
+                inventory.fish[id].count++
+
+                if (id == 0){
+                    newWeight = Math.floor(Math.random() * 999)+1
+                } else if (id == 1){
+                    newWeight = Math.floor(Math.random() * 2)+50
                 }
-                //loadGrid(PX, PY)
-            }
 
-            if (e.key == "ArrowDown") {
-                if (gridData[map][PY+1+FY][PX].water && FY < FR){
-                    FY++
-                    FX = 0
-                    FV = true
+                if (newWeight > inventory.fish[id].size){
+                    inventory.fish[id].size = newWeight
                 }
-                //loadGrid(PX, PY)
+                
+                textNotif.textContent = `+1 ${inventory.fish[id].name}, Weight: ${newWeight}g`
+                textNotif.style.opacity = "100"
+                setTimeout(() => {
+                    textNotif.style.opacity = "0"
+                }, 1000)
+
+                lastFish = Date.now()
             }
+            //loadGrid(PX, PY)
+        }
 
-            if (e.key == "ArrowLeft") {
-                if (gridData[map][PY][PX-1+FX].water && FX > -FR){
-                    FX--
-                    FY = 0
-                    FV = true
-                }
-                //loadGrid(PX, PY)
-            }
+        localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
 
-            if (e.key == "ArrowRight") {
-                if (gridData[map][PY][PX+1+FX].water && FX < FR){
-                    FX++
-                    FY = 0
-                    FV = true
-                }
-                //loadGrid(PX, PY)
-            }
+        player.style.left = `${(64*PX)+xSkew+4}px`
+        player.style.top = `${(64*PY)+ySkew}px`
 
-            if (e.key == " " && Date.now() > (lastFish + 1500)) {
-                if (FV){
-                    id = Math.floor(Math.random() * 2)
-                    inventory.fish[id].count++
+        cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
+        cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
 
-                    if (id == 0){
-                        newWeight = Math.floor(Math.random() * 999)+1
-                    } else if (id == 1){
-                        newWeight = Math.floor(Math.random() * 2)+50
-                    }
-
-                    if (newWeight > inventory.fish[id].size){
-                        inventory.fish[id].size = newWeight
-                    }
-                    
-                    textNotif.textContent = `+1 ${inventory.fish[id].name}, Weight: ${newWeight}g`
-                    textNotif.style.opacity = "100"
-                    setTimeout(() => {
-                        textNotif.style.opacity = "0"
-                    }, 1000)
-
-                    lastFish = Date.now()
-                }
-                //loadGrid(PX, PY)
-            }
-
-            if(map == 0 && PX == 0 && PY == 0 && e.key == "Enter"){
-                map = 1
-                loadGrid(gridData[map])
-                PX = 7
-                PY = 3
-            }
-
-            if(map == 1 && PX >= 6 && PX <= 9 && PY == 9 && e.key == "Enter"){
-                map = 0
-                loadGrid(gridData[map])
-                PX = 4
-                PY = 2
-            }
-
-            localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
-
-            player.style.left = `${(64*PX)+xSkew+4}px`
-            player.style.top = `${(64*PY)+ySkew}px`
-
-            cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
-            cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
-
-            if (FV || !(FX == FY)) {
-                cast.style.visibility = "visible"
-            } else {
-                cast.style.visibility = "hidden"
-            }
+        if (FV || !(FX == FY)) {
+            cast.style.visibility = "visible"
+        } else {
+            cast.style.visibility = "hidden"
         }
     }
 }, false)
