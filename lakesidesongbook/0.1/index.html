@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lakeside Songbook v0.1</title>
+</head>
+
+<body>
+    <audio id="music" preload="auto" loop>
+        <source src="Lakeside Songbook.mp3">
+    </audio>
+    <p class="textNotif"></p>
+    <div class="gridContainer">
+        <div class="grid">
+            <div class="man"></div>
+            <div class="cast"></div>
+        </div>
+    </div>
+    <div class="invContainer">
+        <div class="inventory">
+            <div class="bestiary"></div>
+            <div class="stats">
+                <img class="icon" src="invImgs/DEBUGFISH.png" alt="temp">
+                <p class="text name">DEBUGFISH</p>
+                <p class="text catchCount">Caught: 0</p>
+                <p class="text bestWeight">Best weight: 0g</p>
+                <p class="text description">The first</p>
+            </div>
+        </div>
+    </div>
+    <script src="level_data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
