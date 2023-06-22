@@ -1,4 +1,4 @@
-let version = "0.1.3"
+let version = "0.1.3.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -180,9 +180,9 @@ window.addEventListener('keydown', function (e) {
         if (inventory.fish[cursor].count == 0 || inventory.fish[cursor].count == undefined || inventory.fish[cursor].count == NaN){
             icon.src = "invImgs/fishless.png"
             invName.textContent = "You haven't caught this fish yet!"
-            catchCount.textContent = "Caught: 0"
-            bestWeight.textContent = "Best weight: 0g"
-            description.textContent = "???"
+            catchCount.textContent = ""
+            bestWeight.textContent = ""
+            description.textContent = ""
         } else {
             icon.src = inventory.fish[cursor].imgSrc
             invName.textContent = inventory.fish[cursor].name
@@ -314,7 +314,7 @@ window.addEventListener('keydown', function (e) {
                     newWeight = Math.floor(Math.random() * 1401)+100
                 }
 
-                if (inventory.fish[id].count != undefined || inventory.fish[id].count != NaN){
+                if (inventory.fish[id].size != undefined && inventory.fish[id].size != NaN){
                     if (newWeight > inventory.fish[id].size){
                         inventory.fish[id].size = newWeight
                     }
