@@ -1,4 +1,4 @@
-let version = "0.1.2"
+let version = "0.1.3"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -16,24 +16,7 @@ let map = 0
 
 let cursor = 0
 
-let inventory = {
-    "fish": [
-        {   
-            "imgSrc": "invImgs/DEBUGFISH.png",
-            "name": "DEBUG.FISH",
-            "description": "The first",
-            "count": 0,
-            "size": 0
-        },
-        {   
-            "imgSrc": "invImgs/realfakefish.png",
-            "name": "Real fake fish",
-            "description": "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now.",
-            "count": 0,
-            "size": 0
-        }
-    ]
-}
+let inventory = {"fish": []}
 
 let saveData = localStorage.getItem("savedata")
 
@@ -51,10 +34,6 @@ try{
             } else {
                 inventory = saveData.inventory
             }
-        } else if (inventory.fish.length == 0) {
-            textNotif.textContent = `Your fish from v${saveData.version} have been wiped due to incompatability with a new format, sorry for the inconvenience.`
-            textNotif.style.opacity = "100"
-            textNotif.style.visibility = "visible"
         } else {
             inventory = saveData.inventory
         }
@@ -63,6 +42,9 @@ try{
             PX = saveData.PX
             PY = saveData.PY
             map = saveData.map
+        } else {
+            PX = 4
+            PY = 2
         }
     } else {
         console.log("No save data detected, proceeding with fresh data")
@@ -78,7 +60,7 @@ try{
         PY = 2
 }
 
-//inventory["fish"] = inventoryRepair(inventory["fish"])
+inventory["fish"] = inventoryRepair(inventory["fish"])
 
 const play = document.getElementById("play")
 
@@ -165,7 +147,7 @@ let lastPress = 0
 let FX = 0
 let FY = 0
 let FV = false
-let FR = 1
+let FR = 3
 
 let lastFish = 0
 
@@ -195,7 +177,7 @@ window.addEventListener('keydown', function (e) {
             cursor++
         }
 
-        if (inventory.fish[cursor].count == 0){
+        if (inventory.fish[cursor].count == 0 || inventory.fish[cursor].count == undefined || inventory.fish[cursor].count == NaN){
             icon.src = "invImgs/fishless.png"
             invName.textContent = "You haven't caught this fish yet!"
             catchCount.textContent = "Caught: 0"
@@ -205,7 +187,12 @@ window.addEventListener('keydown', function (e) {
             icon.src = inventory.fish[cursor].imgSrc
             invName.textContent = inventory.fish[cursor].name
             catchCount.textContent = `Caught: ${inventory.fish[cursor].count}`
-            bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size}g`
+
+            if (inventory.fish[cursor].size < 1000){
+                bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size}g`
+            } else {
+                bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size/1000}kg`
+            }
             description.textContent = inventory.fish[cursor].description
         }
     } else {
@@ -309,16 +296,29 @@ window.addEventListener('keydown', function (e) {
 
         if (e.key == " " && Date.now() > (lastFish + 1500)) {
             if (FV){
-                id = Math.floor(Math.random() * 2)
-                inventory.fish[id].count++
+                id = Math.floor(Math.random() * 6)
 
-                if (id == 0){
-                    newWeight = Math.floor(Math.random() * 999)+1
-                } else if (id == 1){
-                    newWeight = Math.floor(Math.random() * 2)+50
+                if (inventory.fish[id].count == undefined || inventory.fish[id].count == NaN){
+                    inventory.fish[id].count = 1
+                } else {
+                    inventory.fish[id].count++
                 }
 
-                if (newWeight > inventory.fish[id].size){
+                if (id <= 0){
+                    newWeight = Math.floor(Math.random() * 999)+1
+                } else if (id <= 1){
+                    newWeight = Math.floor(Math.random() * 20)+50
+                } else if (id <= 4){
+                    newWeight = Math.floor(Math.random() * 201)+200
+                } else if (id <= 5){
+                    newWeight = Math.floor(Math.random() * 1401)+100
+                }
+
+                if (inventory.fish[id].count != undefined || inventory.fish[id].count != NaN){
+                    if (newWeight > inventory.fish[id].size){
+                        inventory.fish[id].size = newWeight
+                    }
+                } else {
                     inventory.fish[id].size = newWeight
                 }
                 
@@ -336,7 +336,7 @@ window.addEventListener('keydown', function (e) {
         localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
 
         player.style.left = `${(64*PX)+xSkew+4}px`
-        player.style.top = `${(64*PY)+ySkew}px`
+        player.style.top = `${(64*PY)+ySkew-16}px`
 
         cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
         cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
