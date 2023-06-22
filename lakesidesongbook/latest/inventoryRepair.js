@@ -45,7 +45,7 @@ function inventoryRepair(inventory){
         inventory[2],
         "invImgs/flopper.png",
         "Flopper",
-        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing..."
+        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing... \"I Love Flopper\" - Reid"
     )
 
     inventory[3] = makeObject(

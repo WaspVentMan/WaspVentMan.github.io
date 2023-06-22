@@ -9,6 +9,17 @@
 </head>
 
 <body>
+    <div style="text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">
+        <b>CONTROLS</b><br>
+        <b>"wasd" to move</b><br>
+        <b>"arrow keys" to fish</b><br>
+        <b>"space" to confirm fish</b><br>
+        <b>"i" to inventory</b><br>
+        <b>"arrow keys" while in the inventory to change fish</b><br>
+        <b>you can use "resetSave()" in the console to reset your save file</b><br><br>
+        <a href="https://discord.gg/petCdNFcYz" target="_blank">Join the discord, to report bugs and other shit</a>
+    </div>
+
     <audio id="music" preload="auto" loop>
         <source src="Lakeside Songbook.mp3">
     </audio>
@@ -17,26 +28,42 @@
         <div class="grid">
             <div class="man"></div>
             <div class="cast"></div>
+            <div class="splash"></div>
         </div>
     </div>
     <div class="invContainer">
         <div class="inventory">
-            <div class="bestiary">
-                <p>CONTROLS</p>
-                <p>"wasd" to move</p>
-                <p>"arrow keys" to fish</p>
-                <p>"space" to confirm fish</p>
-                <p>"i" to inventory</p>
-                <p>"arrow keys" while in the inventory to change fish</p>
-                <br>
+            <div class="stats">
+                <img class="icon icon0" src="invImgs/DEBUGFISH.png" alt="temp">
+                <div class="iconTextDiv"></div>
+                <p class="text name0">DEBUGFISH</p>
+                <p class="text catchCount0">Caught: 0</p>
+                <p class="text bestWeight0">Best weight: 0g</p>
+                <p class="text description0">The first</p>
             </div>
             <div class="stats">
-                <img class="icon" src="invImgs/DEBUGFISH.png" alt="temp">
+                <img class="icon icon1" src="invImgs/DEBUGFISH.png" alt="temp">
                 <div class="iconTextDiv"></div>
-                <p class="text name">DEBUGFISH</p>
-                <p class="text catchCount">Caught: 0</p>
-                <p class="text bestWeight">Best weight: 0g</p>
-                <p class="text description">The first</p>
+                <p class="text name1">DEBUGFISH</p>
+                <p class="text catchCount1">Caught: 0</p>
+                <p class="text bestWeight1">Best weight: 0g</p>
+                <p class="text description1">The first</p>
+            </div>
+            <div class="stats">
+                <img class="icon icon2" src="invImgs/DEBUGFISH.png" alt="temp">
+                <div class="iconTextDiv"></div>
+                <p class="text name2">DEBUGFISH</p>
+                <p class="text catchCount2">Caught: 0</p>
+                <p class="text bestWeight2">Best weight: 0g</p>
+                <p class="text description2">The first</p>
+            </div>
+            <div class="stats">
+                <img class="icon icon3" src="invImgs/DEBUGFISH.png" alt="temp">
+                <div class="iconTextDiv"></div>
+                <p class="text name3">DEBUGFISH</p>
+                <p class="text catchCount3">Caught: 0</p>
+                <p class="text bestWeight3">Best weight: 0g</p>
+                <p class="text description3">The first</p>
             </div>
         </div>
     </div>

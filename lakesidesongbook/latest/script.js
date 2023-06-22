@@ -1,4 +1,4 @@
-let version = "0.1.3.1"
+let version = "0.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -9,11 +9,10 @@ let gridHeight = 10
 let xSkew = (screen.width - (64*gridWidth)) / 2
 let ySkew = (screen.height - (64*gridHeight)) / 2
 
-let PX = 0
-let PY = 0
+let PX = 4
+let PY = 3
 
 let map = 0
-
 let cursor = 0
 
 let inventory = {"fish": []}
@@ -24,40 +23,21 @@ try{
     if (saveData != null){
         saveData = JSON.parse(saveData)
 
-        if (saveData.version != version){
-            if (saveData.version == "0.1"){
-                localStorage.clear()
-                textNotif.textContent = `Your save data, created on v${saveData.version} has been wiped due to incompatability with a new format, sorry for the inconvenience.`
-                textNotif.style.opacity = "100"
-                textNotif.style.visibility = "visible"
-                console.log("SaveWipe")
-            } else {
-                inventory = saveData.inventory
-            }
-        } else {
-            inventory = saveData.inventory
-        }
+        inventory = saveData.inventory
 
         if (saveData.version == version){
             PX = saveData.PX
             PY = saveData.PY
             map = saveData.map
-        } else {
-            PX = 4
-            PY = 2
         }
     } else {
         console.log("No save data detected, proceeding with fresh data")
-        PX = 4
-        PY = 2
     }
 } catch {
     localStorage.clear()
-        textNotif.textContent = `Your save data is corrupt.`
-        textNotif.style.opacity = "100"
-        textNotif.style.visibility = "visible"
-        PX = 4
-        PY = 2
+    textNotif.textContent = `Your save data is corrupt.`
+    textNotif.style.opacity = "100"
+    textNotif.style.visibility = "visible"
 }
 
 inventory["fish"] = inventoryRepair(inventory["fish"])
@@ -70,6 +50,7 @@ document.addEventListener('click', () => {
 
 const player = document.querySelector(".man")
 const cast = document.querySelector(".cast")
+const splash = document.querySelector(".splash")
 
 const gridContainer = document.querySelector(".gridContainer")
 const grid = document.querySelector(".grid")
@@ -91,12 +72,6 @@ inv.style.width = `${64*gridWidth}px`
 inv.style.height = `${64*gridHeight}px`
 
 invContainer.style.left = `${xSkew}px`
-
-const icon = document.querySelector(".icon")
-const invName = document.querySelector(".name")
-const catchCount = document.querySelector(".catchCount")
-const bestWeight = document.querySelector(".bestWeight")
-const description = document.querySelector(".description")
 
 let gridX = 1
 let gridY = 1
@@ -121,6 +96,35 @@ for (let x = 0; x < (gridWidth * gridHeight); x++) {
     }
 }
 
+function updateInv(cursor, inventory, offset){
+    const icon = document.querySelector(`.icon${offset}`)
+    const invName = document.querySelector(`.name${offset}`)
+    const catchCount = document.querySelector(`.catchCount${offset}`)
+    const bestWeight = document.querySelector(`.bestWeight${offset}`)
+    const description = document.querySelector(`.description${offset}`)
+
+    if (inventory.fish[cursor+offset].count == 0 || inventory.fish[cursor+offset].count == undefined || inventory.fish[cursor+offset].count == NaN){
+        icon.src = "invImgs/fishless.png"
+        invName.textContent = "You haven't caught this fish yet!"
+        catchCount.textContent = ""
+        bestWeight.textContent = ""
+        description.textContent = ""
+    } else {
+        icon.src = inventory.fish[cursor+offset].imgSrc
+        invName.textContent = inventory.fish[cursor+offset].name
+        catchCount.textContent = `Caught: ${inventory.fish[cursor+offset].count}`
+
+        if (inventory.fish[cursor+offset].size < 1000){
+            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size}g`
+        } else if (inventory.fish[cursor+offset].size < 1000000){
+            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size/1000}kg`
+        } else {
+            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size/1000000}T`
+        }
+        description.textContent = inventory.fish[cursor+offset].description
+    }
+}
+
 function loadGrid(gridData){
     let gridX = 1
     let gridY = 1
@@ -137,10 +141,15 @@ function loadGrid(gridData){
     }
 }
 
+function resetSave(){
+    localStorage.clear()
+    location.reload()
+}
+
 loadGrid(gridData[map])
 
 player.style.left = `${(64*PX)+xSkew+4}px`
-player.style.top = `${(64*PY)+ySkew}px`
+player.style.top = `${(64*PY)+ySkew-16}px`
 
 let lastPress = 0
 
@@ -148,6 +157,7 @@ let FX = 0
 let FY = 0
 let FV = false
 let FR = 3
+let FS = false
 
 let lastFish = 0
 
@@ -155,15 +165,20 @@ textNotif.style.left = `${xSkew+4}px`
 textNotif.style.top = `${ySkew}px`
 
 let inInv = false
+invContainer.style.top = `${ySkew}px`
 
 window.addEventListener('keydown', function (e) {
+    if (Date.now() < (lastFish + 1000)){
+        return
+    }
+
     if (e.key == "i") {
         inInv = !inInv
         if (inInv) {
-            invContainer.style.top = `${ySkew}px`
+            invContainer.style.visibility = "visible"
             textNotif.style.visibility = "hidden"
         } else {
-            invContainer.style.top = `-100%`
+            invContainer.style.visibility = "hidden"
             textNotif.style.visibility = "visible"
         }
     }
@@ -173,28 +188,14 @@ window.addEventListener('keydown', function (e) {
             cursor--
         }
 
-        if (e.key == "ArrowRight" && cursor < inventory.fish.length-1) {
+        if (e.key == "ArrowRight" && cursor < inventory.fish.length-4) {
             cursor++
         }
 
-        if (inventory.fish[cursor].count == 0 || inventory.fish[cursor].count == undefined || inventory.fish[cursor].count == NaN){
-            icon.src = "invImgs/fishless.png"
-            invName.textContent = "You haven't caught this fish yet!"
-            catchCount.textContent = ""
-            bestWeight.textContent = ""
-            description.textContent = ""
-        } else {
-            icon.src = inventory.fish[cursor].imgSrc
-            invName.textContent = inventory.fish[cursor].name
-            catchCount.textContent = `Caught: ${inventory.fish[cursor].count}`
-
-            if (inventory.fish[cursor].size < 1000){
-                bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size}g`
-            } else {
-                bestWeight.textContent = `Best weight: ${inventory.fish[cursor].size/1000}kg`
-            }
-            description.textContent = inventory.fish[cursor].description
-        }
+        updateInv(cursor, inventory, 0)
+        updateInv(cursor, inventory, 1)
+        updateInv(cursor, inventory, 2)
+        updateInv(cursor, inventory, 3)
     } else {
         if(map == 0 && PX == 15 && e.key == "d"){
             map = 1
@@ -294,8 +295,10 @@ window.addEventListener('keydown', function (e) {
             //loadGrid(PX, PY)
         }
 
-        if (e.key == " " && Date.now() > (lastFish + 1500)) {
+        if (e.key == " ") {
             if (FV){
+                FS = true
+
                 id = Math.floor(Math.random() * 6)
 
                 if (inventory.fish[id].count == undefined || inventory.fish[id].count == NaN){
@@ -324,8 +327,19 @@ window.addEventListener('keydown', function (e) {
                 
                 textNotif.textContent = `+1 ${inventory.fish[id].name}, Weight: ${newWeight}g`
                 textNotif.style.opacity = "100"
+
+                splash.style.backgroundImage = `url('char/splash.gif?${new Date().getTime()}')`
+
+                let sfx = new Audio(`sfx/splash.mp3`)
+                sfx.play()
+
                 setTimeout(() => {
                     textNotif.style.opacity = "0"
+                    FS = false
+
+                    FX = 0
+                    FY = 0
+                    FV = false
                 }, 1000)
 
                 lastFish = Date.now()
@@ -341,7 +355,10 @@ window.addEventListener('keydown', function (e) {
         cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
         cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
 
-        if (FV || !(FX == FY)) {
+        splash.style.left = `${(64*FX)+(64*PX)+xSkew}px`
+        splash.style.top = `${(64*FY)+(64*PY)+ySkew}px`
+
+        if ((FV || !(FX == FY)) && !FS) {
             cast.style.visibility = "visible"
         } else {
             cast.style.visibility = "hidden"
