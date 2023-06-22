@@ -7,3 +7,7 @@ body{
     background-position: center;
     background-size: 250px;
 }
+
+img{
+    width: 75vw;
+}
