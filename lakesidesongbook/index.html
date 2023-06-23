@@ -3,23 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lakeside Navigator</title>
+    <title>The Lakeside Songbook Navigator</title>
 
     <meta content="https://waspventman.co.uk/lakesidesongbook" property="og:url"/>
-    <meta content="The Lakeside Navigator" property="og:title"/>
+    <meta content="The Lakeside Songbook Navigator" property="og:title"/>
 </head>
 <body>
-    <a href="./latest/"><h1>Latest release</h1></a><br>
+    <a href="./latest/"><h1>Latest release</h1></a>
 
-    <h2>Old Versions:</h2>
-    <a href="./0.2/">v0.2</a><br>
-    <a href="./0.1.3.1/">v0.1.3.1</a><br>
-    <a href="./0.1.3/">v0.1.3</a><br>
-    <a href="./0.1.2/">v0.1.2</a><br>
-    <a href="./0.1.1.2/">v0.1.1.2</a><br>
-    <a href="./0.1.1.1/">v0.1.1.1</a><br>
-    <a href="./0.1.1/">v0.1.1</a><br>
-    <a href="./0.1/">v0.1</a><br>
-    <a href="./EEV1/">EEV1</a>
+    <select name="Version" id="vs">
+        <option value="latest">Latest release (0.2.1)</option>
+        <option value="0.2.1">v0.2.1</option>
+        <option value="0.2">v0.2</option>
+        <option value="0.1.3.1">v0.1.3.1</option>
+        <option value="0.1.3">v0.1.3</option>
+        <option value="0.1.2">v0.1.2</option>
+        <option value="0.1.1.2">v0.1.1.2</option>
+        <option value="0.1.1.1">v0.1.1.1</option>
+        <option value="0.1.1">v0.1.1</option>
+        <option value="0.1">v0.1</option>
+        <option value="EEV1">EEV1</a>
+    </select>
+
+    <button>play</button>
+
+    <script>
+        document.querySelector("button").addEventListener("click", function() {
+            window.location.href = document.querySelector("select").value
+        })
+    </script>
 </body>
 </html>

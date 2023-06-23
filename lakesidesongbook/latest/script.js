@@ -1,4 +1,4 @@
-let version = "0.2"
+let version = "0.2.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -15,7 +15,7 @@ let PY = 3
 let map = 0
 let cursor = 0
 
-let inventory = {"fish": []}
+let inventory = {"fish": [], "rareFish": []}
 
 let saveData = localStorage.getItem("savedata")
 
@@ -23,7 +23,15 @@ try{
     if (saveData != null){
         saveData = JSON.parse(saveData)
 
-        inventory = saveData.inventory
+        inventory.fish = saveData.inventory.fish
+
+        if (saveData.inventory.rareFish != undefined){
+            inventory.rareFish = saveData.inventory.rareFish
+        } else {
+            console.log("Pre v0.2.1 save file detected")
+            inventory.rareFish = []
+        }
+
 
         if (saveData.version == version){
             PX = saveData.PX
@@ -41,6 +49,7 @@ try{
 }
 
 inventory["fish"] = inventoryRepair(inventory["fish"])
+inventory["rareFish"] = inventoryRepair(inventory["rareFish"])
 
 const play = document.getElementById("play")
 
@@ -96,32 +105,41 @@ for (let x = 0; x < (gridWidth * gridHeight); x++) {
     }
 }
 
-function updateInv(cursor, inventory, offset){
+function updateInv(cursor, inventory, offset, type = "fish"){
+    if (cursor + offset > (inventory.fish.length-1)) {
+        cursor -= inventory.fish.length
+        type = "rareFish"
+    }
     const icon = document.querySelector(`.icon${offset}`)
     const invName = document.querySelector(`.name${offset}`)
     const catchCount = document.querySelector(`.catchCount${offset}`)
     const bestWeight = document.querySelector(`.bestWeight${offset}`)
     const description = document.querySelector(`.description${offset}`)
 
-    if (inventory.fish[cursor+offset].count == 0 || inventory.fish[cursor+offset].count == undefined || inventory.fish[cursor+offset].count == NaN){
+    if (inventory[type][cursor+offset].count == 0 || inventory[type][cursor+offset].count == undefined || inventory[type][cursor+offset].count == NaN){
         icon.src = "invImgs/fishless.png"
         invName.textContent = "You haven't caught this fish yet!"
         catchCount.textContent = ""
         bestWeight.textContent = ""
         description.textContent = ""
     } else {
-        icon.src = inventory.fish[cursor+offset].imgSrc
-        invName.textContent = inventory.fish[cursor+offset].name
-        catchCount.textContent = `Caught: ${inventory.fish[cursor+offset].count}`
+        icon.src = inventory[type][cursor+offset].imgSrc
 
-        if (inventory.fish[cursor+offset].size < 1000){
-            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size}g`
-        } else if (inventory.fish[cursor+offset].size < 1000000){
-            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size/1000}kg`
+        if (type == "rareFish"){
+            invName.textContent = "Rare " + inventory[type][cursor+offset].name
         } else {
-            bestWeight.textContent = `Best weight: ${inventory.fish[cursor+offset].size/1000000}T`
+            invName.textContent = inventory[type][cursor+offset].name
         }
-        description.textContent = inventory.fish[cursor+offset].description
+        catchCount.textContent = `Caught: ${inventory[type][cursor+offset].count}`
+
+        if (inventory[type][cursor+offset].size < 1000){
+            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size}g`
+        } else if (inventory[type][cursor+offset].size < 1000000){
+            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size/1000}kg`
+        } else {
+            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size/1000000}T`
+        }
+        description.textContent = inventory[type][cursor+offset].description
     }
 }
 
@@ -146,6 +164,20 @@ function resetSave(){
     location.reload()
 }
 
+function loadSave(data){
+    localStorage.setItem("savedata", JSON.stringify({"version": ":3", "inventory": JSON.parse(atob(data)), "map": map, "PX": PX, "PY": PY}))
+    location.reload()
+}
+
+function copySave(){
+    navigator.clipboard.writeText(btoa(JSON.stringify(inventory)))
+
+    textNotif.textContent = `Save data copied.`
+    textNotif.style.opacity = "100"
+    textNotif.style.visibility = "visible"
+    setTimeout(() => {textNotif.style.opacity="0"}, 1000)
+}
+
 loadGrid(gridData[map])
 
 player.style.left = `${(64*PX)+xSkew+4}px`
@@ -161,6 +193,8 @@ let FS = false
 
 let lastFish = 0
 
+let type = "fish"
+
 textNotif.style.left = `${xSkew+4}px`
 textNotif.style.top = `${ySkew}px`
 
@@ -174,6 +208,7 @@ window.addEventListener('keydown', function (e) {
 
     if (e.key == "i") {
         inInv = !inInv
+        cursor = 0
         if (inInv) {
             invContainer.style.visibility = "visible"
             textNotif.style.visibility = "hidden"
@@ -188,8 +223,16 @@ window.addEventListener('keydown', function (e) {
             cursor--
         }
 
-        if (e.key == "ArrowRight" && cursor < inventory.fish.length-4) {
+        if (e.key == "ArrowRight" && cursor < ((inventory.fish.length-1)*2)-2) {
             cursor++
+        }
+
+        if (e.key == " ") {
+            if (type == "rareFish"){
+                type = "fish"
+            } else {
+                type = "rareFish"
+            }
         }
 
         updateInv(cursor, inventory, 0)
@@ -300,32 +343,46 @@ window.addEventListener('keydown', function (e) {
                 FS = true
 
                 id = Math.floor(Math.random() * 6)
-
-                if (inventory.fish[id].count == undefined || inventory.fish[id].count == NaN){
-                    inventory.fish[id].count = 1
+                if (Math.floor(Math.random() * 128) == 1) {
+                    fish = "rareFish"
                 } else {
-                    inventory.fish[id].count++
+                    fish = "fish"
+                }
+
+                if (inventory[fish][id].count == undefined || inventory[fish][id].count == NaN){
+                    inventory[fish][id].count = 1
+                } else {
+                    inventory[fish][id].count++
+                }
+
+                let weightMult = 1
+                if (fish == "rareFish"){
+                    weightMult = 2
                 }
 
                 if (id <= 0){
-                    newWeight = Math.floor(Math.random() * 999)+1
+                    newWeight = (Math.floor(Math.random() * 999)+1)*weightMult
                 } else if (id <= 1){
-                    newWeight = Math.floor(Math.random() * 20)+50
+                    newWeight = (Math.floor(Math.random() * 20)+50)*weightMult
                 } else if (id <= 4){
-                    newWeight = Math.floor(Math.random() * 201)+200
+                    newWeight = (Math.floor(Math.random() * 201)+200)*weightMult
                 } else if (id <= 5){
-                    newWeight = Math.floor(Math.random() * 1401)+100
+                    newWeight = (Math.floor(Math.random() * 1401)+100)*weightMult
                 }
 
-                if (inventory.fish[id].size != undefined && inventory.fish[id].size != NaN){
-                    if (newWeight > inventory.fish[id].size){
-                        inventory.fish[id].size = newWeight
+                if (inventory[fish][id].size != undefined && inventory[fish][id].size != NaN){
+                    if (newWeight > inventory[fish][id].size){
+                        inventory[fish][id].size = newWeight
                     }
                 } else {
-                    inventory.fish[id].size = newWeight
+                    inventory[fish][id].size = newWeight
                 }
                 
-                textNotif.textContent = `+1 ${inventory.fish[id].name}, Weight: ${newWeight}g`
+                if (fish == "rareFish"){
+                    textNotif.textContent = `+1 Rare ${inventory["fish"][id].name}, Weight: ${newWeight}g`
+                } else {
+                    textNotif.textContent = `+1 ${inventory["fish"][id].name}, Weight: ${newWeight}g`
+                }
                 textNotif.style.opacity = "100"
 
                 splash.style.backgroundImage = `url('char/splash.gif?${new Date().getTime()}')`
