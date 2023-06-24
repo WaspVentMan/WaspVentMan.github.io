@@ -1,6 +1,7 @@
 body{
     margin: 0%;
     background-color: black;
+    image-rendering: pixelated;
 }
 
 .gridContainer{
@@ -26,18 +27,14 @@ body{
 .stats{
     display: inline-block;
     width: 256px;
-    height: 100%;
-    background-color: lightgrey;
+    height: 640px;
+    background: lightgrey;
+    outline: 2px black solid;
 }
 
 .icon{
     width: 256px;
     height: 256px;
-}
-
-.iconTextDiv{
-    height: 8px;
-    background-color: black;
 }
 
 .text{

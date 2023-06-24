@@ -1,4 +1,4 @@
-let version = "0.2.1.1"
+let version = "0.2.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -110,6 +110,7 @@ function updateInv(cursor, inventory, offset, type = "fish"){
         cursor -= inventory.fish.length
         type = "rareFish"
     }
+    const stats = document.querySelector(`.stats${offset}`)
     const icon = document.querySelector(`.icon${offset}`)
     const invName = document.querySelector(`.name${offset}`)
     const catchCount = document.querySelector(`.catchCount${offset}`)
@@ -118,7 +119,7 @@ function updateInv(cursor, inventory, offset, type = "fish"){
 
     if (inventory[type][cursor+offset].count == 0 || inventory[type][cursor+offset].count == undefined || inventory[type][cursor+offset].count == NaN){
         icon.src = "invImgs/fishless.png"
-        invName.textContent = "You haven't caught this fish yet!"
+        invName.textContent = ""
         catchCount.textContent = ""
         bestWeight.textContent = ""
         description.textContent = ""
@@ -139,7 +140,23 @@ function updateInv(cursor, inventory, offset, type = "fish"){
         } else {
             bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size/1000000}T`
         }
+
         description.textContent = inventory[type][cursor+offset].description
+
+        weightMult = 1
+        if (type == "rareFish"){
+            weightMult = 2
+        }
+
+        try{
+            if (inventory[type][cursor+offset].size >= weightCalc(cursor+offset, weightMult)[1]){
+                stats.style.background = "linear-gradient(172deg, rgba(255,215,0,1) 0%, rgba(255,255,0,1) 25%, rgba(255,215,0,1) 100%)"
+                bestWeight.textContent += " ★"
+                invName.textContent = "Perfect " + invName.textContent
+            } else {
+                stats.style.background = "linear-gradient(172deg, rgba(215,215,215,1) 0%, rgba(255,255,255,1) 25%, rgba(215,215,215,1) 100%)"
+            }
+        } catch {}
     }
 }
 
@@ -176,6 +193,23 @@ function copySave(){
     textNotif.style.opacity = "100"
     textNotif.style.visibility = "visible"
     setTimeout(() => {textNotif.style.opacity="0"}, 1000)
+}
+
+function weightCalc(id, weightMult){
+    if (id <= 0){
+        newWeight = (Math.floor(Math.random() * 999)+1)*weightMult
+        maxWeight = 999*weightMult
+    } else if (id <= 1){
+        newWeight = (Math.floor(Math.random() * 20)+50)*weightMult
+        maxWeight = 69*weightMult
+    } else if (id <= 4){
+        newWeight = (Math.floor(Math.random() * 201)+200)*weightMult
+        maxWeight = 400*weightMult
+    } else if (id <= 5){
+        newWeight = (Math.floor(Math.random() * 1401)+100)*weightMult
+        maxWeight = 1500*weightMult
+    }
+    return [newWeight, maxWeight]
 }
 
 loadGrid(gridData[map])
@@ -360,15 +394,7 @@ window.addEventListener('keydown', function (e) {
                     weightMult = 2
                 }
 
-                if (id <= 0){
-                    newWeight = (Math.floor(Math.random() * 999)+1)*weightMult
-                } else if (id <= 1){
-                    newWeight = (Math.floor(Math.random() * 20)+50)*weightMult
-                } else if (id <= 4){
-                    newWeight = (Math.floor(Math.random() * 201)+200)*weightMult
-                } else if (id <= 5){
-                    newWeight = (Math.floor(Math.random() * 1401)+100)*weightMult
-                }
+                newWeight = weightCalc(id, weightMult)[0]
 
                 if (inventory[fish][id].size != undefined && inventory[fish][id].size != NaN){
                     if (newWeight > inventory[fish][id].size){
