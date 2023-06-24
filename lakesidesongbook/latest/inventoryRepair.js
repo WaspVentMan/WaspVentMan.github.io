@@ -30,14 +30,14 @@ function inventoryRepair(inventory){
     inventory[0] = makeObject(
         inventory[0],
         "invImgs/DEBUGFISH.png",
-        "DEBUG.FISH",
-        "The first"
+        "Debug Fish",
+        "A small li'l fella, rumor has it that they have been around longer than history, but that's just a myth... right?"
     )
 
     inventory[1] = makeObject(
         inventory[1],
         "invImgs/realfakefish.png",
-        "Real fake fish",
+        "Real Fake Fish",
         "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now."
     )
 
@@ -51,21 +51,21 @@ function inventoryRepair(inventory){
     inventory[3] = makeObject(
         inventory[3],
         "invImgs/flopperG.png",
-        "Green flopper",
+        "Green Flopper",
         "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing..."
     )
 
     inventory[4] = makeObject(
         inventory[4],
         "invImgs/flopperB.png",
-        "Blue flopper",
-        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing..."
+        "Blue Flopper",
+        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing... \"blue flopper my beloved\" - Brine"
     )
 
     inventory[5] = makeObject(
         inventory[5],
         "invImgs/cheepcheep.png",
-        "Cheep cheep",
+        "Cheep Cheep",
         "That fish got them dick sucking lips!"
     )
 
