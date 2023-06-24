@@ -1,4 +1,4 @@
-let version = "0.2.2.1"
+let version = "0.2.2.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -217,15 +217,17 @@ loadGrid(gridData[map])
 player.style.left = `${(64*PX)+xSkew+4}px`
 player.style.top = `${(64*PY)+ySkew-16}px`
 
-let lastPress = 0
-
 let FX = 0
 let FY = 0
 let FV = false
 let FR = 3
 let FS = false
 
-let lastFish = 0
+let lastMove = 0
+let lastInv = false
+let lastInvMove = 0
+let lastFish = false
+let lastFishMove = 0
 
 let type = "fish"
 
@@ -235,12 +237,42 @@ textNotif.style.top = `${ySkew}px`
 let inInv = false
 invContainer.style.top = `${ySkew}px`
 
+let key = {}
+
 window.addEventListener('keydown', function (e) {
-    if (Date.now() < (lastFish + 1000)){
+    key[e.key] = true
+})
+
+window.addEventListener('keyup', function (e) {
+    key[e.key] = false
+
+    if (!key["i"]){
+        lastInv = key["i"]
+    }
+
+    if (!key[" "]){
+        lastInv = key[" "]
+    }
+
+    if (key[e.key] != "ArrowLeft" && key[e.key] != "ArrowRight"){
+        lastInvMove = 0
+        if (key[e.key] != "ArrowUp" && key[e.key] != "ArrowDown"){
+            lastFishMove = 0
+        }
+    }
+
+    if (key[e.key] != "w" && key[e.key] != "a" && key[e.key] != "s" && key[e.key] != "d"){
+        lastMove = 0
+    }
+})
+
+setInterval(() => {
+    if (Date.now() < (lastFish + 1500)){
         return
     }
 
-    if (e.key == "i") {
+    if (key["i"] && lastInv != key["i"]) { //  && Date.now() < (lastInv + 1000)
+        lastInv = key["i"]
         inInv = !inInv
         cursor = 0
         if (inInv) {
@@ -253,15 +285,17 @@ window.addEventListener('keydown', function (e) {
     }
 
     if (inInv){
-        if (e.key == "ArrowLeft" && cursor > 0) {
+        if (key["ArrowLeft"] && cursor > 0 && Date.now() > (lastInvMove + 100)) {
+            lastInvMove = Date.now()
             cursor--
         }
 
-        if (e.key == "ArrowRight" && cursor < ((inventory.fish.length-1)*2)-2) {
+        if (key["ArrowRight"] && cursor < ((inventory.fish.length-1)*2)-2 && Date.now() > (lastInvMove + 100)) {
+            lastInvMove = Date.now()
             cursor++
         }
 
-        if (e.key == " ") {
+        if (key[" "]) {
             if (type == "rareFish"){
                 type = "fish"
             } else {
@@ -274,59 +308,47 @@ window.addEventListener('keydown', function (e) {
         updateInv(cursor, inventory, 2)
         updateInv(cursor, inventory, 3)
     } else {
-        if(map == 0 && PX == 15 && e.key == "d"){
+        if(map == 0 && PX == 15 && key["d"]){
             map = 1
             loadGrid(gridData[map])
             PX = 0
-        } else if(map == 1 && PX == 0 && e.key == "a"){
+        } else if(map == 1 && PX == 0 && key["a"]){
             map = 0
             loadGrid(gridData[map])
             PX = 15
-        } else if(Date.now() > (lastPress + 100)){
+        } else if(Date.now() > (lastMove + 200)){
             try{
-                if (e.key == "a") {
+                if (key["a"]) {
                     if (!gridData[map][PY][PX-1].solid){
                         PX--
-                        lastPress = Date.now()
+                        lastMove = Date.now()
                         FX = 0
                         FY = 0
                         FV = false
                     }
                     //loadGrid(PX, PY)
-                }
-            } catch {console.log("edge")}
-            
-            try{
-                if (e.key == "d") {
+                } else if (key["d"]) {
                     if (!gridData[map][PY][PX+1].solid){
                         PX++
-                        lastPress = Date.now()
+                        lastMove = Date.now()
                         FX = 0
                         FY = 0
                         FV = false
                     }
                     //loadGrid(PX, PY)
-                }
-            } catch {console.log("edge")}
-            
-            try{
-                if (e.key == "s") {
+                } else if (key["s"]) {
                     if (!gridData[map][PY+1][PX].solid){
                         PY++
-                        lastPress = Date.now()
+                        lastMove = Date.now()
                         FX = 0
                         FY = 0
                         FV = false
                     }
                     //loadGrid(PX, PY)
-                }
-            } catch {console.log("edge")}
-            
-            try{
-                if (e.key == "w") {
+                } else if (key["w"]) {
                     if (!gridData[map][PY-1][PX].solid){
                         PY--
-                        lastPress = Date.now()
+                        lastMove = Date.now()
                         FX = 0
                         FY = 0
                         FV = false
@@ -336,44 +358,41 @@ window.addEventListener('keydown', function (e) {
             } catch {console.log("edge")}
         }
 
-        if (e.key == "ArrowUp") {
+        if (key["ArrowUp"] && Date.now() > (lastFishMove + 250)) {
             if (gridData[map][PY-1+FY][PX].water && FY > -FR){
+                lastFishMove = Date.now()
                 FY--
                 FX = 0
                 FV = true
             }
             //loadGrid(PX, PY)
-        }
-
-        if (e.key == "ArrowDown") {
+        } else if (key["ArrowDown"] && Date.now() > (lastFishMove + 250)) {
             if (gridData[map][PY+1+FY][PX].water && FY < FR){
+                lastFishMove = Date.now()
                 FY++
                 FX = 0
                 FV = true
             }
             //loadGrid(PX, PY)
-        }
-
-        if (e.key == "ArrowLeft") {
+        } else if (key["ArrowLeft"] && Date.now() > (lastFishMove + 250)) {
             if (gridData[map][PY][PX-1+FX].water && FX > -FR){
+                lastFishMove = Date.now()
                 FX--
                 FY = 0
                 FV = true
             }
             //loadGrid(PX, PY)
-        }
-
-        if (e.key == "ArrowRight") {
+        } else if (key["ArrowRight"] && Date.now() > (lastFishMove + 250)) {
             if (gridData[map][PY][PX+1+FX].water && FX < FR){
+                lastFishMove = Date.now()
                 FX++
                 FY = 0
                 FV = true
             }
             //loadGrid(PX, PY)
-        }
-
-        if (e.key == " ") {
+        } else if (key[" "] && lastInv != key[" "] && Date.now() > (lastFishMove + 250)) {
             if (FV){
+                lastInv = key[" "]
                 FS = true
 
                 id = Math.floor(Math.random() * 6)
@@ -447,4 +466,4 @@ window.addEventListener('keydown', function (e) {
             cast.style.visibility = "hidden"
         }
     }
-}, false)
+}, 0)
