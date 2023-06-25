@@ -1,4 +1,4 @@
-let version = "0.2.3"
+let version = "0.2.3.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -56,6 +56,8 @@ const play = document.getElementById("play")
 document.addEventListener('click', () => {
     music.play()
 })
+
+const controlsDiv = document.querySelector(".controlsDiv")
 
 const player = document.querySelector(".man")
 const cast = document.querySelector(".cast")
@@ -275,6 +277,7 @@ textNotif.style.left = `${xSkew+4}px`
 textNotif.style.top = `${ySkew}px`
 
 let inInv = false
+let controlsVisibility = true
 invContainer.style.top = `${ySkew}px`
 
 let key = {}
@@ -309,6 +312,17 @@ window.addEventListener('keyup', function (e) {
 setInterval(() => {
     if (Date.now() < (lastFish + 1500)){
         return
+    }
+
+    if (key["k"] && lastInv != key["k"]) { //  && Date.now() < (lastInv + 1000)
+        lastInv = key["k"]
+        controlsVisibility = !controlsVisibility
+        cursor = 0
+        if (controlsVisibility) {
+            controlsDiv.style.visibility = "visible"
+        } else {
+            controlsDiv.style.visibility = "hidden"
+        }
     }
 
     if (key["i"] && lastInv != key["i"]) { //  && Date.now() < (lastInv + 1000)
