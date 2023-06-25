@@ -1,11 +1,11 @@
-function makeObject(inventory, img, title, description){
+function makeObject(inventory){
     if (inventory == undefined){
         inventory = {}
     }
 
-    inventory.imgSrc = img
-    inventory.name = title
-    inventory.description = description
+    inventory.imgSrc = undefined
+    inventory.name = undefined
+    inventory.description = undefined
 
     try{
         if (inventory.count == NaN) {
@@ -27,47 +27,14 @@ function makeObject(inventory, img, title, description){
 }
 
 function inventoryRepair(inventory){
-    inventory[0] = makeObject(
-        inventory[0],
-        "invImgs/DEBUGFISH.png",
-        "Debug Fish",
-        "A small li'l fella, rumor has it that they have been around longer than history, but that's just a myth... right?"
-    )
-
-    inventory[1] = makeObject(
-        inventory[1],
-        "invImgs/realfakefish.png",
-        "Real Fake Fish",
-        "A plastic fish indistinguishable from a real one, at least at its initial time of production, it's broken now."
-    )
-
-    inventory[2] = makeObject(
-        inventory[2],
-        "invImgs/flopper.png",
-        "Flopper",
-        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing... \"I Love Flopper\" - Reid"
-    )
-
-    inventory[3] = makeObject(
-        inventory[3],
-        "invImgs/flopperG.png",
-        "Green Flopper",
-        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing..."
-    )
-
-    inventory[4] = makeObject(
-        inventory[4],
-        "invImgs/flopperB.png",
-        "Blue Flopper",
-        "An uncommon fish from a far away land... Rumour has it that the island it came from is forever changing... \"blue flopper my beloved\" - Brine"
-    )
-
-    inventory[5] = makeObject(
-        inventory[5],
-        "invImgs/cheepcheep.png",
-        "Cheep Cheep",
-        "That fish got them dick sucking lips!"
-    )
+    inventory[0] = makeObject(inventory[0])
+    inventory[1] = makeObject(inventory[1])
+    inventory[2] = makeObject(inventory[2])
+    inventory[3] = makeObject(inventory[3])
+    inventory[4] = makeObject(inventory[4])
+    inventory[5] = makeObject(inventory[5])
+    inventory[6] = makeObject(inventory[6])
+    inventory[7] = makeObject(inventory[7])
 
     return inventory
 }

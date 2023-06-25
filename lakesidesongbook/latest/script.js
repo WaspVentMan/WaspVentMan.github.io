@@ -1,4 +1,4 @@
-let version = "0.2.2.2"
+let version = "0.2.3"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -105,59 +105,93 @@ for (let x = 0; x < (gridWidth * gridHeight); x++) {
     }
 }
 
-function updateInv(cursor, inventory, offset, type = "fish"){
+function updateInv(cursor, inventory, offset){
     if (cursor + offset > (inventory.fish.length-1)) {
         cursor -= inventory.fish.length
-        type = "rareFish"
     }
+
+    if (cursor + offset < 0) {
+        cursor += inventory.fish.length
+    }
+
     const stats = document.querySelector(`.stats${offset}`)
     const icon = document.querySelector(`.icon${offset}`)
     const invName = document.querySelector(`.name${offset}`)
     const catchCount = document.querySelector(`.catchCount${offset}`)
     const bestWeight = document.querySelector(`.bestWeight${offset}`)
+
+    const catchCountR = document.querySelector(`.catchCountR${offset}`)
+    const bestWeightR = document.querySelector(`.bestWeightR${offset}`)
+
     const description = document.querySelector(`.description${offset}`)
 
-    if (inventory[type][cursor+offset].count == 0 || inventory[type][cursor+offset].count == undefined || inventory[type][cursor+offset].count == NaN){
+    if (inventory["fish"][cursor+offset].count == 0 || inventory["fish"][cursor+offset].count == undefined || inventory["fish"][cursor+offset].count == NaN){
         icon.src = "invImgs/fishless.png"
         invName.textContent = ""
         catchCount.textContent = ""
         bestWeight.textContent = ""
         description.textContent = ""
     } else {
-        icon.src = inventory[type][cursor+offset].imgSrc
+        icon.src = fish[cursor+offset].imgSrc
 
-        if (type == "rareFish"){
-            invName.textContent = "Rare " + inventory[type][cursor+offset].name
+        invName.textContent = fish[cursor+offset].name
+        catchCount.textContent = `Caught: ${inventory["fish"][cursor+offset].count}`
+
+        if (inventory["fish"][cursor+offset].size < 1000){
+            bestWeight.textContent = `Best weight: ${inventory["fish"][cursor+offset].size}g`
+        } else if (inventory["fish"][cursor+offset].size < 1000000){
+            bestWeight.textContent = `Best weight: ${inventory["fish"][cursor+offset].size/1000}kg`
         } else {
-            invName.textContent = inventory[type][cursor+offset].name
-        }
-        catchCount.textContent = `Caught: ${inventory[type][cursor+offset].count}`
-
-        if (inventory[type][cursor+offset].size < 1000){
-            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size}g`
-        } else if (inventory[type][cursor+offset].size < 1000000){
-            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size/1000}kg`
-        } else {
-            bestWeight.textContent = `Best weight: ${inventory[type][cursor+offset].size/1000000}T`
+            bestWeight.textContent = `Best weight: ${inventory["fish"][cursor+offset].size/1000000}T`
         }
 
-        description.textContent = inventory[type][cursor+offset].description
-
-        weightMult = 1
-        if (type == "rareFish"){
-            weightMult = 2
-        }
-
-        try{
-            if (inventory[type][cursor+offset].size >= weightCalc(cursor+offset, weightMult)[1]){
-                stats.style.background = "linear-gradient(172deg, rgba(255,215,0,1) 0%, rgba(255,255,0,1) 25%, rgba(255,215,0,1) 100%)"
-                bestWeight.textContent += " ★"
-                invName.textContent = "Perfect " + invName.textContent
-            } else {
-                stats.style.background = "linear-gradient(172deg, rgba(215,215,215,1) 0%, rgba(255,255,255,1) 25%, rgba(215,215,215,1) 100%)"
-            }
-        } catch {}
+        description.textContent = fish[cursor+offset].description
     }
+    
+    if (inventory["rareFish"][cursor+offset].count == 0 || inventory["rareFish"][cursor+offset].count == undefined || inventory["rareFish"][cursor+offset].count == NaN){
+        catchCountR.textContent = ""
+        bestWeightR.textContent = ""
+    } else {
+        if (inventory["rareFish"][cursor+offset].count == 0 || inventory["rareFish"][cursor+offset].count == undefined){
+            catchCountR.textContent = `You haven't caught any rares`
+            bestWeightR.textContent = ""
+        } else {
+            catchCountR.textContent = `Rares caught: ${inventory["rareFish"][cursor+offset].count}`
+
+            if (inventory["rareFish"][cursor+offset].size < 1000){
+                bestWeightR.textContent = `Best rare weight: ${inventory["rareFish"][cursor+offset].size}g`
+            } else if (inventory["rareFish"][cursor+offset].size < 1000000){
+                bestWeightR.textContent = `Best rare weight: ${inventory["rareFish"][cursor+offset].size/1000}kg`
+            } else {
+                bestWeightR.textContent = `Best rare weight: ${inventory["rareFish"][cursor+offset].size/1000000}T`
+            }
+        }
+    }
+
+    try{
+        let invNameText = invName.textContent
+        stats.style.background = "linear-gradient(169deg, rgba(255,255,255,1) 0%, rgba(215,215,215,1) 100%)"
+        if (inventory["fish"][cursor+offset].size >= weightCalc(cursor+offset, 1)[1]){
+            stats.style.background = "linear-gradient(169deg, rgba(255,255,0,1) 0%, rgba(255,215,0,1) 100%)"
+            bestWeight.textContent += " ★"
+
+            if (fish[cursor+offset].name != "Magikarp"){
+                invName.textContent = "Perfect " + invNameText
+            } else {
+                invName.textContent = "Worthless " + invNameText
+            }
+        }
+        if (inventory["rareFish"][cursor+offset].size >= weightCalc(cursor+offset, 2)[1]){
+            stats.style.background = "linear-gradient(169deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)"
+            bestWeightR.textContent += " ★"
+
+            if (fish[cursor+offset].name != "Magikarp"){
+                invName.textContent = "Truly Perfect " + invNameText
+            } else {
+                invName.textContent = "Truly Worthless " + invNameText
+            }
+        }
+    } catch {}
 }
 
 function loadGrid(gridData){
@@ -208,6 +242,12 @@ function weightCalc(id, weightMult){
     } else if (id <= 5){
         newWeight = (Math.floor(Math.random() * 1401)+100)*weightMult
         maxWeight = 1500*weightMult
+    } else if (id <= 6){
+        newWeight = (Math.floor(Math.random() * 9901)+100)*weightMult
+        maxWeight = 10000*weightMult
+    } else if (id <= 7){
+        newWeight = 10000*weightMult
+        maxWeight = 10000*weightMult
     }
     return [newWeight, maxWeight]
 }
@@ -285,14 +325,24 @@ setInterval(() => {
     }
 
     if (inInv){
-        if (key["ArrowLeft"] && cursor > 0 && Date.now() > (lastInvMove + 100)) {
+        if (key["ArrowLeft"] && Date.now() > (lastInvMove + 100)) {
             lastInvMove = Date.now()
-            cursor--
+
+            if (cursor > 0){
+                cursor--
+            } else {
+                cursor += inventory.fish.length-1
+            }
         }
 
-        if (key["ArrowRight"] && cursor < ((inventory.fish.length-1)*2)-2 && Date.now() > (lastInvMove + 100)) {
+        if (key["ArrowRight"] && Date.now() > (lastInvMove + 100)) {
             lastInvMove = Date.now()
-            cursor++
+
+            if (cursor < inventory.fish.length-4){
+                cursor++
+            } else {
+                cursor -= inventory.fish.length-1
+            }
         }
 
         if (key[" "]) {
@@ -395,38 +445,47 @@ setInterval(() => {
                 lastInv = key[" "]
                 FS = true
 
-                id = Math.floor(Math.random() * 6)
-                if (Math.floor(Math.random() * 128) == 1) {
-                    fish = "rareFish"
+                id = Math.floor(Math.random() * 8)
+                if (Math.floor(Math.random() * 32) == 1) {
+                    fishType = "rareFish"
                 } else {
-                    fish = "fish"
+                    fishType = "fish"
                 }
 
-                if (inventory[fish][id].count == undefined || inventory[fish][id].count == NaN){
-                    inventory[fish][id].count = 1
+                if (inventory["fish"][id].count == undefined || inventory["fish"][id].count == NaN){
+                    fishType = "fish"
+                    inventory[fishType][id].count = 1
+                } else if (inventory[fishType][id].count == undefined || inventory[fishType][id].count == NaN){
+                    inventory[fishType][id].count = 1
                 } else {
-                    inventory[fish][id].count++
+                    inventory[fishType][id].count++
                 }
 
                 let weightMult = 1
-                if (fish == "rareFish"){
+                if (fishType == "rareFish"){
                     weightMult = 2
                 }
 
                 newWeight = weightCalc(id, weightMult)[0]
 
-                if (inventory[fish][id].size != undefined && inventory[fish][id].size != NaN){
-                    if (newWeight > inventory[fish][id].size){
-                        inventory[fish][id].size = newWeight
+                if (inventory[fishType][id].size != undefined && inventory[fishType][id].size != NaN){
+                    if (newWeight > inventory[fishType][id].size){
+                        inventory[fishType][id].size = newWeight
                     }
                 } else {
-                    inventory[fish][id].size = newWeight
+                    inventory[fishType][id].size = newWeight
+                }
+
+                let weightSymbol = "g"
+                if (newWeight > 999){
+                    weightSymbol = "kg"
+                    newWeight /= 1000
                 }
                 
-                if (fish == "rareFish"){
-                    textNotif.textContent = `+1 Rare ${inventory["fish"][id].name}, Weight: ${newWeight}g`
+                if (fishType == "rareFish"){
+                    textNotif.textContent = `+1 Rare ${fish[id].name}, Weight: ${newWeight}${weightSymbol}`
                 } else {
-                    textNotif.textContent = `+1 ${inventory["fish"][id].name}, Weight: ${newWeight}g`
+                    textNotif.textContent = `+1 ${fish[id].name}, Weight: ${newWeight}${weightSymbol}`
                 }
                 textNotif.style.opacity = "100"
 
@@ -448,22 +507,22 @@ setInterval(() => {
             }
             //loadGrid(PX, PY)
         }
+    }
 
-        localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
+    localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
 
-        player.style.left = `${(64*PX)+xSkew+4}px`
-        player.style.top = `${(64*PY)+ySkew-16}px`
+    player.style.left = `${(64*PX)+xSkew+4}px`
+    player.style.top = `${(64*PY)+ySkew-16}px`
 
-        cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
-        cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
+    cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
+    cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
 
-        splash.style.left = `${(64*FX)+(64*PX)+xSkew}px`
-        splash.style.top = `${(64*FY)+(64*PY)+ySkew}px`
+    splash.style.left = `${(64*FX)+(64*PX)+xSkew}px`
+    splash.style.top = `${(64*FY)+(64*PY)+ySkew}px`
 
-        if ((FV || !(FX == FY)) && !FS) {
-            cast.style.visibility = "visible"
-        } else {
-            cast.style.visibility = "hidden"
-        }
+    if ((FV || !(FX == FY)) && !FS) {
+        cast.style.visibility = "visible"
+    } else {
+        cast.style.visibility = "hidden"
     }
 }, 0)
