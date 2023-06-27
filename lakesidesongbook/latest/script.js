@@ -1,13 +1,15 @@
-let version = "0.2.3.1"
+let version = "0.3"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
+const text = document.querySelector(".text")
 
 let gridWidth = 16
 let gridHeight = 10
 
-let xSkew = (screen.width - (64*gridWidth)) / 2
-let ySkew = (screen.height - (64*gridHeight)) / 2
+let xSkew = 0
+let ySkew = 0
+let rez = 0
 
 let PX = 4
 let PY = 3
@@ -31,13 +33,6 @@ try{
             console.log("Pre v0.2.1 save file detected")
             inventory.rareFish = []
         }
-
-
-        if (saveData.version == version){
-            PX = saveData.PX
-            PY = saveData.PY
-            map = saveData.map
-        }
     } else {
         console.log("No save data detected, proceeding with fresh data")
     }
@@ -48,8 +43,8 @@ try{
     textNotif.style.visibility = "visible"
 }
 
-inventory["fish"] = inventoryRepair(inventory["fish"])
-inventory["rareFish"] = inventoryRepair(inventory["rareFish"])
+inventory["fish"] = inventoryRepair(inventory["fish"], 12)
+inventory["rareFish"] = inventoryRepair(inventory["rareFish"], 12)
 
 const play = document.getElementById("play")
 
@@ -66,23 +61,63 @@ const splash = document.querySelector(".splash")
 const gridContainer = document.querySelector(".gridContainer")
 const grid = document.querySelector(".grid")
 
+const invContainer = document.querySelector(".invContainer")
+const inv = document.querySelector(".inventory")
+
 grid.style.display = "grid"
 grid.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`
 grid.style.gridTemplateRows = `repeat(${gridHeight}, 1fr)`
 
-grid.style.width = `${64*gridWidth}px`
-grid.style.height = `${64*gridHeight}px`
+function setRez(step = 0.5, set = false){
+    rez = 0
 
-gridContainer.style.left = `${xSkew}px`
-gridContainer.style.top = `${ySkew}px`
+    if (!set){
+        while (rez*16*gridWidth < screen.width || rez*16*gridHeight < screen.height){
+            rez += step
+        }
 
-const invContainer = document.querySelector(".invContainer")
-const inv = document.querySelector(".inventory")
+        while (rez*16*gridWidth > screen.width || rez*16*gridHeight > screen.height){
+            rez -= step
+        }
+    } else {
+        rez = step
+    }
 
-inv.style.width = `${64*gridWidth}px`
-inv.style.height = `${64*gridHeight}px`
+    xSkew = (screen.width - ((16*rez)*gridWidth)) / 2
+    ySkew = (screen.height - ((16*rez)*gridHeight)) / 2
 
-invContainer.style.left = `${xSkew}px`
+    controlsDiv.style.left = `${xSkew}px`
+    controlsDiv.style.top = `${ySkew}px`
+
+    grid.style.width = `${(16*rez)*gridWidth}px`
+    grid.style.height = `${(16*rez)*gridHeight}px`
+
+    player.style.width = `${(14*rez)}px`
+    player.style.height = `${(14*rez)}px`
+
+    cast.style.width = `${(14*rez)}px`
+    cast.style.height = `${(14*rez)}px`
+
+    splash.style.width = `${(14*rez)}px`
+    splash.style.height = `${(14*rez)}px`
+
+    gridContainer.style.left = `${xSkew}px`
+    gridContainer.style.top = `${ySkew}px`
+
+    inv.style.width = `${(16*rez)*gridWidth}px`
+    inv.style.height = `${(16*rez)*gridHeight}px`
+
+    invContainer.width = `${(16*rez)*gridWidth}px`
+    invContainer.height = `${(16*rez)*gridHeight}px`
+    invContainer.style.top = `${ySkew}px`
+    invContainer.style.left = `${xSkew}px`
+
+    textNotif.style.left = `${xSkew+4}px`
+    textNotif.style.top = `${ySkew}px`
+
+    textNotif.style.fontSize = `${(25/4)*rez}px`
+    text.style.fontSize = `${(16/4)*rez}px`
+}
 
 let gridX = 1
 let gridY = 1
@@ -126,6 +161,18 @@ function updateInv(cursor, inventory, offset){
     const bestWeightR = document.querySelector(`.bestWeightR${offset}`)
 
     const description = document.querySelector(`.description${offset}`)
+
+    icon.style.width = `${((256/4)*rez)}px`
+    icon.style.height = `${((256/4)*rez)}px`
+
+    invName.style.fontSize = `${((1.17/4)*rez)}em`
+
+    catchCount.style.fontSize = `${((16/4)*rez)}px`
+    bestWeight.style.fontSize = `${((16/4)*rez)}px`
+    catchCountR.style.fontSize = `${((16/4)*rez)}px`
+    bestWeightR.style.fontSize = `${((16/4)*rez)}px`
+
+    description.style.fontSize = `${((16/4)*rez)}px`
 
     if (inventory["fish"][cursor+offset].count == 0 || inventory["fish"][cursor+offset].count == undefined || inventory["fish"][cursor+offset].count == NaN){
         icon.src = "invImgs/fishless.png"
@@ -213,11 +260,13 @@ function loadGrid(gridData){
 }
 
 function resetSave(){
+    clearInterval(gameloop)
     localStorage.clear()
     location.reload()
 }
 
 function loadSave(data){
+    clearInterval(gameloop)
     localStorage.setItem("savedata", JSON.stringify({"version": ":3", "inventory": JSON.parse(atob(data)), "map": map, "PX": PX, "PY": PY}))
     location.reload()
 }
@@ -250,14 +299,14 @@ function weightCalc(id, weightMult){
     } else if (id <= 7){
         newWeight = 10000*weightMult
         maxWeight = 10000*weightMult
+    } else if (id <= 12){
+        newWeight = (Math.floor(Math.random() * 2147483647)+1)*weightMult
+        maxWeight = 2147483647+1*weightMult
     }
     return [newWeight, maxWeight]
 }
 
 loadGrid(gridData[map])
-
-player.style.left = `${(64*PX)+xSkew+4}px`
-player.style.top = `${(64*PY)+ySkew-16}px`
 
 let FX = 0
 let FY = 0
@@ -273,12 +322,8 @@ let lastFishMove = 0
 
 let type = "fish"
 
-textNotif.style.left = `${xSkew+4}px`
-textNotif.style.top = `${ySkew}px`
-
 let inInv = false
 let controlsVisibility = true
-invContainer.style.top = `${ySkew}px`
 
 let key = {}
 
@@ -288,6 +333,10 @@ window.addEventListener('keydown', function (e) {
 
 window.addEventListener('keyup', function (e) {
     key[e.key] = false
+
+    if (!key["Escape"]){
+        lastInv = key["Escape"]
+    }
 
     if (!key["i"]){
         lastInv = key["i"]
@@ -309,33 +358,38 @@ window.addEventListener('keyup', function (e) {
     }
 })
 
-setInterval(() => {
+setRez(1)
+
+gameloop = setInterval(() => {
     if (Date.now() < (lastFish + 1500)){
         return
     }
 
-    if (key["k"] && lastInv != key["k"]) { //  && Date.now() < (lastInv + 1000)
-        lastInv = key["k"]
+    if (key["Escape"] && lastInv != key["Escape"]) { //  && Date.now() < (lastInv + 1000)
+        lastInv = key["Escape"]
         controlsVisibility = !controlsVisibility
         cursor = 0
-        if (controlsVisibility) {
-            controlsDiv.style.visibility = "visible"
-        } else {
-            controlsDiv.style.visibility = "hidden"
-        }
     }
-
-    if (key["i"] && lastInv != key["i"]) { //  && Date.now() < (lastInv + 1000)
+    
+    if (key["i"] && lastInv != key["i"] || (inInv && key["Escape"])) { //  && Date.now() < (lastInv + 1000)
         lastInv = key["i"]
         inInv = !inInv
+        controlsVisibility = false
         cursor = 0
-        if (inInv) {
-            invContainer.style.visibility = "visible"
-            textNotif.style.visibility = "hidden"
-        } else {
-            invContainer.style.visibility = "hidden"
-            textNotif.style.visibility = "visible"
-        }
+    }
+
+    if (inInv) {
+        invContainer.style.visibility = "visible"
+        textNotif.style.visibility = "hidden"
+    } else {
+        invContainer.style.visibility = "hidden"
+        textNotif.style.visibility = "visible"
+    }
+
+    if (controlsVisibility) {
+        controlsDiv.style.visibility = "visible"
+    } else {
+        controlsDiv.style.visibility = "hidden"
     }
 
     if (inInv){
@@ -419,7 +473,9 @@ setInterval(() => {
                     }
                     //loadGrid(PX, PY)
                 }
-            } catch {console.log("edge")}
+            } catch {
+                console.log("edge")
+            }
         }
 
         if (key["ArrowUp"] && Date.now() > (lastFishMove + 250)) {
@@ -459,7 +515,7 @@ setInterval(() => {
                 lastInv = key[" "]
                 FS = true
 
-                id = Math.floor(Math.random() * 8)
+                id = Math.floor(Math.random() * 12)
                 if (Math.floor(Math.random() * 32) == 1) {
                     fishType = "rareFish"
                 } else {
@@ -525,14 +581,14 @@ setInterval(() => {
 
     localStorage.setItem("savedata", JSON.stringify({"version": version, "inventory": inventory, "map": map, "PX": PX, "PY": PY}))
 
-    player.style.left = `${(64*PX)+xSkew+4}px`
-    player.style.top = `${(64*PY)+ySkew-16}px`
+    player.style.left = `${((16*rez)*PX)+xSkew+rez}px`
+    player.style.top = `${((16*rez)*PY)+ySkew-(rez*4)}px`
 
-    cast.style.left = `${(64*FX)+(64*PX)+xSkew}px`
-    cast.style.top = `${(64*FY)+(64*PY)+ySkew}px`
+    cast.style.left = `${((16*rez)*FX)+((16*rez)*PX)+xSkew}px`
+    cast.style.top = `${((16*rez)*FY)+((16*rez)*PY)+ySkew}px`
 
-    splash.style.left = `${(64*FX)+(64*PX)+xSkew}px`
-    splash.style.top = `${(64*FY)+(64*PY)+ySkew}px`
+    splash.style.left = `${((16*rez)*FX)+((16*rez)*PX)+xSkew}px`
+    splash.style.top = `${((16*rez)*FY)+((16*rez)*PY)+ySkew}px`
 
     if ((FV || !(FX == FY)) && !FS) {
         cast.style.visibility = "visible"

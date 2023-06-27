@@ -3,12 +3,8 @@ function makeObject(inventory){
         inventory = {}
     }
 
-    inventory.imgSrc = undefined
-    inventory.name = undefined
-    inventory.description = undefined
-
     try{
-        if (inventory.count == NaN) {
+        if (inventory.count == NaN || inventory.count == undefined) {
             inventory.count = 0
         }
     } catch {
@@ -16,7 +12,7 @@ function makeObject(inventory){
     }
 
     try{
-        if (inventory.size == NaN) {
+        if (inventory.size == NaN || inventory.size == undefined) {
             inventory.size = 0
         }
     } catch {
@@ -26,15 +22,10 @@ function makeObject(inventory){
     return inventory
 }
 
-function inventoryRepair(inventory){
-    inventory[0] = makeObject(inventory[0])
-    inventory[1] = makeObject(inventory[1])
-    inventory[2] = makeObject(inventory[2])
-    inventory[3] = makeObject(inventory[3])
-    inventory[4] = makeObject(inventory[4])
-    inventory[5] = makeObject(inventory[5])
-    inventory[6] = makeObject(inventory[6])
-    inventory[7] = makeObject(inventory[7])
+function inventoryRepair(inventory, IL = 1){
+    for(let x = 0 ; x < IL ; x++){
+        inventory[x] = makeObject(inventory[x])
+    }
 
     return inventory
 }

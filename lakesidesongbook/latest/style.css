@@ -28,8 +28,8 @@ body{
 
 .stats{
     display: inline-block;
-    width: 256px;
-    height: 640px;
+    width: 25%;
+    height: 100%;
     background: lightgrey;
     outline: 2px black solid;
 }
@@ -44,6 +44,8 @@ body{
     margin-bottom: 8px;
     margin-left: 8px;
     margin-right: 8px;
+
+    font-size: 16px;
 }
 
 .man{

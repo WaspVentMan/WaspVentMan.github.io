@@ -38,5 +38,25 @@ let fish = [
         imgSrc: "invImgs/magikarp.png",
         name: "Magikarp",
         description: "The name says it all."
+    },
+    {
+        imgSrc: "invImgs/BOOK.png",
+        name: "BOOK",
+        description: ""
+    },
+    {
+        imgSrc: "invImgs/SONG.png",
+        name: "SONG",
+        description: ""
+    },
+    {
+        imgSrc: "invImgs/SIDE.png",
+        name: "SIDE",
+        description: ""
+    },
+    {
+        imgSrc: "invImgs/LAKE.png",
+        name: "LAKE",
+        description: ""
     }
 ]
