@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="logoSmall.png">
+    <link rel="stylesheet" href="style.css">
+    <meta content="logoSmall.png" property="og:image"/>
+</head>
+
+<body>
+    <div class="controlsDiv" style="text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; z-index: 69420; margin: 8px; position: absolute;">
+        <b>SETTINGS</b><br>
+        <b>"k" to hide settings</b><br><br>
+        <b>"wasd" to move</b><br>
+        <b>"arrow keys" to fish</b><br>
+        <b>"space" to confirm fish</b><br>
+        <b>"i" to inventory</b><br>
+        <b>"arrow keys" while in the inventory to change fish</b><br><br>
+        <a href="https://discord.gg/petCdNFcYz" target="_blank">Join the discord, to report bugs and other shit</a><br><br>
+
+        <input type="text" id="savePaste">
+        <button onclick="loadSave(document.getElementById('savePaste').value)">load save data</button>
+        <button onclick="copySave()">copy save data</button>
+        <button onclick="resetSave()">reset save data</button><br><br>
+
+        <input type="text" id="rezSet">
+        <button onclick="setRez(document.getElementById('rezSet').value, true)">Manual Fullscreen</button>
+        <button onclick="setRez()">Fullscreen</button>
+        <button onclick="setRez(1)">Fullscreen Pixel Perfect</button>
+    </div>
+
+    <audio id="music" preload="auto" loop>
+        <source src="sfx/Lakeside Songbook.mp3">
+    </audio>
+    <b class="textNotif"></b>
+    <div class="gridContainer">
+        <div class="grid">
+            <div class="man"></div>
+            <div class="cast"></div>
+            <div class="splash"></div>
+        </div>
+    </div>
+    <div class="invContainer">
+        <div class="inventory">
+            <div class="stats stats0">
+                <img class="icon icon0" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name0">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount0">Caught: 0</p>
+                <p class="text catchCountR0">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight0">Best weight: 0g</p>
+                <p class="text bestWeightR0">Best rare weight: 0g</p>
+                <br>
+                <p class="text description0">The first</p>
+            </div>
+            <div class="stats stats1">
+                <img class="icon icon1" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name1">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount1">Caught: 0</p>
+                <p class="text catchCountR1">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight1">Best weight: 0g</p>
+                <p class="text bestWeightR1">Best rare weight: 0g</p>
+                <br>
+                <p class="text description1">The first</p>
+            </div>
+            <div class="stats stats2">
+                <img class="icon icon2" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name2">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount2">Caught: 0</p>
+                <p class="text catchCountR2">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight2">Best weight: 0g</p>
+                <p class="text bestWeightR2">Best rare weight: 0g</p>
+                <br>
+                <p class="text description2">The first</p>
+            </div>
+            <div class="stats stats3">
+                <img class="icon icon3" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name3">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount3">Caught: 0</p>
+                <p class="text catchCountR3">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight3">Best weight: 0g</p>
+                <p class="text bestWeightR3">Best rare weight: 0g</p>
+                <br>
+                <p class="text description3">The first</p>
+            </div>
+        </div>
+    </div>
+    <script src="data/level.js"></script>
+    <script src="data/fish.js"></script>
+    <script src="inventoryRepair.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

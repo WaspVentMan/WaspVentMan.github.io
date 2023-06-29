@@ -1,4 +1,4 @@
-let version = "0.3.0.1"
+let version = "0.3.0.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -13,6 +13,10 @@ let rez = 0
 
 let PX = 4
 let PY = 3
+
+let XP = 0
+let LV = 0
+let NLV = 100
 
 let map = 0
 let cursor = 0
@@ -301,7 +305,7 @@ function weightCalc(id, weightMult){
         maxWeight = 10000*weightMult
     } else if (id <= 12){
         newWeight = (Math.floor(Math.random() * 2147483647)+1)*weightMult
-        maxWeight = 2147483647+1*weightMult
+        maxWeight = 2147483647*weightMult
     }
     return [newWeight, maxWeight]
 }
@@ -357,6 +361,29 @@ window.addEventListener('keyup', function (e) {
         lastMove = 0
     }
 })
+
+function calcLV(){
+    LV = 0
+    XP = 0
+    NLV = 100
+
+    for (let x = 0; x < inventory.fish.length-1; x++){
+        XP += inventory.fish[x].size
+        XP += inventory.rareFish[x].size
+    }
+
+    while (XP > NLV){
+        LV += 1
+        XP -= NLV
+        NLV *= 1.1
+    }
+
+    console.log(NLV)
+    console.log(LV)
+    console.log(XP)
+}
+
+calcLV()
 
 setRez(1)
 

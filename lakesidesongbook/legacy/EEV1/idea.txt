@@ -1,0 +1,6 @@
+2D fishing game
+
+Tile based, fish in cardinal directions and diagonals (on tile)
+
+There are two robots, "B33" and "B34"
+You play as B33, B34 is playable in NG+
