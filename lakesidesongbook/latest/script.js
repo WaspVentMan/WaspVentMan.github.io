@@ -1,4 +1,4 @@
-let version = "0.3.0.2"
+let version = "0.3.0.3"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
