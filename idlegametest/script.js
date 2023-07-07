@@ -11,6 +11,11 @@ try{
     if (saveData != null){
         saveData = JSON.parse(saveData)
 
+        if (saveData.version != undefined){
+            localStorage.clear()
+            location.reload()
+        }
+
         auto = saveData.auto
         cashMoney = saveData.cashMoney
         last = saveData.last
