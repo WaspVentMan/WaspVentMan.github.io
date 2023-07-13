@@ -1,11 +1,11 @@
-let version = "0.3.0.3"
+let version = "0.3.0.4"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
 const text = document.querySelector(".text")
 
 let gridWidth = 16
-let gridHeight = 10
+let gridHeight = 9
 
 let xSkew = 0
 let ySkew = 0
@@ -72,7 +72,7 @@ grid.style.display = "grid"
 grid.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`
 grid.style.gridTemplateRows = `repeat(${gridHeight}, 1fr)`
 
-function setRez(step = 0.5, set = false){
+function setRez(step = 0.01, set = false){
     rez = 0
 
     if (!set){

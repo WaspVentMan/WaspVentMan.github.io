@@ -27,7 +27,7 @@ let fish = [
     {
         imgSrc: "invImgs/cheepcheep.png",
         name: "Cheep Cheep",
-        description: "That fish got them dick sucking lips!"
+        description: "[NO DESCRIPTION]"
     },
     {
         imgSrc: "invImgs/Blipper.png",
