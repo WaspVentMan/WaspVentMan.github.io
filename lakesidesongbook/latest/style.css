@@ -1,5 +1,5 @@
 body{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: large;
     margin: 0%;
     background-color: black;
@@ -99,4 +99,22 @@ body{
 
     transition: opacity 0.25s ease;
     opacity: 0;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    width: max-content;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    padding: 14px 16px;
+    margin: 4px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
 }

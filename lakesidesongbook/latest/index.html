@@ -12,34 +12,79 @@
 </head>
 
 <body>
-    <div class="controlsDiv" style="text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; z-index: 69420; margin: 8px; position: absolute;">
-        <b>SETTINGS</b><br>
-        <b>"Esc" to hide settings</b><br><br>
-        <b>"wasd" to move</b><br>
-        <b>"arrow keys" to fish</b><br>
-        <b>"space" to confirm fish</b><br>
-        <b>"i" to inventory</b><br>
-        <b>"arrow keys" while in the inventory to change fish</b><br><br>
-        <a href="https://discord.gg/petCdNFcYz" target="_blank">Join the discord, to report bugs and other stuff</a><br><br>
+    <div class="controlsDiv" style="text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; z-index: 69420; width: 100%; height: 100%; position: absolute; background-color: #000000dd;">
+        <center>
+            <br><br><h1 style="margin-bottom: 0%;">Lakeside Songbook: PAUSED</h1><h5 style="margin: 0%;">waspventman.co.uk/lakesidesongbook</h5><br>
+            <a href="https://discord.gg/petCdNFcYz" target="_blank">Join the discord, to report bugs and other stuff</a><br><br>
+        </center>
 
-        <!--<b>XP: 0</b>
-        <b>LV: 0</b><br><br>-->
+        <center>
+            <div class="tab" style="margin: auto;">
+                <button class="tablinks" onclick="openCity(event, 'controls')">CONTROLS</button>
+                <button class="tablinks" onclick="openCity(event, 'settings')">SETTINGS</button>
+            </div>
 
-        <input type="text" id="savePaste">
-        <button onclick="loadSave(document.getElementById('savePaste').value)">load save data</button>
-        <button onclick="copySave()">copy save data</button>
-        <button onclick="resetSave()">reset save data</button><br><br>
+            <div id="controls" class="tabcontent">
+                <h1>CONTROLS</h1><br>
+                <div style="text-align: left; width: max-content">
+                    <b style="font-size: 60px;"><img src="keys/esc.png" alt="" style="height: 60px; image-rendering: auto;"> FOR PAUSE MENU</b><br>
+                    <b style="font-size: 60px;"><img src="keys/w.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/a.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/s.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/d.png" alt="" style="height: 60px; image-rendering: auto;"> TO MOVE</b><br>
+                    <b style="font-size: 60px;"><img src="keys/up.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/down.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/left.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/right.png" alt="" style="height: 60px; image-rendering: auto;"> TO AIM YOUR ROD</b><br>
+                    <b style="font-size: 60px;"><img src="keys/space.png" alt="" style="height: 60px; image-rendering: auto;"> TO FISH</b><br>
+                    <b style="font-size: 60px;"><img src="keys/i.png" alt="" style="height: 60px; image-rendering: auto;"> TO OPEN INVENTORY</b><br>
+                    <b style="font-size: 60px;"><img src="keys/left.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/right.png" alt="" style="height: 60px; image-rendering: auto;"> TO SCROLL INVENTORY</b>
+                </div><br><br>
+            </div>
+            <!--<b>XP: 0</b>
+            <b>LV: 0</b><br><br>-->
 
-        <!--<input type="text" id="rezSet">
-        <button onclick="setRez(document.getElementById('rezSet').value, true)">Manual Fullscreen</button>-->
-        <button onclick="setRez()">Fullscreen</button>
-        <button onclick="setRez(1)">Fullscreen Pixel Perfect</button>
+            <div id="settings" class="tabcontent">
+                <h1>SETTINGS</h1>
+                <h2>SAVE MANAGEMENT</h2>
+                <input type="text" id="savePaste" style="width: 154px; height: 60px; font-size: xx-large; border: 0px; margin: 0px; padding: 0%;">
+                <button onclick="loadSave(document.getElementById('savePaste').value)" style="width: 120px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">LOAD</button><br>
+                <button onclick="copySave()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">COPY SAVE DATA</button><br>
+                <button onclick="resetSave()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">RESET SAVE DATA</button><br><br>
+
+                <h2>FULLSCREEN SETTINGS</h2>
+                <!--<input type="text" id="rezSet">
+                <button onclick="setRez(document.getElementById('rezSet').value, true)">Manual Fullscreen</button>-->
+                <button onclick="setRez()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN</button><br>
+                <button onclick="setRez(1)" style="width: 280px; height: 100px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN PIXEL PERFECT</button><br><br>
+            </div>
+        </center>
+
+        <script>
+            function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the button that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+                }
+        </script>
     </div>
 
     <audio id="music" preload="auto" loop>
         <source src="sfx/Lakeside Songbook.mp3">
     </audio>
-    <b class="textNotif"></b>
+    <div class="textNotif" style="display: flex;">
+        <div><img class="textNotifImg" style="margin-right: 8px;"></div>
+        <div><b class="textNotifText"></b></div>
+    </div>
     <div class="gridContainer">
         <div class="grid">
             <div class="man"></div>
