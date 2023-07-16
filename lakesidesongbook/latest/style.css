@@ -90,7 +90,7 @@ body{
 .textNotif{
     position: fixed;
     font-size: 25px;
-    z-index: 101;
+    z-index: 175;
     margin: 0%;
 
     color: white;
@@ -117,4 +117,14 @@ body{
 .tabcontent {
     display: none;
     padding: 6px 12px;
+}
+
+.light{
+    position: fixed;
+    z-index: 150;
+}
+
+.time{
+    position: fixed;
+    margin: 8px;
 }

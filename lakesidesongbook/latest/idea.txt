@@ -1,0 +1,10 @@
+Player: se30
+Guide: LHt9
+
+se30: [Sea Explorer, ID: 30]
+Defunct robot line designed to be expert fishermen.
+They fished in the deepest parts of the ocean, in hopes of finding new species.
+
+You are the only [se] left after being deactivated for however many years.
+Since there is no-one left for you to fish for, you fish for the fun of it.
+

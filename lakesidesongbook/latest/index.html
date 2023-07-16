@@ -22,6 +22,7 @@
             <div class="tab" style="margin: auto;">
                 <button class="tablinks" onclick="openCity(event, 'controls')">CONTROLS</button>
                 <button class="tablinks" onclick="openCity(event, 'settings')">SETTINGS</button>
+                <button class="tablinks" onclick="openCity(event, 'credits')">CREDITS</button>
             </div>
 
             <div id="controls" class="tabcontent">
@@ -33,7 +34,7 @@
                     <b style="font-size: 60px;"><img src="keys/space.png" alt="" style="height: 60px; image-rendering: auto;"> TO FISH</b><br>
                     <b style="font-size: 60px;"><img src="keys/i.png" alt="" style="height: 60px; image-rendering: auto;"> TO OPEN INVENTORY</b><br>
                     <b style="font-size: 60px;"><img src="keys/left.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/right.png" alt="" style="height: 60px; image-rendering: auto;"> TO SCROLL INVENTORY</b>
-                </div><br><br>
+                </div>
             </div>
             <!--<b>XP: 0</b>
             <b>LV: 0</b><br><br>-->
@@ -51,6 +52,16 @@
                 <button onclick="setRez(document.getElementById('rezSet').value, true)">Manual Fullscreen</button>-->
                 <button onclick="setRez()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN</button><br>
                 <button onclick="setRez(1)" style="width: 280px; height: 100px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN PIXEL PERFECT</button><br><br>
+            </div>
+
+            <div id="credits" class="tabcontent">
+                <h1>CREDITS</h1><br>
+                <h3>Programming & Art</h3>
+                <b>WaspVentMan</b><br><br>
+                <h3><a href="https://heavenpierceher.bandcamp.com/track/lakeside-songbook" target="_blank">Lakeside Songbook</a> (Song)</h3>
+                <b><a href="https://heavenpierceher.bandcamp.com/" target="_blank">Heaven Pierce Her</a></b><br><br>
+                <h3>Zu Language</h3>
+                <b><a href="https://store.steampowered.com/app/224760/FEZ/" target="_blank">FEZ</a></b><br>
             </div>
         </center>
 
@@ -74,7 +85,7 @@
                 // Show the current tab, and add an "active" class to the button that opened the tab
                 document.getElementById(cityName).style.display = "block";
                 evt.currentTarget.className += " active";
-                }
+            }
         </script>
     </div>
 
@@ -85,6 +96,7 @@
         <div><img class="textNotifImg" style="margin-right: 8px;"></div>
         <div><b class="textNotifText"></b></div>
     </div>
+    <div class="light"></div>
     <div class="gridContainer">
         <div class="grid">
             <div class="man"></div>
@@ -94,6 +106,7 @@
     </div>
     <div class="invContainer">
         <div class="inventory">
+            <p class="time">time</p>
             <div class="stats stats0">
                 <img class="icon icon0" src="invImgs/DEBUGFISH.png" alt="temp">
                 <h3 class="text name0">DEBUGFISH</h3>
@@ -146,7 +159,9 @@
     </div>
     <script src="data/level.js"></script>
     <script src="data/fish.js"></script>
+    <script src="data/lootpool.js"></script>
     <script src="inventoryRepair.js"></script>
+    <script src="gametime.js"></script>
     <script src="script.js"></script>
 </body>
 
