@@ -1,4 +1,4 @@
-let version = "0.4.0.1"
+let version = "0.4.0.2"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -268,7 +268,7 @@ function resetSave(){
     try{
         clearInterval(gameloop)
     } catch {}
-    //localStorage.clear()
+    localStorage.clear()
     location.reload()
 }
 
