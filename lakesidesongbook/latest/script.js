@@ -1,4 +1,4 @@
-let version = "0.4"
+let version = "0.4.0.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -29,10 +29,12 @@ let inventory = {"fish": {}}
 
 let saveData = JSON.parse(localStorage.getItem("savedataLSSB"))
 
-inventory = saveData.inventory
-map = saveData.map
-PX = saveData.PX
-PY = saveData.PY
+try{
+    inventory = saveData.inventory
+    map = saveData.map
+    PX = saveData.PX
+    PY = saveData.PY
+} catch {}
 
 inventory["fish"] = inventoryRepair(inventory["fish"], IL)
 
