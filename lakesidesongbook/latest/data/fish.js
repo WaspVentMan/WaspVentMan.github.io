@@ -21,7 +21,7 @@ let fishUltralist = [
 
 let fish = {
     "fish_0": {
-        imgSrc: "invImgs/debugfish.png",
+        imgSrc: "invImgs/DEBUGFISH.png",
         name: "Debug Fish",
         description: "A small li'l fella, rumor has it that they have been around longer than history, but that's just a myth... right?",
         wmin: 1,

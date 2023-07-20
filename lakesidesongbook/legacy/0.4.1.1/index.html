@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="logoSmall.png">
+    <link rel="stylesheet" href="style.css">
+    <meta content="logoSmall.png" property="og:image"/>
+</head>
+
+<body>
+    <div class="controlsDiv" style="text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; z-index: 69420; width: 100%; height: 100%; position: absolute; background-color: #000000dd;">
+        <center>
+            <br><br><h1 style="margin-bottom: 0%;">Lakeside Songbook: PAUSED</h1><h5 style="margin: 0%;">waspventman.co.uk/lakesidesongbook</h5><br>
+            <a href="https://discord.gg/petCdNFcYz" target="_blank">Join the discord, to report bugs and other stuff</a><br><br>
+        </center>
+
+        <center>
+            <div class="tab" style="margin: auto;">
+                <button class="tablinks" onclick="openCity(event, 'controls')">CONTROLS</button>
+                <button class="tablinks" onclick="openCity(event, 'settings')">SETTINGS</button>
+                <button class="tablinks" onclick="openCity(event, 'credits')">CREDITS</button>
+                <button class="tablinks" onclick="openCity(event, 'pnotes')">PATCH NOTES</button>
+            </div>
+
+            <div id="controls" class="tabcontent">
+                <h1>CONTROLS</h1><br>
+                <div style="text-align: left; width: max-content">
+                    <b style="font-size: 60px;"><img src="keys/esc.png" alt="" style="height: 60px; image-rendering: auto;"> FOR PAUSE MENU</b><br>
+                    <b style="font-size: 60px;"><img src="keys/w.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/a.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/s.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/d.png" alt="" style="height: 60px; image-rendering: auto;"> TO MOVE</b><br>
+                    <b style="font-size: 60px;"><img src="keys/up.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/down.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/left.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/right.png" alt="" style="height: 60px; image-rendering: auto;"> TO AIM YOUR ROD</b><br>
+                    <b style="font-size: 60px;"><img src="keys/space.png" alt="" style="height: 60px; image-rendering: auto;"> TO FISH</b><br>
+                    <b style="font-size: 60px;"><img src="keys/i.png" alt="" style="height: 60px; image-rendering: auto;"> TO OPEN INVENTORY</b><br>
+                    <b style="font-size: 60px;"><img src="keys/left.png" alt="" style="height: 60px; image-rendering: auto;"> <img src="keys/right.png" alt="" style="height: 60px; image-rendering: auto;"> TO SCROLL INVENTORY</b>
+                </div>
+            </div>
+            <!--<b>XP: 0</b>
+            <b>LV: 0</b><br><br>-->
+
+            <div id="settings" class="tabcontent">
+                <h1>SETTINGS</h1>
+                <h2>SAVE MANAGEMENT</h2>
+                <input type="text" id="savePaste" style="width: 154px; height: 60px; font-size: xx-large; border: 0px; margin: 0px; padding: 0%;">
+                <button onclick="loadSave(document.getElementById('savePaste').value)" style="width: 120px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">LOAD</button><br>
+                <button onclick="copySave()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">COPY SAVE DATA</button><br>
+                <button onclick="resetSave()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">RESET SAVE DATA</button><br><br>
+
+                <h2>FULLSCREEN SETTINGS</h2>
+                <!--<input type="text" id="rezSet">
+                <button onclick="setRez(document.getElementById('rezSet').value, true)">Manual Fullscreen</button>-->
+                <button onclick="setRez()" style="width: 280px; height: 60px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN</button><br>
+                <button onclick="setRez(1)" style="width: 280px; height: 100px; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">FULLSCREEN PIXEL PERFECT</button><br><br>
+            </div>
+
+            <div id="credits" class="tabcontent">
+                <h1>CREDITS</h1><br>
+                <h3>Programming & Art</h3>
+                <b>WaspVentMan</b><br><br>
+                <h3><a href="https://heavenpierceher.bandcamp.com/track/lakeside-songbook" target="_blank">Lakeside Songbook</a> (Song)</h3>
+                <b><a href="https://heavenpierceher.bandcamp.com/" target="_blank">Heaven Pierce Her</a></b><br><br>
+                <h3>Zu Language</h3>
+                <b><a href="https://store.steampowered.com/app/224760/FEZ/" target="_blank">FEZ</a></b><br>
+            </div>
+
+            <div id="pnotes" class="tabcontent">
+                <h1>PATCH NOTES</h1>
+                <p>Fixed DEBUGFISH not showing in the inventory correctly</p>
+                <p>Fixed rare fish</p>
+                <br><br><br>
+                <h2>¯\_(ツ)_/¯</h2>
+            </div>
+        </center>
+
+        <script>
+            function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the button that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+        </script>
+    </div>
+
+    <audio id="music" preload="auto" loop>
+        <source src="sfx/Lakeside Songbook.mp3">
+    </audio>
+    <div class="textNotif">
+        <div style="display: flex;">
+            <div><img class="textNotifImg" style="margin-right: 8px;"></div>
+            <div><b class="textNotifText"></b></div>
+        </div>
+    </div>
+    <div class="light"></div>
+    <div class="gridContainer">
+        <div class="grid">
+            <div class="man"></div>
+            <div class="cast"></div>
+            <div class="splash"></div>
+        </div>
+    </div>
+    <div class="invContainer">
+        <div class="inventory">
+            <p class="time">time</p>
+            <div class="stats stats0">
+                <img class="icon icon0" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name0">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount0">Caught: 0</p>
+                <p class="text catchCountR0">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight0">Best weight: 0g</p>
+                <p class="text bestWeightR0">Best rare weight: 0g</p>
+                <br>
+                <p class="text description0">The first</p>
+            </div>
+            <div class="stats stats1">
+                <img class="icon icon1" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name1">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount1">Caught: 0</p>
+                <p class="text catchCountR1">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight1">Best weight: 0g</p>
+                <p class="text bestWeightR1">Best rare weight: 0g</p>
+                <br>
+                <p class="text description1">The first</p>
+            </div>
+            <div class="stats stats2">
+                <img class="icon icon2" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name2">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount2">Caught: 0</p>
+                <p class="text catchCountR2">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight2">Best weight: 0g</p>
+                <p class="text bestWeightR2">Best rare weight: 0g</p>
+                <br>
+                <p class="text description2">The first</p>
+            </div>
+            <div class="stats stats3">
+                <img class="icon icon3" src="invImgs/DEBUGFISH.png" alt="temp">
+                <h3 class="text name3">DEBUGFISH</h3>
+                <br>
+                <p class="text catchCount3">Caught: 0</p>
+                <p class="text catchCountR3">Rares caught: 0</p>
+                <br>
+                <p class="text bestWeight3">Best weight: 0g</p>
+                <p class="text bestWeightR3">Best rare weight: 0g</p>
+                <br>
+                <p class="text description3">The first</p>
+            </div>
+        </div>
+    </div>
+    <script src="data/level.js"></script>
+    <script src="data/fish.js"></script>
+    <script src="data/lootpool.js"></script>
+    <script src="inventoryRepair.js"></script>
+    <script src="gametime.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
