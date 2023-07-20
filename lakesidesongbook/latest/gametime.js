@@ -12,6 +12,8 @@ function gametime(){
     let hour = 24
     let min = 60
     let quart = 60
+    let month = Math.round(day/24)
+    let year = 1970
 
     while (hour*150000 > time){
         hour--
@@ -23,6 +25,11 @@ function gametime(){
 
     while ((hour*150000) + (quart*37500) > time){
         quart--
+    }
+
+    while (month > 12){
+        year++
+        month -= 12
     }
 
     let colour = [[255, 255, 0, 0.3], [255, 0, 0, 0.3]]
@@ -156,5 +163,5 @@ function gametime(){
 
     daylight.style.background = `linear-gradient(135deg, rgba(${colour[0][0]},${colour[0][1]},${colour[0][2]},${colour[0][3]}) 0%, rgba(${colour[1][0]},${colour[1][1]},${colour[1][2]},${colour[1][3]}) 100%)`
     
-    return [hour, min, day]
+    return [hour, min, day, month, year]
 }

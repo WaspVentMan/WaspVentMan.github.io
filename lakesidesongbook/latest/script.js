@@ -1,4 +1,4 @@
-let version = "0.4.0.2"
+let version = "0.4.1"
 document.title = `Lakeside Songbook v${version}`
 
 const textNotif = document.querySelector(".textNotif")
@@ -191,13 +191,41 @@ function updateInv(cursor, inventory, offset){
         invName.textContent = fish[fishUltralist[cursor+offset]].name
         catchCount.textContent = `Caught: ${selectedfish.count}`
 
-        if (selectedfish.size < 1000){
-            bestWeight.textContent = `Best weight: ${selectedfish.size}g`
-        } else if (selectedfish.size < 1000000){
-            bestWeight.textContent = `Best weight: ${Math.round((selectedfish.size/1000)*100)/100}kg`
-        } else {
-            bestWeight.textContent = `Best weight: ${Math.round((selectedfish.size/1000000)*100)/100}T`
+        let newWeight = selectedfish.size
+        let weightSymbol = "g"
+        if (newWeight >= 1000){
+            weightSymbol = "kg"
+            newWeight /= 1000
+            if (newWeight >= 1000){
+                weightSymbol = "t"
+                newWeight /= 1000
+                if (newWeight >= 1000){
+                    weightSymbol = "Mt"
+                    newWeight /= 1000
+                    if (newWeight >= 1000){
+                        weightSymbol = "Gt"
+                        newWeight /= 1000
+                    }
+                }
+            }
+        } else if (newWeight < 1){
+            weightSymbol = "mg"
+            newWeight *= 1000
+            if (newWeight < 1){
+                weightSymbol = "µg"
+                newWeight *= 1000
+                if (newWeight < 1){
+                    weightSymbol = "ng"
+                    newWeight *= 1000
+                    if (newWeight < 1){
+                        weightSymbol = "pg"
+                        newWeight *= 1000
+                    }
+                }
+            }
         }
+
+        bestWeight.textContent = `Best weight: ${Math.round(newWeight*100)/100}${weightSymbol}`
 
         description.textContent = fish[fishUltralist[cursor+offset]].description
     }
@@ -206,19 +234,14 @@ function updateInv(cursor, inventory, offset){
         catchCountR.textContent = ""
         bestWeightR.textContent = ""
     } else {
-        if (selectedfish.countR == 0 || selectedfish.countR == undefined){
-            catchCountR.textContent = `You haven't caught any rares`
-            bestWeightR.textContent = ""
-        } else {
-            catchCountR.textContent = `Rares caught: ${selectedfish.countR}`
+        catchCountR.textContent = `Rares caught: ${selectedfish.countR}`
 
-            if (selectedfish.sizeR < 1000){
-                bestWeightR.textContent = `Best rare weight: ${selectedfish.sizeR}g`
-            } else if (selectedfish.sizeR < 1000000){
-                bestWeightR.textContent = `Best rare weight: ${Math.round((selectedfish.size/1000)*100)/100}kg`
-            } else {
-                bestWeightR.textContent = `Best rare weight: ${Math.round((selectedfish.size/1000000)*100)/100}T`
-            }
+        if (selectedfish.sizeR < 1000){
+            bestWeightR.textContent = `Best rare weight: ${selectedfish.sizeR}g`
+        } else if (selectedfish.sizeR < 1000000){
+            bestWeightR.textContent = `Best rare weight: ${Math.round((selectedfish.sizeR/1000)*100)/100}kg`
+        } else {
+            bestWeightR.textContent = `Best rare weight: ${Math.round((selectedfish.sizeR/1000000)*100)/100}T`
         }
     }
 
@@ -263,6 +286,8 @@ function loadGrid(gridData){
         }
     }
 }
+
+//textConsole(0, "test")
 
 function resetSave(){
     try{
@@ -506,10 +531,8 @@ let gameloop = setInterval(() => {
                     fishType = ""
                 }
 
-                if (inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == undefined || inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == NaN || inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == 0){
+                if (inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == undefined || inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == NaN || inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count`] == 0){
                     fishType = ""
-                    inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] = 1
-                } else if (inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == undefined || inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] == NaN){
                     inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`] = 1
                 } else {
                     inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`count${fishType}`]++
@@ -520,7 +543,7 @@ let gameloop = setInterval(() => {
                     weightMult = 2
                 }
 
-                newWeight = weightCalc(lootpool[gridData[map][PY+FY][PX+FX].loot][id], weightMult)[0]*weightMult
+                newWeight = weightCalc(lootpool[gridData[map][PY+FY][PX+FX].loot][id], weightMult)[0]
 
                 if (inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`size${fishType}`] != undefined && inventory["fish"][lootpool[gridData[map][PY+FY][PX+FX].loot][id]][`size${fishType}`] != NaN){
                     if (newWeight == weightCalc(lootpool[gridData[map][PY+FY][PX+FX].loot][id], weightMult)[1]){
@@ -542,13 +565,36 @@ let gameloop = setInterval(() => {
                 }
 
                 let weightSymbol = "g"
-                if (newWeight > 999){
+                if (newWeight >= 1000){
                     weightSymbol = "kg"
                     newWeight /= 1000
-                }
-                if (newWeight > 999){
-                    weightSymbol = "T"
-                    newWeight /= 1000
+                    if (newWeight >= 1000){
+                        weightSymbol = "t"
+                        newWeight /= 1000
+                        if (newWeight >= 1000){
+                            weightSymbol = "Mt"
+                            newWeight /= 1000
+                            if (newWeight >= 1000){
+                                weightSymbol = "Gt"
+                                newWeight /= 1000
+                            }
+                        }
+                    }
+                } else if (newWeight < 1){
+                    weightSymbol = "mg"
+                    newWeight *= 1000
+                    if (newWeight < 1){
+                        weightSymbol = "µg"
+                        newWeight *= 1000
+                        if (newWeight < 1){
+                            weightSymbol = "ng"
+                            newWeight *= 1000
+                            if (newWeight < 1){
+                                weightSymbol = "pg"
+                                newWeight *= 1000
+                            }
+                        }
+                    }
                 }
 
                 newWeight = Math.round(newWeight*100)/100
@@ -614,5 +660,5 @@ let gameloop = setInterval(() => {
         time[1] = "0" + time[1]
     }
         
-    document.querySelector(".time").textContent = `${time[0]}:${time[1] + AMPM} // days since epoch: ${time[2]}`
+    document.querySelector(".time").textContent = `${time[0]}:${time[1] + AMPM} // days since epoch: ${time[2]} // ${time[3]}, ${time[4]}`
 }, 0)

@@ -23,6 +23,7 @@
                 <button class="tablinks" onclick="openCity(event, 'controls')">CONTROLS</button>
                 <button class="tablinks" onclick="openCity(event, 'settings')">SETTINGS</button>
                 <button class="tablinks" onclick="openCity(event, 'credits')">CREDITS</button>
+                <button class="tablinks" onclick="openCity(event, 'pnotes')">PATCH NOTES</button>
             </div>
 
             <div id="controls" class="tabcontent">
@@ -63,6 +64,12 @@
                 <h3>Zu Language</h3>
                 <b><a href="https://store.steampowered.com/app/224760/FEZ/" target="_blank">FEZ</a></b><br>
             </div>
+
+            <div id="pnotes" class="tabcontent">
+                <h1>PATCH NOTES</h1>
+                <p>Fixed rare fish</p><br><br><br>
+                <h2>¯\_(ツ)_/¯</h2>
+            </div>
         </center>
 
         <script>
@@ -92,9 +99,11 @@
     <audio id="music" preload="auto" loop>
         <source src="sfx/Lakeside Songbook.mp3">
     </audio>
-    <div class="textNotif" style="display: flex;">
-        <div><img class="textNotifImg" style="margin-right: 8px;"></div>
-        <div><b class="textNotifText"></b></div>
+    <div class="textNotif">
+        <div style="display: flex;">
+            <div><img class="textNotifImg" style="margin-right: 8px;"></div>
+            <div><b class="textNotifText"></b></div>
+        </div>
     </div>
     <div class="light"></div>
     <div class="gridContainer">
