@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obfuscation-100</title>
+</head>
+
+<body>
+    <center>
+        <h1 style="margin-bottom: 0;">OBFUSCATION 100</h1>
+        <h2 style="margin-top: 0;">Make the number 100</h2>
+        <button onclick="money += 9">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 class="numb" style="margin-bottom: 0%;">0</h1>
+                <i class="perc" style="margin-top: 0%;"></i>
+            </div>
+        </button><button onclick="money += 9">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 class="numbmps" style="margin-bottom: 0%;">0</h1>
+                <i class="percmps" style="margin-top: 0%;"></i>
+            </div>
+        </button><br>
+        <button onclick="if (money >= cost[0]){
+            money -= cost[0]; owned[0] += 1; cost[0] *= 1.15; multi[0] *= 1.05
+
+            let numbperc = cost[0].toExponential().split('e+')
+
+            document.querySelector('.gen1cost').textContent = numbperc[1] + ' (' + Math.round((((numbperc[0]-1)*10)/90)*10000)/100 + '%)'
+        }">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 style="margin-bottom: 0%;">Gen</h1>
+                <i class="gen1cost" style="margin-top: 0%;">Cost: 2</i>
+            </div>
+        </button><button class="auto1" onclick="if (money >= 1000){
+            money -= 1000; autobuy[0] = true
+            document.querySelector('.auto1').setAttribute('disabled', true)
+            document.querySelector('.auto1cost').textContent = 'OWNED'
+        }">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 style="margin-bottom: 0%;">Auto</h1>
+                <i class="auto1cost" style="margin-top: 0%;">Cost: 3</i>
+            </div>
+        </button><br>
+        <button onclick="if (money >= cost[1]){
+            money -= cost[1]; owned[1] += 1; cost[1] *= 1.15; multi[1] *= 1.05
+
+            let numbperc = cost[1].toExponential().split('e+')
+
+            document.querySelector('.gen2cost').textContent = numbperc[1] + ' (' + Math.round((((numbperc[0]-1)*10)/90)*10000)/100 + '%)'
+        }">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 style="margin-bottom: 0%;">Gen²</h1>
+                <i class="gen2cost" style="margin-top: 0%;">Cost: 5</i>
+            </div>
+        </button><button class="auto2" onclick="if (money >= 100000000){
+            money -= 100000000; autobuy[1] = true
+            document.querySelector('.auto2').setAttribute('disabled', true)
+            document.querySelector('.auto2cost').textContent = 'OWNED'
+        }">
+            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                <h1 style="margin-bottom: 0%;">Auto</h1>
+                <i class="auto2cost" style="margin-top: 0%;">Cost: 8</i>
+            </div>
+        </button>
+        <h3>WARNING: THE GAME DOES NOT CURRENTLY SAVE</h3>
+    </center>
+    <script src="script.js"></script>
+</body>
+
+</html>
