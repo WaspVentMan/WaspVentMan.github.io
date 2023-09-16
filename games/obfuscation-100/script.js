@@ -11,8 +11,38 @@ let cost = [100, 1e5]
 let autobuy = [false, false]
 let owned = [0, 0]
 let multi = [1, 1]
+let tokens = 0
 
 let numbperc = [0, 0]
+
+let saveData = localStorage.getItem("OBFUSCATION100")
+
+try {
+    if (saveData != null){
+        saveData = JSON.parse(saveData)
+    }
+    if (saveData.money != undefined){
+        money = saveData.money
+    }
+    if (saveData.cost != undefined){
+        cost = saveData.cost
+    }
+    if (saveData.autobuy != undefined){
+        autobuy = saveData.autobuy
+    }
+    if (saveData.owned != undefined){
+        owned = saveData.owned
+    }
+    if (saveData.multi != undefined){
+        multi = saveData.multi
+    }
+    if (saveData.last_tick != undefined){
+        last_tick = saveData.last_tick
+    }
+    if (saveData.tokens != undefined){
+        tokens = saveData.tokens
+    }
+} catch {}
 
 function gameloop(){
     numbperc = money.toExponential().split("e+")
@@ -25,7 +55,7 @@ function gameloop(){
         perc.textContent = ""
     )
 
-    numbperc = (owned[0]*10*multi[0]).toExponential().split("e+")
+    numbperc = (owned[0]*10*multi[0]*(tokens+1)).toExponential().split("e+")
 
     numbmps.textContent = numbperc[1] + "/s"
 
@@ -35,8 +65,8 @@ function gameloop(){
         percmps.textContent = ""
     )
 
-    owned[0] += ((owned[1]/10*multi[1] / 1000) * (Date.now() - last_tick))
-    money += ((owned[0]*10*multi[0] / 1000) * (Date.now() - last_tick))
+    owned[0] += ((owned[1]/10*multi[1]*(tokens+1) / 1000) * (Date.now() - last_tick))
+    money += ((owned[0]*10*multi[0]*(tokens+1) / 1000) * (Date.now() - last_tick))
     last_tick = Date.now()
 
     if (autobuy[0]){
@@ -56,6 +86,15 @@ function gameloop(){
 
             document.querySelector('.gen2cost').textContent = numbperc[1] + ' (' + Math.round((((numbperc[0]-1)*10)/90)*10000)/100 + '%)'
         }
+    }
+
+    localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy,  "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens}))
+
+    if (money >= 1e100){
+        tokens += 1
+        localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": [100, 1e5], "autobuy": [false, false],  "owned": [0, 0], "multi": [1, 1], "last_tick": last_tick, "tokens": tokens}))
+        location.reload()
+        clearInterval(life)
     }
 }
 

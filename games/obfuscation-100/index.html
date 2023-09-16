@@ -22,7 +22,7 @@
                 <i class="percmps" style="margin-top: 0%;"></i>
             </div>
         </button><br>
-        <button onclick="if (money >= cost[0]){
+        <button class="gen1" onclick="if (money >= cost[0]){
             money -= cost[0]; owned[0] += 1; cost[0] *= 1.15; multi[0] *= 1.05
 
             let numbperc = cost[0].toExponential().split('e+')
@@ -36,6 +36,7 @@
         </button><button class="auto1" onclick="if (money >= 1000){
             money -= 1000; autobuy[0] = true
             document.querySelector('.auto1').setAttribute('disabled', true)
+            document.querySelector('.gen1').setAttribute('disabled', true)
             document.querySelector('.auto1cost').textContent = 'OWNED'
         }">
             <div style="/*background-color: gray*/ width: 100px; height: 50px;">
@@ -43,7 +44,7 @@
                 <i class="auto1cost" style="margin-top: 0%;">Cost: 3</i>
             </div>
         </button><br>
-        <button onclick="if (money >= cost[1]){
+        <button class="gen2" onclick="if (money >= cost[1]){
             money -= cost[1]; owned[1] += 1; cost[1] *= 1.15; multi[1] *= 1.05
 
             let numbperc = cost[1].toExponential().split('e+')
@@ -57,14 +58,15 @@
         </button><button class="auto2" onclick="if (money >= 100000000){
             money -= 100000000; autobuy[1] = true
             document.querySelector('.auto2').setAttribute('disabled', true)
+            document.querySelector('.gen2').setAttribute('disabled', true)
             document.querySelector('.auto2cost').textContent = 'OWNED'
         }">
             <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Auto</h1>
+                <h1 style="margin-bottom: 0%;">Auto²</h1>
                 <i class="auto2cost" style="margin-top: 0%;">Cost: 8</i>
             </div>
-        </button>
-        <h3>WARNING: THE GAME DOES NOT CURRENTLY SAVE</h3>
+        </button><br><br>
+        <i>Version 2: saved</i>
     </center>
     <script src="script.js"></script>
 </body>
