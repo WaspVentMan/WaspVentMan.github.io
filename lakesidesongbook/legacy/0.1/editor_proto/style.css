@@ -1,8 +1,0 @@
-.pieceDisplayImage{
-    background-image: url('../tiles/DEBUG.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    image-rendering: pixelated;
-    width: 64px;
-    height: 64px
-}
