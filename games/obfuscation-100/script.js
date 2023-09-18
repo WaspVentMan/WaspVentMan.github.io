@@ -7,11 +7,22 @@ let money = 1
 let mps = 0
 let last_tick = Date.now()
 
-let cost = [100, 1e5]
-let autobuy = [false, false]
-let owned = [0, 0]
-let multi = [1, 1]
+let defaultvals = [
+    [1e2, 1e5, 1e15],
+    [1e5, 1e15, 1e20],
+    [false, false, false],
+    [0, 0, 0],
+    [1, 1, 1]
+]
+
+let cost = defaultvals[0]
+let autocost = defaultvals[1]
+let autobuy = defaultvals[2]
+let owned = defaultvals[3]
+let multi = defaultvals[4]
 let tokens = 0
+
+let rates = [[1.15, 1.1], [2, 1.15], [4, 1.2]]
 
 let numbperc = [0, 0]
 
@@ -44,62 +55,129 @@ try {
     }
 } catch {}
 
+for (let x = 0; x < defaultvals[0].length; x++){
+    if (cost[x] == undefined){
+        cost[x] = defaultvals[0][x]
+        autocost[x] = defaultvals[1][x]
+        autobuy[x] = defaultvals[2][x]
+        owned[x] = defaultvals[3][x]
+        multi[x] = defaultvals[4][x]
+    }
+}
+
+function obfuscate(value){
+    numbperc = value.toExponential().split("e+")
+
+    if (Math.round((((numbperc[0]-1)*10)/90)*10000)/100 != 0){
+        numbperc[0] = `(${Math.round((((numbperc[0]-1)*10)/90)*10000)/100}%)`
+    } else (
+        numbperc[0] = ""
+    )
+
+    if (numbperc[1] == undefined){
+        numbperc[1] = 0
+    }
+
+    numbperc[2] = numbperc[1] + ' ' + numbperc[0]
+
+    return numbperc
+}
+
+function purchase(x){
+    if (money >= cost[x]){
+        money -= cost[x]; owned[x] += 1; cost[x] *= rates[x][0]; multi[x] *= rates[x][1]
+    }
+    let numbperc = obfuscate(cost[x])
+    document.querySelector('.gen' + (x+1) + 'cost').textContent = numbperc[2]
+}
+
+function purchaseauto(x){
+    if (money >= autocost[x]){
+        money -= autocost[x]; autobuy[x] = true
+        document.querySelector('.auto' + (x+1)).setAttribute('disabled', true)
+        document.querySelector('.gen' + (x+1)).setAttribute('disabled', true)
+        document.querySelector('.auto' + (x+1) + 'cost').textContent = 'OWNED'
+    }
+}
+
 function gameloop(){
-    numbperc = money.toExponential().split("e+")
+    numbperc = obfuscate(money)
 
     numb.textContent = numbperc[1]
+    perc.textContent = numbperc[0]
 
-    if (Math.round((((numbperc[0]-1)*10)/90)*10000)/100 != 0){
-        perc.textContent = `(${Math.round((((numbperc[0]-1)*10)/90)*10000)/100}%)`
-    } else (
-        perc.textContent = ""
-    )
+    numbperc = obfuscate(owned[0]*10*multi[0]*(tokens+1))
 
-    numbperc = (owned[0]*10*multi[0]*(tokens+1)).toExponential().split("e+")
+    numbmps.textContent = "+" + numbperc[1] + "/s"
+    percmps.textContent = numbperc[0]
 
-    numbmps.textContent = numbperc[1] + "/s"
-
-    if (Math.round((((numbperc[0]-1)*10)/90)*10000)/100 != 0){
-        percmps.textContent = `(${Math.round((((numbperc[0]-1)*10)/90)*10000)/100}%)`
-    } else (
-        percmps.textContent = ""
-    )
-
+    owned[1] += ((owned[2]/10*multi[2]*(tokens+1) / 1000) * (Date.now() - last_tick))
     owned[0] += ((owned[1]/10*multi[1]*(tokens+1) / 1000) * (Date.now() - last_tick))
     money += ((owned[0]*10*multi[0]*(tokens+1) / 1000) * (Date.now() - last_tick))
     last_tick = Date.now()
 
-    if (autobuy[0]){
-        if (money >= cost[0]){
-            money -= cost[0]; owned[0] += 1; cost[0] *= 1.15; multi[0] *= 1.1
-
-            let numbperc = cost[0].toExponential().split('e+')
-
-            document.querySelector('.gen1cost').textContent = numbperc[1] + ' (' + Math.round((((numbperc[0]-1)*10)/90)*10000)/100 + '%)'
-        }
-    }
-    if (autobuy[1]){
-        if (money >= cost[1]){
-            money -= cost[1]; owned[1] += 1; cost[1] *= 2; multi[1] *= 1.05
-
-            let numbperc = cost[1].toExponential().split('e+')
-
-            document.querySelector('.gen2cost').textContent = numbperc[1] + ' (' + Math.round((((numbperc[0]-1)*10)/90)*10000)/100 + '%)'
-        }
-    }
+    if (autobuy[0]){purchase(0)}
+    if (autobuy[1]){purchase(1)}
+    if (autobuy[2]){purchase(2)}
 
     localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy,  "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens}))
 
     if (money >= 1e100){
         tokens += 1
-        localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": [100, 1e5], "autobuy": [false, false],  "owned": [0, 0], "multi": [1, 1], "last_tick": last_tick, "tokens": tokens}))
+        localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": defaultvals[0], "autobuy": defaultvals[2],  "owned": defaultvals[3], "multi": defaultvals[4], "last_tick": last_tick, "tokens": tokens}))
         location.reload()
         clearInterval(life)
+    }
+
+    for (let x = 0; x < autobuy.length; x++){
+        if (autobuy[x]){
+            document.querySelector('.auto' + (x+1)).setAttribute('disabled', true)
+            document.querySelector('.gen' + (x+1)).setAttribute('disabled', true)
+            document.querySelector('.auto' + (x+1) + 'cost').textContent = 'OWNED'
+        }
+        let numbperc = obfuscate(cost[x])
+        document.querySelector('.gen' + (x+1) + 'cost').textContent = numbperc[2]
+    }
+
+    if (money >= 1e2){
+        document.querySelector('.gen1').style.visibility = "visible"
+    }
+
+    if (owned[0] != 0){
+        document.querySelector('.gen1count').style.visibility = "visible"
+        document.querySelector('.auto1').style.visibility = "visible"
+        document.querySelector('.gen2').style.visibility = "visible"
+        document.querySelector('.mps').style.visibility = "visible"
+        document.querySelector('.gen1numb').textContent = obfuscate(owned[0])[1]
+        document.querySelector('.gen1perc').textContent = obfuscate(owned[0])[0]
+    }
+
+    if (owned[1] != 0){
+        document.querySelector('.gen2count').style.visibility = "visible"
+        document.querySelector('.gen1add').style.visibility = "visible"
+        document.querySelector('.auto2').style.visibility = "visible"
+        document.querySelector('.gen3').style.visibility = "visible"
+        document.querySelector('.gen2numb').textContent = obfuscate(owned[1])[1]
+        document.querySelector('.gen2perc').textContent = obfuscate(owned[1])[0]
+        document.querySelector('.gen1addnumb').textContent = "+" + obfuscate(owned[1]/10*multi[1]*(tokens+1))[1] + "/s"
+        document.querySelector('.gen1addperc').textContent = obfuscate(owned[1]/10*multi[1]*(tokens+1))[0]
+    }
+
+    if (owned[2] != 0){
+        document.querySelector('.gen3count').style.visibility = "visible"
+        document.querySelector('.gen2add').style.visibility = "visible"
+        document.querySelector('.auto3').style.visibility = "visible"
+        document.querySelector('.gen3numb').textContent = obfuscate(owned[2])[1]
+        document.querySelector('.gen3perc').textContent = obfuscate(owned[2])[0]
+        document.querySelector('.gen2addnumb').textContent = "+" + obfuscate(owned[2]/10*multi[2]*(tokens+1))[1] + "/s"
+        document.querySelector('.gen2addperc').textContent = obfuscate(owned[2]/10*multi[2]*(tokens+1))[0]
     }
 }
 
 function kill(name){
     clearInterval(name)
     //localStorage.setItem("savedataobfuscation100")
+
+    console.log("Killed: " + name)
 }
 life = setInterval(gameloop, 0)
