@@ -188,6 +188,7 @@ function gameloop(){
         document.querySelector('.tperc').textContent = obfuscate(tokens)[0]
         document.querySelector('.numbmult').textContent = obfuscate(tokens+1)[1] + "x"
         document.querySelector('.percmult').textContent = obfuscate(tokens+1)[0]
+        //if this isn't here, I'm killing myself
     }
 ;}
 
