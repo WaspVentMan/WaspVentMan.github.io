@@ -5,87 +5,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>obfuscation-100</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <center>
         <h1 style="margin-bottom: 0;">OBFUSCATION 100</h1>
         <h2 style="margin: 0;">Make the number 100</h2>
-        <i style="margin-top: 0;">Version 3: cubed</i><br><br>
-        <button onclick="money += 9">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="numb" style="margin-bottom: 0%;">0</h1>
-                <i class="perc" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="mps" onclick="money += 9">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="numbmps" style="margin-bottom: 0%;">0</h1>
-                <i class="percmps" style="margin-top: 0%;"></i>
-            </div>
-        </button><br>
-        <button disabled style="visibility: hidden;" class="gen1count">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen1numb" style="margin-bottom: 0%;">0/s</h1>
-                <i class="gen1perc" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="gen1" onclick="purchase(0)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Gen</h1>
-                <i class="gen1cost" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="auto1" onclick="purchaseauto(0)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Auto</h1>
-                <i class="auto1cost" style="margin-top: 0%;">5</i>
-            </div>
-        </button><button disabled style="visibility: hidden;" class="gen1add">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen1addnumb" style="margin-bottom: 0%;">0/s</h1>
-                <i class="gen1addperc" style="margin-top: 0%;"></i>
-            </div>
-        </button><br>
-        <button disabled style="visibility: hidden;" class="gen2count">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen2numb" style="margin-bottom: 0%;">0</h1>
-                <i class="gen2perc" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="gen2" onclick="purchase(1)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Gen²</h1>
-                <i class="gen2cost" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="auto2" onclick="purchaseauto(1)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Auto²</h1>
-                <i class="auto2cost" style="margin-top: 0%;">15</i>
-            </div>
-        </button><button disabled style="visibility: hidden;" class="gen2add">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen2addnumb" style="margin-bottom: 0%;">0/s</h1>
-                <i class="gen2addperc" style="margin-top: 0%;"></i>
-            </div>
-        </button><br>
-        <button disabled style="visibility: hidden;" class="gen3count">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen3numb" style="margin-bottom: 0%;">0</h1>
-                <i class="gen3perc" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="gen3" onclick="purchase(2)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Gen³</h1>
-                <i class="gen3cost" style="margin-top: 0%;"></i>
-            </div>
-        </button><button style="visibility: hidden;" class="auto3" onclick="purchaseauto(2)">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 style="margin-bottom: 0%;">Auto³</h1>
-                <i class="auto3cost" style="margin-top: 0%;">20</i>
-            </div>
-        </button><button disabled style="visibility: hidden;" class="gen3add">
-            <div style="/*background-color: gray*/ width: 100px; height: 50px;">
-                <h1 class="gen3addnumb" style="margin-bottom: 0%;">0/s</h1>
-                <i class="gen3addperc" style="margin-top: 0%;"></i>
-            </div>
-        </button><br>
+        <i style="margin-top: 0;">Version 4: token</i><br><br>
+        <div class="clickzone" style="visibility: hidden; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
+            <button style="visibility: visible;" onclick="money += 9*(tokens+1)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="numb" style="margin-bottom: 0%;">0</h1>
+                    <i class="perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="mps" onclick="money += 9*(tokens+1)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="numbmps" style="margin-bottom: 0%;">0</h1>
+                    <i class="percmps" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen1zone" style="visibility: hidden; background-color: rgba(180, 180, 180, 0.25); width: fit-content;">
+            <button disabled style="visibility: hidden;" class="gen1count">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen1numb" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen1perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="gen1" onclick="purchase(0)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Gen</h1>
+                    <i class="gen1cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="auto1" onclick="purchaseauto(0)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Auto</h1>
+                    <i class="auto1cost" style="margin-top: 0%;">5</i>
+                </div>
+            </button>
+            <button disabled style="visibility: hidden;" class="gen1add">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen1addnumb" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen1addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen2zone" style="visibility: hidden; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
+            <button disabled style="visibility: hidden;" class="gen2count">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen2numb" style="margin-bottom: 0%;">0</h1>
+                    <i class="gen2perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="gen2" onclick="purchase(1)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Gen²</h1>
+                    <i class="gen2cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="auto2" onclick="purchaseauto(1)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Auto²</h1>
+                    <i class="auto2cost" style="margin-top: 0%;">15</i>
+                </div>
+            </button>
+            <button disabled style="visibility: hidden;" class="gen2add">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen2addnumb" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen2addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen3zone" style="visibility: hidden; background-color: rgba(180, 180, 180, 0.25); width: fit-content;">
+            <button disabled style="visibility: hidden;" class="gen3count">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen3numb" style="margin-bottom: 0%;">0</h1>
+                    <i class="gen3perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="gen3" onclick="purchase(2)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Gen³</h1>
+                    <i class="gen3cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="auto3" onclick="purchaseauto(2)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 style="margin-bottom: 0%;">Auto³</h1>
+                    <i class="auto3cost" style="margin-top: 0%;">20</i>
+                </div>
+            </button>
+            <button disabled style="visibility: hidden;" class="gen3add">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="gen3addnumb" style="margin-bottom: 0%;">:)</h1>
+                    <i class="gen3addperc" style="margin-top: 0%;">Free Space</i>
+                </div>
+            </button>
+        </div>
+        <div class="tokenzone" style="visibility: hidden; background-color: rgba(99, 0, 112, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="tokencount">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="tnumb" style="margin-bottom: 0%;">0</h1>
+                    <i class="tperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="mult">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="numbmult" style="margin-bottom: 0%;">0</h1>
+                    <i class="percmult" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <br><br>
+        <div class="an_ending" style="visibility: hidden;">
+            <h1>You feel the world freeze around you.</h1>
+            <h1>You have reached an end.</h1><br>
+            <h3>Would you like to traverse to a new reality?</h3>
+            <i>(You will be awarded 1* token)</i><br>
+            <i>(*non-obfuscated)</i><br>
+            <button class="reset" onclick="location.reload()">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="numbmult" style="margin-bottom: 0%;">Yes</h1>
+                    <i class="percmult" style="margin-top: 0%;">Begin Anew</i>
+                </div>
+            </button>
+        </div>
     </center>
     <script src="script.js"></script>
 </body>

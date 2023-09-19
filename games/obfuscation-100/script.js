@@ -125,8 +125,10 @@ function gameloop(){
     if (money >= 1e100){
         tokens += 1
         localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": defaultvals[0], "autobuy": defaultvals[2],  "owned": defaultvals[3], "multi": defaultvals[4], "last_tick": last_tick, "tokens": tokens}))
-        location.reload()
         clearInterval(life)
+        numb.textContent = "100"
+        perc.textContent = ""
+        document.querySelector('.an_ending').style.visibility = "visible"
     }
 
     for (let x = 0; x < autobuy.length; x++){
@@ -141,6 +143,7 @@ function gameloop(){
 
     if (money >= 1e2){
         document.querySelector('.gen1').style.visibility = "visible"
+        document.querySelector('.clickzone').style.visibility = "visible"
     }
 
     if (owned[0] != 0){
@@ -148,6 +151,7 @@ function gameloop(){
         document.querySelector('.auto1').style.visibility = "visible"
         document.querySelector('.gen2').style.visibility = "visible"
         document.querySelector('.mps').style.visibility = "visible"
+        document.querySelector('.gen1zone').style.visibility = "visible"
         document.querySelector('.gen1numb').textContent = obfuscate(owned[0])[1]
         document.querySelector('.gen1perc').textContent = obfuscate(owned[0])[0]
     }
@@ -157,6 +161,7 @@ function gameloop(){
         document.querySelector('.gen1add').style.visibility = "visible"
         document.querySelector('.auto2').style.visibility = "visible"
         document.querySelector('.gen3').style.visibility = "visible"
+        document.querySelector('.gen2zone').style.visibility = "visible"
         document.querySelector('.gen2numb').textContent = obfuscate(owned[1])[1]
         document.querySelector('.gen2perc').textContent = obfuscate(owned[1])[0]
         document.querySelector('.gen1addnumb').textContent = "+" + obfuscate(owned[1]/10*multi[1]*(tokens+1))[1] + "/s"
@@ -166,13 +171,25 @@ function gameloop(){
     if (owned[2] != 0){
         document.querySelector('.gen3count').style.visibility = "visible"
         document.querySelector('.gen2add').style.visibility = "visible"
+        document.querySelector('.gen3add').style.visibility = "visible"
         document.querySelector('.auto3').style.visibility = "visible"
+        document.querySelector('.gen3zone').style.visibility = "visible"
         document.querySelector('.gen3numb').textContent = obfuscate(owned[2])[1]
         document.querySelector('.gen3perc').textContent = obfuscate(owned[2])[0]
         document.querySelector('.gen2addnumb').textContent = "+" + obfuscate(owned[2]/10*multi[2]*(tokens+1))[1] + "/s"
         document.querySelector('.gen2addperc').textContent = obfuscate(owned[2]/10*multi[2]*(tokens+1))[0]
     }
-}
+
+    if (tokens != 0){
+        document.querySelector('.tokencount').style.visibility = "visible"
+        document.querySelector('.mult').style.visibility = "visible"
+        document.querySelector('.tokenzone').style.visibility = "visible"
+        document.querySelector('.tnumb').textContent = obfuscate(tokens)[1]
+        document.querySelector('.tperc').textContent = obfuscate(tokens)[0]
+        document.querySelector('.numbmult').textContent = obfuscate(tokens+1)[1] + "x"
+        document.querySelector('.percmult').textContent = obfuscate(tokens+1)[0]
+    }
+;}
 
 function kill(name){
     clearInterval(name)
