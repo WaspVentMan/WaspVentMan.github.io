@@ -1,5 +1,16 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 button{
     margin: 2px;
-    margin-left: 0%;
-    margin-right: 0%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    outline: 4px;
+    outline-style: solid;
+    border-radius: 0px;
+    background-color: transparent;
+    width: 115px;
+    height: 75px;
+    border-style: hidden;
 }

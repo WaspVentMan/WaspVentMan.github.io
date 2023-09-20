@@ -21,8 +21,8 @@ let autobuy = defaultvals[2]
 let owned = defaultvals[3]
 let multi = defaultvals[4]
 let tokens = 0
-let upgrades = [false, false, false, false]
-let upgradescost = [1e1, 1e1, 1e2, 1e3]
+let upgrades = [false, false, false, false, false]
+let upgradescost = [1e1, 1e1, 1e2, 1e3, 1e1]
 let seen = [false, false, false, false, false, false]
 
 let rates = [[1.15, 1.1], [2, 1.15], [4, 1.2], [2, 1.01]]
@@ -92,7 +92,7 @@ for (let x = 0; x < defaultvals[0].length; x++){
     }
 }
 
-for (let x = 0; x < 4; x++){
+for (let x = 0; x < 5; x++){
     if (upgrades[x] == undefined){
         upgrades[x] == false
     }
@@ -134,6 +134,7 @@ if (seen[0]){
     document.querySelector('.tokenzone').style.visibility = "visible"
 } if (seen[5]){
     document.querySelector('.upgradezone').style.visibility = "visible"
+    document.querySelector('.upgradezone2').style.visibility = "visible"
 } 
 
 for (let x = 0; x < upgrades.length; x++){
@@ -167,7 +168,7 @@ function purchaseupgrade(x){
     if (tokens >= upgradescost[x]){
         tokens -= upgradescost[x]; upgrades[x] = true
         document.querySelector('.upgrade' + (x+1)).setAttribute('disabled', true)
-        if (autocost[x-1] != 0 && x != 0){
+        if (autocost[x-1] != 0 && x != 0 && x < 4){
             autobuy[x] = !autobuy[x]
             document.querySelector('.gen' + (x)).setAttribute('disabled', true)
             autocost[x] = 0
@@ -202,8 +203,14 @@ function gameloop(){
         localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": defaultvals[0], "autobuy": defaultvals[2],  "owned": defaultvals[3], "multi": defaultvals[4], "last_tick": last_tick, "tokens": tokens, "upgrades": upgrades, "seen": seen}))
         clearInterval(life)
         numb.textContent = "100"
-        perc.textContent = ""
+        perc.textContent = "(0%)"
+        document.querySelector('.gen3addnumb').textContent = ":("
+        document.querySelector('.gen3addperc').textContent = "Scroll Down"
         document.querySelector('.an_ending').style.visibility = "visible"
+
+        if (upgrades[4]){
+            location.reload()
+        }
     }
 
     for (let x = 0; x < 3; x++){
@@ -267,6 +274,7 @@ function gameloop(){
         document.querySelector('.mult').style.visibility = "visible"
         document.querySelector('.tokenzone').style.visibility = "visible"
         document.querySelector('.upgradezone').style.visibility = "visible"
+        document.querySelector('.upgradezone2').style.visibility = "visible"
         document.querySelector('.tnumb').textContent = obfuscate(tokens)[1]
         document.querySelector('.tperc').textContent = obfuscate(tokens)[0]
         document.querySelector('.numbmult').textContent = obfuscate(tokens+1)[1] + "x"
@@ -280,6 +288,7 @@ function gameloop(){
         document.querySelector('.upgrade2').style.visibility = "visible"
         document.querySelector('.upgrade3').style.visibility = "visible"
         document.querySelector('.upgrade4').style.visibility = "visible"
+        document.querySelector('.upgrade5').style.visibility = "visible"
     }
 ;}
 

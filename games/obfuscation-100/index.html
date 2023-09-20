@@ -12,7 +12,7 @@
     <center>
         <h1 style="margin-bottom: 0;">OBFUSCATION 100</h1>
         <h2 style="margin: 0;">Make the number 100</h2>
-        <i style="margin-top: 0;">Version 5: upped</i><br><br>
+        <i style="margin-top: 0;">Version 6: style</i><br><br>
         <div class="clickzone" style="visibility: hidden; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
             <button style="visibility: visible;" onclick="money += 9*(tokens+1)">
                 <div style="/*background-color: gray*/ width: 100px; height: 50px;">
@@ -106,13 +106,13 @@
             </button>
         </div>
         <div class="tokenzone" style="visibility: hidden; background-color: rgba(99, 0, 112, 0.25); width: fit-content;">
-            <button style="visibility: hidden;" class="tokencount">
+            <button disabled style="visibility: hidden;" class="tokencount">
                 <div style="/*background-color: gray*/ width: 100px; height: 50px;">
                     <h1 class="tnumb" style="margin-bottom: 0%;">0</h1>
                     <i class="tperc" style="margin-top: 0%;"></i>
                 </div>
             </button>
-            <button style="visibility: hidden;" class="mult">
+            <button disabled style="visibility: hidden;" class="mult">
                 <div style="/*background-color: gray*/ width: 100px; height: 50px;">
                     <h1 class="numbmult" style="margin-bottom: 0%;">0</h1>
                     <i class="percmult" style="margin-top: 0%;"></i>
@@ -142,6 +142,14 @@
                 <div style="/*background-color: gray*/ width: 100px; height: 50px;">
                     <h1 class="u4mult" style="margin-bottom: 0%;">Auto³ ∞</h1>
                     <i class="u4mult" style="margin-top: 0%;">3 tokens</i>
+                </div>
+            </button>
+        </div>
+        <div class="upgradezone2" style="visibility: hidden; background-color: rgba(99, 0, 112, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="upgrade5" onclick="purchaseupgrade(4)">
+                <div style="/*background-color: gray*/ width: 100px; height: 50px;">
+                    <h1 class="u5mult" style="margin-bottom: 0%;">End ∞</h1>
+                    <i class="u5mult" style="margin-top: 0%;">1 token</i>
                 </div>
             </button>
         </div>
