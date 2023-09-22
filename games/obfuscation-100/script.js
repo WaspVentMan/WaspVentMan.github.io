@@ -21,8 +21,8 @@ let autobuy = defaultvals[2]
 let owned = defaultvals[3]
 let multi = defaultvals[4]
 let tokens = 0
-let upgrades = [false, false, false, false, false]
-let upgradescost = [1e1, 1e1, 1e2, 1e3, 1e1]
+let upgrades = [false, false, false, false, false, false, false]
+let upgradescost = [1e1, 1e1, 1e2, 1e3, 1e1, 1e2, 1e3]
 let seen = [false, false, false, false, false, false]
 
 let rates = [[1.15, 1.1], [2, 1.15], [4, 1.2], [2, 1.01]]
@@ -72,6 +72,14 @@ try {
 
 if (upgrades[0] && owned[0] == 0){
     owned[0] += 1
+}
+
+if (upgrades[5] && owned[1] == 0){
+    owned[1] += 1
+}
+
+if (upgrades[6] && owned[2] == 0){
+    owned[2] += 1
 }
 
 for (let x = 0; x < 3; x++){
@@ -134,7 +142,6 @@ if (seen[0]){
     document.querySelector('.tokenzone').style.visibility = "visible"
 } if (seen[5]){
     document.querySelector('.upgradezone').style.visibility = "visible"
-    document.querySelector('.upgradezone2').style.visibility = "visible"
 } 
 
 for (let x = 0; x < upgrades.length; x++){
@@ -274,7 +281,6 @@ function gameloop(){
         document.querySelector('.mult').style.visibility = "visible"
         document.querySelector('.tokenzone').style.visibility = "visible"
         document.querySelector('.upgradezone').style.visibility = "visible"
-        document.querySelector('.upgradezone2').style.visibility = "visible"
         document.querySelector('.tnumb').textContent = obfuscate(tokens)[1]
         document.querySelector('.tperc').textContent = obfuscate(tokens)[0]
         document.querySelector('.numbmult').textContent = obfuscate(tokens+1)[1] + "x"
@@ -289,6 +295,9 @@ function gameloop(){
         document.querySelector('.upgrade3').style.visibility = "visible"
         document.querySelector('.upgrade4').style.visibility = "visible"
         document.querySelector('.upgrade5').style.visibility = "visible"
+        document.querySelector('.upgrade6').style.visibility = "visible"
+        document.querySelector('.upgrade7').style.visibility = "visible"
+        document.querySelector('.upgrade8').style.visibility = "visible"
     }
 ;}
 

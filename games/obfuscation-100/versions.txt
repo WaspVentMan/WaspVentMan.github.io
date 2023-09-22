@@ -3,3 +3,4 @@ Version 3: cubed
 Version 4: token
 Version 5: upped
 Version 6: style
+Version 7: pipis
