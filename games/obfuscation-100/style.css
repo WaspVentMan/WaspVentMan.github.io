@@ -14,4 +14,5 @@ button{
     width: 115px;
     height: 75px;
     border-style: hidden;
+    touch-action: manipulation;
 }
