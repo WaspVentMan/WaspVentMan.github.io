@@ -13,7 +13,7 @@
     <center>
         <h1 style="margin-bottom: 0;">OBFUSCATION 100</h1>
         <h2 style="margin: 0;">The most confusing idle game you'll ever play!</h2>
-        <i style="margin-top: 0;">Version 7h1: pipis</i><br><br>
+        <i style="margin-top: 0;">Version 7h2: pipis</i><br><br>
         <i>↓ Make this number 100!</i><br>
         <div class="clickzone" style="visibility: hidden; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
             <button style="visibility: visible;" onclick="money += 9*(tokens+1)">
@@ -185,7 +185,21 @@
                 </div>
             </button>
         </div><br><br>
-        <i>o100-7h1</i>
+        <i>o100-7h2</i>
+        <script>
+            document.addEventListener('touchmove', function (event) {
+                if (event.scale !== 1) { event.preventDefault(); }
+            }, false);
+
+            var lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                var now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        </script>
     </center>
     <script src="script.js"></script>
 </body>
