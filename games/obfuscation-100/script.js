@@ -155,6 +155,14 @@ function setup(){
 
     saveData = localStorage.getItem("OBFUSCATION100")
 
+    document.querySelector('.gen1').removeAttribute('disabled')
+    document.querySelector('.gen2').removeAttribute('disabled')
+    document.querySelector('.gen3').removeAttribute('disabled')
+
+    document.querySelector('.auto1cost').textContent = "5"
+    document.querySelector('.auto2cost').textContent = "15"
+    document.querySelector('.auto3cost').textContent = "30"
+
     try {
         if (saveData != null){
             saveData = JSON.parse(saveData)
@@ -208,6 +216,13 @@ function setup(){
             seen = saveData.seen
         }
     } catch {}
+
+    numbperc = obfuscate(tcost[0])
+    document.querySelector('.tgen1cost').textContent = numbperc[2]
+    numbperc = obfuscate(tcost[1])
+    document.querySelector('.tgen2cost').textContent = numbperc[2]
+    numbperc = obfuscate(tcost[2])
+    document.querySelector('.tgen3cost').textContent = numbperc[2]
 
     if (upgrades[0] && owned[0] == 0){
         owned[0] += 1
@@ -287,7 +302,7 @@ function setup(){
 
         towned[1] += ((towned[2]/10*tmulti[2] / 10000) * (Date.now() - last_tick))
         towned[0] += ((towned[1]/10*tmulti[1] / 10000) * (Date.now() - last_tick))
-        tokens += ((towned[0]*10*tmulti[0] / 10000) * (Date.now() - last_tick))
+        tokens += ((towned[0]/10*tmulti[0] / 10000) * (Date.now() - last_tick))
         last_tick = Date.now()
 
         if (autobuy[0]){purchase(0)}
