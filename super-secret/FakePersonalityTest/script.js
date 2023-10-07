@@ -1,6 +1,7 @@
 const yesbutton = document.querySelector(".yesButton")
 const nobutton = document.querySelector(".noButton")
 const skipbutton = document.querySelector(".skipButton")
+const endbutton = document.querySelector(".endButton")
 
 const countdown = document.querySelector(".countdown")
 
@@ -17,6 +18,7 @@ function nextQuestion(plusone = 0){
 
     if (questionTime.length >= 5){
         countdown.textContent = "Warning, if you get your results before finishing the test, it will be less accurate"
+        endbutton.removeAttribute("disabled")
     } else {
         countdown.textContent = "Option will unlock in " + (5-questionTime.length+plusone) + " questions."
     }

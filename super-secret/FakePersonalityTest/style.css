@@ -1,4 +1,11 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    touch-action: manipulation;
+}
+
 button {
     width: 30%;
     border-radius: 10px;
+    border-style: hidden;
+    touch-action: manipulation;
 }
