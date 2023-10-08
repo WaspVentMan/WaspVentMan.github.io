@@ -3,6 +3,10 @@ const nobutton = document.querySelector(".noButton")
 const skipbutton = document.querySelector(".skipButton")
 const endbutton = document.querySelector(".endButton")
 
+const quizbox = document.querySelector(".quizbox")
+const endbox = document.querySelector(".endbox")
+const creditbox = document.querySelector(".creditbox")
+
 const countdown = document.querySelector(".countdown")
 
 const questionText = document.querySelector(".questionText")
@@ -28,6 +32,12 @@ function endQuiz(){
     yesbutton.setAttribute("disabled", true)
     nobutton.setAttribute("disabled", true)
     skipbutton.setAttribute("disabled", true)
+    endbutton.setAttribute("disabled", true)
+
+    quizbox.style.visibility = "hidden"
+    endbox.style.visibility = "visible"
+
+    console.log(questionTime.length)
     //questionTime.re
 }
 

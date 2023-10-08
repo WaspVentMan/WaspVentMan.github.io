@@ -6,19 +6,28 @@
     <title>FPT</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-image: url('media/topography.png');">
+<body style="background-image: url('media/topography.png'); margin: 0%;">
     <center style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-        <br><br><br><br><br><br>
-        <div style="background-color: white; width: 95%; margin: 20px; border-radius: 20px;">
+        <div class="quizbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px;">
             <h1>FAKE PERSONALITY TEST BETA</h1>
             <h2 class="questionText"></h2>
             <button class="yesButton" onclick="nextQuestion()"><br><h1>YES</h1><br></button>
             <button class="noButton" onclick="nextQuestion()"><br><h1>NO</h1><br></button>
             <button class="skipButton" onclick="nextQuestion()"><br><h1>SKIP</h1><br></button><br><br>
-            <button class="endButton" disabled onclick="endQuiz()" style="width: 90%;"><br><h1>SHOW RESULTS EARLY</h1><i class="countdown"></i><br><br></button><br><br>
+            <button class="endButton" disabled onclick="endQuiz()" style="width: 100%; border-radius: 20px;"><br><h1>SHOW RESULTS EARLY</h1><i class="countdown"></i><br><br></button>
         </div>
 
-        <div style="background-color: white; width: 95%; margin: 20px; border-radius: 20px;">
+        <div class="endbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px; visibility: hidden;">
+            <h1>CONGRATULATIONS</h1>
+            <h2 class="duration">YOU WERE A DUMBASS FOR [X] QUESTIONS</h2>
+            <h3 class="average">YOU WASTED AN AVERAGE OF [X] PER QUESTION, WOW</h3>
+            <h3 class="longest">THE LONGEST AMOUT OF TIME YOU WASTED ON A QUESTION IS [X]</h3>
+            <i>Share this page to see how much of a dumbass others are :)</i><br><br>
+            <button style="width: 100%; border-radius: 20px;" onclick="endbox.style.visibility = 'hidden'; creditbox.style.visibility = 'visible'"><br><h1>CREDITS</h1><br></button>
+            <br>
+        </div>
+
+        <div class="creditbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px; visibility: hidden;">
             <h3>CREDITS:</h3>
             <h4>MOST OF THE SHIT:</h4>
             <p>WaspVentMan</p>
@@ -26,6 +35,7 @@
             <p>Meeber</p>
             <p>Vespa</p>
             <i>If you have recieved a link to this page, please don't share it, thanks :)</i><br><br>
+            <button style="width: 100%; border-radius: 20px;" onclick="creditbox.style.visibility = 'hidden'; endbox.style.visibility = 'visible'"><br><h1>END SCREEN</h1><br></button>
         </div>
     </center>
 </body>
@@ -34,3 +44,4 @@
 <script src="script.js"></script>
 
 </html>
+
