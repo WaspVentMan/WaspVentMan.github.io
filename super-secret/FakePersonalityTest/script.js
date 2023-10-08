@@ -7,6 +7,10 @@ const quizbox = document.querySelector(".quizbox")
 const endbox = document.querySelector(".endbox")
 const creditbox = document.querySelector(".creditbox")
 
+const amount = document.querySelector(".amount")
+const average = document.querySelector(".average")
+const longest = document.querySelector(".longest")
+
 const countdown = document.querySelector(".countdown")
 
 const questionText = document.querySelector(".questionText")
@@ -34,10 +38,23 @@ function endQuiz(){
     skipbutton.setAttribute("disabled", true)
     endbutton.setAttribute("disabled", true)
 
+    let totaltime = 0
+
+    questionTime.sort()
+
+    for (let x = 0; x < questionTime.length; x++){
+        totaltime += questionTime[x]
+    }
+
+    console.log(totaltime)
+    let averagetime = Math.round(totaltime/questionTime.length)
+
+    amount.textContent = "YOU WERE A GULLIBLE DUMBASS FOR " + questionTime.length + " QUESTIONS, WASTING " + totaltime/1000 + " SECONDS OF YOUR LIFE"
+    average.textContent = "YOU WASTED AN AVERAGE OF " + averagetime/1000 + " SECONDS PER QUESTION, WOW"
+    longest.textContent = "THE LONGEST AMOUNT OF TIME YOU WASTED ON A QUESTION WAS " + questionTime[questionTime.length-1]/1000 + " SECONDS"
+
     quizbox.style.visibility = "hidden"
     endbox.style.visibility = "visible"
-
-    console.log(questionTime.length)
     //questionTime.re
 }
 
