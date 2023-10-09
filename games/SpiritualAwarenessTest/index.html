@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Awareness Test</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="shortcut icon" href="https://waspventman.co.uk/img/wasp.png" type="image/x-icon">
+
+    <meta property="og:title" content="Spiritual Awareness Test">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://waspventman.co.uk/super-secret/FakePersonalityTest/media/embedBanner.png">
+    <meta property="og:site_name" content="Spiritual Awareness Test">
+    <meta property="og:description" content="See where your chakras align with the stars!">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://waspventman.co.uk/super-secret/FakePersonalityTest/media/embedBanner.png">
+    <meta name="twitter:description" content="See where your chakras align with the stars!">
+</head>
+<body style="background-image: url('media/topography.png'); margin: 0%;">
+    <center style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        <div class="quizbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px;">
+            <h1>Spiritual Awareness Test</h1>
+            <h2 class="questionText"></h2>
+            <button class="yesButton" onclick="nextQuestion()"><br><h1>YES</h1><br></button>
+            <button class="noButton" onclick="nextQuestion()"><br><h1>NO</h1><br></button>
+            <button class="skipButton" onclick="nextQuestion()"><br><h1>SKIP</h1><br></button><br><br>
+            <button class="endButton" disabled onclick="endQuiz()" style="width: 100%; border-radius: 20px;"><br><h1>SHOW RESULTS EARLY</h1><i class="countdown"></i><br><br></button>
+        </div>
+
+        <div class="endbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px; visibility: hidden;">
+            <h1>CONGRATULATIONS</h1>
+            <h2 class="amount">YOU WERE A GULLIBLE DUMBASS FOR [X] QUESTIONS, WASTING [X] OF YOUR LIFE</h2>
+            <h3 class="average">YOU WASTED AN AVERAGE OF [X] SECONDS PER QUESTION, WOW</h3>
+            <h3 class="longest">THE LONGEST AMOUNT OF TIME YOU WASTED ON A QUESTION WAS [X]</h3>
+            <i>This is not meant to be a personal attack on you, just a bit of fun :)</i><br>
+            <i>Please share with others, to see how much of a gullible dumbass they are!</i><br><br>
+            <button style="width: 100%; border-radius: 20px;" onclick="endbox.style.visibility = 'hidden'; creditbox.style.visibility = 'visible'"><br><h1>CREDITS</h1><br></button>
+            <br>
+        </div>
+
+        <div class="creditbox" style="background-image: url('media/topographynull.png'); width: 95%; margin: 2.5%; border-radius: 20px; visibility: hidden;">
+            <h3>CREDITS:</h3>
+            <h4>EVERYTHING:</h4>
+            <p>Jacob A.G. Taylor; AKA: WaspVentMan</p>
+            <h4>QUESTIONS & QA:</h4>
+            <p>Annabelle Maeve</p>
+            <p>Susanna Gonzales</p><br>
+            <button style="width: 100%; border-radius: 20px;" onclick="creditbox.style.visibility = 'hidden'; endbox.style.visibility = 'visible'"><br><h1>END SCREEN</h1><br></button>
+        </div>
+    </center>
+</body>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
+
+</html>
+
