@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdleCraft</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        @font-face {
+            font-family: minecraft;
+            src: url('textures/minecraft_font.ttf') format('truetype');
+        } 
+    </style>
+</head>
+<body>
+    <h1>RESOURCES</h1>
+    <div>
+        <img class="block" title="oak_log" src="textures/oak_log.png" alt="" onclick="invadd('oak_log', 1)">
+        <img class="block" title="stone"   src="textures/stone.png" alt="" onclick="if (invcheck('wooden_pickaxe') > 0){invadd('cobblestone', 1), damage('wooden_pickaxe', 1)}">
+    </div>
+    <h1>INVENTORY</h1>
+    <div class="inventory" style="display: grid; grid-template-columns: repeat(9, 1fr); grid-template-rows: repeat(4, 1fr); width: fit-content; background-image: url(textures/tile.png); background-size: 72px;">
+        <!-- hi :3 -->
+    </div>
+    <h1>CRAFTING</h1>
+    <img class="block" title="oak_planks"     src="textures/oak_planks.png" alt="" onclick="if (invcheck('oak_log') > 0){invadd('oak_planks', 4); invrem('oak_log', 1)}">
+    <img class="block" title="crafting_table" src="textures/crafting_table.png" alt="" onclick="if (invcheck('oak_planks') > 3){invadd('crafting_table', 1); invrem('oak_planks', 4)}"><br>
+    <img class="block" title="stick"          src="textures/stick.png" alt="" onclick="if (invcheck('oak_planks') > 1){invadd('stick', 4); invrem('oak_planks', 2)}"><br>
+    <img class="block" title="wooden_pickaxe" src="textures/wooden_pickaxe.png" alt="" onclick="if (invcheck('oak_planks') > 2 && invcheck('stick') > 1){invadd('wooden_pickaxe', 1); invrem('oak_planks', 3); invrem('stick', 2)}">
+    <img class="block" title="wooden_axe"     src="textures/wooden_axe.png" alt="" onclick="if (invcheck('oak_planks') > 2 && invcheck('stick') > 1){invadd('wooden_axe', 1); invrem('oak_planks', 3); invrem('stick', 2)}"><br>
+    <img class="block" title="stone_pickaxe"  src="textures/stone_pickaxe.png" alt="" onclick="if (invcheck('cobblestone') > 2 && invcheck('stick') > 1){invadd('stone_pickaxe', 1); invrem('cobblestone', 3); invrem('stick', 2)}">
+    <img class="block" title="oak_stone_axe"  src="textures/stone_axe.png" alt="" onclick="if (invcheck('cobblestone') > 2 && invcheck('stick') > 1){invadd('stone_axe', 1); invrem('cobblestone', 3); invrem('stick', 2)}">
+    <script src="script.js"></script>
+    <script src="itemconfig.js"></script>
+</body>
+</html>
