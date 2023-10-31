@@ -1,6 +1,13 @@
 const inventory = document.querySelector(".inventory")
 
+let key = []
+
 let inv = []
+let eqp = {
+    "crafting_table": null,
+    "pickaxe": null,
+    "axe": null
+}
 
 function invadd(item, count){
     for (let x = 0; x < inv.length; x++){
@@ -34,7 +41,7 @@ function invadd(item, count){
         invel.style.height = "64px"
         invel.style.margin = "4px"
         invel.title = item
-        invel.onclick = function(){invrem(item, 1)}
+        invel.onclick = function(){invuse(item)}
             
         if (count > itemconfig[item].stack){
             invel.textContent = itemconfig[item].stack
@@ -112,3 +119,23 @@ function damage(item, dmg){
         inv.splice(splicelist[x], 1)
     }
 }
+
+function invuse(item){
+    if (key["Shift"]){
+        invrem(item, 1)
+    } else {
+        if (["crafting_table"].includes(item) && eqp.crafting_table == null){
+            eqp.crafting_table = "crafting_table"
+            document.querySelector(".hotbar_crafting_table").style.backgroundImage = "url(textures/" + item + ".png)"
+            invrem(item, 1)
+        }
+    }
+}
+
+window.addEventListener('keydown', function (e) {
+    key[e.key] = true
+})
+
+window.addEventListener('keyup', function (e) {
+    key[e.key] = false
+})
