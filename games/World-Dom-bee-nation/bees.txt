@@ -1,0 +1,11 @@
+Have a limited number of bees, grow hive to increase bee count.
+Limited honey/nectar storage, grow storage by increasing hive size.
+
+Have to venture out to different spots to get nectar.
+Each nectar spot has a cap for how much it can produce and store, bees function as transporters.
+Have to go further for more and higher capacity nectar.
+
+Susie example:
+You have a bee hive, the hive has limited capacity for bees, honey and nectar, these can be expanded by upgrading the hive, to get the nectar, you have to send the bees to flowers and such, however, the flowers have a limited capacity to produce and store nectar, so eventually, when you have too many bees, you’ll have to venture out further to find better sources of nectar. As you still have to get enough food to keep your bees fed.
+
+The endgame of the game will be your hive engulfing the earth, after your hive expands exponentially.
