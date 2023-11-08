@@ -9,13 +9,13 @@ let truebees = {
     "swarmqueue": 0,
     "swarm": {"pos": 0, "to": true, "nectar": 0, "bees": 0},
     "worker": {"bees": 0},
-    "constructor": {"bees": 0},
+    "constructors": {"bees": 0},
     "queen": {"bees": 0}
 }
 
 function savecheck(){
     let hiveparts = ["beeswax", "honey", "nectar", "bees"]
-    let beesparts = ["swarmqueue", "swarm", "worker", "constructor", "queen"]
+    let beesparts = ["swarmqueue", "swarm", "worker", "constructors", "queen"]
 
     for (let x = 0; x < hiveparts.length; x++){
         if (hive[hiveparts[x]] == undefined){

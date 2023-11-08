@@ -22,7 +22,7 @@ catch{console.log(":(")}
 
 savecheck()
 
-function totalBee(){return bees.swarmqueue + bees.swarm.bees + bees.worker.bees + bees.constructor.bees + bees.queen.bees}
+function totalBee(){return bees.swarmqueue + bees.swarm.bees + bees.worker.bees + bees.constructors.bees + bees.queen.bees}
 
 const hiveVars = ["beeswax", "honey", "nectar", "bees"] // "beeswaxcap", "honeycap", "nectarcap", "beecap", 
 
@@ -38,7 +38,7 @@ setInterval(function(){
 
     document.querySelector(".swarm").textContent = " Swarm: " + Math.round(bees.swarm.bees*100)/100 + " (" +  Math.round(bees.swarmqueue*100)/100 + " in queue)"
     document.querySelector(".worker").textContent = " Workers: " + Math.round(bees.worker.bees*100)/100
-    document.querySelector(".constructor").textContent = " Constructors: " + Math.round(bees.constructor.bees*100)/100
+    document.querySelector(".constructors").textContent = " constructors: " + Math.round(bees.constructors.bees*100)/100
     document.querySelector(".queen").textContent = " Queens: " + Math.round(bees.queen.bees*100)/100
 
     document.querySelector('.queencost').textContent = 100*((bees.queen.bees+1)**2) + ' HONEY + BEE'
@@ -87,12 +87,12 @@ setInterval(function(){
         }
     }
 
-    if (bees.constructor.bees != 0 && hive.honey > 0){
-        if (hive.honey - (0.001*bees.constructor.bees*((Date.now()-t)/100)) >= 0){
-            hive.beeswax += 0.001*bees.constructor.bees*((Date.now()-t)/100)
-            hive.honey -= 0.001*bees.constructor.bees*((Date.now()-t)/100)
+    if (bees.constructors.bees != 0 && hive.honey > 0){
+        if (hive.honey - (0.001*bees.constructors.bees*((Date.now()-t)/100)) >= 0){
+            hive.beeswax += 0.001*bees.constructors.bees*((Date.now()-t)/100)
+            hive.honey -= 0.001*bees.constructors.bees*((Date.now()-t)/100)
         } else {
-            hive.beeswax += 0 - (0.001*bees.constructor.bees*((Date.now()-t)/100))
+            hive.beeswax += 0 - (0.001*bees.constructors.bees*((Date.now()-t)/100))
             hive.honey = 0
         }
     }
@@ -119,7 +119,7 @@ setInterval(function(){
         document.querySelector(".ac0").style.backgroundColor = "green"
     }
 
-    if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructor.bees > 0){
+    if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
         document.querySelector(".ac1").style.backgroundColor = "green"
     }
 
