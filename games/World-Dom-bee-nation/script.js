@@ -112,6 +112,7 @@ setInterval(function(){
 
     document.querySelector(".lilbee").src = "img/" + document.querySelector(".beesel").value + ".png"
     document.querySelector(".lilhive").src = "img/" + document.querySelector(".hivesel").value + ".png"
+    document.querySelector(".lilflower").src = "img/" + document.querySelector(".flowersel").value + ".png"
 }, 0)
 
 setInterval(function(){
@@ -121,6 +122,7 @@ setInterval(function(){
 
     if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
         document.querySelector(".ac1").style.backgroundColor = "green"
+        document.querySelector(".flowerskin1").removeAttribute("disabled")
     }
 
     if (hive.beeswax >= 100){
