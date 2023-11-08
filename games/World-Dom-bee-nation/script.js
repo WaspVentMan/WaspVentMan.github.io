@@ -1,18 +1,10 @@
-let hive = {
-    "beeswax": 0,
-    "honey": 0,
-    "nectar": 0,
-    "bees": 1
-}
-
-let bees = {
-    "swarmqueue": 0,
-    "swarm": {"pos": 0, "to": true, "nectar": 0, "bees": 0},
-    "worker": {"bees": 0},
-    "constructor": {"bees": 0}
-}
+let hive = {}
+let bees = {}
 
 let saveData = localStorage.getItem("BEE_IDLE")
+let lastchild = Date.now()
+
+let buycount = 1
 
 try{
     if (saveData != null){
@@ -25,9 +17,12 @@ try{
         bees = saveData.bees
     }
 }
+
 catch{console.log(":(")}
 
-function totalBee(){return bees.swarmqueue + bees.swarm.bees + bees.worker.bees + bees.constructor.bees}
+savecheck()
+
+function totalBee(){return bees.swarmqueue + bees.swarm.bees + bees.worker.bees + bees.constructor.bees + bees.queen.bees}
 
 const hiveVars = ["beeswax", "honey", "nectar", "bees"] // "beeswaxcap", "honeycap", "nectarcap", "beecap", 
 
@@ -44,6 +39,11 @@ setInterval(function(){
     document.querySelector(".swarm").textContent = " Swarm: " + Math.round(bees.swarm.bees*100)/100 + " (" +  Math.round(bees.swarmqueue*100)/100 + " in queue)"
     document.querySelector(".worker").textContent = " Workers: " + Math.round(bees.worker.bees*100)/100
     document.querySelector(".constructor").textContent = " Constructors: " + Math.round(bees.constructor.bees*100)/100
+    document.querySelector(".queen").textContent = " Queens: " + Math.round(bees.queen.bees*100)/100
+
+    document.querySelector('.queencost').textContent = 100*((bees.queen.bees+1)**2) + ' HONEY + BEE'
+
+    buycount = parseInt(document.querySelector('.buycount').value)
 
     if (bees.swarm.pos <= 0){
         bees.swarm.bees += bees.swarmqueue
@@ -97,7 +97,21 @@ setInterval(function(){
         }
     }
 
+    if (bees.queen.bees != 0 && hive.honey > 10 && Date.now() - (lastchild + (20000 / bees.queen.bees+1)) > 0){
+        hive.bees += 1
+        hive.honey -= 10
+
+        lastchild = Date.now()
+    }
+
+    if (hive.nectar < 0){hive.nectar = 0}
+    if (hive.honey < 0){hive.honey = 0}
+    if (hive.beeswax < 0){hive.beeswax = 0}
+
     t = Date.now()
+
+    document.querySelector(".lilbee").src = "img/" + document.querySelector(".beesel").value + ".png"
+    document.querySelector(".lilhive").src = "img/" + document.querySelector(".hivesel").value + ".png"
 }, 0)
 
 setInterval(function(){
@@ -111,7 +125,12 @@ setInterval(function(){
 
     if (hive.beeswax >= 100){
         document.querySelector(".ac2").style.backgroundColor = "green"
-        document.querySelector(".lilbee").src = "img/beeplusplus.png"
+        document.querySelector(".beeskin1").removeAttribute("disabled")
+    }
+
+    if (bees.queen.bees > 0){
+        document.querySelector(".ac3").style.backgroundColor = "green"
+        document.querySelector(".hiveskin1").removeAttribute("disabled")
     }
 
     localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees}))
