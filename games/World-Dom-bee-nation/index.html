@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin: 0%;">
+<body style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin: 0%; background-color: white;">
     <div style="width: 100%; height: 64px;">
         <div class="swarmtracker" style="height: 32px; position:fixed;"></div>
     </div>
@@ -52,31 +52,54 @@
             <button disabled>-</button><i class="queen"></i>
         </div>
 
+        <!--<h1>BEESWAX UPGRADES</h1>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
+            <div class="acbox">
+                <p></p>
+            </div>
+            <div class="acbox">
+                <p>TBA</p>
+            </div>
+            <div class="acbox">
+                <p>TBA</p>
+            </div>
+            <div class="acbox">
+                <p>TBA</p>
+            </div>
+        </div>-->
+
         <h1>COSMETICS</h1>
-        <select class="beesel">
-            <option class="beeskin0" value="bee" selected>Bee</option>
+        <select class="beesel" style="width: 64px;">
+            <option class="beeskin0" value="bee">Bee</option>
             <option class="beeskin1" value="beeplusplus" disabled>B++</option>
+            <option class="beeskin2" value="jonesy" disabled>Jonesy</option>
         </select>
 
-        <select class="hivesel">
-            <option class="hiveskin0" value="hive" selected>Hive</option>
+        <select class="hivesel" style="width: 64px;">
+            <option class="hiveskin0" value="hive">Hive</option>
             <option class="hiveskin1" value="hiveplusplus" disabled>H++</option>
         </select>
 
-        <select class="flowersel">
-            <option class="flowerskin0" value="flower" selected>Flower</option>
+        <select class="flowersel" style="width: 64px;">
+            <option class="flowerskin0" value="flower">Flower</option>
             <option class="flowerskin1" value="flowerplusplus" disabled>F++</option>
         </select>
 
-        <select class="bgsel">
+        <!--<select class="bgsel" style="width: 64px;">
             <option class="bgskin0" value="" selected>None</option>
-        </select>
+        </select>-->
+
+        <br><i>preview</i><hr style="width: 200px; margin: 4px;">
+
+        <img class="lilbeeprev" src="img/bee.png" alt="" style="width: 64px">
+        <img class="lilhiveprev" src="img/hive.png" alt="" style="width: 64px">
+        <img class="lilflowerprev" src="img/flower.png" alt="" style="width: 64px">
 
         <h1>ACHIEVEMENTS</h1>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
             <div class="acbox ac0">
                 <p>So it beegins...</p>
-                <i>Assign 1 bee to the swarm.</i>
+                <i>Assign 1 bee to the swarm.<br>Reward: Jonsey</i>
             </div>
             <div class="acbox ac1">
                 <p>D-hive-ersity!</p>
@@ -90,11 +113,15 @@
                 <p><i>I am the bee lady, I am the one who jests!</i></p>
                 <i>Get a queen bee.<br>Reward: H++</i>
             </div>
-            <div class="acbox">
+            <!--<div class="acbox">
                 <p>A beellion bees to get beesiness done!</p>
-                <i>Get 1 billion bees</i>
+                <i>Get 1 billion bees</i>-->
             </div>
         </div>
+
+        <h1>SETTINGS</h1>
+        <p style="margin-bottom: 0%;">Bee bob intensity: <i class="BBIdisp"></i> (Default: 5)</p>
+        <input type="range" min="0" max="20" value="5" class="BBI"><br>
         <i>Just to let you know, anything in the game could break at any time, don't blame me for the loss of your save file :)</i>
     </center>
     <script src="check.js"></script>

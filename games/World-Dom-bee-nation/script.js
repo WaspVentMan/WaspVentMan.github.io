@@ -4,6 +4,8 @@ let bees = {}
 let saveData = localStorage.getItem("BEE_IDLE")
 let lastchild = Date.now()
 
+let achievements = ""
+
 let buycount = 1
 
 try{
@@ -15,6 +17,9 @@ try{
     }
     if (saveData.bees != undefined){
         bees = saveData.bees
+    }
+    if (bees.constructor != undefined){
+        delete bees.constructor
     }
 }
 
@@ -73,8 +78,9 @@ setInterval(function(){
             }
         }
 
-        document.querySelector(".swarmtracker").style.width = ((bees.swarm.pos/5000)*100) + "%"
-        document.querySelector(".lilbee").style.left = "calc(" + ((bees.swarm.pos/5000)*100) + "% - " + 64*(bees.swarm.pos/5000) + "px)"
+        document.querySelector(".swarmtracker").style.width = (bees.swarm.pos/5000*100) + "%"
+        document.querySelector(".lilbee").style.left = "calc(" + (bees.swarm.pos/5000*100) + "% - " + 64*(bees.swarm.pos/5000) + "px)"
+        document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*(document.querySelector(".BBI").value) + "px"
     }
 
     if (bees.worker.bees != 0 && hive.nectar > 0){
@@ -113,11 +119,17 @@ setInterval(function(){
     document.querySelector(".lilbee").src = "img/" + document.querySelector(".beesel").value + ".png"
     document.querySelector(".lilhive").src = "img/" + document.querySelector(".hivesel").value + ".png"
     document.querySelector(".lilflower").src = "img/" + document.querySelector(".flowersel").value + ".png"
+    document.querySelector(".lilbeeprev").src = "img/" + document.querySelector(".beesel").value + ".png"
+    document.querySelector(".lilhiveprev").src = "img/" + document.querySelector(".hivesel").value + ".png"
+    document.querySelector(".lilflowerprev").src = "img/" + document.querySelector(".flowersel").value + ".png"
+
+    document.querySelector('.BBIdisp').textContent = document.querySelector('.BBI').value
 }, 0)
 
 setInterval(function(){
     if (bees.swarm.bees > 0){
         document.querySelector(".ac0").style.backgroundColor = "green"
+        document.querySelector(".beeskin2").removeAttribute("disabled")
     }
 
     if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
