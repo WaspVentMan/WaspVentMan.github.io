@@ -1,10 +1,10 @@
 let hive = {}
 let bees = {}
+let achievements = "0"*512
+let skin = {"bee": "bee", "hive": "hive", "flower": "flower"}
 
 let saveData = localStorage.getItem("BEE_IDLE")
 let lastchild = Date.now()
-
-let achievements = ""
 
 let buycount = 1
 
@@ -18,16 +18,33 @@ try{
     if (saveData.bees != undefined){
         bees = saveData.bees
     }
+    if (saveData.achievements != undefined){
+        achievements = saveData.achievements
+    }
+    if (saveData.skin != undefined){
+        skin = saveData.skin
+    }
     if (bees.constructor != undefined){
         delete bees.constructor
     }
 }
-
 catch{console.log(":(")}
 
 savecheck()
 
 function totalBee(){return bees.swarmqueue + bees.swarm.bees + bees.worker.bees + bees.constructors.bees + bees.queen.bees}
+
+function updateskin(newskin, i=true){
+    if (i){
+        skin[newskin] = document.querySelector(".sel").value
+    }
+    document.querySelector(".lil" + newskin).src = "img/" + skin[newskin] + ".png"
+    document.querySelector(".lil" + newskin + "prev").src = "img/" + skin[newskin] + ".png"
+}
+
+updateskin("bee", i=false)
+updateskin("hive", i=false)
+updateskin("flower", i=false)
 
 const hiveVars = ["beeswax", "honey", "nectar", "bees"] // "beeswaxcap", "honeycap", "nectarcap", "beecap", 
 
@@ -79,8 +96,8 @@ setInterval(function(){
         }
 
         document.querySelector(".swarmtracker").style.width = (bees.swarm.pos/5000*100) + "%"
-        document.querySelector(".lilbee").style.left = "calc(" + (bees.swarm.pos/5000*100) + "% - " + 64*(bees.swarm.pos/5000) + "px)"
-        document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*(document.querySelector(".BBI").value) + "px"
+        document.querySelector(".lilbee").style.left = "calc(" + (bees.swarm.pos/5000*100) + "% - " + parseInt(document.querySelector('.BS').value)*(bees.swarm.pos/5000) + "px)"
+        document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*document.querySelector(".BBI").value*Math.sin(Date.now()/20) + "px"
     }
 
     if (bees.worker.bees != 0 && hive.nectar > 0){
@@ -116,20 +133,23 @@ setInterval(function(){
 
     t = Date.now()
 
-    document.querySelector(".lilbee").src = "img/" + document.querySelector(".beesel").value + ".png"
-    document.querySelector(".lilhive").src = "img/" + document.querySelector(".hivesel").value + ".png"
-    document.querySelector(".lilflower").src = "img/" + document.querySelector(".flowersel").value + ".png"
-    document.querySelector(".lilbeeprev").src = "img/" + document.querySelector(".beesel").value + ".png"
-    document.querySelector(".lilhiveprev").src = "img/" + document.querySelector(".hivesel").value + ".png"
-    document.querySelector(".lilflowerprev").src = "img/" + document.querySelector(".flowersel").value + ".png"
-
     document.querySelector('.BBIdisp').textContent = document.querySelector('.BBI').value
+    document.querySelector('.BSdisp').textContent = document.querySelector('.BS').value
+    document.querySelector('.BSPdisp').textContent = document.querySelector('.BSP').value
+
+    document.querySelector('.lilbee').style.width = parseInt(document.querySelector('.BS').value) + "px"
+    document.querySelector('.lilhive').style.width = parseInt(document.querySelector('.BS').value) + "px"
+    document.querySelector('.lilflower').style.width = parseInt(document.querySelector('.BS').value) + "px"
+    document.querySelector('.lilbeeprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
+    document.querySelector('.lilhiveprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
+    document.querySelector('.lilflowerprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
+    document.querySelector('.bg').style.height = parseInt(document.querySelector('.BS').value) + "px"
 }, 0)
 
 setInterval(function(){
     if (bees.swarm.bees > 0){
         document.querySelector(".ac0").style.backgroundColor = "green"
-        document.querySelector(".beeskin2").removeAttribute("disabled")
+        document.querySelector(".otherskin0").removeAttribute("disabled")
     }
 
     if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
@@ -147,5 +167,5 @@ setInterval(function(){
         document.querySelector(".hiveskin1").removeAttribute("disabled")
     }
 
-    localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees}))
+    localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees, "achievements": achievements, "skin": skin}))
 }, 33)

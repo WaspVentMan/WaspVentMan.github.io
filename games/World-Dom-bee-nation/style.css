@@ -1,5 +1,5 @@
 .acbox {
-    max-width: 200px;
+    min-width: 200px;
     min-height: 100px;
     background-color: lightgrey;
     border-radius: 10px;

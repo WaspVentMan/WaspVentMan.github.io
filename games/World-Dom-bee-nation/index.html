@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin: 0%; background-color: white;">
-    <div style="width: 100%; height: 64px;">
+    <div class="bg" style="width: 100%; height: 64px;"> <!--background-image: url('img/jonesy.png');-->
         <div class="swarmtracker" style="height: 32px; position:fixed;"></div>
     </div>
     <img class="lilbee" src="img/bee.png" alt="" style="position: fixed; top: 0%; width: 64px; z-index: 1;">
@@ -17,7 +17,15 @@
     <!-- PUT YOU IN MY OVEN! -->
 
     <center>
-        <h1>World Dom-bee-nation</h1>
+        <h1 class="title">World Dom-bee-nation</h1>
+
+        <script>
+            let temp = new Date
+            if (temp.getMonth() == 8 && temp.getDate() == 16){
+                document.querySelector(".title").textContent = "Wold Dom-bee-nation"
+            }
+        </script>
+
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); width: fit-content; text-align: center;">
             <p style="margin: 0%;">beeswax</p>
             <p style="margin: 0%;">honey</p>
@@ -32,97 +40,129 @@
             <p style="margin: 0%;" class="nectarcap"></p>
             <p style="margin: 0%;" class="beecap"></p>
         </div>
-        
-        <h1>CREATION</h1>
-        <button onclick="if (hive.nectar >= 1){hive.nectar -= 1; hive.honey += 1}">NECTAR<br>↓<br>HONEY</button>
-        <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.beeswax += 1}">10 HONEY<br>↓<br>BEESWAX</button>
-        <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.bees += 1}">10 HONEY<br>↓<br>BEE</button>
-        <button onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}"><p class="queencost" style="margin: 0%;">100 HONEY + BEE</p>↓<br>QUEEN BEE</button>
 
-        <h1>JOBS</h1>
-        <div style="width: max-content; text-align: left;">
-            <input class="buycount" type="number" iname="quantity" min="1" style="width: 100%;" value="1"><br>
-            <button onclick="if (totalBee()+buycount <= hive.bees){bees.swarmqueue += buycount}">+</button>
-            <button onclick="if (bees.swarm.bees-buycount >= 0){bees.swarmqueue -= buycount}">-</button><i class="swarm"></i><br>
-            <button onclick="if (totalBee()+buycount <= hive.bees){bees.worker.bees += buycount}">+</button>
-            <button onclick="if (bees.worker.bees-buycount >= 0){bees.worker.bees -= buycount}">-</button><i class="worker"></i><br>
-            <button onclick="if (totalBee()+buycount <= hive.bees){bees.constructors.bees += buycount}">+</button>
-            <button onclick="if (bees.constructors.bees-buycount >= 0){bees.constructors.bees -= buycount}">-</button><i class="constructors"></i><br>
-            <button disabled>+</button>
-            <button disabled>-</button><i class="queen"></i>
-        </div>
+        <details open>
+            <summary><h1 style="margin: 0%; display: inline-block">CREATION</h1></summary>
+            <button onclick="if (hive.nectar >= 1){hive.nectar -= 1; hive.honey += 1}">NECTAR<br>↓<br>HONEY</button>
+            <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.beeswax += 1}">10 HONEY<br>↓<br>BEESWAX</button>
+            <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.bees += 1}">10 HONEY<br>↓<br>BEE</button>
+            <button onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}"><p class="queencost" style="margin: 0%;">100 HONEY + BEE</p>↓<br>QUEEN BEE</button>
+        </details>
 
-        <!--<h1>BEESWAX UPGRADES</h1>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
-            <div class="acbox">
-                <p></p>
+        <details open>
+            <summary><h1 style="margin: 0%; display: inline-block">JOBS</h1></summary>
+            <div style="width: max-content; text-align: left;">
+                <input class="buycount" type="number" iname="quantity" min="1" style="width: 100%;" value="1"><br>
+                <button onclick="if (totalBee()+buycount <= hive.bees){bees.swarmqueue += buycount}">+</button>
+                <button onclick="if (bees.swarm.bees-buycount >= 0){bees.swarmqueue -= buycount}">-</button><i class="swarm"></i><br>
+                <button onclick="if (totalBee()+buycount <= hive.bees){bees.worker.bees += buycount}">+</button>
+                <button onclick="if (bees.worker.bees-buycount >= 0){bees.worker.bees -= buycount}">-</button><i class="worker"></i><br>
+                <button onclick="if (totalBee()+buycount <= hive.bees){bees.constructors.bees += buycount}">+</button>
+                <button onclick="if (bees.constructors.bees-buycount >= 0){bees.constructors.bees -= buycount}">-</button><i class="constructors"></i><br>
+                <button disabled>+</button>
+                <button disabled>-</button><i class="queen"></i>
             </div>
-            <div class="acbox">
-                <p>TBA</p>
-            </div>
-            <div class="acbox">
-                <p>TBA</p>
-            </div>
-            <div class="acbox">
-                <p>TBA</p>
-            </div>
-        </div>-->
+        </details>
 
-        <h1>COSMETICS</h1>
-        <select class="beesel" style="width: 64px;">
-            <option class="beeskin0" value="bee">Bee</option>
-            <option class="beeskin1" value="beeplusplus" disabled>B++</option>
-            <option class="beeskin2" value="jonesy" disabled>Jonesy</option>
-        </select>
-
-        <select class="hivesel" style="width: 64px;">
-            <option class="hiveskin0" value="hive">Hive</option>
-            <option class="hiveskin1" value="hiveplusplus" disabled>H++</option>
-        </select>
-
-        <select class="flowersel" style="width: 64px;">
-            <option class="flowerskin0" value="flower">Flower</option>
-            <option class="flowerskin1" value="flowerplusplus" disabled>F++</option>
-        </select>
-
-        <!--<select class="bgsel" style="width: 64px;">
-            <option class="bgskin0" value="" selected>None</option>
-        </select>-->
-
-        <br><i>preview</i><hr style="width: 200px; margin: 4px;">
-
-        <img class="lilbeeprev" src="img/bee.png" alt="" style="width: 64px">
-        <img class="lilhiveprev" src="img/hive.png" alt="" style="width: 64px">
-        <img class="lilflowerprev" src="img/flower.png" alt="" style="width: 64px">
-
-        <h1>ACHIEVEMENTS</h1>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
-            <div class="acbox ac0">
-                <p>So it beegins...</p>
-                <i>Assign 1 bee to the swarm.<br>Reward: Jonsey</i>
+        <!--<details open>
+            <summary><h1 style="margin: 0%; display: inline-block">BEESWAX UPGRADES</h1></summary>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
+                <div class="acbox">
+                    <p>S-bee-dy!</p>
+                    <i>Double bee speed<br>100 Beeswax</i>
+                </div>
+                <div class="acbox">
+                    <p>TBA</p>
+                    <i>TBA</i>
+                </div>
+                <div class="acbox">
+                    <p>TBA</p>
+                    <i>TBA</i>
+                </div>
+                <div class="acbox">
+                    <p>TBA</p>
+                    <i>TBA</i>
+                </div>
             </div>
-            <div class="acbox ac1">
-                <p>D-hive-ersity!</p>
-                <i>Get one of each basic bee type.<br>Reward: F++</i>
-            </div>
-            <div class="acbox ac2">
-                <p>Bee in a candle shop!</p>
-                <i>Get 100 beeswax.<br>Reward: B++</i>
-            </div>
-            <div class="acbox ac3">
-                <p><i>I am the bee lady, I am the one who jests!</i></p>
-                <i>Get a queen bee.<br>Reward: H++</i>
-            </div>
-            <!--<div class="acbox">
-                <p>A beellion bees to get beesiness done!</p>
-                <i>Get 1 billion bees</i>-->
-            </div>
-        </div>
+        </details>-->
 
-        <h1>SETTINGS</h1>
-        <p style="margin-bottom: 0%;">Bee bob intensity: <i class="BBIdisp"></i> (Default: 5)</p>
-        <input type="range" min="0" max="20" value="5" class="BBI"><br>
-        <i>Just to let you know, anything in the game could break at any time, don't blame me for the loss of your save file :)</i>
+        <details open>
+            <summary><h1 style="margin: 0%; display: inline-block">ACHIEVEMENTS</h1></summary>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
+                <div class="acbox ac0">
+                    <p>So it beegins...</p>
+                    <i>Assign 1 bee to the swarm.<br>Reward: Jonsey</i>
+                </div>
+                <div class="acbox ac1">
+                    <p>D-hive-ersity!</p>
+                    <i>Get one of each basic bee type.<br>Reward: F++</i>
+                </div>
+                <div class="acbox ac3">
+                    <p><i>I am the bee lady, I am the one who jests!</i></p>
+                    <i>Get a queen bee.<br>Reward: H++</i>
+                </div>
+                <div class="acbox ac2">
+                    <p>Bee in a candle shop!</p>
+                    <i>Get 100 beeswax.<br>Reward: B++</i>
+                </div>
+                <!--<div class="acbox">
+                    <p>A beellion bees to get beesiness done!</p>
+                    <i>Get 1 billion bees</i>
+                </div>-->
+            </div>
+        </details>
+
+        <details open>
+            <summary><h1 style="margin: 0%; display: inline-block">SETTINGS</h1></summary>
+            <p style="margin-bottom: 0%;">Bob intensity: <i class="BBIdisp"></i> (Default: 5)</p>
+            <input type="range" min="0" max="20" value="5" class="BBI"><br>
+            <p style="margin-bottom: 0%;">Bee scale: <i class="BSdisp"></i>px (Default: 64px)</p>
+            <input type="range" min="0" max="256" value="64" step="16" class="BS"><br>
+            <p style="margin-bottom: 0%;">Preview scale: <i class="BSPdisp"></i>px (Default: 64px)</p>
+            <input type="range" min="64" max="256" value="64" step="16" class="BSP"><br>
+            
+            <br>
+            <details style="display: block; width: max-content;">
+                <summary>COSMETICS</summary>
+
+                
+
+                
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; text-align: center;">
+                    <p style="margin: 0%;">Bee</p>
+                    <p style="margin: 0%;">Hive</p>
+                    <p style="margin: 0%;">Flower</p>
+                    <img class="lilbeeprev" src="img/bee.png" alt="" style="width: 64px">
+                    <img class="lilhiveprev" src="img/hive.png" alt="" style="width: 64px">
+                    <img class="lilflowerprev" src="img/flower.png" alt="" style="width: 64px">
+                    <button style="width: 100%;" onclick="updateskin('bee')">Apply</button>
+                    <button style="width: 100%;" onclick="updateskin('hive')">Apply</button>
+                    <button style="width: 100%;" onclick="updateskin('flower')">Apply</button>
+                </div>
+
+                <select class="sel" style="width: 100%;">
+                    <optgroup label="Bees">
+                        <option class="beeskin0" value="bee">Bee</option>
+                        <option class="beeskin1" value="beeplusplus" disabled>B++</option>
+                        <option class="beeskin2" value="warmupbee">Warm-Up Bee</option>
+                        <option class="beeskin3" value="maxwell">Jess "Dingus" Maxwell</option>
+                    </optgroup>
+                    <optgroup label="Hives">
+                        <option class="hiveskin0" value="hive">Hive</option>
+                        <option class="hiveskin1" value="hiveplusplus" disabled>H++</option>
+                    </optgroup>
+                    <optgroup label="Flowers">
+                        <option class="flowerskin0" value="flower">Flower</option>
+                        <option class="flowerskin1" value="flowerplusplus" disabled>F++</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option class="otherskin0" value="jonesy" disabled>Jonesy</option>
+                    </optgroup>
+                </select>
+            </details><br>
+            <i>Just to let you know, anything in the game could break at any time, don't blame me for the loss of your save file :)</i>
+        </details>
     </center>
     <script src="check.js"></script>
     <script src="script.js"></script>
