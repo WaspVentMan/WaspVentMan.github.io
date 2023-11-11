@@ -1,6 +1,14 @@
 let hive = {}
 let bees = {}
-let achievements = "0"*512
+
+let rawstring = ["0"]
+
+for (let x = 0; x < 9; x++){
+    rawstring = rawstring.concat(rawstring)
+}
+
+let achievements = rawstring
+let beeswaxbuffs = rawstring
 let skin = {"bee": "bee", "hive": "hive", "flower": "flower"}
 
 let saveData = localStorage.getItem("BEE_IDLE")
@@ -23,6 +31,9 @@ try{
     }
     if (saveData.skin != undefined){
         skin = saveData.skin
+    }
+    if (saveData.beeswaxbuffs != undefined){
+        beeswaxbuffs = saveData.beeswaxbuffs
     }
     if (bees.constructor != undefined){
         delete bees.constructor
@@ -52,7 +63,7 @@ let t = Date.now()
 
 setInterval(function(){
     for (let x = 0; x < hiveVars.length; x++){
-        document.querySelector("." + hiveVars[x]).textContent = Math.round(hive[hiveVars[x]]*100)/100
+        document.querySelector("." + hiveVars[x]).textContent = numeral(Math.round(hive[hiveVars[x]]*100)/100).format('0a')
         if (x >= 4){
             document.querySelector("." + hiveVars[x]).textContent += "/"
         }
@@ -63,7 +74,7 @@ setInterval(function(){
     document.querySelector(".constructors").textContent = " constructors: " + Math.round(bees.constructors.bees*100)/100
     document.querySelector(".queen").textContent = " Queens: " + Math.round(bees.queen.bees*100)/100
 
-    document.querySelector('.queencost').textContent = 100*((bees.queen.bees+1)**2) + ' HONEY + BEE'
+    document.querySelector('.queencost').textContent = numeral(100*((bees.queen.bees+1)**2)).format('0a') + ' Honey + 1 Bee'
 
     buycount = parseInt(document.querySelector('.buycount').value)
 
@@ -72,10 +83,16 @@ setInterval(function(){
         bees.swarmqueue = 0
     }
 
+    let beemove = 100*((Date.now()-t)/100)
+
+    if (beeswaxbuffs[0] == "1"){
+        beemove *= 2
+    }
+
     if (bees.swarm.bees != 0){
         if (bees.swarm.to){
             document.querySelector(".lilbee").style.transform = "scaleX(1)"
-            bees.swarm.pos += 100*((Date.now()-t)/100)
+            bees.swarm.pos += beemove
             if (bees.swarm.pos >= 5000){
                 bees.swarm.to = false
                 bees.swarm.nectar = 1
@@ -85,7 +102,7 @@ setInterval(function(){
 
         else {
             document.querySelector(".lilbee").style.transform = "scaleX(-1)"
-            bees.swarm.pos -= 100*((Date.now()-t)/100)
+            bees.swarm.pos -= beemove
             if (bees.swarm.pos <= 0){
                 bees.swarm.to = true
                 bees.swarm.nectar = 0
@@ -97,7 +114,7 @@ setInterval(function(){
 
         document.querySelector(".swarmtracker").style.width = (bees.swarm.pos/5000*100) + "%"
         document.querySelector(".lilbee").style.left = "calc(" + (bees.swarm.pos/5000*100) + "% - " + parseInt(document.querySelector('.BS').value)*(bees.swarm.pos/5000) + "px)"
-        document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*document.querySelector(".BBI").value*Math.sin(Date.now()/20) + "px"
+        document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*document.querySelector(".BBI").value + "px"
     }
 
     if (bees.worker.bees != 0 && hive.nectar > 0){
@@ -133,9 +150,32 @@ setInterval(function(){
 
     t = Date.now()
 
-    document.querySelector('.BBIdisp').textContent = document.querySelector('.BBI').value
-    document.querySelector('.BSdisp').textContent = document.querySelector('.BS').value
-    document.querySelector('.BSPdisp').textContent = document.querySelector('.BSP').value
+    if (document.querySelector('.BBI').value == "5"){
+        document.querySelector('.BBIdisp').textContent = document.querySelector('.BBI').value + " (Default)"
+    } else {
+        document.querySelector('.BBIdisp').textContent = document.querySelector('.BBI').value
+    }
+    
+
+    if (document.querySelector('.BS').value == "0"){
+        document.querySelector('.BSdisp').textContent = "Hidden"
+    } else if (document.querySelector('.BS').value == "64"){
+        document.querySelector('.BSdisp').textContent = (parseInt(document.querySelector('.BS').value)/64)*100 + "% (Default)"
+    } else {
+        document.querySelector('.BSdisp').textContent = (parseInt(document.querySelector('.BS').value)/64)*100 + "%"
+    }
+    
+    if (document.querySelector('.BSP').value == "64"){
+        document.querySelector('.BSPdisp').textContent = (parseInt(document.querySelector('.BSP').value)/64)*100 + "% (Default)"
+    } else {
+        document.querySelector('.BSPdisp').textContent = (parseInt(document.querySelector('.BSP').value)/64)*100 + "%"
+    }
+
+    if (document.querySelector('.TITLECLEAR').value == "1"){
+        document.querySelector('.TITLECLEARdisp').textContent = "No"
+    } else {
+        document.querySelector('.TITLECLEARdisp').textContent = "Yes (Default)"
+    }
 
     document.querySelector('.lilbee').style.width = parseInt(document.querySelector('.BS').value) + "px"
     document.querySelector('.lilhive').style.width = parseInt(document.querySelector('.BS').value) + "px"
@@ -143,29 +183,42 @@ setInterval(function(){
     document.querySelector('.lilbeeprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
     document.querySelector('.lilhiveprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
     document.querySelector('.lilflowerprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
-    document.querySelector('.bg').style.height = parseInt(document.querySelector('.BS').value) + "px"
-}, 0)
+    document.querySelector('.bg').style.height = parseInt(document.querySelector('.BS').value)*parseInt(document.querySelector('.TITLECLEAR').value) + "px"
+}, 1000/60)
 
 setInterval(function(){
-    if (bees.swarm.bees > 0){
+    // ACHIEVEMENTS
+    if (achievements[0] == "1" || bees.swarm.bees > 0){
+        achievements[0] = "1"
         document.querySelector(".ac0").style.backgroundColor = "green"
         document.querySelector(".otherskin0").removeAttribute("disabled")
     }
 
-    if (bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
+    if (achievements[1] == "1" || bees.swarm.bees > 0 && bees.worker.bees > 0 && bees.constructors.bees > 0){
+        achievements[1] = "1"
         document.querySelector(".ac1").style.backgroundColor = "green"
         document.querySelector(".flowerskin1").removeAttribute("disabled")
     }
 
-    if (hive.beeswax >= 100){
+    if (achievements[2] == "1" || hive.beeswax >= 100){
+        achievements[2] = "1"
         document.querySelector(".ac2").style.backgroundColor = "green"
         document.querySelector(".beeskin1").removeAttribute("disabled")
     }
 
-    if (bees.queen.bees > 0){
+    if (achievements[3] == "1" || bees.queen.bees > 0){
+        achievements[3] = "1"
         document.querySelector(".ac3").style.backgroundColor = "green"
         document.querySelector(".hiveskin1").removeAttribute("disabled")
     }
 
-    localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees, "achievements": achievements, "skin": skin}))
-}, 33)
+    // BEESWAXBUFFS
+    if (beeswaxbuffs[0] == "1"){
+        document.querySelector(".bw0").style.backgroundColor = "green"
+    }
+    else if (beeswaxbuffs[0] != "1" && hive.beeswax > 100){
+        document.querySelector(".bw0").style.backgroundColor = "lightgreen"
+    }
+
+    localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees, "achievements": achievements, "skin": skin, "beeswaxbuffs": beeswaxbuffs}))
+}, 100)

@@ -28,4 +28,8 @@ function savecheck(){
             bees[beesparts[x]] = truebees[beesparts[x]]
         }
     }
+
+    if (achievements == 0){
+        achievements = rawstring
+    }
 }

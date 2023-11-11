@@ -43,52 +43,80 @@
 
         <details open>
             <summary><h1 style="margin: 0%; display: inline-block">CREATION</h1></summary>
-            <button onclick="if (hive.nectar >= 1){hive.nectar -= 1; hive.honey += 1}">NECTAR<br>↓<br>HONEY</button>
-            <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.beeswax += 1}">10 HONEY<br>↓<br>BEESWAX</button>
-            <button onclick="if (hive.honey >= 10){hive.honey -= 10; hive.bees += 1}">10 HONEY<br>↓<br>BEE</button>
-            <button onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}"><p class="queencost" style="margin: 0%;">100 HONEY + BEE</p>↓<br>QUEEN BEE</button>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <div class="acbox" onclick="if (hive.nectar >= 1){hive.nectar -= 1; hive.honey += 1}">
+                    <p>HONEY!</p>
+                    <i>1 Nectar</i>
+                </div>
+                <div class="acbox" onclick="if (hive.honey >= 10){hive.honey -= 10; hive.beeswax += 1}">
+                    <p>BEESWAX!</p>
+                    <i>10 Honey</i>
+                </div>
+                <div class="acbox" onclick="if (hive.honey >= 10){hive.honey -= 10; hive.bees += 1}">
+                    <p>BEE!</p>
+                    <i>10 Honey</i>
+                </div>
+                <div class="acbox" onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}">
+                    <p>Queen Bee</p>
+                    <i class="queencost"></i>
+                </div>
+            </div>
         </details>
 
         <details open>
             <summary><h1 style="margin: 0%; display: inline-block">JOBS</h1></summary>
             <div style="width: max-content; text-align: left;">
                 <input class="buycount" type="number" iname="quantity" min="1" style="width: 100%;" value="1"><br>
-                <button onclick="if (totalBee()+buycount <= hive.bees){bees.swarmqueue += buycount}">+</button>
-                <button onclick="if (bees.swarm.bees-buycount >= 0){bees.swarmqueue -= buycount}">-</button><i class="swarm"></i><br>
-                <button onclick="if (totalBee()+buycount <= hive.bees){bees.worker.bees += buycount}">+</button>
-                <button onclick="if (bees.worker.bees-buycount >= 0){bees.worker.bees -= buycount}">-</button><i class="worker"></i><br>
-                <button onclick="if (totalBee()+buycount <= hive.bees){bees.constructors.bees += buycount}">+</button>
-                <button onclick="if (bees.constructors.bees-buycount >= 0){bees.constructors.bees -= buycount}">-</button><i class="constructors"></i><br>
-                <button disabled>+</button>
-                <button disabled>-</button><i class="queen"></i>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: 100%; text-align: right;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                        <button onclick="if (totalBee()+buycount <= hive.bees){bees.swarmqueue += buycount}">+</button>
+                        <button onclick="if (bees.swarm.bees-buycount >= 0){bees.swarmqueue -= buycount}">-</button>
+                    </div>
+                    <i class="swarm"></i>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                        <button onclick="if (totalBee()+buycount <= hive.bees){bees.worker.bees += buycount}">+</button>
+                        <button onclick="if (bees.worker.bees-buycount >= 0){bees.worker.bees -= buycount}">-</button>
+                    </div>
+                    <i class="worker"></i>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                        <button onclick="if (totalBee()+buycount <= hive.bees){bees.constructors.bees += buycount}">+</button>
+                        <button onclick="if (bees.constructors.bees-buycount >= 0){bees.constructors.bees -= buycount}">-</button>
+                    </div>
+                    <i class="constructors"></i>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                        <button disabled>+</button>
+                        <button disabled>-</button>
+                    </div>
+                    <i class="queen"></i>
+                </div>
             </div>
         </details>
 
-        <!--<details open>
-            <summary><h1 style="margin: 0%; display: inline-block">BEESWAX UPGRADES</h1></summary>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
-                <div class="acbox">
+        <details open>
+            <summary><h1 style="margin: 0%; display: inline-block">HIVE IMPROVEMENT</h1></summary>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <div class="acbox bw0" onclick="if(beeswaxbuffs[0] != '1' && hive.beeswax > 100){hive.beeswax -= 100; beeswaxbuffs[0] = '1'}">
                     <p>S-bee-dy!</p>
                     <i>Double bee speed<br>100 Beeswax</i>
                 </div>
-                <div class="acbox">
-                    <p>TBA</p>
-                    <i>TBA</i>
+                <div class="acbox bw1">
+                    <p>Under Construction</p>
+                    <i>Come back soon :)</i>
                 </div>
-                <div class="acbox">
-                    <p>TBA</p>
-                    <i>TBA</i>
+                <div class="acbox bw2">
+                    <p>Under Construction</p>
+                    <i>Come back soon :)</i>
                 </div>
-                <div class="acbox">
-                    <p>TBA</p>
-                    <i>TBA</i>
+                <div class="acbox bw3">
+                    <p>Under Construction</p>
+                    <i>Come back soon :)</i>
                 </div>
             </div>
-        </details>-->
+        </details>
 
         <details open>
             <summary><h1 style="margin: 0%; display: inline-block">ACHIEVEMENTS</h1></summary>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: fit-content; text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
                 <div class="acbox ac0">
                     <p>So it beegins...</p>
                     <i>Assign 1 bee to the swarm.<br>Reward: Jonsey</i>
@@ -114,12 +142,34 @@
 
         <details open>
             <summary><h1 style="margin: 0%; display: inline-block">SETTINGS</h1></summary>
-            <p style="margin-bottom: 0%;">Bob intensity: <i class="BBIdisp"></i> (Default: 5)</p>
-            <input type="range" min="0" max="20" value="5" class="BBI"><br>
-            <p style="margin-bottom: 0%;">Bee scale: <i class="BSdisp"></i>px (Default: 64px)</p>
-            <input type="range" min="0" max="256" value="64" step="16" class="BS"><br>
-            <p style="margin-bottom: 0%;">Preview scale: <i class="BSPdisp"></i>px (Default: 64px)</p>
-            <input type="range" min="64" max="256" value="64" step="16" class="BSP"><br>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <p style="margin: 0%; margin-right: 2px; text-align: right;">Bob intensity: </p>
+                <i class="BBIdisp" style="text-align: left; margin-left: 2px;"></i>
+            </div>
+            
+            <input type="range" min="0" max="20" value="5" step="1" class="BBI"><br>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <p style="margin: 0%; margin-right: 2px; text-align: right;">Bee scale:</p>
+                <i class="BSdisp" style="text-align: left; margin-left: 2px;"></i>
+            </div>
+
+            <input type="range" min="0" max="128" value="64" step="4" class="BS"><br>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <p style="margin: 0%; margin-right: 2px; text-align: right;">Preview scale:</p>
+                <i class="BSPdisp" style="text-align: left; margin-left: 2px;"></i>
+            </div>
+
+            <input type="range" min="64" max="128" value="64" step="4" class="BSP"><br>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                <p style="margin: 0%; margin-right: 2px; text-align: right;">Bee can overlap title:</p>
+                <i class="TITLECLEARdisp" style="text-align: left; margin-left: 2px;"></i>
+            </div>
+
+            <input type="range" min="0" max="1" value="0" step="1" class="TITLECLEAR"><br>
             
             <br>
             <details style="display: block; width: max-content;">
@@ -129,7 +179,7 @@
 
                 
 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; text-align: center;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); max-width: 100%; text-align: center;">
                     <p style="margin: 0%;">Bee</p>
                     <p style="margin: 0%;">Hive</p>
                     <p style="margin: 0%;">Flower</p>
@@ -164,6 +214,9 @@
             <i>Just to let you know, anything in the game could break at any time, don't blame me for the loss of your save file :)</i>
         </details>
     </center>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js" ></script>
+
     <script src="check.js"></script>
     <script src="script.js"></script>
 </body>
