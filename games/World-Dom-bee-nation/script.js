@@ -1,3 +1,14 @@
+let params = new URL(document.location).searchParams
+let code = params.get("b")
+
+if (code != undefined){
+    try{
+        code = atob(code)
+    } catch {
+        location.href = location.href.split("?")[0]
+    }
+}
+
 let hive = {}
 let bees = {}
 
@@ -11,8 +22,11 @@ let achievements = rawstring
 let beeswaxbuffs = rawstring
 let skin = {"bee": "bee", "hive": "hive", "flower": "flower"}
 
+let manager = true
+
 let saveData = localStorage.getItem("BEE_IDLE")
 let lastchild = Date.now()
+let lastmanage = Date.now()
 
 let buycount = 1
 
@@ -53,6 +67,10 @@ function updateskin(newskin, i=true){
     document.querySelector(".lil" + newskin + "prev").src = "img/" + skin[newskin] + ".png"
 }
 
+if (code != undefined){
+    skin.bee = code
+}
+
 updateskin("bee", i=false)
 updateskin("hive", i=false)
 updateskin("flower", i=false)
@@ -61,20 +79,32 @@ const hiveVars = ["beeswax", "honey", "nectar", "bees"] // "beeswaxcap", "honeyc
 
 let t = Date.now()
 
-setInterval(function(){
+function gameloop(){
     for (let x = 0; x < hiveVars.length; x++){
-        document.querySelector("." + hiveVars[x]).textContent = numeral(Math.round(hive[hiveVars[x]]*100)/100).format('0a')
+        document.querySelector("." + hiveVars[x]).textContent = numeral(Math.round(hive[hiveVars[x]]*100)/100).format('0.00a')
         if (x >= 4){
             document.querySelector("." + hiveVars[x]).textContent += "/"
         }
     }
 
-    document.querySelector(".swarm").textContent = " Swarm: " + Math.round(bees.swarm.bees*100)/100 + " (" +  Math.round(bees.swarmqueue*100)/100 + " in queue)"
-    document.querySelector(".worker").textContent = " Workers: " + Math.round(bees.worker.bees*100)/100
-    document.querySelector(".constructors").textContent = " constructors: " + Math.round(bees.constructors.bees*100)/100
-    document.querySelector(".queen").textContent = " Queens: " + Math.round(bees.queen.bees*100)/100
+    if (bees.swarmqueue == 0){
+        document.querySelector(".swarm").textContent = numeral(bees.swarm.bees).format('0.00a')
+    } else {
+        document.querySelector(".swarm").textContent = numeral(bees.swarm.bees).format('0.00a') + " (" + numeral(bees.swarmqueue).format('0a') + ")"
+    }
 
-    document.querySelector('.queencost').textContent = numeral(100*((bees.queen.bees+1)**2)).format('0a') + ' Honey + 1 Bee'
+    document.querySelector(".worker").textContent = numeral(bees.worker.bees).format('0.00a')
+    document.querySelector(".constructors").textContent = numeral(bees.constructors.bees).format('0.00a')
+    document.querySelector(".queen").textContent = numeral(bees.queen.bees).format('0a')
+
+    if (manager){
+        document.querySelector(".manager").textContent = "On"
+    } else {
+        document.querySelector(".manager").textContent = "Off"
+    }
+    
+
+    document.querySelector('.queencost').textContent = numeral(100*((bees.queen.bees+1)**2)).format('0.00a') + ' Honey + 1 Bee'
 
     buycount = parseInt(document.querySelector('.buycount').value)
 
@@ -113,6 +143,13 @@ setInterval(function(){
         }
 
         document.querySelector(".swarmtracker").style.width = (bees.swarm.pos/5000*100) + "%"
+        document.querySelector(".swarmtracker").style.backgroundColor = "rgba("+document.querySelector('.PBR').value+", "+document.querySelector('.PBG').value+", "+document.querySelector('.PBB').value+", "+parseInt(document.querySelector('.PBA').value)/100+")"
+
+        if (document.querySelector('.PB').value == "1"){
+            document.querySelector(".swarmtracker").style.visibility = "hidden"
+        } else {
+            document.querySelector(".swarmtracker").style.visibility = "visible"
+        }
         document.querySelector(".lilbee").style.left = "calc(" + (bees.swarm.pos/5000*100) + "% - " + parseInt(document.querySelector('.BS').value)*(bees.swarm.pos/5000) + "px)"
         document.querySelector(".lilbee").style.top = Math.sin(Date.now()/100)*document.querySelector(".BBI").value + "px"
     }
@@ -144,6 +181,20 @@ setInterval(function(){
         lastchild = Date.now()
     }
 
+    if (beeswaxbuffs[1] == "1" && Date.now() - lastmanage > 100 && manager){
+        let average = (bees.swarm.bees + bees.swarmqueue + bees.worker.bees + bees.constructors.bees)/3
+
+        if (bees.swarm.bees + bees.swarmqueue <= average && totalBee()+1 < hive.bees){
+            bees.swarmqueue += 1
+        } else if (bees.worker.bees <= average && totalBee()+1 < hive.bees){
+            bees.worker.bees += 1
+        } else if (bees.constructors.bees <= average && totalBee()+1 < hive.bees){
+            bees.constructors.bees += 1
+        }
+
+        lastmanage = Date.now()
+    }
+
     if (hive.nectar < 0){hive.nectar = 0}
     if (hive.honey < 0){hive.honey = 0}
     if (hive.beeswax < 0){hive.beeswax = 0}
@@ -165,7 +216,7 @@ setInterval(function(){
         document.querySelector('.BSdisp').textContent = (parseInt(document.querySelector('.BS').value)/64)*100 + "%"
     }
     
-    if (document.querySelector('.BSP').value == "64"){
+    if (document.querySelector('.BSP').value == "128"){
         document.querySelector('.BSPdisp').textContent = (parseInt(document.querySelector('.BSP').value)/64)*100 + "% (Default)"
     } else {
         document.querySelector('.BSPdisp').textContent = (parseInt(document.querySelector('.BSP').value)/64)*100 + "%"
@@ -177,6 +228,52 @@ setInterval(function(){
         document.querySelector('.TITLECLEARdisp').textContent = "Yes (Default)"
     }
 
+    if (document.querySelector('.PB').value == "1"){
+        document.querySelector('.PBdisp').textContent = "Hidden (Default)"
+    } else {
+        document.querySelector('.PBdisp').textContent = "Shown"
+    }
+
+    if (document.querySelector('.PBR').value == "128"){
+        document.querySelector('.PBRdisp').textContent = document.querySelector('.PBR').value + " (Default)"
+    } else {
+        document.querySelector('.PBRdisp').textContent = document.querySelector('.PBR').value
+    }
+
+    if (document.querySelector('.PBG').value == "128"){
+        document.querySelector('.PBGdisp').textContent = document.querySelector('.PBG').value + " (Default)"
+    } else {
+        document.querySelector('.PBGdisp').textContent = document.querySelector('.PBG').value
+    }
+
+    if (document.querySelector('.PBB').value == "128"){
+        document.querySelector('.PBBdisp').textContent = document.querySelector('.PBB').value + " (Default)"
+    } else {
+        document.querySelector('.PBBdisp').textContent = document.querySelector('.PBB').value
+    }
+
+    if (document.querySelector('.PBA').value == "25"){
+        document.querySelector('.PBAdisp').textContent = document.querySelector('.PBA').value + "% (Default)"
+    } else {
+        document.querySelector('.PBAdisp').textContent = document.querySelector('.PBA').value + "%"
+    }
+
+    if (document.querySelector('.TR').value == "10"){//🥔
+        document.querySelector('.TRdisp').textContent = parseInt(document.querySelector('.TR').value)/1000 + "s (Default)"
+    } else if (document.querySelector('.TR').value == "100"){
+        document.querySelector('.TRdisp').textContent = "🥔"
+    } else {
+        document.querySelector('.TRdisp').textContent = parseInt(document.querySelector('.TR').value)/1000 + "s"
+    }
+
+    if (document.querySelector('.STR').value == "200"){
+        document.querySelector('.STRdisp').textContent = parseInt(document.querySelector('.STR').value)/1000 + "s (Default)"
+    } else if (document.querySelector('.STR').value == "1000"){
+        document.querySelector('.STRdisp').textContent = "🥔"
+    } else {
+        document.querySelector('.STRdisp').textContent = parseInt(document.querySelector('.STR').value)/1000 + "s"
+    }
+
     document.querySelector('.lilbee').style.width = parseInt(document.querySelector('.BS').value) + "px"
     document.querySelector('.lilhive').style.width = parseInt(document.querySelector('.BS').value) + "px"
     document.querySelector('.lilflower').style.width = parseInt(document.querySelector('.BS').value) + "px"
@@ -184,9 +281,9 @@ setInterval(function(){
     document.querySelector('.lilhiveprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
     document.querySelector('.lilflowerprev').style.width = parseInt(document.querySelector('.BSP').value) + "px"
     document.querySelector('.bg').style.height = parseInt(document.querySelector('.BS').value)*parseInt(document.querySelector('.TITLECLEAR').value) + "px"
-}, 1000/60)
+}
 
-setInterval(function(){
+function acievementloop(){
     // ACHIEVEMENTS
     if (achievements[0] == "1" || bees.swarm.bees > 0){
         achievements[0] = "1"
@@ -220,5 +317,36 @@ setInterval(function(){
         document.querySelector(".bw0").style.backgroundColor = "lightgreen"
     }
 
+    if (beeswaxbuffs[1] == "1"){
+        document.querySelector(".bw1").style.backgroundColor = "green"
+    }
+    else if (beeswaxbuffs[1] != "1" && hive.beeswax > 100 && bees.queen.bees >= 1){
+        document.querySelector(".bw1").style.backgroundColor = "lightgreen"
+    }
+
+    //CREATION
+    if (hive.nectar >= 1){
+        document.querySelector(".cr0").style.backgroundColor = "lightgreen"
+    } else {
+        document.querySelector(".cr0").style.backgroundColor = "lightgray"
+    }
+
+    if (hive.honey >= 10){
+        document.querySelector(".cr1").style.backgroundColor = "lightgreen"
+        document.querySelector(".cr2").style.backgroundColor = "lightgreen"
+    } else {
+        document.querySelector(".cr1").style.backgroundColor = "lightgray"
+        document.querySelector(".cr2").style.backgroundColor = "lightgray"
+    }
+
+    if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){
+        document.querySelector(".cr3").style.backgroundColor = "lightgreen"
+    } else {
+        document.querySelector(".cr3").style.backgroundColor = "lightgray"
+    }
+
     localStorage.setItem("BEE_IDLE", JSON.stringify({"hive": hive, "bees": bees, "achievements": achievements, "skin": skin, "beeswaxbuffs": beeswaxbuffs}))
-}, 100)
+}
+
+let gamelife = setInterval(gameloop, 10)
+let aclife = setInterval(acievementloop, 200)
