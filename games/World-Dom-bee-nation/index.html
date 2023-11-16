@@ -14,6 +14,7 @@
     <img class="lilbee" src="img/bee.png" alt="" style="position: fixed; top: 0%; width: 64px; z-index: 1;">
     <img class="lilhive" src="img/hive.png" alt="" style="position: fixed; top: 0%; width: 64px; left: 0%; z-index: 2;">
     <img class="lilflower" src="img/flower.png" alt="" style="position: fixed; top: 0%; width: 64px; right: 0%; z-index: 0;">
+    
     <!-- PUT YOU IN MY OVEN! -->
 
     <center>
@@ -39,7 +40,7 @@
 
         <details open>
             <summary><h1 style="margin: 0%; display: inline-block">CONVERSION</h1></summary>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: fit-content; text-align: center;">
                 <div class="acbox cr0" onclick="if (hive.nectar >= 1){hive.nectar -= 1; hive.honey += 1}">
                     <p>HONEY!</p>
                     <i>1 Nectar</i>
@@ -52,10 +53,6 @@
                     <p>BEE!</p>
                     <i>10 Honey</i>
                 </div>
-                <div class="acbox cr3" onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}">
-                    <p>Queen Bee</p>
-                    <i class="queencost"></i>
-                </div>
             </div>
         </details>
 
@@ -64,6 +61,12 @@
             <div style="width: max-content; text-align: left;">
                 <div style="display: grid; grid-template-columns: repeat(1, 1fr); width: 100%; text-align: right;">
                     <input class="buycount" type="number" iname="quantity" min="1" value="1">
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; text-align: right; background-color: white;">
+                        <button disabled></button>
+                        <i style="text-align: right; padding-left: 4px;">Unemployed:</i>
+                        <i style="text-align: left; padding-left: 4px;" class="unemployed"></i>
+                    </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; text-align: right; background-color: lightgray;">
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: 100%; text-align: center;">
@@ -93,7 +96,9 @@
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; text-align: right; background-color: white;">
-                        <button disabled></button>
+                        <button onclick="if (totalBee()+1 <= hive.bees && hive.honey >= 100*((bees.queen.bees+1)**2)){bees.queen.bees += 1; hive.honey -= 100*((bees.queen.bees)**2)}">
+                            <i class="queencost"></i>
+                        </button>
                         <i style="text-align: right; padding-left: 4px;">Queens:</i>
                         <i style="text-align: left; padding-left: 4px;" class="queen"></i>
                     </div>
@@ -129,29 +134,45 @@
             </div>
         </details>
 
+        <!--<details>
+            <summary><h1 style="margin: 0%; display: inline-block">WAR</h1></summary>
+        </details>-->
+
         <details>
             <summary><h1 style="margin: 0%; display: inline-block">ACHIEVEMENTS</h1></summary>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
                 <div class="acbox ac0">
-                    <p>So it beegins...</p>
+                    <p>So it bee-gins...</p>
                     <i>Assign 1 bee to the swarm.<br>Reward: Jonsey</i>
                 </div>
                 <div class="acbox ac1">
                     <p>D-hive-ersity!</p>
-                    <i>Get one of each basic bee type.<br>Reward: F++</i>
+                    <i>Get one of each basic bee type.<br>Reward: B++</i>
                 </div>
                 <div class="acbox ac3">
                     <p><i>I am the bee lady, I am the one who jests!</i></p>
-                    <i>Get a queen bee.<br>Reward: H++</i>
+                    <i>Get a queen bee.<br>Reward: F++</i>
                 </div>
                 <div class="acbox ac2">
                     <p>Bee in a candle shop!</p>
-                    <i>Get 100 beeswax.<br>Reward: B++</i>
+                    <i>Get 100 beeswax.<br>Reward: H++</i>
                 </div>
-                <!--<div class="acbox">
+                <div class="acbox ac4">
+                    <p>A taste of automation...</p>
+                    <i>Get the manager.<br>Reward: BeeVentMan</i>
+                </div>
+                <div class="acbox ac6">
+                    <p>"God Gamer"</p>
+                    <i>Get 2k bees.<br>Reward: Bee-g Hive</i>
+                </div>
+                <div class="acbox ac7">
+                    <p>"God Gamer"++</p>
+                    <i>Get 20k bees.<br>Reward: Bee-g Hive++</i>
+                </div>
+                <div class="acbox ac5">
                     <p>A beellion bees to get beesiness done!</p>
-                    <i>Get 1 billion bees</i>
-                </div>-->
+                    <i>Get 1 billion bees<br>Reward: Warm-Up Bee</i>
+                </div>
             </div>
         </details>
 
@@ -162,46 +183,26 @@
                 <p style="margin: 0%;">Bee</p>
                 <p style="margin: 0%;">Hive</p>
                 <p style="margin: 0%;">Flower</p>
-                <img class="lilbeeprev" src="img/bee.png" style="width: 64px">
-                <img class="lilhiveprev" src="img/hive.png" style="width: 64px">
-                <img class="lilflowerprev" src="img/flower.png" style="width: 64px">
+                <img class="lilbeeprev" src="img/bee.png" style="width: 64px; margin: auto;">
+                <img class="lilhiveprev" src="img/hive.png" style="width: 64px; margin: auto;">
+                <img class="lilflowerprev" src="img/flower.png" style="width: 64px; margin: auto;">
                 <button style="width: 100%;" onclick="updateskin('bee')">Apply</button>
                 <button style="width: 100%;" onclick="updateskin('hive')">Apply</button>
                 <button style="width: 100%;" onclick="updateskin('flower')">Apply</button>
             </div>
 
-            <select class="sel" style="width: 100%;">
-                <optgroup label="Bees">
-                    <option class="beeskin0" value="bee">Bee</option>
-                    <option class="beeskin1" value="beeplusplus" disabled>B++</option>
-                    <option class="beeskin2" value="warmupbee">Warm-Up Bee</option>
-                    <option class="beeskin3" value="maxwell">Jess "Dingus" Maxwell</option>
-                </optgroup>
-                <optgroup label="Hives">
-                    <option class="hiveskin0" value="hive">Hive</option>
-                    <option class="hiveskin1" value="hiveplusplus" disabled>H++</option>
-                </optgroup>
-                <optgroup label="Flowers">
-                    <option class="flowerskin0" value="flower">Flower</option>
-                    <option class="flowerskin1" value="flowerplusplus" disabled>F++</option>
-                </optgroup>
-                <optgroup label="Other">
-                    <option class="otherskin0" value="jonesy" disabled>Jonesy</option>
-                </optgroup>
-            </select>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); max-width: 100%; text-align: center;">
+                <img class="cosprev" src="img/null.png" alt="" style="width: 128px;">
+                <div style="grid-area: 1 / 2 / 2 / 4; width: 100%;">
+                    <h3 class="cosname" style="margin-bottom: 0%;">Null</h3>
+                    <i class="cosinternal">(null)</i><br><br>
+                    <h5 style="margin: 0%;">Artist:</h5>
+                    <a class="cosart" style="margin: 0%;" href="">None</a>
+                </div>
+            </div>
 
             <!-- NEW COS SELECT :o -->
-            <!--<div style="display: grid; grid-template-columns: repeat(6, 1fr); max-width: 100%; text-align: center;">
-                <img src="img/bee.png" style="width: 64px;">
-                <img src="img/hive.png" style="width: 64px;">
-                <img src="img/flower.png" style="width: 64px;">
-                <img src="img/beeplusplus.png" style="width: 64px;">
-                <img src="img/hiveplusplus.png" style="width: 64px;">
-                <img src="img/flowerplusplus.png" style="width: 64px;">
-                <img src="img/jonesy.png" style="width: 64px;">
-                <img src="img/maxwell.png" style="width: 64px;">
-                <img src="img/warmupbee.png" style="width: 64px;">
-            </div>-->
+            <div class="cosgrid" style="display: grid; grid-template-columns: repeat(6, 1fr); max-width: 100%; text-align: center;"></div>
         </details>
 
         <details>
@@ -229,6 +230,13 @@
                 </div>
 
                 <input type="range" min="64" max="128" value="128" step="4" class="BSP"><br>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: fit-content; text-align: center;">
+                    <p style="margin: 0%; margin-right: 2px; text-align: right;">Decimal Places:</p>
+                    <i class="DPdisp" style="text-align: left; margin-left: 2px;"></i>
+                </div>
+
+                <input type="range" min="0" max="3" value="2" step="1" class="DP"><br>
             </details>
             <details>
                 <summary><h2 style="margin: 0%; display: inline-block">Progress Bar</h2></summary>
@@ -297,14 +305,14 @@
             
             <details>
                 <summary><h2 style="margin: 0%; display: inline-block">Save Data Management</h2></summary>
-                <button onclick="clearInterval(aclife); localStorage.setItem('BEE_IDLE', JSON.stringify({})); location.reload()">RESET DATA</button>
+                <button onclick="clearInterval(aclife); localStorage.clear(); location.reload()">RESET DATA</button>
             </details>
-        </details><br>
-        <i>Just to let you know, anything in the game could break at any time, don't blame me for the loss of your save file :)</i>
+        </details>
     </center>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js" ></script>
 
+    <script src="bees.js"></script>
     <script src="check.js"></script>
     <script src="script.js"></script>
 </body>
