@@ -411,7 +411,7 @@ function acievementloop(){
         if (loadorder[x] == null){
             skip += 1; continue
         }
-        if (unlockedskin[(x -skip)] == "1"){
+        if (unlockedskin[loadorder[x]] == "1"){
             document.querySelector(".select"+(x -skip)).style.filter = ""
         }
     }
