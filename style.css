@@ -11,3 +11,35 @@ a{
 .icon{
     width: 75px;
 }
+
+.outerBox{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+}
+
+.innerBox{
+    background-color: lightgray;
+    width: max-content;
+}
+
+.boxImg{
+    margin-bottom: 0%;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.topBar{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    background-color: lightgray;
+}
+
+.topBarBox{
+    width: max-content;
+}
