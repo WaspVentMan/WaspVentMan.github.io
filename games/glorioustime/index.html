@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLORIOUS TIME</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="clock.css">
+</head>
+<body>
+    <div class="clock"></div>
+    <div class="knob"></div>
+    <div class="dots"></div>
+    <div class="second"></div>
+    <div class="minute"></div>
+    <div class="hour"></div>
+    <div class="day"></div>
+    <div class="week"></div>
+    <div class="month"></div>
+    <div class="year"></div>
+    <div class="decade"></div>
+    <div class="century"></div>
+    <div class="millennia"></div>
+
+    <script src="script.js"></script>
+
+    <div style="margin: 8px; text-align: center; margin-top: 400px;">
+        <p>Time is moving <b class="timeDisp"></b> times faster that usual</p>
+
+        <br>
+        <h1>YOUR TIME:</h1>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+            <p>Eons: </p><b class="eonDisp"></b>
+            <p>Millennia: </p><b class="milDisp"></b>
+            <p>Centuries: </p><b class="cenDisp"></b>
+            <p>Decades: </p><b class="decDisp"></b>
+            <p>Years: </p><b class="yeaDisp"></b>
+            <p>Months: </p><b class="monDisp"></b>
+            <p>Weeks: </p><b class="weeDisp"></b>
+            <p>Days: </p><b class="dayDisp"></b>
+            <p>Hours: </p><b class="houDisp"></b>
+            <p>Minutes: </p><b class="minDisp"></b>
+            <p>Seconds: </p><b class="secDisp"></b>
+        </div>
+
+        <br>
+        <h1>COGS IN THE MACHINE:</h1>
+        <div style="display: grid; grid-template-columns: 1fr 4fr; width: max-content; margin: auto; text-align: left;">
+            <button onclick="purchase(0)">Purchase</button><p style="margin-left: 4px;"><b class="cog1count">0</b><b class="cog1mult">x1</b>, <b class="cog1cost">1 minute</b></p>
+            <button onclick="purchase(1)">Purchase</button><p style="margin-left: 4px;"><b class="cog2count">0</b><b class="cog2mult">x1</b>, <b class="cog2cost">1 hour</b></p>
+            <button onclick="purchase(2)">Purchase</button><p style="margin-left: 4px;"><b class="cog3count">0</b><b class="cog3mult">x1</b>, <b class="cog3cost">1 day</b></p>
+            <button onclick="purchase(3)">Purchase</button><p style="margin-left: 4px;"><b class="cog4count">0</b><b class="cog4mult">x1</b>, <b class="cog4cost">1 week</b></p>
+            <button onclick="purchase(4)">Purchase</button><p style="margin-left: 4px;"><b class="cog5count">0</b><b class="cog5mult">x1</b>, <b class="cog5cost">1 month</b></p>
+            <button onclick="purchase(5)">Purchase</button><p style="margin-left: 4px;"><b class="cog6count">0</b><b class="cog6mult">x1</b>, <b class="cog6cost">1 year</b></p>
+            <button onclick="purchase(6)">Purchase</button><p style="margin-left: 4px;"><b class="cog7count">0</b><b class="cog7mult">x1</b>, <b class="cog7cost">1 decade</b></p>
+            <button onclick="purchase(7)">Purchase</button><p style="margin-left: 4px;"><b class="cog8count">0</b><b class="cog8mult">x1</b>, <b class="cog8cost">1 century</b></p>
+        </div>
+
+        <br>
+        <h1>CREDITS:</h1>
+        <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
+        <p>Jacob A. G. Taylor, 2023</p><br>
+        <button onclick="clearInterval(gameloop); localStorage.clear(); location.reload()" style="font-family: monospace;">RESET GAME</button>
+    </div>
+</body>
+</html>
