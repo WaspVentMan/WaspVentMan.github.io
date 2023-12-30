@@ -46,7 +46,7 @@
 
         <br>
         <h1>COGS IN THE MACHINE:</h1>
-        <div style="display: grid; grid-template-columns: 1fr 4fr; width: max-content; margin: auto; text-align: left;">
+        <div style="display: grid; grid-template-columns: 1fr 5fr; width: max-content; margin: auto; text-align: left;">
             <button onclick="purchase(0)">Purchase</button><p style="margin-left: 4px;"><b class="cog1count">0</b><b class="cog1mult">x1</b>, <b class="cog1cost">1 minute</b></p>
             <button onclick="purchase(1)">Purchase</button><p style="margin-left: 4px;"><b class="cog2count">0</b><b class="cog2mult">x1</b>, <b class="cog2cost">1 hour</b></p>
             <button onclick="purchase(2)">Purchase</button><p style="margin-left: 4px;"><b class="cog3count">0</b><b class="cog3mult">x1</b>, <b class="cog3cost">1 day</b></p>
@@ -58,17 +58,26 @@
         </div>
 
         <br>
-        <h1>SETTING</h1>
+        <h1>SETTINGS:</h1>
         <div>
             <button onclick="performance = !performance" style="font-family: monospace;">TOGGLE PERFORMANCE MODE</button>
-            <p>Performance mode is: <b class="perf"></b></p>
+            <p>Performance mode is <b class="perf"></b>.</p>
+            <p>Performance mode reduces the framerate of the game.</p>
+            <br>
+            <button onclick="renderer = !renderer" style="font-family: monospace;">TOGGLE RENDERING STYLE</button>
+            <p>Clock rendering is in <b class="rend"></b> mode.</p>
+            <p><b>OPACITY</b> rendering is reccomended for most devices.</p>
+            <br>
+            <button onclick="format = !format" style="font-family: monospace;">TOGGLE FORMATTING STYLE</button>
+            <p>Price formatting is in <b class="form"></b> mode.</p>
+            <p>Changes the prices in CITM between old and new format.</p>
         </div>
 
         <br>
         <h1>CREDITS:</h1>
         <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
         <p>Jacob A. G. Taylor, 2023</p><br>
-        <button onclick="clearInterval(gameloop); localStorage.clear(); location.reload()" style="font-family: monospace;">RESET GAME</button>
+        <button onclick="clearInterval(gameloop); localStorage.setItem('gloretime', JSON.stringify({'bigFreeze': bigFreeze})); location.reload()" style="font-family: monospace;">RESET GAME</button>
     </div>
 </body>
 </html>
