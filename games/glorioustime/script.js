@@ -185,7 +185,11 @@ function rendertime(){
     document.querySelector(".milDisp").textContent = Math.floor(time/31557600000)
     document.querySelector(".eonDisp").textContent = bigFreeze
 
-    document.querySelector(".timeDisp").textContent = Math.floor((speed-1)*10)/10
+    if (speed < 1000){
+        document.querySelector(".timeDisp").textContent = Math.floor((speed-1)*10)/10
+    } else {
+        document.querySelector(".timeDisp").textContent = speed.toExponential(2)
+    }
 }
 
 let gameloop = setInterval(function(){
