@@ -1,0 +1,35 @@
+@font-face {
+    font-family: HeadingNowVariable;
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url(font/HeadingNowVariable-IJONJUZC.woff2) format("woff2");
+}
+
+* {
+    font-family: 'HeadingNowVariable', monospace;
+    font-weight: 700;
+    font-variation-settings: "wdth" 300, "wght" 700;
+}
+
+@keyframes ash {
+    0%   {filter: invert(0.5)}
+    100% {filter: invert(0)}
+}
+
+button {
+    padding: 0%;
+    border: none;
+}
+
+.buttonR {
+    background: linear-gradient(-90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.buttonL {
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.deltabutton {
+    transition: opacity 1s;
+}
