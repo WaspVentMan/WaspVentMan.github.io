@@ -13,13 +13,19 @@
 }
 
 @keyframes ash {
+<<<<<<< Updated upstream
     0%   {filter: invert(0.5)}
     100% {filter: invert(0)}
+=======
+    0%   {filter: invert(0.5) brightness(2)}
+    100% {filter: invert(0) brightness(1)}
+>>>>>>> Stashed changes
 }
 
 button {
     padding: 0%;
     border: none;
+<<<<<<< Updated upstream
 }
 
 .buttonR {
@@ -32,4 +38,21 @@ button {
 
 .deltabutton {
     transition: opacity 1s;
+=======
+    background-color: #111;
+    color: white;
+
+    border-radius: 100px;
+
+    transition: all 0.25s;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+
+.deltabutton {
+    transition: width 2s;
+>>>>>>> Stashed changes
 }
