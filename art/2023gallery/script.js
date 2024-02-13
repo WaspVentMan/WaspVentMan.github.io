@@ -12,34 +12,8 @@ let looming = [
     new Audio('mp3/loom5.mp3'),
     new Audio('mp3/loom6.mp3'),
     new Audio('mp3/loom7.mp3'),
-<<<<<<< Updated upstream
-    new Audio('mp3/loom8.mp3')
-]
-
-let splashes = [
-    "MADE WIH HATE, NOT LOVE",
-    "PORGAMING :)",
-    "IMAGE UNLOADING?",
-    "WASPVENTMAN.CO.UK",
-    "UNINSTALLING ANTIMATTER DIMENSIONS",
-    "404",
-    "PIPEBOMB + MAILBOX = ?",
-    "OOPS, ALL SPLASHES",
-    "WHAT IS THIS 'JS' YOU SPEAK OF?",
-    "HELP! I LOST THE SPLASH TEXT!",
-    "TEST? TEST?! TEEEEEEEST!",
-    "HOLY CRAP IT'S THE GUY FROM FORTNITE!",
-    "BEST VALUE!",
-    "LSSB IS DEAD?!",
-    "O100 IS DEAD?!",
-    "WDBM IS DEAD?!",
-    "SAT IS DONE?!",
-    "ALL THE ART CAN BE FOUND ON MY NEWGROUNDS PAGE!",
-    "WASPVENTMAN.NEWGROUNDS.COM"
-=======
     new Audio('mp3/loom8.mp3'),
     new Audio('mp3/fart-with-reverb.mp3')
->>>>>>> Stashed changes
 ]
 
 let titles = {
@@ -127,38 +101,20 @@ function change(pm, pmdelta = 0){
     let img = cursor
 
     if (cursor == delta){
-<<<<<<< Updated upstream
-        dbutt.style.opacity = "100%"
-        img += deltaindex[cursordelta]
-    } else {
-        dbutt.style.opacity = "0%"
-=======
         dbutt.style.width = "50%"
         img += deltaindex[cursordelta]
     } else {
         dbutt.style.width = "0%"
->>>>>>> Stashed changes
     }
 
     let blist = document.querySelectorAll("button")
 
     for (let x = 0; x < blist.length; x++){blist[x].setAttribute("disabled", "true")}
 
-<<<<<<< Updated upstream
-    //splash.textContent = splashes[Math.round(Math.random()*(splashes.length-1))].toUpperCase()
-
-=======
->>>>>>> Stashed changes
     document.title = "WVM2023: " + titles[img]
 
     frame.style.animation = "ash 2s ease-out"; title.style.animation = "ash 2s ease-out"
 
-<<<<<<< Updated upstream
-    looming[loomindex].play()
-    loomindex += 1
-
-    if (loomindex > looming.length-1){
-=======
     if (Math.round(Math.random()*10000) == 1){
         looming[8].play()
     } else {
@@ -167,7 +123,6 @@ function change(pm, pmdelta = 0){
     loomindex += 1
 
     if (loomindex > looming.length-2){
->>>>>>> Stashed changes
         loomindex = 0
     }
 

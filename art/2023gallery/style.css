@@ -13,32 +13,13 @@
 }
 
 @keyframes ash {
-<<<<<<< Updated upstream
-    0%   {filter: invert(0.5)}
-    100% {filter: invert(0)}
-=======
     0%   {filter: invert(0.5) brightness(2)}
     100% {filter: invert(0) brightness(1)}
->>>>>>> Stashed changes
 }
 
 button {
     padding: 0%;
     border: none;
-<<<<<<< Updated upstream
-}
-
-.buttonR {
-    background: linear-gradient(-90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-}
-
-.buttonL {
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-}
-
-.deltabutton {
-    transition: opacity 1s;
-=======
     background-color: #111;
     color: white;
 
@@ -54,5 +35,4 @@ button:hover {
 
 .deltabutton {
     transition: width 2s;
->>>>>>> Stashed changes
 }
