@@ -73,7 +73,7 @@ let deltaindex = "abcdefg"
 
 let delta = 39
 
-let cursor = 0
+let cursor = Math.round(Math.random()*42)
 let cursordelta = 0
 
 function change(pm, pmdelta = 0){
@@ -126,7 +126,17 @@ function change(pm, pmdelta = 0){
         loomindex = 0
     }
 
-    frame.src = "img/" + img + ".png"; title.textContent = titles[img]; favicon.href = "img/" + img + ".png"
-    setTimeout(function(){frame.style.animation = ""; title.style.animation = ""; for (let x = 0; x < blist.length; x++){blist[x].removeAttribute("disabled")}}, 2000)
+    frame.src = "img/" + img + ".png"
+    title.textContent = titles[img]
+    favicon.href = "img/" + img + ".png"
+
+    setTimeout(function(){
+        frame.style.animation = ""
+        title.style.animation = ""
+        for (let x = 0; x < blist.length; x++){
+            blist[x].removeAttribute("disabled")
+        }
+    }, 2000)
 }
 
+change(0)

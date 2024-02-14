@@ -36,3 +36,7 @@ button:hover {
 .deltabutton {
     transition: width 2s;
 }
+
+.imagepreload {
+    display: none;
+}
