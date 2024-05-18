@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="clock.css">
 </head>
-<body style="background-color: white">
+<body>
     <div class="clock"></div>
     <div class="knob"></div>
     <div class="dots"></div>
@@ -22,62 +22,131 @@
     <div class="decade"></div>
     <div class="century"></div>
     <div class="millennia"></div>
-
-    <script src="script.js"></script>
+    <div class="eonsecond"></div>
+    <div class="eonminute"></div>
+    <div class="eonhour"></div>
+    <div class="eonday"></div>
+    <div class="eonweek"></div>
+    <div class="eonmonth"></div>
+    <div class="eonyear"></div>
+    <div class="eondecade"></div>
+    <div class="eoncentury"></div>
+    <div class="eonmillennia"></div>
 
     <div style="margin: 8px; text-align: center; margin-top: 400px;">
         <p>Time is moving <b class="timeDisp"></b> times faster than usual</p>
 
         <br>
-        <h1>YOUR TIME:</h1>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
-            <p>Eons: </p><b class="eonDisp"></b>
-            <p>Millennia: </p><b class="milDisp"></b>
-            <p>Centuries: </p><b class="cenDisp"></b>
-            <p>Decades: </p><b class="decDisp"></b>
-            <p>Years: </p><b class="yeaDisp"></b>
-            <p>Months: </p><b class="monDisp"></b>
-            <p>Weeks: </p><b class="weeDisp"></b>
-            <p>Days: </p><b class="dayDisp"></b>
-            <p>Hours: </p><b class="houDisp"></b>
-            <p>Minutes: </p><b class="minDisp"></b>
-            <p>Seconds: </p><b class="secDisp"></b>
-        </div>
-
-        <br>
-        <h1>COGS IN THE MACHINE:</h1>
-        <div style="display: grid; grid-template-columns: 1fr 5fr; width: max-content; margin: auto; text-align: left;">
-            <button onclick="purchase(0)">Purchase</button><p style="margin-left: 4px;"><b class="cog1count">0</b><b class="cog1mult">x1</b>, <b class="cog1cost">1 minute</b></p>
-            <button onclick="purchase(1)">Purchase</button><p style="margin-left: 4px;"><b class="cog2count">0</b><b class="cog2mult">x1</b>, <b class="cog2cost">1 hour</b></p>
-            <button onclick="purchase(2)">Purchase</button><p style="margin-left: 4px;"><b class="cog3count">0</b><b class="cog3mult">x1</b>, <b class="cog3cost">1 day</b></p>
-            <button onclick="purchase(3)">Purchase</button><p style="margin-left: 4px;"><b class="cog4count">0</b><b class="cog4mult">x1</b>, <b class="cog4cost">1 week</b></p>
-            <button onclick="purchase(4)">Purchase</button><p style="margin-left: 4px;"><b class="cog5count">0</b><b class="cog5mult">x1</b>, <b class="cog5cost">1 month</b></p>
-            <button onclick="purchase(5)">Purchase</button><p style="margin-left: 4px;"><b class="cog6count">0</b><b class="cog6mult">x1</b>, <b class="cog6cost">1 year</b></p>
-            <button onclick="purchase(6)">Purchase</button><p style="margin-left: 4px;"><b class="cog7count">0</b><b class="cog7mult">x1</b>, <b class="cog7cost">1 decade</b></p>
-            <button onclick="purchase(7)">Purchase</button><p style="margin-left: 4px;"><b class="cog8count">0</b><b class="cog8mult">x1</b>, <b class="cog8cost">1 century</b></p>
-        </div>
-
-        <br>
-        <h1>SETTINGS:</h1>
-        <div>
-            <button onclick="performance = !performance" style="font-family: monospace;">TOGGLE PERFORMANCE MODE</button>
-            <p>Performance mode is <b class="perf"></b>.</p>
-            <p>Performance mode reduces the framerate of the game.</p>
+        <details open>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">YOUR TIME</h1></summary>
             <br>
-            <button onclick="renderer = !renderer" style="font-family: monospace;">TOGGLE RENDERING STYLE</button>
-            <p>Clock rendering is in <b class="rend"></b> mode.</p>
-            <p><b>OPACITY</b> rendering is reccomended for most devices.</p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+                    <p style="text-align: right;">Eons: </p><b style="text-align: left;" class="eonDisp">0</b>
+                    <p style="text-align: right;">Millennia: </p><b style="text-align: left;" class="milDisp">0</b>
+                    <p style="text-align: right;">Centuries: </p><b style="text-align: left;" class="cenDisp">0</b>
+                    <p style="text-align: right;">Decades: </p><b style="text-align: left;" class="decDisp">0</b>
+                    <p style="text-align: right;">Years: </p><b style="text-align: left;" class="yeaDisp">0</b>
+                    <p style="text-align: right;">Months: </p><b style="text-align: left;" class="monDisp">0</b>
+                    <p style="text-align: right;">Weeks: </p><b style="text-align: left;" class="weeDisp">0</b>
+                    <p style="text-align: right;">Days: </p><b style="text-align: left;" class="dayDisp">0</b>
+                    <p style="text-align: right;">Hours: </p><b style="text-align: left;" class="houDisp">0</b>
+                    <p style="text-align: right;">Minutes: </p><b style="text-align: left;" class="minDisp">0</b>
+                    <p style="text-align: right;">Seconds: </p><b style="text-align: left;" class="secDisp">0</b>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+                    <p style="text-align: right;">Eternities: </p><b style="text-align: left;" class="eoneonDisp">0</b>
+                    <p style="text-align: right;">Eon Millennia: </p><b style="text-align: left;" class="eonmilDisp">0</b>
+                    <p style="text-align: right;">Eon Centuries: </p><b style="text-align: left;" class="eoncenDisp">0</b>
+                    <p style="text-align: right;">Eon Decades: </p><b style="text-align: left;" class="eondecDisp">0</b>
+                    <p style="text-align: right;">Eon Years: </p><b style="text-align: left;" class="eonyeaDisp">0</b>
+                    <p style="text-align: right;">Eon Months: </p><b style="text-align: left;" class="eonmonDisp">0</b>
+                    <p style="text-align: right;">Eon Weeks: </p><b style="text-align: left;" class="eonweeDisp">0</b>
+                    <p style="text-align: right;">Eon Days: </p><b style="text-align: left;" class="eondayDisp">0</b>
+                    <p style="text-align: right;">Eon Hours: </p><b style="text-align: left;" class="eonhouDisp">0</b>
+                    <p style="text-align: right;">Eon Minutes: </p><b style="text-align: left;" class="eonminDisp">0</b>
+                    <p style="text-align: right;">Eon Seconds: </p><b style="text-align: left;" class="eonsecDisp">0</b>
+                </div>
+            </div>
             <br>
-            <button onclick="format = !format" style="font-family: monospace;">TOGGLE FORMATTING STYLE</button>
-            <p>Price formatting is in <b class="form"></b> mode.</p>
-            <p>Changes the prices in CITM between old and new format.</p>
-        </div>
-
-        <br>
-        <h1>CREDITS:</h1>
-        <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
-        <p>Jacob A. G. Taylor, 2023</p><br>
-        <button onclick="clearInterval(gameloop); localStorage.setItem('gloretime', JSON.stringify({'bigFreeze': bigFreeze})); location.reload()" style="font-family: monospace;">RESET GAME</button>
+        </details>
+        <details open>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1>COGS IN THE MACHINE</h1></summary>
+            <br>
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr 3.5fr; width: max-content; margin: auto; text-align: left;">
+                <button onclick="purchase(0)">Purchase</button><b style="margin-left: 4px;" class="cog1count">0</b><b style="margin-left: 4px;" class="cog1cost">1 minute</b>
+                <button onclick="purchase(1)">Purchase</button><b style="margin-left: 4px;" class="cog2count">0</b><b style="margin-left: 4px;" class="cog2cost">1 hour</b>
+                <button onclick="purchase(2)">Purchase</button><b style="margin-left: 4px;" class="cog3count">0</b><b style="margin-left: 4px;" class="cog3cost">1 day</b>
+                <button onclick="purchase(3)">Purchase</button><b style="margin-left: 4px;" class="cog4count">0</b><b style="margin-left: 4px;" class="cog4cost">1 week</b>
+                <button onclick="purchase(4)">Purchase</button><b style="margin-left: 4px;" class="cog5count">0</b><b style="margin-left: 4px;" class="cog5cost">1 month</b>
+                <button onclick="purchase(5)">Purchase</button><b style="margin-left: 4px;" class="cog6count">0</b><b style="margin-left: 4px;" class="cog6cost">1 year</b>
+                <button onclick="purchase(6)">Purchase</button><b style="margin-left: 4px;" class="cog7count">0</b><b style="margin-left: 4px;" class="cog7cost">1 decade</b>
+                <button onclick="purchase(7)">Purchase</button><b style="margin-left: 4px;" class="cog8count">0</b><b style="margin-left: 4px;" class="cog8cost">1 century</b>
+            </div>
+            <br>
+        </details>
+        <details class="automation" style="display: none;">
+            <summary style="display: flex; width: max-content; margin: auto;"><h1>AUTOBUYERS</h1></summary>
+            <br>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 3fr 3fr; width: max-content; margin: auto; text-align: left;">
+                <button class="auto1unlock" onclick="purchaseAuto(0)">Purchase</button><b style="margin-left: 4px;" class="auto1">False</b><b style="margin-left: 4px;" class="auto1cost">1 Eon Second</b><b style="margin-left: 4px;">Automates Cog 1</b>
+                <button class="auto2unlock" onclick="purchaseAuto(1)">Purchase</button><b style="margin-left: 4px;" class="auto2">False</b><b style="margin-left: 4px;" class="auto2cost">1 Eon Minute</b><b style="margin-left: 4px;">Automates Cog 2</b>
+                <button class="auto3unlock" onclick="purchaseAuto(2)">Purchase</button><b style="margin-left: 4px;" class="auto3">False</b><b style="margin-left: 4px;" class="auto3cost">1 Eon Hour</b><b style="margin-left: 4px;">Automates Cog 3</b>
+                <button class="auto4unlock" onclick="purchaseAuto(3)">Purchase</button><b style="margin-left: 4px;" class="auto4">False</b><b style="margin-left: 4px;" class="auto4cost">1 Eon Day</b><b style="margin-left: 4px;">Automates Cog 4</b>
+                <button class="auto5unlock" onclick="purchaseAuto(4)">Purchase</button><b style="margin-left: 4px;" class="auto5">False</b><b style="margin-left: 4px;" class="auto5cost">1 Eon Week</b><b style="margin-left: 4px;">Automates Cog 5</b>
+                <button class="auto6unlock" onclick="purchaseAuto(5)">Purchase</button><b style="margin-left: 4px;" class="auto6">False</b><b style="margin-left: 4px;" class="auto6cost">1 Eon Month</b><b style="margin-left: 4px;">Automates Cog 6</b>
+                <button class="auto7unlock" onclick="purchaseAuto(6)">Purchase</button><b style="margin-left: 4px;" class="auto7">False</b><b style="margin-left: 4px;" class="auto7cost">1 Eon Year</b><b style="margin-left: 4px;">Automates Cog 7</b>
+                <button class="auto8unlock" onclick="purchaseAuto(7)">Purchase</button><b style="margin-left: 4px;" class="auto8">False</b><b style="margin-left: 4px;" class="auto8cost">1 Eon Decade</b><b style="margin-left: 4px;">Automates Cog 8</b>
+            </div>
+            <br>
+        </details>
+        <details class="eonUp" style="display: none;">
+            <summary style="display: flex; width: max-content; margin: auto;"><h1>EON UPGRADES</h1></summary>
+            <br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
+                <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 Eon Second</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
+                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">1 Eon Minute</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
+                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">1 Eon Hour</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
+                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">1 Eon Day</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
+                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">1 Eon Week</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
+                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">1 Eon Month</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
+                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 Eon Year</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
+                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">1 Eon Decade</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
+            </div>
+            <br>
+        </details>
+        <details>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1>SETTINGS</h1></summary>
+            <br>
+            <div>
+                <button onclick="player.settings.autoEon = !player.settings.autoEon" style="font-family: monospace;">TOGGLE AUTO EON</button>
+                <p>Auto Eon is <b class="AE"></b>.</p>
+                <p>Skips the heat death of the universe, QOL</p>
+                <br>
+                <button onclick="player.settings.performance = !player.settings.performance" style="font-family: monospace;">TOGGLE PERFORMANCE MODE</button>
+                <p>Performance mode is <b class="perf"></b>.</p>
+                <p>Performance mode reduces the framerate of the game.</p>
+                <br>
+                <button onclick="player.settings.renderer = !player.settings.renderer" style="font-family: monospace;">TOGGLE RENDERING STYLE</button>
+                <p>Clock rendering is in <b class="rend"></b> mode.</p>
+                <p><b>OPACITY</b> rendering is reccomended for most devices.</p>
+                <br>
+                <button onclick="player.settings.format = !player.settings.format" style="font-family: monospace;">TOGGLE FORMATTING STYLE</button>
+                <p>Price formatting is in <b class="form"></b> mode.</p>
+                <p>Changes the prices in CITM between old and new format.</p>
+            </div>
+            <br>
+        </details>
+        <details>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1>CREDITS</h1></summary>
+            <br>
+            <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
+            <p>Jacob A. G. Taylor, 2023-2024</p>
+        </details>
     </div>
+
+    <p>v1.1 - 18/5/24</p>
+
+    <script src="script.js"></script>
 </body>
 </html>
