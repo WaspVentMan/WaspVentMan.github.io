@@ -252,14 +252,14 @@ function rendertime(){
 }
 
 let gameloop = setInterval(function(){
-    player.cogs[6].count += (player.cogs[7].count*player.cogs[7].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[5].count += (player.cogs[6].count*player.cogs[6].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[4].count += (player.cogs[5].count*player.cogs[5].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[3].count += (player.cogs[4].count*player.cogs[4].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[2].count += (player.cogs[3].count*player.cogs[3].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[1].count += (player.cogs[2].count*player.cogs[2].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.cogs[0].count += (player.cogs[1].count*player.cogs[1].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
-    player.speed += (player.cogs[0].count*player.cogs[0].mult)*((Date.now()-player.tick)/10000)*Math.sqrt(player.bigFreeze)
+    player.cogs[6].count += (player.cogs[7].count*player.cogs[7].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[5].count += (player.cogs[6].count*player.cogs[6].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[4].count += (player.cogs[5].count*player.cogs[5].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[3].count += (player.cogs[4].count*player.cogs[4].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[2].count += (player.cogs[3].count*player.cogs[3].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[1].count += (player.cogs[2].count*player.cogs[2].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.cogs[0].count += (player.cogs[1].count*player.cogs[1].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
+    player.speed += (player.cogs[0].count*player.cogs[0].mult)*((Date.now()-player.tick)/10000)*(1+Math.sqrt(player.bigFreeze))
     player.time += (1+(player.speed-1))*((Date.now()-player.tick)/1000)
     player.tick = Date.now()
 
