@@ -292,7 +292,7 @@ let gameloop = setInterval(function(){
 
 let slowloop = setInterval(function(){
     for (let x = 0; x < player.cogs.length; x++){
-        document.querySelector(".cog" + (x+1) + "count").textContent = Math.floor(player.cogs[x].count) + "x" + Math.floor((player.cogs[x].mult*Math.sqrt(player.bigFreeze))*100)/100
+        document.querySelector(".cog" + (x+1) + "count").textContent = Math.floor(player.cogs[x].count) + "x" + Math.floor((player.cogs[x].mult*(1+Math.sqrt(player.bigFreeze)))*100)/100
         if (!player.settings.format){
             document.querySelector(".cog" + (x+1) + "cost").textContent = timeify(player.cogs[x].cost)
         } else {
