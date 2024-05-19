@@ -65,7 +65,7 @@ if (player.freezeStart == 0){
 
 if (player.fastestFreeze == 1e100){
     document.querySelector(".freezeFast").style.display = "none"
-} else if (player.fastestFreeze >= 10000) {
+} else if (player.fastestFreeze >= 1000) {
     document.querySelector(".fastFreeze").innerHTML = timeify(player.fastestFreeze/1000).toLowerCase()
 } else {
     document.querySelector(".fastFreeze").innerHTML = player.fastestFreeze + "ms"
@@ -316,7 +316,7 @@ let gameloop = setInterval(function(){
         rendertime()
     }
 
-    if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+    if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 600000){
         document.querySelector(".eonPrestige").style.display = "block"
         document.querySelector(".eonReward").innerHTML = Math.floor(player.time/(31557600000000000))
     } else if (Math.floor(player.time/(31557600000000000/2)) > 1){
