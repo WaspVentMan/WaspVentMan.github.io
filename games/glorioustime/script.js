@@ -48,8 +48,7 @@ let saveData = JSON.parse(localStorage.getItem("gloretime").replaceAll("null", "
 console.log(saveData)
 console.log(player)
 
-if (saveData != null && saveData.time != null){
-    console.log(Object.keys(saveData))
+if (saveData != null){
     for (let x = 0; x < Object.keys(saveData).length; x++){
         player[Object.keys(saveData)[x]] = saveData[Object.keys(saveData)[x]]
     }
@@ -66,10 +65,8 @@ if (player.freezeStart == 0){
 
 if (player.fastestFreeze == 1e100){
     document.querySelector(".freezeFast").style.display = "none"
-} else if (player.fastestFreeze >= 60000) {
-    document.querySelector(".fastFreeze").innerHTML = timeify(player.fastestFreeze/1000).toLowerCase()
 } else if (player.fastestFreeze >= 10000) {
-    document.querySelector(".fastFreeze").innerHTML = player.fastestFreeze/1000 + "s"
+    document.querySelector(".fastFreeze").innerHTML = timeify(player.fastestFreeze/1000).toLowerCase()
 } else {
     document.querySelector(".fastFreeze").innerHTML = player.fastestFreeze + "ms"
 }
@@ -290,9 +287,8 @@ function prestige(value){
                 }
             )
         )
-        
         location.reload()
-    }, 10)
+    }, 20)
 }
 
 let gameloop = setInterval(function(){
