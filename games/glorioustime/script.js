@@ -307,7 +307,12 @@ let gameloop = setInterval(function(){
     player.cogs[1].count += (player.cogs[2].count*player.cogs[2].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
     player.cogs[0].count += (player.cogs[1].count*player.cogs[1].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
     player.speed += (player.cogs[0].count*player.cogs[0].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
-    player.time += player.speed*d/(Math.ceil(player.time/31557600000000000)*Math.ceil(player.time/31557600000000000))
+
+    if (location.hostname == "www.newgrounds.com"){
+        player.time += player.speed*d/(Math.ceil(player.time/31557600000000000)*Math.ceil(player.time/31557600000000000))
+    } else {
+        player.time += player.speed*d/(Math.ceil(player.time/31557600000000000)**2)
+    }
 
     for (let x = 0; x < player.auto.length; x++){
         if (player.auto[7-x].unlocked){
