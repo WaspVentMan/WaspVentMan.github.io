@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLORIOUS TIME</title>
     <link rel="shortcut icon" href="logo.png" type="image/x-icon">
-
     <link rel="stylesheet" href="clock.css">
 </head>
-<body>
+<body style="background-color: white;">
     <div class="clock"></div>
     <div class="knob"></div>
     <div class="dots"></div>
@@ -35,13 +34,20 @@
 
     <div style="margin: 8px; text-align: center; margin-top: 400px;">
         <p>Time is moving <b class="timeDisp"></b> times faster than usual</p>
+        <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>1m</b>.</p>
+
+        <br>
+        <div style="display: none; border-radius: 10px; outline: 2px solid cyan; background-color: lightcyan; padding: 8px; width: max-content; margin: auto;" class="eonPrestige" onclick="prestige(Math.floor(player.time/(31557600000000000)))">
+            <h1>BIG FREEZE</h1>
+            <h2>Earn <b class="eonReward"></b> Eons when you reset.</h2>
+        </div>
 
         <br>
         <details open>
             <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">YOUR TIME</h1></summary>
             <br>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+                <div style="display: grid; grid-template-columns: 2fr 1.5fr; width: max-content; margin: auto;">
                     <p style="text-align: right;">Eons: </p><b style="text-align: left;" class="eonDisp">0</b>
                     <p style="text-align: right;">Millennia: </p><b style="text-align: left;" class="milDisp">0</b>
                     <p style="text-align: right;">Centuries: </p><b style="text-align: left;" class="cenDisp">0</b>
@@ -54,7 +60,7 @@
                     <p style="text-align: right;">Minutes: </p><b style="text-align: left;" class="minDisp">0</b>
                     <p style="text-align: right;">Seconds: </p><b style="text-align: left;" class="secDisp">0</b>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; width: max-content; margin: auto;">
                     <p style="text-align: right;">Eternities: </p><b style="text-align: left;" class="eoneonDisp">0</b>
                     <p style="text-align: right;">Eon Millennia: </p><b style="text-align: left;" class="eonmilDisp">0</b>
                     <p style="text-align: right;">Eon Centuries: </p><b style="text-align: left;" class="eoncenDisp">0</b>
@@ -90,13 +96,13 @@
             <br>
             <div style="display: grid; grid-template-columns: 2fr 1fr 3fr 3fr; width: max-content; margin: auto; text-align: left;">
                 <button class="auto1unlock" onclick="purchaseAuto(0)">Purchase</button><b style="margin-left: 4px;" class="auto1">False</b><b style="margin-left: 4px;" class="auto1cost">1 Eon Second</b><b style="margin-left: 4px;">Automates Cog 1</b>
-                <button class="auto2unlock" onclick="purchaseAuto(1)">Purchase</button><b style="margin-left: 4px;" class="auto2">False</b><b style="margin-left: 4px;" class="auto2cost">1 Eon Minute</b><b style="margin-left: 4px;">Automates Cog 2</b>
-                <button class="auto3unlock" onclick="purchaseAuto(2)">Purchase</button><b style="margin-left: 4px;" class="auto3">False</b><b style="margin-left: 4px;" class="auto3cost">1 Eon Hour</b><b style="margin-left: 4px;">Automates Cog 3</b>
-                <button class="auto4unlock" onclick="purchaseAuto(3)">Purchase</button><b style="margin-left: 4px;" class="auto4">False</b><b style="margin-left: 4px;" class="auto4cost">1 Eon Day</b><b style="margin-left: 4px;">Automates Cog 4</b>
-                <button class="auto5unlock" onclick="purchaseAuto(4)">Purchase</button><b style="margin-left: 4px;" class="auto5">False</b><b style="margin-left: 4px;" class="auto5cost">1 Eon Week</b><b style="margin-left: 4px;">Automates Cog 5</b>
-                <button class="auto6unlock" onclick="purchaseAuto(5)">Purchase</button><b style="margin-left: 4px;" class="auto6">False</b><b style="margin-left: 4px;" class="auto6cost">1 Eon Month</b><b style="margin-left: 4px;">Automates Cog 6</b>
-                <button class="auto7unlock" onclick="purchaseAuto(6)">Purchase</button><b style="margin-left: 4px;" class="auto7">False</b><b style="margin-left: 4px;" class="auto7cost">1 Eon Year</b><b style="margin-left: 4px;">Automates Cog 7</b>
-                <button class="auto8unlock" onclick="purchaseAuto(7)">Purchase</button><b style="margin-left: 4px;" class="auto8">False</b><b style="margin-left: 4px;" class="auto8cost">1 Eon Decade</b><b style="margin-left: 4px;">Automates Cog 8</b>
+                <button class="auto2unlock" onclick="purchaseAuto(1)">Purchase</button><b style="margin-left: 4px;" class="auto2">False</b><b style="margin-left: 4px;" class="auto2cost">2 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 2</b>
+                <button class="auto3unlock" onclick="purchaseAuto(2)">Purchase</button><b style="margin-left: 4px;" class="auto3">False</b><b style="margin-left: 4px;" class="auto3cost">4 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 3</b>
+                <button class="auto4unlock" onclick="purchaseAuto(3)">Purchase</button><b style="margin-left: 4px;" class="auto4">False</b><b style="margin-left: 4px;" class="auto4cost">8 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 4</b>
+                <button class="auto5unlock" onclick="purchaseAuto(4)">Purchase</button><b style="margin-left: 4px;" class="auto5">False</b><b style="margin-left: 4px;" class="auto5cost">16 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 5</b>
+                <button class="auto6unlock" onclick="purchaseAuto(5)">Purchase</button><b style="margin-left: 4px;" class="auto6">False</b><b style="margin-left: 4px;" class="auto6cost">32 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 6</b>
+                <button class="auto7unlock" onclick="purchaseAuto(6)">Purchase</button><b style="margin-left: 4px;" class="auto7">False</b><b style="margin-left: 4px;" class="auto7cost">1 Eon Minute and 4 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 7</b>
+                <button class="auto8unlock" onclick="purchaseAuto(7)">Purchase</button><b style="margin-left: 4px;" class="auto8">False</b><b style="margin-left: 4px;" class="auto8cost">2 Eon Minutes and 8 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 8</b>
             </div>
             <br>
         </details>
@@ -134,19 +140,18 @@
                 <button onclick="player.settings.format = !player.settings.format" style="font-family: monospace;">TOGGLE FORMATTING STYLE</button>
                 <p>Price formatting is in <b class="form"></b> mode.</p>
                 <p>Changes the prices in CITM between old and new format.</p>
+
+                <br>
+                <button onclick="clearInterval(gameloop); clearInterval(slowloop); setTimeout(function(){location.reload()}, 100)">RESET</button>
             </div>
             <br>
         </details>
-        <details>
-            <summary style="display: flex; width: max-content; margin: auto;"><h1>CREDITS</h1></summary>
-            <br>
-            <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
-            <p>Jacob A. G. Taylor, 2023-2024</p>
-        </details>
     </div>
 
-    <p>v1.1.2 - 18/5/24</p>
-
+    <p>v1.2 - 19/5/24</p>
+    <p>Jacob A. G. Taylor, 2023-2024</p>
+    <p><a href="https://www.newgrounds.com/projects/games/5712334">Newgrounds Version</a> // <a href="https://waspventman.co.uk/games/glorioustime/">waspventman.co.uk Version</a></p>
+    <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
     <script src="script.js"></script>
 </body>
 </html>

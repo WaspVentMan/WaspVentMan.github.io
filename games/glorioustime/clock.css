@@ -13,6 +13,10 @@ summary:hover {
     cursor: pointer;
 }
 
+.eonPrestige:hover {
+    cursor: pointer;
+}
+
 .clock {
     position: absolute;
     width: 300px;
