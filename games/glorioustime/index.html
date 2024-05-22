@@ -6,6 +6,7 @@
     <title>GLORIOUS TIME</title>
     <link rel="shortcut icon" href="logo.png" type="image/x-icon">
     <link rel="stylesheet" href="clock.css">
+    <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
 </head>
 <body style="background-color: white;">
     <div class="clock"></div>
@@ -34,7 +35,20 @@
 
     <div style="margin: 8px; text-align: center; margin-top: 400px;">
         <p>Time is moving <b class="timeDisp"></b> times faster than usual</p>
-        <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>10m</b>.</p>
+        <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>1m</b>.</p>
+        
+        <br>
+
+        <div class="NewgroundsIO" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto;"></div>
+        
+        <!--<p class="NewgroundsMedals"></p>
+
+        <br>
+        
+        <button onclick="NGIO.unlockMedal(78906, function(medal){
+            console.log(medal)
+            document.querySelector('.NewgroundsMedal').innerHTML = medal
+        })">testmedal</button>-->
 
         <br>
         <div style="display: none; border-radius: 10px; outline: 2px solid cyan; background-color: lightcyan; padding: 8px; width: max-content; margin: auto;" class="eonPrestige" onclick="prestige(Math.floor(player.time/(31557600000000000)))">
@@ -111,13 +125,13 @@
             <br>
             <div style="display: grid; grid-template-columns: 1fr 1fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
                 <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 Eon Second</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
-                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">1 Eon Minute</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
-                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">1 Eon Hour</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
-                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">1 Eon Day</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
-                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">1 Eon Week</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
-                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">1 Eon Month</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
-                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 Eon Year</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
-                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">1 Eon Decade</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
+                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">2 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
+                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">4 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
+                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">8 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
+                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">16 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
+                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">32 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
+                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 Eon Minute and 4 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
+                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">2 Eon Minutes and 8 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
             </div>
             <br>
         </details>
@@ -142,15 +156,18 @@
                 <p>Changes the prices in CITM between old and new format.</p>
 
                 <br>
-                <button onclick="clearInterval(gameloop); clearInterval(slowloop); setTimeout(function(){location.reload()}, 100)">RESET</button>
+                <button onclick="clearInterval(gameloop); clearInterval(slowloop); localStorage.removeItem('gloretime'); location.reload()">TRUE RESET</button>
             </div>
             <br>
         </details>
     </div>
 
-    <p>v1.2.4 - 19/5/24</p>
+    <p>v<b class="gameVerDisp">?</b></p>
     <p>Jacob A. G. Taylor, 2023-2024</p>
+    <br>
+    <p>Thank you TokalaFox1984 <3</p>
     <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
+    <script src="nginit.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
