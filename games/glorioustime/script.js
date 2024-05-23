@@ -40,11 +40,7 @@ let player = {
         "performance": false,
         "renderer": false,
         "format": false
-    },
-    "achievements": [
-        false,
-        false
-    ]
+    }
 }
 
 let saveData = player
@@ -61,9 +57,12 @@ if (saveData != null){
     }
 }
 
-if (player.bigFreeze != 0){
+if (player.fastestFreeze != 1e100){
     document.querySelector(".eonUp").style.display = "block"
     document.querySelector(".automation").style.display = "block"
+} else {
+    document.querySelector(".timeDispCont").style.gridTemplateColumns = "1fr"
+    document.querySelector(".timeDispEon").style.display = "none"
 }
 
 if (player.freezeStart == 0){
@@ -274,7 +273,7 @@ function rendertime(){
     } else if (Math.floor(player.time/(31557600000000000)) < 1) {
         document.querySelector(".timeDisp").textContent = player.speed.toExponential(2).replace("+", "")
     } else {
-        document.querySelector(".timeDisp").textContent = (player.speed/(Math.ceil(player.time/(31557600000000000))**6)).toExponential(2).replace("+", "") + " (speed reduced by /" + (Math.ceil(player.time/(31557600000000000))**6) + ")"
+        document.querySelector(".timeDisp").textContent = (player.speed/(((player.time+1)/31557600000000000)**6)).toExponential(2).replace("+", "") + " (speed reduced by /" + (((player.time+1)/31557600000000000)**6).toExponential(2).replace("+", "") + ")"
     }
 }
 
@@ -314,7 +313,22 @@ let gameloop = setInterval(function(){
     player.cogs[0].count += (player.cogs[1].count*player.cogs[1].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
     player.speed += (player.cogs[0].count*player.cogs[0].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
 
-    player.time += (player.speed*d)/(Math.ceil((player.time+1)/31557600000000000)**6)
+    if (d > 10){
+        smallD = (d/10000)
+        for (let x = 0; x < 10000; x++){
+            if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+                player.time += (player.speed*smallD)/(((player.time+1)/31557600000000000)**6)
+            } else {
+                player.time += player.speed*smallD
+            }
+        }
+    } else {
+        if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+            player.time += (player.speed*d)/(((player.time+1)/31557600000000000)**6)
+        } else {
+            player.time += player.speed*d
+        }
+    }
 
     for (let x = 0; x < player.auto.length; x++){
         if (player.auto[7-x].unlocked){
@@ -335,9 +349,8 @@ let gameloop = setInterval(function(){
         document.querySelector(".eonReward").innerHTML = Math.floor(player.time/(31557600000000000))
 
         try {
-            if (!player.achievements[1]){
-                NGIO.unlockMedal(78934, onMedalUnlocked);
-                player.achievements[1] = true
+            if (!NGIO.getMedal(78934).unlocked){
+                NGIO.unlockMedal(78934, onMedalUnlocked)
             }
         } catch {
             console.log("Newgrounds issue")
@@ -346,19 +359,22 @@ let gameloop = setInterval(function(){
     } else if (Math.floor(player.time/(31557600000000000/2)) > 1){
         if (Date.now()-player.freezeStart < player.fastestFreeze){
             player.fastestFreeze = Date.now()-player.freezeStart
+            player.freezeStart = 0
         }
 
         try {
-            if (!player.achievements[0]){
-                NGIO.unlockMedal(78933, onMedalUnlocked);
-                player.achievements[0] = true
+            if (!NGIO.getMedal(78933).unlocked){
+                NGIO.unlockMedal(78933, onMedalUnlocked)
             }
         } catch {
             console.log("Newgrounds issue")
         }
 
-        querySelector(".eonPrestige").style.display = "block"
-        querySelector(".eonPrestige").innerHTML = "<div style=\"border-radius: 10px; outline: 2px solid cyan; background-color: lightcyan; padding: 8px; width: max-content; margin: auto; margin-top: 8px;\" class=\"eonPrestige\" onclick=\"prestige(1)\"><h1>BIG FREEZE</h1><h2>Earn <b>1</b> Eon when you reset.</h2></div>"
+        player.time = 31557600000000000
+        rendertime()
+
+        document.querySelector(".eonPrestige").style.display = "block"
+        document.querySelector(".eonPrestige").innerHTML = "<h1>BIG FREEZE</h1><h2>Earn <b>1</b> Eon when you reset.</h2></div>"
         clearInterval(gameloop); clearInterval(slowloop)
 
         if (player.settings.autoEon){
