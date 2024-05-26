@@ -10,6 +10,7 @@
 </head>
 <body style="background-color: white;">
     <div class="clock"></div>
+    <div class="clock2"></div>
     <div class="knob"></div>
     <div class="dots"></div>
     <div class="second"></div>
@@ -34,22 +35,25 @@
     <div class="eonmillennia"></div>
 
     <div style="margin: 8px; text-align: center; margin-top: 400px;">
-        <p>Time is moving <b class="timeDisp"></b> times faster than usual</p>
-        <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>1m</b>.</p>
-        
-        <br>
+        <details open>
+            <summary>Time is moving <b class="timeDisp"></b> times faster than usual</summary>
+            <p>You have been in this universe for <b class="currentFreeze"></b>.</p>
+            <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>1m 30s</b>.</p>
+            
+            <div class="NewgroundsIO" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto;"></div>
 
-        <div class="NewgroundsIO" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto;"></div>
-        
-        <!--<p class="NewgroundsMedals"></p>
-
-        <br>
-        
-        <button onclick="NGIO.unlockMedal(78906, function(medal){
-            console.log(medal)
-            document.querySelector('.NewgroundsMedal').innerHTML = medal
-        })">testmedal</button>-->
-
+            <details open>
+                <summary>Achievements</summary>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; width: max-content; margin: auto;">
+                    <p>One Full Circle</p>|<p class="AC78933">Not Achieved</p>
+                    <p>Full Auto Circle</p>|<p class="AC78994">Not Achieved</p>
+                    <p>Fast Full Circles</p>|<p class="AC78934">Not Achieved</p>
+                    <p>Many Full Circles</p>|<p class="AC78995">Not Achieved</p>
+                </div>
+            </details>
+            
+            <p>v<b class="gameVerDisp">?</b></p>
+        </details>
         <br>
         <div style="display: none; border-radius: 10px; outline: 2px solid cyan; background-color: lightcyan; padding: 8px; width: max-content; margin: auto;" class="eonPrestige" onclick="prestige(Math.floor(player.time/(31557600000000000)))">
             <h1>BIG FREEZE</h1>
@@ -75,7 +79,7 @@
                     <p style="text-align: right;">Seconds: </p><b style="text-align: left;" class="secDisp">0</b>
                 </div>
                 <div class="timeDispEon" style="display: grid; grid-template-columns: 2fr 1fr; width: max-content; margin: auto;">
-                    <p style="text-align: right;">Eternities: </p><b style="text-align: left;" class="eoneonDisp">0</b>
+                    <p style="display: none; text-align: right;">Eternities: </p><b style="display: none; text-align: left;" class="eoneonDisp">0</b>
                     <p style="text-align: right;">Eon Millennia: </p><b style="text-align: left;" class="eonmilDisp">0</b>
                     <p style="text-align: right;">Eon Centuries: </p><b style="text-align: left;" class="eoncenDisp">0</b>
                     <p style="text-align: right;">Eon Decades: </p><b style="text-align: left;" class="eondecDisp">0</b>
@@ -123,15 +127,16 @@
         <details class="eonUp" style="display: none;">
             <summary style="display: flex; width: max-content; margin: auto;"><h1>EON UPGRADES</h1></summary>
             <br>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
-                <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 Eon Second</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
-                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">2 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
-                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">4 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
-                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">8 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
-                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">16 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
-                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">32 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
-                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 Eon Minute and 4 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
-                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">2 Eon Minutes and 8 Eon Seconds</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
+            <div style="display: grid; grid-template-columns: 1fr 2fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
+                <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
+                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">2 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
+                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">4 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
+                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">8 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
+                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">16 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
+                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">32 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
+                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 EM 4 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
+                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">2 EM 8 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
+                <button class="upgrade9unlock" onclick="purchaseUpgrade(8)">Purchase</button><b style="margin-left: 4px;" class="upgrade9">Level 0</b><b style="margin-left: 4px;" class="upgrade9cost">1 ES</b><b style="margin-left: 4px;">x<b class="upgrade9mult">2</b> Eon gain, qwerty's theorem</b>
             </div>
             <br>
         </details>
@@ -160,17 +165,39 @@
             </div>
             <br>
         </details>
+        <details open>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">CREDITS</h1></summary>
+            <p>Jacob A. G. Taylor, 2023-2024</p>
+            <br>
+            <details open>
+                <summary>Achievement Hunters</summary>
+                <h3>One Full Circle - Amereep</h3>
+                <h3>Fast Full Circles - Lankeer</h3>
+                
+            </details>
+            <br>
+            <details open>
+                <summary>Special Thanks</summary>
+                <h3>fuckoffasshole</h3>
+                <h3>Magnus727</h3>
+                <h3>TokalaFox1984</h3>
+                
+            </details>
+            <br>
+            <details open>
+                <summary>Very Special Thanks</summary>
+                <h3>qwerty741</h3>
+            </details>
+            <br>
+            <img src="newgroundstitle.png" style="height: 40px;">
+            <br>
+            <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
+        </details>
+        <br>
     </div>
 
-    <p>v<b class="gameVerDisp">?</b></p>
-    <p>Jacob A. G. Taylor, 2023-2024</p>
-    <br>
-    <details open>
-        <summary>Special Thanks</summary>
-        <h3>TokalaFox1984</h3>
-        <h3>qwerty741</h3>
-    </details>
-    <p>Original clock code: <a href="https://codepen.io/NikhilKumaran/pen/GRoboYJ">https://codepen.io/NikhilKumaran/pen/GRoboYJ</a></p>
+    <div class="achievement" style="position: fixed; bottom: 0%; right: 0%; display: grid; grid-template-columns: 2fr 1fr;" onclick="this.innerHTML = ''"></div>
+
     <script src="nginit.js"></script>
     <script src="script.js"></script>
 </body>

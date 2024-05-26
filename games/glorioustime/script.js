@@ -33,7 +33,8 @@ let player = {
         {"cost": 16, "unlocked": false},
         {"cost": 32, "unlocked": false},
         {"cost": 64, "unlocked": false},
-        {"cost": 128, "unlocked": false}
+        {"cost": 128, "unlocked": false},
+        {"cost": [1, 60, 3600, 86400, 604800, 2629800, 31557600, 315576000, 3155760000, 1.8e308], "level": 0}
     ],
     "settings": {
         "autoEon": false,
@@ -52,6 +53,14 @@ try{
 }
 
 if (saveData != null){
+    if (saveData.upgrade.length != player.upgrade.length){
+        for (let x = 0; x < player.upgrade.length; x++){
+            if (saveData.upgrade[x] == undefined){
+                saveData.upgrade.push(player.upgrade[x])
+            }
+        }
+    }
+
     for (let x = 0; x < Object.keys(saveData).length; x++){
         player[Object.keys(saveData)[x]] = saveData[Object.keys(saveData)[x]]
     }
@@ -86,7 +95,7 @@ if (player.time == 0){
 }
 
 function purchase(cog){
-    if (player.time > player.cogs[cog].cost){
+    if (player.time >= player.cogs[cog].cost){
         player.time -= player.cogs[cog].cost
 
         player.cogs[cog].mult *= 1.1
@@ -100,7 +109,7 @@ function purchase(cog){
 }
 
 function purchaseAuto(cog){
-    if (player.bigFreeze > player.auto[cog].cost){
+    if (player.bigFreeze >= player.auto[cog].cost){
         player.bigFreeze -= player.auto[cog].cost
 
         player.auto[cog].cost = 0
@@ -109,7 +118,13 @@ function purchaseAuto(cog){
 }
 
 function purchaseUpgrade(cog){
-    if (player.bigFreeze > player.upgrade[cog].cost){
+    if (cog == 8){
+        if (player.upgrade[8].level == player.upgrade[8].cost.length-1){} else
+        if (player.bigFreeze >= player.upgrade[8].cost[player.upgrade[8].level]){
+            player.bigFreeze -= player.upgrade[8].cost[player.upgrade[8].level]
+            player.upgrade[8].level += 1
+        }
+    } else if (player.bigFreeze > player.upgrade[cog].cost){
         player.bigFreeze -= player.upgrade[cog].cost
 
         player.upgrade[cog].cost = 0
@@ -117,6 +132,14 @@ function purchaseUpgrade(cog){
 
         player.time += [60, 3600, 86400, 604800, 2629800, 31557600, 315576000, 3155760000][cog]
     }
+}
+
+function qwertyMult(value){
+    for (let x = 0; x < player.upgrade[8].level; x++){
+        value = value * 2
+    }
+
+    return value
 }
 
 /**
@@ -246,18 +269,28 @@ function rendertime(){
     if (1-(player.speed/3155760000000) > 0 || true){document.querySelector(".eoncentury").style.transform = "rotate(" + ((player.bigFreeze/3155760000*(360/10)) + 180)%360 + "deg)"}
     document.querySelector(".eonmillennia").style.transform = "rotate(" + ((player.bigFreeze/31557600000000000*360) + 180)%360 + "deg)"
 
-    let display = [".secDisp",".minDisp",".houDisp",".dayDisp",".weeDisp",".monDisp",".yeaDisp",".decDisp",".cenDisp",".milDisp"]
-    let degredation = [1,60,3600,86400,604800,2629800,31557600,315576000,3155760000,31557600000]
+    let display = [".secDisp",".minDisp",".houDisp",".dayDisp",".weeDisp",".monDisp",".yeaDisp",".decDisp",".cenDisp",".milDisp",".eonDisp"]
+    let degredation = [1,60,3600,86400,604800,2629800,31557600,315576000,3155760000,31557600000, 31557600000000000]
     for (let x = 0; x < display.length; x++){
         if (Math.floor(player.time/degredation[x]) < 1000){
             document.querySelector(display[x]).textContent = Math.floor(player.time/degredation[x])
         } else {
             document.querySelector(display[x]).textContent = Math.floor(player.time/degredation[x]).toExponential(2).replace("+", "")
         }
+
+        if (display[x] == ".eonDisp"){
+            if (Math.floor(player.time/degredation[x]) < 10){
+                document.querySelector(display[x]).textContent = Math.floor(qwertyMult(player.time/degredation[x])*1e3)/1e3
+            } else if (Math.floor(player.time/degredation[x]) < 1000){
+                document.querySelector(display[x]).textContent = Math.floor(qwertyMult(player.time/degredation[x]))
+            } else {
+                document.querySelector(display[x]).textContent = Math.floor(qwertyMult(player.time/degredation[x])).toExponential(2).replace("+", "")
+            }
+        }
     }
 
-    display = [".eonDisp",".eonsecDisp",".eonminDisp",".eonhouDisp",".eondayDisp",".eonweeDisp",".eonmonDisp",".eonyeaDisp",".eondecDisp",".eoncenDisp",".eonmilDisp"]
-    degredation = [1,1,60,3600,86400,604800,2629800,31557600,315576000,3155760000,31557600000]
+    display = [".eonsecDisp",".eonminDisp",".eonhouDisp",".eondayDisp",".eonweeDisp",".eonmonDisp",".eonyeaDisp",".eondecDisp",".eoncenDisp",".eonmilDisp"]
+    degredation = [1,60,3600,86400,604800,2629800,31557600,315576000,3155760000,31557600000]
     for (let x = 0; x < display.length; x++){
         if (Math.floor(player.bigFreeze/degredation[x]) < 1000){
             document.querySelector(display[x]).textContent = Math.floor(player.bigFreeze/degredation[x])
@@ -275,29 +308,32 @@ function rendertime(){
     } else {
         document.querySelector(".timeDisp").textContent = (player.speed/(((player.time+1)/31557600000000000)**6)).toExponential(2).replace("+", "") + " (speed reduced by /" + (((player.time+1)/31557600000000000)**6).toExponential(2).replace("+", "") + ")"
     }
+
+    if (Date.now()-player.freezeStart >= 1000) {
+        document.querySelector(".currentFreeze").innerHTML = timeify((Date.now()-player.freezeStart)/1000).toLowerCase()
+    } else {
+        document.querySelector(".currentFreeze").innerHTML = (Date.now()-player.freezeStart) + "ms"
+    }
 }
 
 function prestige(value){
     clearInterval(gameloop)
     clearInterval(slowloop)
 
-    player.bigFreeze += value
-
-    setTimeout(function(){
-        localStorage.setItem('gloretime',
-            JSON.stringify(
-                {
-                    'bigFreeze': player.bigFreeze,
-                    'auto': player.auto,
-                    'upgrade': player.upgrade,
-                    'settings': player.settings,
-                    'achievements': player.achievements,
-                    'fastestFreeze': player.fastestFreeze
-                }
-            )
+    localStorage.setItem('gloretime',
+        JSON.stringify(
+            {
+                'bigFreeze': player.bigFreeze + qwertyMult(value),
+                'auto': player.auto,
+                'upgrade': player.upgrade,
+                'settings': player.settings,
+                'achievements': player.achievements,
+                'fastestFreeze': player.fastestFreeze
+            }
         )
-        location.reload()
-    }, 20)
+    )
+
+    location.reload()
 }
 
 let gameloop = setInterval(function(){
@@ -316,14 +352,14 @@ let gameloop = setInterval(function(){
     if (d > 10){
         smallD = (d/10000)
         for (let x = 0; x < 10000; x++){
-            if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+            if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 90000){
                 player.time += (player.speed*smallD)/(((player.time+1)/31557600000000000)**6)
             } else {
                 player.time += player.speed*smallD
             }
         }
     } else {
-        if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+        if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 90000){
             player.time += (player.speed*d)/(((player.time+1)/31557600000000000)**6)
         } else {
             player.time += player.speed*d
@@ -340,46 +376,36 @@ let gameloop = setInterval(function(){
         rendertime()
     }
 
-    if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 60000){
+    if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 90000){
         if (Date.now()-player.freezeStart < player.fastestFreeze){
             player.fastestFreeze = Date.now()-player.freezeStart
         }
 
-        document.querySelector(".eonPrestige").style.display = "block"
-        document.querySelector(".eonReward").innerHTML = Math.floor(player.time/(31557600000000000))
+        player.freezeStart = 1
 
-        try {
-            if (!NGIO.getMedal(78934).unlocked){
-                NGIO.unlockMedal(78934, onMedalUnlocked)
-            }
-        } catch {
-            console.log("Newgrounds issue")
-        }
-        
+        document.querySelector(".eonPrestige").style.display = "block"
+        document.querySelector(".eonReward").innerHTML = qwertyMult(Math.floor(player.time/(31557600000000000)))
+
+        return
     } else if (Math.floor(player.time/(31557600000000000/2)) > 1){
         if (Date.now()-player.freezeStart < player.fastestFreeze){
             player.fastestFreeze = Date.now()-player.freezeStart
-            player.freezeStart = 0
         }
 
-        try {
-            if (!NGIO.getMedal(78933).unlocked){
-                NGIO.unlockMedal(78933, onMedalUnlocked)
-            }
-        } catch {
-            console.log("Newgrounds issue")
-        }
+        player.freezeStart = 1
 
         player.time = 31557600000000000
         rendertime()
 
         document.querySelector(".eonPrestige").style.display = "block"
-        document.querySelector(".eonPrestige").innerHTML = "<h1>BIG FREEZE</h1><h2>Earn <b>1</b> Eon when you reset.</h2></div>"
+        document.querySelector(".eonPrestige").innerHTML = `<h1>BIG FREEZE</h1><h2>Earn <b>${qwertyMult(1)}</b> Eon when you reset.</h2></div>`
         clearInterval(gameloop); clearInterval(slowloop)
 
         if (player.settings.autoEon){
             prestige(1)
         }
+
+        return
     }
 
     localStorage.setItem("gloretime", JSON.stringify(player))
@@ -428,8 +454,49 @@ let slowloop = setInterval(function(){
         }
     }
 
+    document.querySelector(".upgrade9").textContent = "Level " + player.upgrade[8].level
+    
+    if (player.upgrade[8].level == 9){
+        document.querySelector(".upgrade9cost").textContent = "MAX"
+    } else {
+        document.querySelector(".upgrade9cost").textContent = "1 E" + timeify(player.upgrade[8].cost[player.upgrade[8].level]).replace(" 1", "")
+    }
+
+    document.querySelector(".upgrade9mult").textContent = qwertyMult(1)
+
     document.querySelector(".AE").textContent = ["OFF", "ON"][player.settings.autoEon+0]
     document.querySelector(".perf").textContent = ["OFF", "ON"][player.settings.performance+0]
     document.querySelector(".rend").textContent = ["OPACITY", "BLUR"][player.settings.renderer+0]
     document.querySelector(".form").textContent = ["NEW", "OLD"][player.settings.format+0]
+
+    try {
+        if (player.bigFreeze != 0){
+            document.querySelector(".AC78933").textContent = "Achieved"
+            
+            if (!NGIO.getMedal(78933).unlocked){
+                NGIO.unlockMedal(78933, onMedalUnlocked)
+            }
+        }
+        if (player.auto.reduce((partialSum, a) => partialSum + a.cost, 0) == 0){
+            document.querySelector(".AC78994").textContent = "Achieved"
+            
+            if (!NGIO.getMedal(78994).unlocked){
+                NGIO.unlockMedal(78994, onMedalUnlocked)
+            }
+        }
+        if (player.fastestFreeze < 90000){
+            document.querySelector(".AC78934").textContent = "Achieved"
+
+            if (!NGIO.getMedal(78934).unlocked){
+                NGIO.unlockMedal(78934, onMedalUnlocked)
+            }
+        }
+        if (player.upgrade[8].level == player.upgrade[8].cost.length-1){
+            document.querySelector(".AC78995").textContent = "Achieved"
+
+            if (!NGIO.getMedal(78995).unlocked){
+                NGIO.unlockMedal(78995, onMedalUnlocked)
+            }
+        }
+    } catch {}
 }, 100)
