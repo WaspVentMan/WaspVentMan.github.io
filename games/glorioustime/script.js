@@ -134,8 +134,10 @@ function purchase(cog){
 }
 
 function purchaseAuto(cog){
-    if (player.bigFreeze >= player.auto[cog].cost){
-        player.bigFreeze -= player.auto[cog].cost
+    if (player.bigFreeze >= costs.auto[cog].cost || player.auto[cog].cost == 0){
+        if (player.auto[cog].cost != 0){
+            player.bigFreeze -= costs.auto[cog].cost
+        }
 
         player.auto[cog].cost = 0
         player.auto[cog].unlocked = !player.auto[cog].unlocked
@@ -144,13 +146,13 @@ function purchaseAuto(cog){
 
 function purchaseUpgrade(cog){
     if (cog == 8){
-        if (player.upgrade[8].level == player.upgrade[8].cost.length-1){} else
-        if (player.bigFreeze >= player.upgrade[8].cost[player.upgrade[8].level]){
-            player.bigFreeze -= player.upgrade[8].cost[player.upgrade[8].level]
+        if (player.upgrade[8].level == costs.upgrade[8].cost.length-1){} else
+        if (player.bigFreeze >= costs.upgrade[8].cost[player.upgrade[8].level]){
+            player.bigFreeze -= costs.upgrade[8].cost[player.upgrade[8].level]
             player.upgrade[8].level += 1
         }
-    } else if (player.bigFreeze >= player.upgrade[cog].cost){
-        player.bigFreeze -= player.upgrade[cog].cost
+    } else if (player.bigFreeze >= costs.upgrade[cog].cost){
+        player.bigFreeze -= costs.upgrade[cog].cost
 
         player.upgrade[cog].cost = 0
         player.upgrade[cog].unlocked = true
