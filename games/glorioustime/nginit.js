@@ -1,6 +1,6 @@
 // Set up the options for NGIO.
 var options = {
-    version: "1.4",
+    version: "1.4.1",
     preloadMedals: true
 };
 

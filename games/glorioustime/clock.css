@@ -13,7 +13,7 @@ body {
     text-align: center;
     margin: 0%;
 
-    background-image: url('PastelPassage.png');
+    background-image: url('img/PastelPassage.png');
     animation: bgScroll 120s infinite linear;
 }
 
@@ -27,7 +27,7 @@ details {
 
 details:hover {
     mix-blend-mode: difference;
-    background-image: url('GrayDient.png');
+    background-image: url('img/GrayDient.png');
 }
 
 @keyframes ngEntice {

@@ -17,24 +17,24 @@ let player = {
     ],
     "auto": [
         {"cost": 1, "unlocked": false},
-        {"cost": 2, "unlocked": false},
-        {"cost": 4, "unlocked": false},
-        {"cost": 8, "unlocked": false},
-        {"cost": 16, "unlocked": false},
-        {"cost": 32, "unlocked": false},
-        {"cost": 64, "unlocked": false},
-        {"cost": 128, "unlocked": false}
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false},
+        {"cost": 1, "unlocked": false}
     ],
     "upgrade": [
-        {"cost": 1, "unlocked": false},
-        {"cost": 2, "unlocked": false},
-        {"cost": 4, "unlocked": false},
-        {"cost": 8, "unlocked": false},
-        {"cost": 16, "unlocked": false},
-        {"cost": 32, "unlocked": false},
-        {"cost": 64, "unlocked": false},
-        {"cost": 128, "unlocked": false},
-        {"cost": [1, 60, 3600, 86400, 604800, 2629800, 31557600, 315576000, 3155760000, 1.8e308], "level": 0}
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"unlocked": false},
+        {"level": 0}
     ],
     "settings": {
         "autoEon": false,
@@ -44,7 +44,32 @@ let player = {
     }
 }
 
+let costs = {
+    "auto": [
+        {"cost": 1},
+        {"cost": 2},
+        {"cost": 4},
+        {"cost": 8},
+        {"cost": 16},
+        {"cost": 32},
+        {"cost": 64},
+        {"cost": 128}
+    ],
+    "upgrade": [
+        {"cost": 1},
+        {"cost": 2},
+        {"cost": 4},
+        {"cost": 8},
+        {"cost": 16},
+        {"cost": 32},
+        {"cost": 64},
+        {"cost": 128},
+        {"cost": [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1.8e308]}
+    ],
+}
+
 let saveData = player
+let slowdown = 0
 
 try{
     saveData = JSON.parse(localStorage.getItem("gloretime").replaceAll("null", "0"))
@@ -124,7 +149,7 @@ function purchaseUpgrade(cog){
             player.bigFreeze -= player.upgrade[8].cost[player.upgrade[8].level]
             player.upgrade[8].level += 1
         }
-    } else if (player.bigFreeze > player.upgrade[cog].cost){
+    } else if (player.bigFreeze >= player.upgrade[cog].cost){
         player.bigFreeze -= player.upgrade[cog].cost
 
         player.upgrade[cog].cost = 0
@@ -147,7 +172,7 @@ function qwertyMult(value){
  * @param {*} time time to be converted
  * @returns string, 60 becomes 60S, 120 becomes 2M, etc
  */
-function timeify(time){
+function timeify(time, prefix = ""){
     const timeBounds = [1, 60, 3600, 86400, 604800, 2629800, 31557600, 315576000, 3155760000, 31557600000, 1.8e308]
     const timeNames = ["S", "M", "H", "D", "W", "Mo", "Y", "De", "C", "Mi", "INFINITY"]
 
@@ -157,7 +182,7 @@ function timeify(time){
         if (time < timeBounds[x+1]){
             for (let y = 0; y < 5; y++){
                 if (time != 0 && x-y >= 0 && Math.floor(time/timeBounds[x-y]) != 0){
-                    back += " " + Math.floor(time/timeBounds[x-y]) + timeNames[x-y]
+                    back += " " + Math.floor(time/timeBounds[x-y]) + prefix + timeNames[x-y]
                     time -= time-(time%timeBounds[x-y])
                 }
             }
@@ -306,7 +331,7 @@ function rendertime(){
     } else if (Math.floor(player.time/(31557600000000000)) < 1) {
         document.querySelector(".timeDisp").textContent = player.speed.toExponential(2).replace("+", "")
     } else {
-        document.querySelector(".timeDisp").textContent = (player.speed/(((player.time+1)/31557600000000000)**6)).toExponential(2).replace("+", "") + " (speed reduced by /" + (((player.time+1)/31557600000000000)**6).toExponential(2).replace("+", "") + ")"
+        document.querySelector(".timeDisp").textContent = (player.speed/slowdown).toExponential(2).replace("+", "") + " (speed reduced by /" + slowdown.toExponential(2).replace("+", "") + ")"
     }
 
     if (Date.now()-player.freezeStart >= 1000) {
@@ -336,9 +361,11 @@ function prestige(value){
     location.reload()
 }
 
-let gameloop = setInterval(function(){
+let gameloop = setInterval(async function(){
     let d = (Date.now() - player.tick)/1000
     player.tick = Date.now()
+
+    slowdown = (((player.time+1)/31557600000000000)**6)
 
     player.cogs[6].count += (player.cogs[7].count*player.cogs[7].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
     player.cogs[5].count += (player.cogs[6].count*player.cogs[6].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
@@ -350,17 +377,18 @@ let gameloop = setInterval(function(){
     player.speed += (player.cogs[0].count*player.cogs[0].mult)*(d/10)*(1+Math.cbrt(player.bigFreeze))
 
     if (d > 10){
-        smallD = (d/10000)
-        for (let x = 0; x < 10000; x++){
+        console.log("offline calc")
+        smallD = 10
+        for (let x = 0; x < d/10; x++){
             if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 90000){
-                player.time += (player.speed*smallD)/(((player.time+1)/31557600000000000)**6)
+                player.time = player.time + ((player.speed*smallD)/slowdown)
             } else {
                 player.time += player.speed*smallD
             }
         }
     } else {
         if (Math.floor(player.time/(31557600000000000/2)) > 1 && player.fastestFreeze < 90000){
-            player.time += (player.speed*d)/(((player.time+1)/31557600000000000)**6)
+            player.time += (player.speed*d)/slowdown
         } else {
             player.time += player.speed*d
         }
@@ -381,8 +409,6 @@ let gameloop = setInterval(function(){
             player.fastestFreeze = Date.now()-player.freezeStart
         }
 
-        player.freezeStart = 1
-
         document.querySelector(".eonPrestige").style.display = "block"
         document.querySelector(".eonReward").innerHTML = qwertyMult(Math.floor(player.time/(31557600000000000)))
 
@@ -391,8 +417,6 @@ let gameloop = setInterval(function(){
         if (Date.now()-player.freezeStart < player.fastestFreeze){
             player.fastestFreeze = Date.now()-player.freezeStart
         }
-
-        player.freezeStart = 1
 
         player.time = 31557600000000000
         rendertime()
@@ -459,7 +483,7 @@ let slowloop = setInterval(function(){
     if (player.upgrade[8].level == 9){
         document.querySelector(".upgrade9cost").textContent = "MAX"
     } else {
-        document.querySelector(".upgrade9cost").textContent = "1 E" + timeify(player.upgrade[8].cost[player.upgrade[8].level]).replace(" 1", "")
+        document.querySelector(".upgrade9cost").textContent = timeify(costs.upgrade[8].cost[player.upgrade[8].level], " E")
     }
 
     document.querySelector(".upgrade9mult").textContent = qwertyMult(1)
