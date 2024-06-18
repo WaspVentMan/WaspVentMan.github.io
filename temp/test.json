@@ -4,8 +4,8 @@
         "prev": "audio/music/amalgam.mp3",
         "artist": "Toby Fox",
         "name": "Amalgam",
-        "cover": "img/cover_UT.png",
-        "background": "img/truelab.png",
+        "cover": "https://www.newgrounds.com/dump/draw/3ced4db8e715412e3751d8f835a6e0d5",
+        "background": "https://www.newgrounds.com/dump/draw/3ced4db8e715412e3751d8f835a6e0d5",
         "link": [
             {"url": "https://undertale.com/", "type": "UT"},
             {"url": "https://tobyfox.bandcamp.com/album/undertale-soundtrack", "type": "BC"}
