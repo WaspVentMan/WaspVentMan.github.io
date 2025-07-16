@@ -18,18 +18,65 @@
     <div style="width: 800px; margin: auto; background-color: white; position: absolute; left: calc(50vw - 400px);">
         <br>
         <h1>WASPVENTMAN.CO.UK</h1>
+        <h3 class="spashText"></h3>
+        <script>
+            let spashes = [
+                "The website I update once every 4 years!",
+                "The home to games of questionable quality!",
+                "The home to a game about climbing based off a game about climbing!",
+                "The home to a game about a maze with a <s>shitty</s> funny ending!",
+                "The home to a confusing game about getting to 100!",
+                "The home to a game about pressing a button a few hundred times!",
+                "The home to a fishing game that wasn't very good and will never be rereleased on it's own because of how not good it was!",
+                "The home to a game that was very good but got so spaghetti inside that I abandoned it!",
+                "Soon to be the home to a digital graveyard!"
+            ]
+            document.querySelector(".spashText").innerHTML = spashes[Math.floor(Math.random()*spashes.length)]
+
+            let d = new Date()
+            if (d.getMonth() + 1 == 8 && d.getDate() == 9){
+                document.querySelector(".spashText").innerHTML = "Happy birthday to me!"
+            }
+        </script>
         <div style="display: flex; width: max-content; margin: auto;">
-            <h3 style="margin: 4px;"><a href="games/">GAMES</a></h3>
+            <h3 style="margin: 4px;"><a href="games/">OLD GAMES</a></h3>
             <h3 style="margin: 4px;">•</h3>
             <h3 style="margin: 4px;"><a href="art/">ART</a></h3>
         </div>
         <br>
+        <div style="background-image: url(img/promo/o100/o100.png); width: 800px; background-size: cover; background-position: center;">
+            <div style="height: 500px;"></div>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <a href="https://github.com/WaspVentMan/obfuscation-100" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
+                <div style="width: 8px;"></div>
+                <a href="https://www.newgrounds.com/portal/view/942654" style="background-image: url(img/NG_logo.png); width: 128px; height: 128px;"></a>
+                <div style="width: 8px;"></div>
+                <a href="https://waspventman.itch.io/obfuscation-100" style="background-image: url(img/ITCH_logo.png); width: 128px; height: 128px;"></a>
+            </div>
+            <br>
+        </div>
+        <div style="background-image: url(img/promo/maze/logoWide.png); width: 800px; background-size: cover; background-position: center;">
+            <div style="height: 500px;"></div>
+        </div>
+        <div style="width: 800px; background-size: cover; background-position: center; background-color: black;">
+            <br>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <a href="https://github.com/WaspVentMan/understand-the-maze" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
+                <div style="width: 8px;"></div>
+                <a href="https://www.newgrounds.com/portal/view/984760" style="background-image: url(img/NG_logo.png); width: 128px; height: 128px;"></a>
+                <div style="width: 8px;"></div>
+                <a href="https://waspventman.itch.io/understand-the-maze" style="background-image: url(img/ITCH_logo.png); width: 128px; height: 128px;"></a>
+            </div>
+            <br>
+        </div>
         <div style="background-image: url(img/promo/peaks87_2.0/NGlogoV5.png); width: 800px; background-size: cover; background-position: center;">
             <div style="height: 500px;"></div>
             <div style="display: flex; margin: auto; width: max-content;">
                 <a href="https://github.com/WaspVentMan/Peaks-87" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
                 <div style="width: 8px;"></div>
                 <a href="https://www.newgrounds.com/portal/view/963644" style="background-image: url(img/NG_logo.png); width: 128px; height: 128px;"></a>
+                <div style="width: 8px;"></div>
+                <a href="https://waspventman.itch.io/peaks-87" style="background-image: url(img/ITCH_logo.png); width: 128px; height: 128px;"></a>
             </div>
             <br>
         </div>
@@ -43,21 +90,13 @@
             </div>
             <br>
         </div>
-        <div style="background-image: url(img/promo/peaks87/cliff.png); width: 800px;">
-            <div style="height: 384px;"></div>
-            <div style="display: flex; margin: auto; width: max-content;">
-                <a href="https://github.com/WaspVentMan/Peaks-87" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
-                <div style="width: 8px;"></div>
-                <a href="https://www.newgrounds.com/portal/view/963644" style="background-image: url(img/NG_logo.png); width: 128px; height: 128px;"></a>
-            </div>
-            <br>
-        </div>
-        <br>
+        <h1>LINKS TO OTHER PLACES I MIGHT BE</h1>
         <div style="display: flex; margin: auto; width: max-content;">
             <a href="https://bsky.app/profile/waspventman.co.uk" style="background-image: url(img/BSKY_logo.png); width: 128px; height: 128px;"></a>
             <a href="https://discord.com/invite/JtBMPEb54H" style="background-image: url(img/DC_logo.png); width: 128px; height: 128px;"></a>
             <a href="https://github.com/WaspVentMan" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
             <a href="https://waspventman.newgrounds.com" style="background-image: url(img/NG_logo.png); width: 128px; height: 128px;"></a>
+            <a href="https://waspventman.itch.io/" style="background-image: url(img/ITCH_logo.png); width: 128px; height: 128px;"></a>
         </div>
         <br>
     </div>
