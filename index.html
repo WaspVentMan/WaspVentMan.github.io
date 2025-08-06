@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/wasp.png" type="image/x-icon">
 
+    <script src="lib/text.js"></script>
+
     <meta content="https://waspventman.co.uk" property="og:url"/>
     <meta content="waspventman.co.uk" property="og:title" />
     <meta content="https://waspventman.co.uk/img/wasp.png" property="og:image"/>
@@ -44,6 +46,12 @@
             <h3 style="margin: 4px;"><a href="art/">ART</a></h3>
         </div>
         <br>
+        <div class="ALE" style="width: 800px; background-color: black; display: none;">
+            <br>
+            <div class="timer" style="margin-bottom: -80px;"></div>
+            <img style="width: 800px;" src="img/promo/ale/logoSquare.png" alt="">
+            <script src="script.js"></script>
+        </div>
         <div style="background-image: url(img/promo/abandonware/logo.png); width: 800px; background-size: cover; background-position: center;">
             <div style="height: 500px;"></div>
             <div style="display: flex; margin: auto; width: max-content;">
@@ -80,8 +88,27 @@
             </div>
             <br>
         </div>
-        <div style="background-image: url(img/promo/peaks87_2.0/NGlogoV5.png); width: 800px; background-size: cover; background-position: center;">
-            <div style="height: 500px;"></div>
+        <div class="peaks87container" style="width: 800px; height: 400px; overflow: hidden;">
+            <div class="peaks87game" style="width: 800px; height: 400px; position: absolute; overflow: hidden; background: linear-gradient(rgba(100, 206, 235, 1) 0%, rgba(135, 206, 235, 1) 100%)">
+                <div class="peaks87logo" style="position: absolute; width: 512px; height: 256px; margin-left: 144px; background-image: url(img/promo/peaks87/logo.png); z-index: 15; image-rendering: pixelated; background-size: 100%;"></div>
+                <div class="peaks87towerRender" style="position: absolute; width: 512px; height: 4096px; margin-left: 144px; background-image: url(img/promo/peaks87/cliff.png); z-index: 11;"></div>
+                <div class="peaks87paralax0" style="z-index: 15; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax1" style="z-index: 14; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png); background-position: 16px 0px;"></div>
+                <div class="peaks87paralax2" style="z-index: 13; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax3" style="z-index: 12; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png); background-position: 16px 0px;"></div>
+                <div class="peaks87paralax4" style="z-index: 10; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax5" style="z-index: 9; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png); background-position: 16px 0px;"></div>
+                <div class="peaks87paralax6" style="z-index: 8; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax7" style="z-index: 7; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png); background-position: 16px 0px;"></div>
+                <div class="peaks87paralax8" style="z-index: 6; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax9" style="z-index: 5; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png); background-position: 16px 0px;"></div>
+                <div class="peaks87paralax10" style="z-index: 4; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraTree.png);"></div>
+                <div class="peaks87paralax11" style="z-index: 3; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraHill.png);"></div>
+                <div class="peaks87paralax12" style="z-index: 2; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraHill.png); transform: scaleX(-1);"></div>
+                <div class="peaks87paralax13" style="z-index: 1; position: absolute; width: 800px; height: 224px; background-image: url(img/promo/peaks87/paraMount.png);"></div>
+            </div>
+        </div>
+        <div style="width: 784px; background-color: #4C0000; padding: 8px;">
             <div style="display: flex; margin: auto; width: max-content;">
                 <a href="https://github.com/WaspVentMan/Peaks-87" style="background-image: url(img/GH_logo.png); width: 128px; height: 128px;"></a>
                 <div style="width: 8px;"></div>
@@ -89,7 +116,6 @@
                 <div style="width: 8px;"></div>
                 <a href="https://waspventman.itch.io/peaks-87" style="background-image: url(img/ITCH_logo.png); width: 128px; height: 128px;"></a>
             </div>
-            <br>
         </div>
         <div style="width: 800px">
             <div style="background-image: url(img/promo/worldD-B-N/logo.png); width: 800px; background-size: cover; background-position: center; height: 400px;"></div>
@@ -100,7 +126,7 @@
             </div>
             <br>
         </div>
-        <div style="width: 800px; background-color: black;">
+        <div style="width: 800px; background-color: black">
             <div style="background-image: url(img/promo/button/room.png); width: 512px; height: 512px; margin: auto;"></div>
             <div style="background-image: url(img/promo/button/logo.png); width: 256px; height: 128px; margin: auto; margin-top: -384px; margin-bottom: 256px;"></div>
             <div style="display: flex; margin: auto; width: max-content;">
@@ -121,4 +147,4 @@
         <br>
     </div>
 </body>
-</html>
+</html>;
