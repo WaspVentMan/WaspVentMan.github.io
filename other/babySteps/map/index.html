@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Steps Map v1.0.0</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="margin: 0px; overflow: hidden;">
+    <div class="map" style="background-image: url(img/babyStepsMap.png); width: 1920px; height: 8350px;"></div>
+    <div class="fogOfWar" style="position: absolute; top: 0%;">
+        <div onclick="this.style.display = 'none'" class="fogOfWar0" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 7548px; background-color: black;"></div>
+            <div style="width: 1920px; height: 474px; background-image: url(img/fog0.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar1" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 7076px; background-color: black;"></div>
+            <div style="width: 1920px; height: 277px; background-image: url(img/fog1.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar2" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 6617px; background-color: black;"></div>
+            <div style="width: 1920px; height: 317px; background-image: url(img/fog2.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar3" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 6102px; background-color: black;"></div>
+            <div style="width: 1920px; height: 381px; background-image: url(img/fog3.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar4" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 4699px; background-color: black;"></div>
+            <div style="width: 1920px; height: 399px; background-image: url(img/fog4.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar5" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 4544px; background-color: black;"></div>
+            <div style="width: 1920px; height: 324px; background-image: url(img/fog5.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar6" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 3336px; background-color: black;"></div>
+            <div style="width: 1920px; height: 346px; background-image: url(img/fog6.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar7" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 2559px; background-color: black;"></div>
+            <div style="width: 1920px; height: 398px; background-image: url(img/fog7.png);"></div>
+        </div>
+        <div onclick="this.style.display = 'none'" class="fogOfWar8" style="position: absolute; top: 0%;">
+            <div style="width: 1920px; height: 1634px; background-color: black;"></div>
+            <div style="width: 1920px; height: 361px; background-image: url(img/fog8.png);"></div>
+        </div>
+    </div>
+    <div class="warning" style="position: fixed; width: 100vw; height: 100vh; top: 0px; left: 0px; background-color: black;">
+        <div style="position: absolute; width: 384px; height: 384px; left: calc(50vw - 192px); top: calc(50vh - 192px); background-color: blanchedalmond; border-radius: 16px;">
+            <br>
+            <h1>Baby Steps Map</h1>
+            <br>
+            <h2>How many campsites</h2>
+            <h2>have you been to?</h2>
+            <br>
+            <input class="campsitesInput" onmousemove="document.querySelector('.campsites').textContent = this.value" type="range" min="0" max="8" value="0">
+            <br><br>
+            <button onclick="fogAdjust(document.querySelector('.campsitesInput').value)">
+                <h2 style="margin: 8px; width: 256px;">I have been to <b class="campsites">0</b> campsite(s)</h2>
+            </button>
+        </div>
+        <div class="warningInit" style="position: absolute; width: 384px; height: 384px; left: calc(50vw - 192px); top: calc(50vh - 192px); background-color: blanchedalmond; border-radius: 16px;">
+            <br>
+            <h1>Baby Steps Map</h1>
+            <br>
+            <h2>Turn back if you don't</h2>
+            <h2>want to be spoiled</h2>
+            <br>
+            <button onclick="fogAdjust(9)"><h2 style="margin: 8px; width: 256px;">Show me the whole map</h2></button>
+            <br><br>
+            <button onclick="document.querySelector('.warningInit').remove()"><h2 style="margin: 8px; width: 256px;">Show me some of it</h2></button>
+            <br><br>
+            <button onclick="window.open('https://store.steampowered.com/app/1281040/Baby_Steps/', '_blank').focus()"><h2 style="margin: 8px; width: 256px;">What is Baby Steps?</h2></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
