@@ -1,5 +1,13 @@
 {
     "name": "fucked",
+    "cameraX": true,
     "clouds": true,
-    "creator": "wasp"
+    "textureSky": true,
+    "paralaxSkyTexture": false,
+    "musicReplacements": {},
+    "paralaxBase": 0,
+    "paralaxDefault": 0,
+    "forceTime": false,
+    "creator": "waspventman",
+    "version": 2
 }

@@ -1,0 +1,24 @@
+{
+    "url": "fountain",
+    "name": "deltarune titan fountain",
+    "cameraX": false,
+    "clouds": false,
+    "textureSky": true,
+    "paralaxSkyTexture": 1.2,
+    "musicCredits": [
+        "Toby Fox",
+        "Deltarune chapter 3+4 - 65: heavy footsteps",
+        "Deltarune chapter 3+4 - 66: crumbling tower"
+    ],
+    "musicReplacements": {
+        "wind": "crumblingtower.mp3",
+        "forest": "heavyfootsteps.mp3",
+        "death": "hurt.mp3",
+        "record": "heal.mp3"
+    },
+    "paralaxBase": 0,
+    "paralaxDefault": 0,
+    "forceTime": "D",
+    "creator": "waspventman",
+    "version": 2
+}
