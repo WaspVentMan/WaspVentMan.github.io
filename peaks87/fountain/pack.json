@@ -4,6 +4,7 @@
     "cameraX": false,
     "clouds": false,
     "textureSky": true,
+    "replaceHolds": false,
     "paralaxSkyTexture": 1.2,
     "musicCredits": [
         "Toby Fox",

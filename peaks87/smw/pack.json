@@ -1,0 +1,24 @@
+{
+    "name": "pack name",
+    "cameraX": true,
+    "clouds": true,
+    "textureSky": true,
+    "paralaxSkyTexture": false,
+    "replaceHolds": true,
+    "musicCredits": [
+        "music/sounds you used in your pack",
+        "in the form of a list (no line limit)"
+    ],
+    "musicReplacements": {
+        "wind": "audiofile.mp3",
+        "forest": "audiofile.mp3",
+        "death": "audiofile.mp3",
+        "record": "audiofile.mp3",
+        "credits": "audiofile.mp3"
+    },
+    "paralaxBase": 0,
+    "paralaxDefault": 0,
+    "forceTime": "D",
+    "creator": "your name here",
+    "version": 2
+}

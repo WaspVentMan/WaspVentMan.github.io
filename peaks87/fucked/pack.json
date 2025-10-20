@@ -3,6 +3,7 @@
     "cameraX": true,
     "clouds": true,
     "textureSky": true,
+    "replaceHolds": false,
     "paralaxSkyTexture": false,
     "musicReplacements": {},
     "paralaxBase": 0,
