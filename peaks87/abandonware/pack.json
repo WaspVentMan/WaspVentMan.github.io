@@ -1,0 +1,12 @@
+{
+    "name": "the abandonware collection",
+    "clouds": true,
+    "textureSky": true,
+    "replaceHolds": false,
+    "musicReplacements": {},
+    "paralaxBase": 32,
+    "paralaxDefault": 84,
+    "forceTime": "N",
+    "creator": "waspventman",
+    "version": 2
+}

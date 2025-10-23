@@ -1,0 +1,11 @@
+{
+    "name": "in the clouds",
+    "clouds": true,
+    "textureSky": true,
+    "replaceHolds": false,
+    "musicReplacements": {},
+    "paralaxBase": 32,
+    "paralaxDefault": 65600,
+    "creator": "waspventman",
+    "version": 2
+}

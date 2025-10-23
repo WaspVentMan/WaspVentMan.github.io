@@ -1,0 +1,11 @@
+{
+    "name": "button",
+    "clouds": false,
+    "textureSky": true,
+    "replaceHolds": false,
+    "musicReplacements": {},
+    "paralaxBase": 0,
+    "paralaxDefault": 0,
+    "creator": "waspventman",
+    "version": 2
+}
