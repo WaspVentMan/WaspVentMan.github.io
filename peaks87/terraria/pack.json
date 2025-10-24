@@ -1,0 +1,14 @@
+{
+    "name": "terraria",
+    "cameraX": true,
+    "clouds": true,
+    "textureSky": true,
+    "paralaxSkyTexture": false,
+    "replaceHolds": false,
+    "musicReplacements": {},
+    "paralaxBase": 0,
+    "paralaxDefault": 0,
+    "forceTime": "D",
+    "creator": "waspventman",
+    "version": 2
+}

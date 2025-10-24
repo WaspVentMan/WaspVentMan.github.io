@@ -1,0 +1,14 @@
+{
+    "name": "green hill zone",
+    "cameraX": true,
+    "clouds": true,
+    "textureSky": true,
+    "paralaxSkyTexture": false,
+    "replaceHolds": false,
+    "musicReplacements": {},
+    "paralaxBase": 32,
+    "paralaxDefault": 84,
+    "forceTime": "D",
+    "creator": "waspventman",
+    "version": 2
+}
