@@ -57,7 +57,9 @@ let ngLoop = setInterval(function(){
             // user needs to log in
             case NGIO.STATUS_READY:
                 document.querySelector(".NewgroundsIO").style.display = "none"
-                offline = false
+                if (NGIO.user != null){
+                    offline = false
+                }
 
                 // If NGIO.hasUser is false, the user opted not to sign in, so you may
                 // need to do some special handling in your game.
