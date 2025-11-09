@@ -35,24 +35,24 @@
     <div class="eonmillennia"></div>
 
     <div style="margin: 8px; text-align: center; margin-top: 400px;">
+        <div class="NewgroundsIO" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto;"></div>
+        <br>
+        <div class="offlineZone">
+            <p><b class="offlineTime"></b> offline time remaining.</p>
+            <p>You can still play while offline time is calculating</p>
+            <p>Offline time is being calculated at a rate of <b class="offlineRate">1s</b>/tick</p>
+            <progress class="offlinebar" style="width: 384px;"></progress>
+            <br>
+        </div>
         <details open>
-            <summary>Time is moving <b class="timeDisp"></b> times faster than usual</summary>
+            <summary class="time"></summary>
+            <p class="timeEon"></p>
+            <br>
+            <p>Time is moving <b class="timeDisp"></b> times faster than usual</p>
+            <br>
             <p>You have been in this universe for <b class="currentFreeze"></b>.</p>
+            <p class="wins" style="display: none;">You have shattered time <b class="shatter"></b> times.</p>
             <p class="freezeFast">Your fastest Big Freeze is <b class="fastFreeze"></b>.<br>Big Freeze is shattered after Freezing in under <b>1m 30s</b>.</p>
-            
-            <div class="NewgroundsIO" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto;"></div>
-
-            <details open>
-                <summary>Achievements</summary>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; width: max-content; margin: auto;">
-                    <p>One Full Circle</p>|<p class="AC78933">Not Achieved</p>
-                    <p>Full Auto Circle</p>|<p class="AC78994">Not Achieved</p>
-                    <p>Fast Full Circles</p>|<p class="AC78934">Not Achieved</p>
-                    <p>Many Full Circles</p>|<p class="AC78995">Not Achieved</p>
-                </div>
-            </details>
-            
-            <p>v<b class="gameVerDisp">?</b></p>
         </details>
         <br>
         <div style="display: none; border-radius: 10px; outline: 2px solid cyan; background-color: lightcyan; padding: 8px; width: max-content; margin: auto;" class="eonPrestige" onclick="prestige(Math.floor(player.time/(31557600000000000)))">
@@ -62,41 +62,7 @@
 
         <br>
         <details open>
-            <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">YOUR TIME</h1></summary>
-            <br>
-            <div class="timeDispCont" style="display: grid; grid-template-columns: repeat(2, 1fr); width: max-content; margin: auto;">
-                <div style="display: grid; grid-template-columns: 2fr 1.5fr; width: max-content; margin: auto;">
-                    <p style="text-align: right;">Eons: </p><b style="text-align: left;" class="eonDisp">0</b>
-                    <p style="text-align: right;">Millennia: </p><b style="text-align: left;" class="milDisp">0</b>
-                    <p style="text-align: right;">Centuries: </p><b style="text-align: left;" class="cenDisp">0</b>
-                    <p style="text-align: right;">Decades: </p><b style="text-align: left;" class="decDisp">0</b>
-                    <p style="text-align: right;">Years: </p><b style="text-align: left;" class="yeaDisp">0</b>
-                    <p style="text-align: right;">Months: </p><b style="text-align: left;" class="monDisp">0</b>
-                    <p style="text-align: right;">Weeks: </p><b style="text-align: left;" class="weeDisp">0</b>
-                    <p style="text-align: right;">Days: </p><b style="text-align: left;" class="dayDisp">0</b>
-                    <p style="text-align: right;">Hours: </p><b style="text-align: left;" class="houDisp">0</b>
-                    <p style="text-align: right;">Minutes: </p><b style="text-align: left;" class="minDisp">0</b>
-                    <p style="text-align: right;">Seconds: </p><b style="text-align: left;" class="secDisp">0</b>
-                </div>
-                <div class="timeDispEon" style="display: grid; grid-template-columns: 2fr 1fr; width: max-content; margin: auto;">
-                    <p style="display: none; text-align: right;">Eternities: </p><b style="display: none; text-align: left;" class="eoneonDisp">0</b>
-                    <p style="text-align: right;">Eon Millennia: </p><b style="text-align: left;" class="eonmilDisp">0</b>
-                    <p style="text-align: right;">Eon Centuries: </p><b style="text-align: left;" class="eoncenDisp">0</b>
-                    <p style="text-align: right;">Eon Decades: </p><b style="text-align: left;" class="eondecDisp">0</b>
-                    <p style="text-align: right;">Eon Years: </p><b style="text-align: left;" class="eonyeaDisp">0</b>
-                    <p style="text-align: right;">Eon Months: </p><b style="text-align: left;" class="eonmonDisp">0</b>
-                    <p style="text-align: right;">Eon Weeks: </p><b style="text-align: left;" class="eonweeDisp">0</b>
-                    <p style="text-align: right;">Eon Days: </p><b style="text-align: left;" class="eondayDisp">0</b>
-                    <p style="text-align: right;">Eon Hours: </p><b style="text-align: left;" class="eonhouDisp">0</b>
-                    <p style="text-align: right;">Eon Minutes: </p><b style="text-align: left;" class="eonminDisp">0</b>
-                    <p style="text-align: right;">Eon Seconds: </p><b style="text-align: left;" class="eonsecDisp">0</b>
-                </div>
-            </div>
-            <br>
-        </details>
-        <details open>
             <summary style="display: flex; width: max-content; margin: auto;"><h1>COGS IN THE MACHINE</h1></summary>
-            <br>
             <div style="display: grid; grid-template-columns: 1fr 1.5fr 3.5fr; width: max-content; margin: auto; text-align: left;">
                 <button onclick="purchase(0)">Purchase</button><b style="margin-left: 4px;" class="cog1count">0</b><b style="margin-left: 4px;" class="cog1cost">1 minute</b>
                 <button onclick="purchase(1)">Purchase</button><b style="margin-left: 4px;" class="cog2count">0</b><b style="margin-left: 4px;" class="cog2cost">1 hour</b>
@@ -112,31 +78,31 @@
         <details class="automation" style="display: none;">
             <summary style="display: flex; width: max-content; margin: auto;"><h1>AUTOBUYERS</h1></summary>
             <br>
-            <div style="display: grid; grid-template-columns: 2fr 1fr 3fr 3fr; width: max-content; margin: auto; text-align: left;">
-                <button class="auto1unlock" onclick="purchaseAuto(0)">Purchase</button><b style="margin-left: 4px;" class="auto1">False</b><b style="margin-left: 4px;" class="auto1cost">1 Eon Second</b><b style="margin-left: 4px;">Automates Cog 1</b>
-                <button class="auto2unlock" onclick="purchaseAuto(1)">Purchase</button><b style="margin-left: 4px;" class="auto2">False</b><b style="margin-left: 4px;" class="auto2cost">2 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 2</b>
-                <button class="auto3unlock" onclick="purchaseAuto(2)">Purchase</button><b style="margin-left: 4px;" class="auto3">False</b><b style="margin-left: 4px;" class="auto3cost">4 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 3</b>
-                <button class="auto4unlock" onclick="purchaseAuto(3)">Purchase</button><b style="margin-left: 4px;" class="auto4">False</b><b style="margin-left: 4px;" class="auto4cost">8 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 4</b>
-                <button class="auto5unlock" onclick="purchaseAuto(4)">Purchase</button><b style="margin-left: 4px;" class="auto5">False</b><b style="margin-left: 4px;" class="auto5cost">16 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 5</b>
-                <button class="auto6unlock" onclick="purchaseAuto(5)">Purchase</button><b style="margin-left: 4px;" class="auto6">False</b><b style="margin-left: 4px;" class="auto6cost">32 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 6</b>
-                <button class="auto7unlock" onclick="purchaseAuto(6)">Purchase</button><b style="margin-left: 4px;" class="auto7">False</b><b style="margin-left: 4px;" class="auto7cost">1 Eon Minute and 4 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 7</b>
-                <button class="auto8unlock" onclick="purchaseAuto(7)">Purchase</button><b style="margin-left: 4px;" class="auto8">False</b><b style="margin-left: 4px;" class="auto8cost">2 Eon Minutes and 8 Eon Seconds</b><b style="margin-left: 4px;">Automates Cog 8</b>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 2fr 2fr; width: max-content; margin: auto; text-align: left;">
+                <button class="auto1unlock" onclick="purchaseAuto(0)">Purchase</button><b style="margin-left: 4px;" class="auto1">False</b><b style="margin-left: 4px;" class="auto1cost">1 Es</b><b style="margin-left: 4px;">Automates Cog 1</b>
+                <button class="auto2unlock" onclick="purchaseAuto(1)">Purchase</button><b style="margin-left: 4px;" class="auto2">False</b><b style="margin-left: 4px;" class="auto2cost">2 Es</b><b style="margin-left: 4px;">Automates Cog 2</b>
+                <button class="auto3unlock" onclick="purchaseAuto(2)">Purchase</button><b style="margin-left: 4px;" class="auto3">False</b><b style="margin-left: 4px;" class="auto3cost">4 Es</b><b style="margin-left: 4px;">Automates Cog 3</b>
+                <button class="auto4unlock" onclick="purchaseAuto(3)">Purchase</button><b style="margin-left: 4px;" class="auto4">False</b><b style="margin-left: 4px;" class="auto4cost">8 Es</b><b style="margin-left: 4px;">Automates Cog 4</b>
+                <button class="auto5unlock" onclick="purchaseAuto(4)">Purchase</button><b style="margin-left: 4px;" class="auto5">False</b><b style="margin-left: 4px;" class="auto5cost">16 Es</b><b style="margin-left: 4px;">Automates Cog 5</b>
+                <button class="auto6unlock" onclick="purchaseAuto(5)">Purchase</button><b style="margin-left: 4px;" class="auto6">False</b><b style="margin-left: 4px;" class="auto6cost">32 Es</b><b style="margin-left: 4px;">Automates Cog 6</b>
+                <button class="auto7unlock" onclick="purchaseAuto(6)">Purchase</button><b style="margin-left: 4px;" class="auto7">False</b><b style="margin-left: 4px;" class="auto7cost">1 Em and 4 Es</b><b style="margin-left: 4px;">Automates Cog 7</b>
+                <button class="auto8unlock" onclick="purchaseAuto(7)">Purchase</button><b style="margin-left: 4px;" class="auto8">False</b><b style="margin-left: 4px;" class="auto8cost">2 Em and 8 Es</b><b style="margin-left: 4px;">Automates Cog 8</b>
             </div>
             <br>
         </details>
         <details class="eonUp" style="display: none;">
             <summary style="display: flex; width: max-content; margin: auto;"><h1>EON UPGRADES</h1></summary>
             <br>
-            <div style="display: grid; grid-template-columns: 1fr 2fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
-                <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
-                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">2 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
-                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">4 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
-                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">8 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
-                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">16 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
-                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">32 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
-                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 EM 4 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
-                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">2 EM 8 ES</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
-                <button class="upgrade9unlock" onclick="purchaseUpgrade(8)">Purchase</button><b style="margin-left: 4px;" class="upgrade9">Level 0</b><b style="margin-left: 4px;" class="upgrade9cost">1 ES</b><b style="margin-left: 4px;">x<b class="upgrade9mult">2</b> Eon gain, qwerty's theorem</b>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 2fr 4fr; width: max-content; margin: auto; text-align: left;">
+                <button class="upgrade1unlock" onclick="purchaseUpgrade(0)">Purchase</button><b style="margin-left: 4px;" class="upgrade1">False</b><b style="margin-left: 4px;" class="upgrade1cost">1 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Minute</b>
+                <button class="upgrade2unlock" onclick="purchaseUpgrade(1)">Purchase</button><b style="margin-left: 4px;" class="upgrade2">False</b><b style="margin-left: 4px;" class="upgrade2cost">2 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Hour</b>
+                <button class="upgrade3unlock" onclick="purchaseUpgrade(2)">Purchase</button><b style="margin-left: 4px;" class="upgrade3">False</b><b style="margin-left: 4px;" class="upgrade3cost">4 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Day</b>
+                <button class="upgrade4unlock" onclick="purchaseUpgrade(3)">Purchase</button><b style="margin-left: 4px;" class="upgrade4">False</b><b style="margin-left: 4px;" class="upgrade4cost">8 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Week</b>
+                <button class="upgrade5unlock" onclick="purchaseUpgrade(4)">Purchase</button><b style="margin-left: 4px;" class="upgrade5">False</b><b style="margin-left: 4px;" class="upgrade5cost">16 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Month</b>
+                <button class="upgrade6unlock" onclick="purchaseUpgrade(5)">Purchase</button><b style="margin-left: 4px;" class="upgrade6">False</b><b style="margin-left: 4px;" class="upgrade6cost">32 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Year</b>
+                <button class="upgrade7unlock" onclick="purchaseUpgrade(6)">Purchase</button><b style="margin-left: 4px;" class="upgrade7">False</b><b style="margin-left: 4px;" class="upgrade7cost">1 Em 4 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Decade</b>
+                <button class="upgrade8unlock" onclick="purchaseUpgrade(7)">Purchase</button><b style="margin-left: 4px;" class="upgrade8">False</b><b style="margin-left: 4px;" class="upgrade8cost">2 Em 8 Es</b><b style="margin-left: 4px;">Start each Eon with 1 Century</b>
+                <button class="upgrade9unlock" onclick="purchaseUpgrade(8)">Purchase</button><b style="margin-left: 4px;" class="upgrade9">Level 0</b><b style="margin-left: 4px;" class="upgrade9cost">1 Es</b><b style="margin-left: 4px;">x<b class="upgrade9mult">2</b> Eon gain, qwerty's theorem</b>
             </div>
             <br>
         </details>
@@ -144,10 +110,12 @@
             <summary style="display: flex; width: max-content; margin: auto;"><h1>SETTINGS</h1></summary>
             <br>
             <div>
-                <button onclick="player.settings.autoEon = !player.settings.autoEon" style="font-family: monospace;">TOGGLE AUTO EON</button>
-                <p>Auto Eon is <b class="AE"></b>.</p>
-                <p>Skips the heat death of the universe, QOL</p>
-                <br>
+                <div class="autoEon" style="display: none;">
+                    <button onclick="player.settings.autoEon = !player.settings.autoEon" style="font-family: monospace;">TOGGLE AUTO EON</button>
+                    <p>Auto Eon is <b class="AE"></b>.</p>
+                    <p>Skips the heat death of the universe, QOL</p>
+                    <br>
+                </div>
                 <button onclick="player.settings.performance = !player.settings.performance" style="font-family: monospace;">TOGGLE PERFORMANCE MODE</button>
                 <p>Performance mode is <b class="perf"></b>.</p>
                 <p>Performance mode reduces the framerate of the game.</p>
@@ -166,19 +134,70 @@
             <br>
         </details>
         <details open>
+            <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">ACHIEVEMENTS</h1></summary>
+            <p>Achievements can only be gained when logged into Newgrounds</p>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <div style="text-align: right; margin-right: 8px;">
+                    <br><br>
+                    <h1>One Full Circle</h1>
+                    <h3>Play for an Eon</h3>
+                    <h2 class="AC78933">Not Achieved</h2>
+                </div>
+                <img style="width: 140px;" src="ach/78933.png">
+            </div>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <img style="width: 140px;" src="ach/78994.png">
+                <div style="text-align: left; margin-left: 8px;">
+                    <br><br>
+                    <h1>Full Auto Circles</h1>
+                    <h3>Buy all of the Autobuyers</h3>
+                    <h2 class="AC78994">Not Achieved</h2>
+                </div>
+            </div>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <div style="text-align: right; margin-right: 8px;">
+                    <br><br>
+                    <h1>Fast Full Circles</h1>
+                    <h3>Shatter the "Big Freeze"</h3>
+                    <h2 class="AC78934">Not Achieved</h2>
+                </div>
+                <img style="width: 140px;" src="ach/78934.png">
+            </div>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <img style="width: 140px;" src="ach/78995.png">
+                <div style="text-align: left; margin-left: 8px;">
+                    <br><br>
+                    <h1>Many Full Circles</h1>
+                    <h3>Max out qwerty's theorem (Level 9)</h3>
+                    <h2 class="AC78995">Not Achieved</h2>
+                </div>
+            </div>
+            <div style="display: flex; margin: auto; width: max-content;">
+                <div style="text-align: right; margin-right: 8px;">
+                    <br><br>
+                    <h1>No More Full Circles</h1>
+                    <h3>Shatter Time</h3>
+                    <h2 class="AC87001">Not Achieved</h2>
+                </div>
+                <img style="width: 140px;" src="ach/87001.png">
+            </div>
+        </details>
+        <details open>
             <summary style="display: flex; width: max-content; margin: auto;"><h1 style="display: flexbox;">CREDITS</h1></summary>
-            <p>Jacob A. G. Taylor, 2023-2024</p>
+            <p>Jacob A. G. Taylor, 2023-2025</p>
+            <p>v<b class="gameVerDisp">?.?.?</b></p>
             <br>
             <details open>
                 <summary>Achievement Hunters</summary>
                 <h3>One Full Circle - Amereep</h3>
+                <h3>Full Auto Circles - Lankeer</h3>
                 <h3>Fast Full Circles - Lankeer</h3>
+                <h3>Many Full Circles - qwerty741</h3>
                 
             </details>
             <br>
             <details open>
                 <summary>Special Thanks</summary>
-                <h3>fuckoffasshole</h3>
                 <h3>Magnus727</h3>
                 <h3>TokalaFox1984</h3>
                 
@@ -189,14 +208,21 @@
                 <h3>qwerty741</h3>
             </details>
             <br>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: min-content; margin: auto; height: min-content;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: min-content; margin: auto; height: min-content;">
                 <a target="_blank" href="https://www.newgrounds.com/portal/view/930944"><img src="img/NG_logo.png" style="filter: invert(1); height: 100px;"></a>
-                <a target="_blank" href="https://waspventman.co.uk/games/glorioustime/"><img src="img/WVM_logo.png" style="filter: invert(1); height: 100px;"></a>
-                <a target="_blank" href="https://github.com/WaspVentMan/Glorious-Time"><img src="img/GH_logo.png" style="filter: invert(1); height: 100px;"></a>
-                <a target="_blank" href="https://discord.gg/dJvfwPHCyr"><img src="img/DC_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
+                <a target="_blank" href="https://waspventman.co.uk/games/glorioustime/"><img src="img/WVM_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
+                <a target="_blank" href="https://waspventman.itch.io/glorious-time"><img src="img/ITCH_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
                 <p>NEWGROUNDS VERSION</p>
                 <p>WASPVENTMAN VERSION</p>
+                <p>ITCH VERSION</p>
+                <p style="height: 24px;"></p>
+                <p></p>
+                <p></p>
+                <a target="_blank" href="https://github.com/WaspVentMan/Glorious-Time"><img src="img/GH_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
+                <a target="_blank" href="https://www.incrementaldb.com/game/glorious-time"><img src="img/IDB_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
+                <a target="_blank" href="https://discord.gg/dJvfwPHCyr"><img src="img/DC_logo.png" style="filter: invert(1); height: 100px; border-radius: 10px;"></a>
                 <p>SOURCE CODE</p>
+                <p>INCREMENTALDB</p>
                 <p>DISCORD SERVER</p>
             </div>
             <br>
@@ -205,7 +231,7 @@
         <br>
     </div>
 
-    <div class="achievement" style="position: fixed; bottom: 0%; right: 0%; display: grid; grid-template-columns: 2fr 1fr;" onclick="this.innerHTML = ''">:3</div>
+    <div class="achievement" style="position: fixed; bottom: 0%; right: 0%; display: grid; grid-template-columns: 2fr 1fr;" onclick="this.innerHTML = ''"></div>
 
     <script src="nginit.js"></script>
     <script src="script.js"></script>

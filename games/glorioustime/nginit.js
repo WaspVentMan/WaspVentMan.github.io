@@ -1,6 +1,7 @@
-// Set up the options for NGIO.
+let offline = true
+
 var options = {
-    version: "1.4.1",
+    version: "1.5.0",
     preloadMedals: true
 };
 
@@ -13,7 +14,7 @@ let ngLoop = setInterval(function(){
 
         // This is a generic check to see if we're waiting for something...
         if (NGIO.isWaitingStatus) {
-            document.querySelector(".NewgroundsIO").innerHTML = "<h1>Connecting to NEWGROUNDS</h1>"
+            document.querySelector(".NewgroundsIO").innerHTML = "<h1>Connecting to NEWGROUNDS</h1><div class=\"ngButton\" onclick=\"document.querySelector(\'.NewgroundsIO\').style.display = \'none\'\"><h1>Just get this off my screen</h1></div>"
             // We're either waiting for the server to respond, or the user to sign in on Newgrounds.
             // Show a "please wait" message and/or a spinner so the player knows something is happening
         }
@@ -56,6 +57,7 @@ let ngLoop = setInterval(function(){
             // user needs to log in
             case NGIO.STATUS_READY:
                 document.querySelector(".NewgroundsIO").style.display = "none"
+                offline = false
 
                 // If NGIO.hasUser is false, the user opted not to sign in, so you may
                 // need to do some special handling in your game.
@@ -66,17 +68,18 @@ let ngLoop = setInterval(function(){
     })
 }, 100)
 
-function onMedalUnlocked(medal)
-{
-    document.querySelector(".achievement").innerHTML = `<div style="text-align: right; margin-right: 8px;"><h1>${medal.name}</h1><h3>${medal.description}</h3><h2>+${medal.value} Points</h2></div><img style="width: 140px;" src="ach/${medal.id}.png">`
-    /**
-     * Show a medal popup.  You can get medal information like so:
-     *   medal.id
-     *   medal.name
-     *   medal.description
-     *   medal.value
-     *   medal.icon  (note, these are usually .webp files, and may not work in all frameworks)
-     */
+function unlockMedal(medal, condition = true){
+    if (!offline){
+        if (!NGIO.getMedal(medal).unlocked && condition){
+            NGIO.unlockMedal(medal, ()=>{})
+            medal = NGIO.getMedal(medal)
+            document.querySelector(".achievement").innerHTML = `<div style="text-align: right; margin-right: 8px;"><h1>${medal.name}</h1><h3>${medal.description}</h3><h2>+${medal.value} Points</h2></div><img style="width: 140px;" src="ach/${medal.id}.png">`
+        }
+
+        if (NGIO.getMedal(medal).unlocked){
+            document.querySelector(".AC" + medal).textContent = "Achieved"
+        }
+    }
 }
 
 //NGIO.UnlockMedal(medal_id, onMedalUnlocked);
