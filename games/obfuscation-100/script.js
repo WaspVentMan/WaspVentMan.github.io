@@ -5,12 +5,6 @@ const percmps = document.querySelector(".percmps")
 const numbtps = document.querySelector(".numbtps")
 const perctps = document.querySelector(".perctps")
 
-function bee(){
-    document.querySelector('.gen3addnumb').textContent = '🐝'
-    document.querySelector('.gen3addperc').textContent = 'Bee Space'
-    return "Bee-ster egg enabled!"
-}
-
 let money = 1
 let mps = 0
 let last_tick = Date.now()
@@ -43,9 +37,9 @@ let trates = [[2, 1.05], [4, 1.025], [8, 1.01]]
 
 let numbperc = [0, 0]
 
-let saveData = localStorage.getItem("OBFUSCATION100")
+let saveData = localStorage.getItem("OBFUSCATION100-")
 if (saveData == null){
-    localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy, "autocost": autocost, "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
+    localStorage.setItem("OBFUSCATION100-", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy, "autocost": autocost, "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
 
     location.reload()
 }
@@ -158,7 +152,7 @@ function setup(){
 
     numbperc = [0, 0]
 
-    saveData = localStorage.getItem("OBFUSCATION100")
+    saveData = localStorage.getItem("OBFUSCATION100-")
 
     document.querySelector('.gen1').removeAttribute('disabled')
     document.querySelector('.gen2').removeAttribute('disabled')
@@ -314,7 +308,7 @@ function setup(){
         if (autobuy[1]){purchase(1)}
         if (autobuy[2]){purchase(2)}
 
-        localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy, "autocost": autocost, "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
+        localStorage.setItem("OBFUSCATION100-", JSON.stringify({"money": money, "cost": cost, "autobuy": autobuy, "autocost": autocost, "owned": owned, "multi": multi, "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
 
         if (tokens >= 1e100){
             tokens = 1e100
@@ -322,7 +316,7 @@ function setup(){
 
         if (money >= 1e100){
             tokens += 1
-            localStorage.setItem("OBFUSCATION100", JSON.stringify({"money": 1, "cost": defaultvals[0], "autobuy": defaultvals[2],  "owned": defaultvals[3], "multi": defaultvals[4], "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
+            localStorage.setItem("OBFUSCATION100-", JSON.stringify({"money": 1, "cost": defaultvals[0], "autobuy": defaultvals[2],  "owned": defaultvals[3], "multi": defaultvals[4], "last_tick": last_tick, "tokens": tokens, "tcost": tcost, "tautobuy": tautobuy, "tautocost": tautocost, "towned": towned, "tmulti": tmulti, "upgrades": upgrades, "seen": seen}))
             clearInterval(life)
             numb.textContent = "100"
             perc.textContent = "(0%)"
