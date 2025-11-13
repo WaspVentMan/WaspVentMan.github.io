@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obfuscation-100</title>
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/o100.png" type="image/x-icon">
+
+    <meta content="https://waspventman.co.uk/games/obfuscation-100/" property="og:url" />
+    <meta content="OBFUSCATION 100" property="og:title" />
+    <meta content="The most confusing idle game you'll ever play!" property="og:description" />
+    <meta content="https://waspventman.co.uk/games/obfuscation-100/assets/o100.png" property="og:image" />
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
+</head>
+
+<body style="background-color: white;">
+    <center>
+        <h1 style="margin-bottom: 0;">OBFUSCATION 100+</h1>
+        <h2 style="margin: 0;">The most confusing idle game you'll ever play!</h2>
+        <div class="NewgroundsIO ngButton" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto; margin-top: 18px;"></div>
+        <br>
+        <details>
+            <summary>Patch Notes</summary>
+            <details>
+                <summary>v1.3.2</summary>
+                <h1>SHAME PATCH 2(025)</h1>
+                <h3>Fixes</h3>
+                <p>Fixed the token prestiege button because for some reason it wouldn't work unless you refreshed the page. Genuinely ashamed of myself for not noticing this one... Thanks to Shenna on Incrementaldb for catching that.</p>
+                <h3>Changed</h3>
+                <p>Updated the "Connecting to Newgrounds" thing to be the same as the new version in Glorious Time</p>
+                <p>Reimplemented the "click this to earn money" text thing at the top</p>
+                <br>
+            </details>
+            <details>
+                <summary>v1.3.1</summary>
+                <h1>SHAME PATCH SHAME PATCH</h1>
+                <h3>Fixes</h3>
+                <p>Fixed the token layer of the game not working because I accidentally removed a line of code while stoned</p>
+                <br>
+            </details>
+            <details>
+                <summary>v1.3</summary>
+                <h3>Additions</h3>
+                <p>Added more speedrun leaderboards</p>
+                <p>First Gen</p>
+                <p>First Gen²</p>
+                <p>First Gen³</p>
+                <p>First End</p>
+                <p>First TGen</p>
+                <p>First TGen²</p>
+                <p>First TGen³</p>
+                <h3>Fixes</h3>
+                <p>Fixed the layout when the screen width is too small</p>
+                <p>Fixed the awful version numbering I was using, all previous update names have been retroactively changed</p>
+                <p>n1 -> v1.0</p>
+                <p>n2 -> v1.1</p>
+                <p>n3 -> v1.2</p>
+                <br>
+            </details>
+            <details>
+                <summary>v1.2</summary>
+                <h3>Additions</h3>
+                <p>Added speedrun leaderboards</p>
+                <br>
+            </details>
+            <details>
+                <summary>v1.1</summary>
+                <h3>Buffs and nerfs</h3>
+                <p>Reduced the token multiplier</p>
+                <p>Increased the strength of all "TGen"s</p>
+                <h3>Additions</h3>
+                <p>Added "The End" upgrade</p>
+                <p>Added "FreeGen" upgrade</p>
+                <p>Added "Auto +" upgrade</p>
+                <p>Added 5 new medals</p>
+                <h3>Fixes</h3>
+                <p>Fixed "TAuto"s showing a gold border when unavailable</p>
+                <p>Fixed a minor spelling mistake in the "Gen² +" upgrade description</p>
+                <p>Fixed the granting of "This is the part where it speeds up, right?"</p>
+                <p>Fixed the granting of "This is the part where it speeds up"</p>
+                <p>Fixed borders of upgrades not turning gold when affordable</p>
+                <br>
+            </details>
+            <details>
+                <summary>v1.0</summary>
+                <p>Released on Newgrounds</p>
+                <br>
+            </details>
+        </details>
+        <br>
+        <p>↓ Click this to earn points</p>
+        <div class="clickzone" style="display: flex; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
+            <button style="visibility: visible;" class="button" onclick="basicClick()">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="numb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button mps" onclick="basicClick()">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="numbmps oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="percmps" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen1zone" style="display: none; background-color: rgba(180, 180, 180, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button gen1count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen1numb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen1perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen1" onclick="purchase(0)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Gen</h1>
+                    <i class="gen1cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button auto1" onclick="purchaseauto(0)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Auto</h1>
+                    <i class="auto1cost" style="margin-top: 0%;">5</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen1add">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen1addnumb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen1addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen2zone" style="display: none; background-color: rgba(128, 128, 128, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button gen2count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen2numb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="gen2perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen2" onclick="purchase(1)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Gen²</h1>
+                    <i class="gen2cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button auto2" onclick="purchaseauto(1)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Auto²</h1>
+                    <i class="auto2cost" style="margin-top: 0%;">15</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen2add">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen2addnumb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="gen2addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="gen3zone" style="display: none; background-color: rgba(180, 180, 180, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button gen3count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen3numb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="gen3perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen3" onclick="purchase(2)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Gen³</h1>
+                    <i class="gen3cost" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button auto3" onclick="purchaseauto(2)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Auto³</h1>
+                    <i class="auto3cost" style="margin-top: 0%;">30</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button gen3add">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="gen3addnumb oneline" style="margin-bottom: 0%;">:)</h1>
+                    <i class="gen3addperc" style="margin-top: 0%;">Free Space</i>
+                </div>
+            </button>
+        </div>
+        <div class="an_ending" style="display: none;">
+            <h1>An end.</h1>
+            <h3>Would you like to traverse to a new beginning?</h3>
+            <b>You will be awarded 1 token</b><br><br>
+            <button class="button reset" onclick="an_ending(true)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">Yes</h1>
+                    <i style="margin-top: 0%;">Begin Anew</i>
+                </div>
+            </button>
+            <br>
+        </div>
+        <div class="tokenzone" style="display: none; background-color: rgba(119, 0, 134, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button tokencount">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tnumb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="tperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton mult">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="numbmult halfline" style="margin-bottom: 0%;">0</h1>
+                    <i class="percmult" style="margin-top: 0%;"></i>
+                    <p style="line-height: 10px;">Multiplier to all basic production</p>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tps">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="numbtps oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="perctps" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="tgen1zone" style="display: none; background-color: rgba(78, 0, 88, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button tgen1count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen1numb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="tgen1perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen1" onclick="tpurchase(0)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TGen</h1>
+                    <i class="tgen1cost" style="margin-top: 0%;">0 (0%)</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tauto1" onclick="tpurchaseauto(0)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TAuto</h1>
+                    <i class="tauto1cost" style="margin-top: 0%;">5 tokens</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen1add">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen1addnumb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="tgen1addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="tgen2zone" style="display: none; background-color: rgba(119, 0, 134, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button tgen2count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen2numb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="tgen2perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen2" onclick="tpurchase(1)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TGen²</h1>
+                    <i class="tgen2cost" style="margin-top: 0%;">0 (0%)</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tauto2" onclick="tpurchaseauto(1)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TAuto²</h1>
+                    <i class="tauto2cost" style="margin-top: 0%;">15 tokens</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen2add">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen2addnumb oneline" style="margin-bottom: 0%;">0/s</h1>
+                    <i class="tgen2addperc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+        </div>
+        <div class="tgen3zone" style="display: none; background-color: rgba(78, 0, 88, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="button tgen3count">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen3numb oneline" style="margin-bottom: 0%;">0</h1>
+                    <i class="tgen3perc" style="margin-top: 0%;"></i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen3" onclick="tpurchase(2)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TGen³</h1>
+                    <i class="tgen3cost" style="margin-top: 0%;">0 (0%)</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tauto3" onclick="tpurchaseauto(2)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="oneline" style="margin-bottom: 0%;">TAuto³</h1>
+                    <i class="tauto3cost" style="margin-top: 0%;">30 tokens</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="button tgen3add" disabled>
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="tgen3addnumb oneline" style="margin-bottom: 0%;">:)</h1>
+                    <i class="tgen3addperc" style="margin-top: 0%;">Free Space 2</i>
+                </div>
+            </button>
+        </div>
+        <h1 class="upgradelabel" style="display: none;">UPGRADES</h1>
+        <div class="upgradezone1" style="display: none; background-color: rgba(119, 0, 134, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="textbutton upgrade2" onclick="purchaseupgrade(1)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u2mult" style="margin-bottom: 0%;">Auto ∞</h1>
+                    <p style="line-height: 10px;">Makes Auto persist between ends</p>
+                    <i class="u2mult" style="margin-top: 0%;">1 token</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton upgrade3" onclick="purchaseupgrade(2)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u3mult" style="margin-bottom: 0%;">Auto² ∞</h1>
+                    <p style="line-height: 10px;">Makes Auto² persist between ends</p>
+                    <i class="u3mult" style="margin-top: 0%;">2 tokens</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton upgrade4" onclick="purchaseupgrade(3)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u4mult" style="margin-bottom: 0%;">Auto³ ∞</h1>
+                    <p style="line-height: 10px;">Makes Auto³ persist between ends</p>
+                    <i class="u4mult" style="margin-top: 0%;">3 tokens</i>
+                </div>
+            </button>
+        </div>
+        <div class="upgradezone2" style="display: none; background-color: rgba(78, 0, 88, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="textbutton upgrade1" onclick="purchaseupgrade(0)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u1numb" style="margin-bottom: 0%;">Gen+</h1>
+                    <p style="line-height: 10px;">Start each end with 1 non-obfuscated Gen</p>
+                    <i class="u1perc" style="margin-top: 0%;">1 token</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton upgrade6" onclick="purchaseupgrade(5)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u1numb" style="margin-bottom: 0%;">Gen²+</h1>
+                    <p style="line-height: 10px;">Start each end with 1 non-obfuscated Gen²</p>
+                    <i class="u1perc" style="margin-top: 0%;">2 tokens</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton upgrade7" onclick="purchaseupgrade(6)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u1numb" style="margin-bottom: 0%;">Gen³+</h1>
+                    <p style="line-height: 10px;">Start each end with 1 non-obfuscated Gen³</p>
+                    <i class="u1perc" style="margin-top: 0%;">3 tokens</i>
+                </div>
+            </button>
+        </div>
+        <div class="upgradezone3" style="display: none; background-color: rgba(119, 0, 134, 0.25); width: fit-content;">
+            <button style="visibility: hidden;" class="textbutton upgrade5" onclick="purchaseupgrade(4)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u5mult halfline" style="margin-bottom: 0%;">End ∞</h1>
+                    <p style="line-height: 10px;">Automatically traverse to a new beginning</p>
+                    <i class="u5mult" style="margin-top: 0%;">1 token</i>
+                </div>
+            </button>
+            <button style="visibility: hidden;" class="textbutton upgrade9" onclick="purchaseupgrade(8)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u8mult halfline" style="margin-bottom: 0%;">Auto+</h1>
+                    <p style="line-height: 10px;">Massively improves all basic Autos</p>
+                    <i class="u8mult" style="margin-top: 0%;">5 tokens</i>
+                </div>
+            </button>
+        </div>
+        <div class="the_ending" style="display: none; background-color: rgba(78, 0, 88, 0.25); width: fit-content; z-index: 100;">
+            <button style="visibility: hidden;" class="textbutton upgrade8" onclick="purchaseupgrade(7)">
+                <div style="/*background-color: gray*/ width: 100%; height: 100%;">
+                    <h1 class="u7mult" style="margin-bottom: 0%;">Free Gen</h1>
+                    <p style="line-height: 10px;">Buying Gens no longer spends points</p>
+                    <i class="u7mult" style="margin-top: 0%;">10 tokens</i>
+                </div>
+            </button>
+            <button style="background-color: rgba(119, 0, 134); visibility: hidden;" class="button finale" onclick="if(tokens == 1e100){the_ending()}">
+                <div style="width: 100%; height: 100%;">
+                    <h1 class="u5mult halfline" style="margin-bottom: 0%;">The End</h1>
+                    <i class="u5mult" style="margin-top: 0%;">100 tokens</i>
+                </div>
+            </button>
+        </div>
+        <br>
+        <i>Jacob A. G. Taylor, 2023-2025</i><br>
+        <i>Version <i class="ver"></i></i><br>
+        <i class="con"></i><br>
+        <button class="button" style="visibility: visible;" onclick="try{clearInterval(life)}catch{}; localStorage.removeItem('OBFUSCATION100'); location.reload()">RESET SAVE</button><br>
+        <br>
+    </center>
+    <script src="script.js"></script>
+    <script src="nginit.js"></script>
+</body>
+
+</html>
