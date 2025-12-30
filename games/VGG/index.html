@@ -44,11 +44,11 @@
 
         let loadLoop = setInterval(function(){
             if (loaded >= toload){
-                document.querySelector(".loadText").style.display = "none"
+                document.querySelector(".loadText").innerHTML = "v" + version
                 clearInterval(loadLoop)
                 return
             } else {
-                document.querySelector(".loadText").innerHTML = "loading: " + loaded + "/" + toload
+                document.querySelector(".loadText").innerHTML = "loading: " + loaded + "/" + toload + " v" + version
             }
         }, 10)
     </script>

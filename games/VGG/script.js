@@ -1,3 +1,5 @@
+let version = 3
+
 let player = {
     "money": 10,
     "machines": {

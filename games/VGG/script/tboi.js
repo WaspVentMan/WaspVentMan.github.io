@@ -32,7 +32,7 @@ function tboiSlotRoll(){
     playSound("sfx/tboi/coin slot.wav", 25)
     
     let life = setInterval(()=>{
-        if (!machines.tboiSlot.spinning){
+        if (!player.machines.tboiSlot.spinning){
             clearInterval(life)
             return
         }
