@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoGameGambling</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="lib/text.js"></script>
+    <script src="lib/audio.js"></script>
+</head>
+<body style="background-color: black; overflow-x: hidden;">
+    <div class="failsafe" style="width: 100vw; text-align: center; cursor: pointer; margin-top: -18px; transition: margin-top 1s;" onclick="poorFailsafe()">Help! I used all my money and can't gamble anymore!</div>
+    <div class="tboi" style="margin: auto; width: max-content; zoom: 2;">
+        <div class="tboiBG" style="display: grid; grid-template-columns: 1fr 1fr; width: max-content; margin: auto; margin-bottom: -248px;"></div>
+        <div style="position: absolute; width: 100%; left: 0%;"><div class="tboiCash" style="padding-bottom: 4px; width: max-content; margin: auto; display: flex;"></div></div>
+        <div class="tboiMachines" style="display: flex; width: max-content; margin: auto; margin-top: 8px;">
+            <div class="tboiBlood" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                <div class="tboiBloodMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/blood/machine.png);" onclick="tboiBloodDonate()"></div>
+                <div class="tboiBloodOut" style="width: max-content; margin: auto; display: flex;"></div>
+                <div class="tboiBloodTimer" style="width: max-content; margin: auto; display: flex;"></div>
+            </div>
+            <div class="tboiSlot" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                <div class="tboiSlotMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/slot/machine.png);" onclick="tboiSlotRoll()">
+                    <div class="tboiSlotSymbol" style="padding-top: 23px; padding-left: 14px; width: 27px; height: 10px; display: flex; user-select: none;">
+                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/heart.png);"></div>
+                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/key.png);"></div>
+                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/bomb.png);"></div>
+                    </div>
+                </div>
+                <div class="tboiSlotOut" style="width: max-content; margin: auto; display: flex;"></div>
+            </div>
+            <div class="tboiClaw" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                <div class="tboiClawMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/claw/machine.png);" onclick="alert('sorry this doesn\'t work rn')">
+                </div>
+                <div class="tboiClawOut" style="width: max-content; margin: auto; display: flex;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="script/tboi.js"></script>
+</body>
+</html>

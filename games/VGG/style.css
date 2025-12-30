@@ -1,0 +1,6 @@
+* {
+    margin: 0%;
+    image-rendering: pixelated;
+    background-size: cover;
+    user-select: none;
+}
