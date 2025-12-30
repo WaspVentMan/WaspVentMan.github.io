@@ -38,6 +38,69 @@
         </div>
     </div>
 
+    <script>
+        let loaded = 0
+        let toload = 46
+
+        let loadLoop = setInterval(function(){
+            if (loaded >= toload){
+                document.querySelector(".loadText").style.display = "none"
+                clearInterval(loadLoop)
+                return
+            } else {
+                document.querySelector(".loadText").innerHTML = "loading: " + loaded + "/" + toload
+            }
+        }, 10)
+    </script>
+    <div class="loadText" style="position: fixed; left: 0px; bottom: 0px; background-color: white;"></div>
+    <div class="loadZone" style="display: none;">
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/blood bank touched.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/chest drop 1.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/coin slot.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/holy!.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/key drop 2.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/penny drop 1.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/superholy.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/thumbs down.wav"></audio>
+        <img onload="loaded++" src="img/font/default.png">
+        <img onload="loaded++" src="img/font/isaacA.png">
+        <img onload="loaded++" src="img/tboi/bg/arcade0.png">
+        <img onload="loaded++" src="img/tboi/bg/arcade1.png">
+        <img onload="loaded++" src="img/tboi/bg/arcade2.png">
+        <img onload="loaded++" src="img/tboi/bg/arcade3.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor0.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor1.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor2.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor3.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor4.png">
+        <img onload="loaded++" src="img/tboi/bg/arcadeFloor5.png">
+        <img onload="loaded++" src="img/tboi/blood/machine.png">
+        <img onload="loaded++" src="img/tboi/blood/machineSlosh0.png">
+        <img onload="loaded++" src="img/tboi/blood/machineSlosh1.png">
+        <img onload="loaded++" src="img/tboi/claw/arm.png">
+        <img onload="loaded++" src="img/tboi/claw/armGrab.png">
+        <img onload="loaded++" src="img/tboi/claw/armReady.png">
+        <img onload="loaded++" src="img/tboi/claw/machine.png">
+        <img onload="loaded++" src="img/tboi/slot/bomb.png">
+        <img onload="loaded++" src="img/tboi/slot/coin.png">
+        <img onload="loaded++" src="img/tboi/slot/dollar.png">
+        <img onload="loaded++" src="img/tboi/slot/fly.png">
+        <img onload="loaded++" src="img/tboi/slot/heart.png">
+        <img onload="loaded++" src="img/tboi/slot/key.png">
+        <img onload="loaded++" src="img/tboi/slot/machine.png">
+        <img onload="loaded++" src="img/tboi/slot/machinePull.png">
+        <img onload="loaded++" src="img/tboi/slot/machinePullFull.png">
+        <img onload="loaded++" src="img/tboi/slot/pill.png">
+        <img onload="loaded++" src="img/tboi/slot/spin1.png">
+        <img onload="loaded++" src="img/tboi/slot/spin2.png">
+        <img onload="loaded++" src="img/tboi/slot/spin3.png">
+        <img onload="loaded++" src="img/tboi/slot/spin4.png">
+        <img onload="loaded++" src="img/tboi/slot/spin5.png">
+        <img onload="loaded++" src="img/tboi/slot/spin6.png">
+        <img onload="loaded++" src="img/tboi/coinUI.png">
+        <img onload="loaded++" src="img/tboi/heartUI.png">
+        <img onload="loaded++" src="img/tboi/refreshUI.png">
+
     <script src="script.js"></script>
     <script src="script/tboi.js"></script>
 </body>

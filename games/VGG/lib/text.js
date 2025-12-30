@@ -28,8 +28,6 @@ function renderChar(char, effect="none", font="default"){
  * @returns {string} HTML UFO 50 Text, apply to an element's `.innerHTML`
  */
 function renderString(string, effect="none", font="default", allign="centre"){
-    if (font == "default"){font = Object.keys(fonts)[settings.font]}
-
     let newString = `<div style="width: max-content; margin: auto; height: ${fonts[font][1]}px; display: flex; text-align: center">`
 
     if (allign == "left"){
