@@ -2,7 +2,12 @@ let charIndex = ` 0123456789abcdefghijklmnopqrstuvwxyz.,!?'-+$"~&/#%():[]|{}<>`
 
 let fonts = {
     "default": [8, 16, 0],
-    "isaacA": [7, 9, 1],
+    "isaacA": [7, 9, -1],
+    "nsmbBig": [15, 15],
+    "nsmbSmall": [8, 15],
+    "nsmbSuperSmall": [8, 9],
+    "nsmbPissSmall": [8, 15],
+    "nsmbPissSuperSmall": [8, 9],
 }
 
 /**
@@ -17,7 +22,7 @@ function renderChar(char, effect="none", font="default"){
     if (effect == "none"){effect = "char"}
     let letter = [false, 0]
     for (let x = 0; x < charIndex.length; x++){if (char == charIndex[x]){letter = [true, x]; break}}
-    if (letter[0]){return `<div class="${effect}" style="width: ${fonts[font][0]}px; height: ${fonts[font][1]}px; background-image: url(img/font/${font}.png); background-position: ${(letter[1]+1)*fonts[font][0]}px 0px; margin-left: -1px"></div>`}
+    if (letter[0]){return `<div class="${effect}" style="width: ${fonts[font][0]}px; height: ${fonts[font][1]}px; background-image: url(img/font/${font}.png); background-position: ${(letter[1]+1)*fonts[font][0]}px 0px; margin-left: ${[0, fonts[font][2]][fonts[font][2] != undefined]}px"></div>`}
     return `<div class="char" style="width: ${fonts[font][0]}px; height: ${fonts[font][1]}px; background-image: url(img/font/${font}.png); background-position: ${(Math.round(Math.random()*1000)*fonts[font][0])+(fonts[font][0]/2)}px 0px;"></div>`
 }
 

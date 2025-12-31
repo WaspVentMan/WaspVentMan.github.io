@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoGameGambling</title>
+    <title>Video Game Gambling</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="lib/text.js"></script>
     <script src="lib/audio.js"></script>
 </head>
 <body style="background-color: black; overflow-x: hidden;">
-    <div class="failsafe" style="width: 100vw; text-align: center; cursor: pointer; margin-top: -18px; transition: margin-top 1s;" onclick="poorFailsafe()">Help! I used all my money and can't gamble anymore!</div>
-    <div class="tboi" style="margin: auto; width: max-content; zoom: 2;">
+    <div class="tboi" style="margin: auto; width: max-content; zoom: 2; height: 312px;">
         <div class="tboiBG" style="display: grid; grid-template-columns: 1fr 1fr; width: max-content; margin: auto; margin-bottom: -248px;"></div>
         <div style="position: absolute; width: 100%; left: 0%;"><div class="tboiCash" style="padding-bottom: 4px; width: max-content; margin: auto; display: flex;"></div></div>
         <div class="tboiMachines" style="display: flex; width: max-content; margin: auto; margin-top: 8px;">
             <div class="tboiBlood" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
                 <div class="tboiBloodMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/blood/machine.png);" onclick="tboiBloodDonate()"></div>
-                <div class="tboiBloodOut" style="width: max-content; margin: auto; display: flex;"></div>
-                <div class="tboiBloodTimer" style="width: max-content; margin: auto; display: flex;"></div>
+                <div class="tboiBloodOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar6.png);">
+                        <div class="tboiBloodTimer2" style="width: 15px; height: 6px; background-image: url(img/tboi/chargeBarFull6.png); margin-left: 2px;"></div>
+                    </div>
+                </div>
             </div>
             <div class="tboiSlot" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
                 <div class="tboiSlotMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/slot/machine.png);" onclick="tboiSlotRoll()">
@@ -28,19 +31,50 @@
                         <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/bomb.png);"></div>
                     </div>
                 </div>
-                <div class="tboiSlotOut" style="width: max-content; margin: auto; display: flex;"></div>
+                <div class="tboiSlotOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar.png);">
+                        <div class="tboiSlotTimer" style="width: 15px; height: 6px; background-image: url(img/tboi/chargeBarFull.png); margin-left: 2px;"></div>
+                    </div>
+                </div>
             </div>
             <div class="tboiClaw" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
                 <div class="tboiClawMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/claw/machine.png);" onclick="alert('sorry this doesn\'t work rn')">
                 </div>
-                <div class="tboiClawOut" style="width: max-content; margin: auto; display: flex;"></div>
+                <div class="tboiClawOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar.png);">
+                        <div class="tboiClawTimer" style="width: 15px; height: 6px; background-image: url(img/tboi/chargeBarFull.png); margin-left: 2px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
+        <br><br>
+        <div class="tboiOptionsCont" style="position: absolute; width: 100%; left: 0%; overflow: hidden; height: 40px;">
+            <div class="tboiOptions" style="width: 220px; height: 230px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;">
+                <div onclick="tboiOptions()" style="width: 220px; height: 40px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;"></div>
+                <div onclick="tboiToggleOption('tboiDonoSFX')" style="display: flex; padding-top: 23px;">
+                    <div style="width: 173px; height: 18px; background-image: url(img/tboi/options/donoSFX.png);"></div>
+                    <div class="tboiDonoSFX" style="width: 35px; height: 18px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+                <div onclick="tboiToggleOption('tboiSlotSFX')" style="display: flex;">
+                    <div style="width: 159px; height: 18px; background-image: url(img/tboi/options/slotSFX.png);"></div>
+                    <div class="tboiSlotSFX" style="width: 35px; height: 18px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+                <div onclick="tboiToggleOption('tboiClawSFX')" style="display: flex;">
+                    <div style="width: 168px; height: 18px; background-image: url(img/tboi/options/clawSFX.png);"></div>
+                    <div class="tboiClawSFX" style="width: 35px; height: 18px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nsmb" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png);">
+        <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; display: flex;"></div>
     </div>
 
     <script>
         let loaded = 0
-        let toload = 46
+        let toload = 65
 
         let loadLoop = setInterval(function(){
             if (loaded >= toload){
@@ -54,16 +88,24 @@
     </script>
     <div class="loadText" style="position: fixed; left: 0px; bottom: 0px; background-color: white;"></div>
     <div class="loadZone" style="display: none;">
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/battery charge.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/blood bank touched.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/chest drop 1.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/coin slot.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/fart.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/holy!.wav"></audio>
+        <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/i found pills 3.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/key drop 2.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/penny drop 1.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/superholy.wav"></audio>
         <audio oncanplaythrough="loaded++" preload="auto" src="sfx/tboi/thumbs down.wav"></audio>
         <img onload="loaded++" src="img/font/default.png">
         <img onload="loaded++" src="img/font/isaacA.png">
+        <img onload="loaded++" src="img/font/nsmbBig.png">
+        <img onload="loaded++" src="img/font/nsmbPissSmall.png">
+        <img onload="loaded++" src="img/font/nsmbPissSuperSmall.png">
+        <img onload="loaded++" src="img/font/nsmbSmall.png">
+        <img onload="loaded++" src="img/font/nsmbSuperSmall.png">
         <img onload="loaded++" src="img/tboi/bg/arcade0.png">
         <img onload="loaded++" src="img/tboi/bg/arcade1.png">
         <img onload="loaded++" src="img/tboi/bg/arcade2.png">
@@ -74,6 +116,8 @@
         <img onload="loaded++" src="img/tboi/bg/arcadeFloor3.png">
         <img onload="loaded++" src="img/tboi/bg/arcadeFloor4.png">
         <img onload="loaded++" src="img/tboi/bg/arcadeFloor5.png">
+        <img onload="loaded++" src="img/tboi/bg/options.png">
+        <img onload="loaded++" src="img/tboi/bg/optionsNoPaper.png">
         <img onload="loaded++" src="img/tboi/blood/machine.png">
         <img onload="loaded++" src="img/tboi/blood/machineSlosh0.png">
         <img onload="loaded++" src="img/tboi/blood/machineSlosh1.png">
@@ -81,6 +125,11 @@
         <img onload="loaded++" src="img/tboi/claw/armGrab.png">
         <img onload="loaded++" src="img/tboi/claw/armReady.png">
         <img onload="loaded++" src="img/tboi/claw/machine.png">
+        <img onload="loaded++" src="img/tboi/options/clawSFX.png">
+        <img onload="loaded++" src="img/tboi/options/donoSFX.png">
+        <img onload="loaded++" src="img/tboi/options/off.png">
+        <img onload="loaded++" src="img/tboi/options/on.png">
+        <img onload="loaded++" src="img/tboi/options/slotSFX.png">
         <img onload="loaded++" src="img/tboi/slot/bomb.png">
         <img onload="loaded++" src="img/tboi/slot/coin.png">
         <img onload="loaded++" src="img/tboi/slot/dollar.png">
@@ -97,6 +146,10 @@
         <img onload="loaded++" src="img/tboi/slot/spin4.png">
         <img onload="loaded++" src="img/tboi/slot/spin5.png">
         <img onload="loaded++" src="img/tboi/slot/spin6.png">
+        <img onload="loaded++" src="img/tboi/chargeBar.png">
+        <img onload="loaded++" src="img/tboi/chargeBar6.png">
+        <img onload="loaded++" src="img/tboi/chargeBarFull.png">
+        <img onload="loaded++" src="img/tboi/chargeBarFull6.png">
         <img onload="loaded++" src="img/tboi/coinUI.png">
         <img onload="loaded++" src="img/tboi/heartUI.png">
         <img onload="loaded++" src="img/tboi/refreshUI.png">
