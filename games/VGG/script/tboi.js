@@ -1,3 +1,7 @@
+const tboiTextIcons = {
+    "coin": `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>`
+}
+
 function tboiSlotRoll(){
     if (player.machines.tboiSlot.last == undefined){
         player.machines.tboiSlot.last = 0
@@ -113,7 +117,7 @@ function tboiSlotRoll(){
 }
 
 function tboiBloodDonate(){
-    if (Date.now() - player.machines.tboiBlood.lastDono < 60000){
+    if (Date.now() - player.machines.tboiBlood.last < 60000){
         if (player.options.tboiDonoSFX){playSound("sfx/tboi/thumbs down.wav", 5)}
         return
     }
@@ -129,15 +133,125 @@ function tboiBloodDonate(){
 
     let change = Math.ceil(Math.random()*10)
     player.money += change
-    player.machines.tboiBlood.lastDono = Date.now()
+    player.machines.tboiBlood.last = Date.now()
     if (player.options.tboiDonoSFX){playSound("sfx/tboi/blood bank touched.wav", 25)}
     document.querySelector(".tboiBloodOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString(change + "", "none", "isaacA")
 }
 
 function tboiClaw(){
-    if (player.money < 5 || Date.now() - player.machines.tboiClaw.last < 750){
+    if (player.money < 5 || Date.now() - player.machines.tboiClaw.last < 5000){
         return
     }
+
+    player.machines.tboiClaw.last = Date.now()
+    player.money -= 5
+
+    let grab = Math.floor(Math.random()*4) == 0
+
+    const prizes = [
+        "battery",
+        "coin",
+        "dime",
+        "nickel",
+        "pill",
+        "slotRefresh",
+        "bloodRefresh",
+        "clawRefresh"
+    ]
+
+    let banlist = [""]
+
+    if (player.upgrades.tboiSlotAuto){
+        banlist.push("slotRefresh")
+    }
+
+    if (player.upgrades.tboiDonoAuto){
+        banlist.push("bloodRefresh")
+    }
+
+    if (player.upgrades.tboiClawAuto){
+        banlist.push("clawRefresh")
+    }
+
+    let prize = ""
+
+    while (banlist.includes(prize)){
+        prize = prizes[Math.floor(Math.random()*prizes.length)]
+    }
+
+    document.querySelector(".tboiClawItem").style.backgroundImage = `url(img/tboi/claw/prize/${prize}.png)`
+    document.querySelector(".tboiClawItem").style.marginLeft = "20px"
+    document.querySelector(".tboiClawArm").style.marginLeft = "21px"
+    setTimeout(()=>{
+        document.querySelector(".tboiClawArm").style.backgroundImage = "url(img/tboi/claw/armReady.png)"
+        document.querySelector(".tboiClawArm").style.marginTop = "12px"
+    }, 550)
+    setTimeout(()=>{
+        document.querySelector(".tboiClawArm").style.backgroundImage = "url(img/tboi/claw/armGrab.png)"
+        document.querySelector(".tboiClawArm").style.marginTop = "0px"
+        document.querySelector(".tboiClawItem").style.marginTop = "19px"
+    }, 1100)
+    setTimeout(()=>{
+        document.querySelector(".tboiClawArm").style.marginLeft = "12px"
+        if (grab){
+            document.querySelector(".tboiClawItem").style.marginLeft = "11px"
+        } else {
+            document.querySelector(".tboiClawArm").style.backgroundImage = "url(img/tboi/claw/arm.png)"
+            document.querySelector(".tboiClawItem").style.marginTop = "31px"
+        }
+    }, 1650)
+    setTimeout(()=>{
+        document.querySelector(".tboiClawArm").style.backgroundImage = "url(img/tboi/claw/arm.png)"
+        document.querySelector(".tboiClawItem").style.marginTop = "31px"
+    }, 2400)
+    setTimeout(()=>{
+        let change = 0
+        if (grab){
+            switch (prize){
+                case "battery":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/battery charge.wav", 25)}
+                    player.machines.tboiBlood.last = 0
+                    player.machines.tboiSlot.last = 0
+                    player.machines.tboiClaw.last = 0
+                    break
+                case "pill":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/i found pills 3.wav", 25)}
+                    change = 5+Math.floor(Math.random()*96)
+                    break
+                case "coin":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/penny pickup 1.wav", 25)}
+                    change = 10
+                    break
+                case "nickel":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/nickel pickup.wav", 25)}
+                    change = 50
+                    break
+                case "dime":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/dime pick up.wav", 25)}
+                    change = 100
+                    break
+                case "slotRefresh":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
+                    player.upgrades.tboiSlotAuto = true
+                    change = 0
+                    break
+                case "bloodRefresh":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
+                    player.upgrades.tboiDonoAuto = true
+                    change = 0
+                    break
+                case "clawRefresh":
+                    if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
+                    player.upgrades.tboiClawAuto = true
+                    change = 0
+                    break
+            }
+        }
+
+        player.money += change
+        
+        document.querySelector(".tboiClawOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString(change + "", "none", "isaacA")
+    }, 2950)
 }
 
 function tboiOptions(){
@@ -150,9 +264,14 @@ function tboiOptions(){
     }
 }
 
-document.querySelector(".tboiBloodOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString("0", "none", "isaacA")
-document.querySelector(".tboiSlotOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString("0", "none", "isaacA")
-document.querySelector(".tboiClawOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString("0", "none", "isaacA")
+function tboiToggleOption(option){
+    player.options[option] = !player.options[option]
+    document.querySelector("."+option).style.backgroundImage = ["url(img/tboi/options/off.png)", "url(img/tboi/options/on.png)"][player.options[option]+0]
+}
+
+document.querySelector(".tboiBloodOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
+document.querySelector(".tboiSlotOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
+document.querySelector(".tboiClawOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
 
 // stupid, bad and dumb. it's perfect.
 tboiToggleOption('tboiDonoSFX'); tboiToggleOption('tboiDonoSFX')
