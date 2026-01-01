@@ -71,6 +71,21 @@
                     <div style="width: 98px; height: 18px; background-image: url(img/tboi/options/clawSFX.png);"></div>
                     <div class="tboiClawSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                 </div>
+                <div class="tboiDonoAutoParent" onclick="tboiToggleOption('tboiDonoAuto')" style="display: flex; padding-top: 13px; width: max-content; margin: auto;">
+                    <div style="width: 96px; height: 18px; background-image: url(img/tboi/options/donoAuto.png);"></div>
+                    <div class="tboiDonoAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+                <div class="tboiDonoAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
+                <div class="tboiSlotAutoParent" onclick="tboiToggleOption('tboiSlotAuto')" style="display: flex; width: max-content; margin: auto;">
+                    <div style="width: 90px; height: 18px; background-image: url(img/tboi/options/slotAuto.png);"></div>
+                    <div class="tboiSlotAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+                <div class="tboiSlotAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
+                <div class="tboiClawAutoParent" onclick="tboiToggleOption('tboiClawAuto')" style="display: flex; width: max-content; margin: auto;">
+                    <div style="width: 98px; height: 18px; background-image: url(img/tboi/options/clawAuto.png);"></div>
+                    <div class="tboiClawAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                </div>
+                <div class="tboiClawAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
             </div>
         </div>
     </div>
@@ -253,7 +268,7 @@
 
         let loadLoop = setInterval(function(){
             if (loaded[0] >= toload[0]){
-                document.querySelector(".loadText").innerHTML = "v" + version
+                document.querySelector(".loadText").innerHTML = "version " + version
 
                 console.log(realNodes.sfx)
 

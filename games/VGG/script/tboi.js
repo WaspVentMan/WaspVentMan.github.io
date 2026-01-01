@@ -233,16 +233,19 @@ function tboiClaw(){
                 case "slotRefresh":
                     if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
                     player.upgrades.tboiSlotAuto = true
+                    tboiToggleOption('tboiSlotAuto'); tboiToggleOption('tboiSlotAuto')
                     change = 0
                     break
                 case "bloodRefresh":
                     if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
                     player.upgrades.tboiDonoAuto = true
+                    tboiToggleOption('tboiDonoAuto'); tboiToggleOption('tboiDonoAuto')
                     change = 0
                     break
                 case "clawRefresh":
                     if (player.options.tboiClawSFX){playSound("sfx/tboi/superholy.wav", 25)}
                     player.upgrades.tboiClawAuto = true
+                    tboiToggleOption('tboiClawAuto'); tboiToggleOption('tboiClawAuto')
                     change = 0
                     break
             }
@@ -265,6 +268,13 @@ function tboiOptions(){
 }
 
 function tboiToggleOption(option){
+    if (option.includes("Auto") && !player.upgrades[option]){
+        document.querySelector("." + option + "Parent").style.filter = "contrast(10%)"
+        return
+    } else if (option.includes("Auto")){
+        document.querySelector("." + option + "Lock").style.display = "none"
+        document.querySelector("." + option + "Parent").style.filter = "none"
+    }
     player.options[option] = !player.options[option]
     document.querySelector("."+option).style.backgroundImage = ["url(img/tboi/options/off.png)", "url(img/tboi/options/on.png)"][player.options[option]+0]
 }
@@ -277,3 +287,6 @@ document.querySelector(".tboiClawOut").innerHTML = tboiTextIcons.coin + renderSt
 tboiToggleOption('tboiDonoSFX'); tboiToggleOption('tboiDonoSFX')
 tboiToggleOption('tboiSlotSFX'); tboiToggleOption('tboiSlotSFX')
 tboiToggleOption('tboiClawSFX'); tboiToggleOption('tboiClawSFX')
+tboiToggleOption('tboiDonoAuto'); tboiToggleOption('tboiDonoAuto')
+tboiToggleOption('tboiSlotAuto'); tboiToggleOption('tboiSlotAuto')
+tboiToggleOption('tboiClawAuto'); tboiToggleOption('tboiClawAuto')
