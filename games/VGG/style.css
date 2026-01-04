@@ -3,4 +3,6 @@
     image-rendering: pixelated;
     background-size: cover;
     user-select: none;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

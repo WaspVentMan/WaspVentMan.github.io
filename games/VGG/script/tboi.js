@@ -1,7 +1,3 @@
-const tboiTextIcons = {
-    "coin": `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>`
-}
-
 function tboiSlotRoll(){
     if (player.machines.tboiSlot.last == undefined){
         player.machines.tboiSlot.last = 0
@@ -30,7 +26,7 @@ function tboiSlotRoll(){
     let results = []
     
     for (let x = 0; x < 3; x++){
-        results.push(symbols[Math.floor(Math.random()*7)])
+        results.push(randomListItem(symbols))
     }
 
     if (Math.floor(Math.random()*5) < 1 && player.money <= 10 || Math.floor(Math.random()*10) < 1){
@@ -112,7 +108,7 @@ function tboiSlotRoll(){
 
         player.money += change
         
-        document.querySelector(".tboiSlotOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString(change + "", "none", "isaacA")
+        document.querySelector(".tboiSlotOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
     }, 500)
 }
 
@@ -135,7 +131,7 @@ function tboiBloodDonate(){
     player.money += change
     player.machines.tboiBlood.last = Date.now()
     if (player.options.tboiDonoSFX){playSound("sfx/tboi/blood bank touched.wav", 25)}
-    document.querySelector(".tboiBloodOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString(change + "", "none", "isaacA")
+    document.querySelector(".tboiBloodOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
 }
 
 function tboiClaw(){
@@ -176,8 +172,10 @@ function tboiClaw(){
     let prize = ""
 
     while (banlist.includes(prize)){
-        prize = prizes[Math.floor(Math.random()*prizes.length)]
+        prize = randomListItem(prizes)
     }
+
+    if (player.options.tboiClawSFX){playSound("sfx/tboi/coin slot.wav", 25)}
 
     document.querySelector(".tboiClawItem").style.backgroundImage = `url(img/tboi/claw/prize/${prize}.png)`
     document.querySelector(".tboiClawItem").style.marginLeft = "20px"
@@ -253,7 +251,7 @@ function tboiClaw(){
 
         player.money += change
         
-        document.querySelector(".tboiClawOut").innerHTML = `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>` + renderString(change + "", "none", "isaacA")
+        document.querySelector(".tboiClawOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
     }, 2950)
 }
 
@@ -279,9 +277,9 @@ function tboiToggleOption(option){
     document.querySelector("."+option).style.backgroundImage = ["url(img/tboi/options/off.png)", "url(img/tboi/options/on.png)"][player.options[option]+0]
 }
 
-document.querySelector(".tboiBloodOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
-document.querySelector(".tboiSlotOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
-document.querySelector(".tboiClawOut").innerHTML = tboiTextIcons.coin + renderString("0", "none", "isaacA")
+document.querySelector(".tboiBloodOut").innerHTML = textIcons.tboiCoin + renderString("0", "none", "isaacA")
+document.querySelector(".tboiSlotOut").innerHTML = textIcons.tboiCoin + renderString("0", "none", "isaacA")
+document.querySelector(".tboiClawOut").innerHTML = textIcons.tboiCoin + renderString("0", "none", "isaacA")
 
 // stupid, bad and dumb. it's perfect.
 tboiToggleOption('tboiDonoSFX'); tboiToggleOption('tboiDonoSFX')

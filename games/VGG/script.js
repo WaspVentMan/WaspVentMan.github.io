@@ -1,4 +1,4 @@
-let version = 6
+let version = 7
 
 let player = {
     "money": 10,
@@ -15,6 +15,13 @@ let player = {
         "tboiClaw": {
             "spinning": false,
             "last": 0
+        },
+        "nsmbPoker": {
+            "hand": [],
+            "discard": [false, false, false, false, false],
+            "dealerHand": [],
+            "played": false,
+            "bet": 0
         }
     },
     "upgrades": {
@@ -32,10 +39,20 @@ let player = {
     }
 }
 
-const upgrades = {
-    "tboiDonoAuto": 100,
-    "tboiSlotAuto": 1000,
-    "tboiClawAuto": 1e100
+const textIcons = {
+    "tboiCoin": `<div style="width: 9px; height: 11px; margin: -1px; margin-right: 2px; background-image: url(img/tboi/coinUI.png);"></div>`,
+    "nsmbCoin": `<div style="width: 16px; height: 16px; margin: -1px; margin-right: 0px; background-image: url(img/nsmb/coin.png);"></div>`,
+    "nsmbHierarchy": {
+        "startOdd": `<div style="width: 20px; height: 17px; margin-left: 19px; background-image: url(img/nsmb/hierarchy/`,
+        "endOdd": `.png);"></div>`,
+        "startEven": `<div style="width: 20px; height: 17px; background-image: url(img/nsmb/hierarchy/`,
+        "endEven": `.png);"></div>`
+    },
+    "nsmbCard": {
+        "start": `<div onclick="`,
+        "mid": `" style="width: 32px; height: 48px; margin: 2px; margin-top: -192px; transition: all 0.05s linear; background-image: url(img/nsmb/card/`,
+        "end": `.png);"></div>`
+    }
 }
 
 let saveData = localStorage.getItem("VideoGameGambling")
@@ -62,6 +79,10 @@ if (saveData != null){
     }
 }
 
+function randomListItem(list){
+    return list[Math.floor(Math.random()*list.length)]
+}
+
 function poorFailsafe(){
     if (player.money <= 0){
         player.money++
@@ -86,8 +107,11 @@ function loadBGs(){
 }
 
 function refreshMoneyCount(){
-    document.querySelector(".tboiCash").innerHTML = tboiTextIcons.coin + renderString(player.money + "", "none", "isaacA")
-    document.querySelector(".nsmbCash").innerHTML = `<div style="width: 16px; height: 16px; margin: -1px; margin-right: 0px; background-image: url(img/nsmb/coin.png);"></div>` + renderString(Math.floor(player.money/100) + "", "none", "nsmbPissSmall") + `<div style="width: 3px; height: 15px; background-image: url(img/nsmb/decimal.png);"></div><div style="margin-top: 6px">` + renderString(["", "0"][(player.money - (Math.floor(player.money/100)*100) < 10) + 0] + (player.money - (Math.floor(player.money/100)*100)) + "", "none", "nsmbPissSuperSmall") + `</div>`
+    document.querySelector(".cash").innerHTML = player.money
+    document.querySelector(".tboiCash").innerHTML = textIcons.tboiCoin + renderString(player.money + "", "none", "isaacA")
+    document.querySelector(".tboiExchangeCash").innerHTML = textIcons.tboiCoin + renderString(player.money + "", "none", "isaacA")
+    document.querySelector(".nsmbCash").innerHTML = textIcons.nsmbCoin + renderString(Math.floor(player.money/100) + "", "none", "nsmbPissSmall") + `<div style="width: 3px; height: 15px; background-image: url(img/nsmb/decimal.png);"></div><div style="margin-top: 6px">` + renderString(["", "0"][(player.money - (Math.floor(player.money/100)*100) < 10) + 0] + (player.money - (Math.floor(player.money/100)*100)) + "", "none", "nsmbPissSuperSmall") + `</div>`
+    document.querySelector(".nsmbExchangeCash").innerHTML = textIcons.nsmbCoin + renderString(Math.floor(player.money/100) + "", "none", "nsmbPissSmall") + `<div style="width: 3px; height: 15px; background-image: url(img/nsmb/decimal.png);"></div><div style="margin-top: 6px">` + renderString(["", "0"][(player.money - (Math.floor(player.money/100)*100) < 10) + 0] + (player.money - (Math.floor(player.money/100)*100)) + "", "none", "nsmbPissSuperSmall") + `</div>`
 }
 
 loadBGs()
@@ -104,6 +128,8 @@ setInterval(()=>{
         if (Date.now() - player.machines.tboiBlood.last >= 120000){
             tboiBloodDonate()
         }
+    } else {
+        document.querySelector(".tboiAutoBloodTimer").style.width = "0px"
     }
 
     if (player.options.tboiSlotAuto && player.upgrades.tboiSlotAuto){
@@ -111,6 +137,8 @@ setInterval(()=>{
         if (Date.now() - player.machines.tboiSlot.last >= 1500){
             tboiSlotRoll()
         }
+    } else {
+        document.querySelector(".tboiAutoSlotTimer").style.width = "0px"
     }
 
     if (player.options.tboiClawAuto && player.upgrades.tboiClawAuto){
@@ -118,6 +146,8 @@ setInterval(()=>{
         if (Date.now() - player.machines.tboiClaw.last >= 10000){
             tboiClaw()
         }
+    } else {
+        document.querySelector(".tboiAutoClawTimer").style.width = "0px"
     }
 }, 1000/60)
 

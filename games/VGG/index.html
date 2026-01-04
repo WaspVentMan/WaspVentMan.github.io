@@ -10,7 +10,41 @@
     <script src="lib/audio.js"></script>
 </head>
 <body style="background-color: black; overflow-x: hidden;">
-    <div class="tboi" style="margin: auto; width: max-content; zoom: 2; height: 312px; width: 468px;">
+    <div class="home" style="background-color: white; text-align: center; width: max-content; margin: auto; margin-bottom: 64px; border-radius: 16px;">
+        <h1 style="margin-top: 64px; padding: 16px;">VIDEO GAME GAMBLING</h1>
+        <details>
+            <summary>Credits</summary>
+            <h3>Video Game Gambling</h3>
+            <p>Jacob Taylor</p><br>
+            <h3>The Binding Of Isaac: Repentance</h3>
+            <p>Edmund McMillen and Nicalis, Inc.</p><br>
+            <h3>New Super Mario Bros.</h3>
+            <p>Nintendo</p><br>
+        </details>
+        <br>
+        <a href="https://discord.gg/8gzjP5bZ9R">Follow development<br>Join my Discord</a><br>
+        <br>
+        <details>
+            <summary>Conversion & Money</summary>
+            <p>All games use the same money</p>
+            <br>
+            <p>You have <b class="cash"></b> money, that equates to:</p>
+            <p>The Binding Of Isaac</p>
+            <div class="tboiExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 3;"></div>
+            <p>New Super Mario Bros.</p>
+            <div class="nsmbExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 2;"></div>
+        </details>
+        <br>
+        <h2>Games:</h2>
+        <a href="#tboi">
+            <img src="img/tboi/logo.png" alt="">
+        </a><br>
+        <a href="#nsmb">
+            <img src="img/nsmb/logo.png" alt="">
+        </a><br>
+        <br>
+    </div>
+    <div id="tboi" class="tboi" style="margin: auto; width: max-content; zoom: 2; height: 312px; width: 468px; margin-bottom: 64px;">
         <div class="tboiBG" style="display: grid; grid-template-columns: 1fr 1fr; width: max-content; margin: auto; margin-bottom: -248px;"></div>
         <div style="position: absolute; width: 468px;"><div class="tboiCash" style="padding-bottom: 4px; width: max-content; margin: auto; display: flex;"></div></div>
         <div class="tboiMachines" style="display: flex; width: max-content; margin: auto; margin-top: 8px;">
@@ -72,29 +106,45 @@
                     <div class="tboiClawSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                 </div>
                 <div class="tboiDonoAutoParent" onclick="tboiToggleOption('tboiDonoAuto')" style="display: flex; padding-top: 13px; width: max-content; margin: auto;">
-                    <div style="width: 96px; height: 18px; background-image: url(img/tboi/options/donoAuto.png);"></div>
+                    <div style="width: 100px; height: 18px; background-image: url(img/tboi/options/donoAuto.png);"></div>
                     <div class="tboiDonoAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                 </div>
-                <div class="tboiDonoAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
+                <div class="tboiDonoAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
                 <div class="tboiSlotAutoParent" onclick="tboiToggleOption('tboiSlotAuto')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 90px; height: 18px; background-image: url(img/tboi/options/slotAuto.png);"></div>
+                    <div style="width: 94px; height: 18px; background-image: url(img/tboi/options/slotAuto.png);"></div>
                     <div class="tboiSlotAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                 </div>
-                <div class="tboiSlotAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
+                <div class="tboiSlotAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
                 <div class="tboiClawAutoParent" onclick="tboiToggleOption('tboiClawAuto')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 98px; height: 18px; background-image: url(img/tboi/options/clawAuto.png);"></div>
+                    <div style="width: 102px; height: 18px; background-image: url(img/tboi/options/clawAuto.png);"></div>
                     <div class="tboiClawAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                 </div>
-                <div class="tboiClawAutoLock" style="width: 189px; height: 10px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -15px; margin-bottom: 5px; filter: contrast(10%);"></div>
+                <div class="tboiClawAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
             </div>
         </div>
     </div>
-    <div class="nsmb" onclick="alert('this part doesn\'t work yet, come back soon(ish)')" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png);">
-        <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; display: flex;"></div>
+    <div id="nsmb" class="nsmb" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png); margin-bottom: 64px; overflow: hidden;">
+        <div class="nsmbSide" style="height: 0px;">
+            <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; height: 15px; display: flex;"></div>
+            <div class="nsmbSymbols" style="margin: 10px; margin-left: 16px; width: max-content; background-image: url(img/nsmb/hierarchybg.png);"></div>
+            <div style="width: 72px; height: 96px; background-image: url(img/nsmb/value.png);"></div>
+        </div>
+        <div class="nsmbStartPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+            <div class="nsmbStart" onclick="nsmbStartPicturePoker()" style="width: 144px; height: 32px; margin: auto; margin-top: 84px; background-image: url(img/nsmb/start.png);"></div>
+        </div>
+        <div class="nsmbPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+            <div class="nsmbDealerCards" style="display: flex; height: 48px; width: max-content; margin: auto; margin-top: 24px; margin-bottom: 12px;"></div>
+            <div class="nsmbDealerScore" style="width: 0px; height: 15px; margin: auto; margin-top: -11px; margin-bottom: -4px; background-image: url(img/nsmb/scores/8.png);"></div>
+            <div class="nsmbHoldDrawButton" onclick="nsmbPlay()" style="width: 144px; height: 32px; margin: auto; background-image: url(img/nsmb/hold.png);"></div>
+            <div class="nsmbWinnings" style="width: max-content; margin: auto; height: 0px; display: flex; margin-bottom: 16px; margin-top: -16px;"></div>
+            <div class="nsmbPlayerScore" style="width: 0px; height: 15px; margin: auto; margin-top: 3px; margin-bottom: -18px; background-image: url(img/nsmb/scores/8.png);"></div>
+            <div class="nsmbPlayerCards" style="display: flex; width: 180px; margin: auto; margin-top: 20px;"></div>
+        </div>
     </div>
     
     <script src="script.js"></script>
     <script src="script/tboi.js"></script>
+    <script src="script/nsmb.js"></script>
 
     <div class="loadText" onclick="document.querySelector('.loadZone').style.display = 'block'" style="position: fixed; left: -2px; top: -2px; background-color: white; padding: 4px; border-radius: 4px;"></div>
     <div class="loadZone" onclick="this.style.display = 'none'" style="position: fixed; width: 100vw; height: 100vh; overflow: scroll; top: 0px; background-color: white; z-index: 1000000; display: none;">
@@ -163,25 +213,43 @@
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/cloud.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/cloudG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/cloudR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/cloudRG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/flower.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/flowerG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/flowerR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/flowerRG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/luigi.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/luigiG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/luigiR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/luigiRG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/mario.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/marioG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/marioR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/marioRG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/mushroom.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/mushroomG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/mushroomR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/mushroomRG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/star.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/starG.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchy/starR.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchy/starRG.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/0.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/2.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/3.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/4.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/6.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/8.png">
+        <img onload="loaded[0]++" src="img/nsmb/scores/16.png">
         <img onload="loaded[0]++" src="img/nsmb/coin.png">
         <img onload="loaded[0]++" src="img/nsmb/decimal.png">
         <img onload="loaded[0]++" src="img/nsmb/draw.png">
+        <img onload="loaded[0]++" src="img/nsmb/DS.png">
+        <img onload="loaded[0]++" src="img/nsmb/DSProd.png">
+        <img onload="loaded[0]++" src="img/nsmb/hierarchybg.png">
         <img onload="loaded[0]++" src="img/nsmb/hold.png">
+        <img onload="loaded[0]++" src="img/nsmb/logo.png">
+        <img onload="loaded[0]++" src="img/nsmb/raise.png">
         <img onload="loaded[0]++" src="img/nsmb/table.png">
         <img onload="loaded[0]++" src="img/nsmb/value.png">
         <img onload="loaded[0]++" src="img/tboi/bg/arcade0.png">
@@ -201,7 +269,6 @@
         <img onload="loaded[0]++" src="img/tboi/blood/machineSlosh1.png">
         <img onload="loaded[0]++" src="img/tboi/claw/prize/battery.png">
         <img onload="loaded[0]++" src="img/tboi/claw/prize/bloodRefresh.png">
-        <img onload="loaded[0]++" src="img/tboi/claw/prize/capsuleBlue.png">
         <img onload="loaded[0]++" src="img/tboi/claw/prize/clawRefresh.png">
         <img onload="loaded[0]++" src="img/tboi/claw/prize/coin.png">
         <img onload="loaded[0]++" src="img/tboi/claw/prize/dime.png">
@@ -213,10 +280,14 @@
         <img onload="loaded[0]++" src="img/tboi/claw/armReady.png">
         <img onload="loaded[0]++" src="img/tboi/claw/machine.png">
         <img onload="loaded[0]++" src="img/tboi/claw/slop.png">
+        <img onload="loaded[0]++" src="img/tboi/options/clawAuto.png">
         <img onload="loaded[0]++" src="img/tboi/options/clawSFX.png">
+        <img onload="loaded[0]++" src="img/tboi/options/donoAuto.png">
         <img onload="loaded[0]++" src="img/tboi/options/donoSFX.png">
+        <img onload="loaded[0]++" src="img/tboi/options/locked.png">
         <img onload="loaded[0]++" src="img/tboi/options/off.png">
         <img onload="loaded[0]++" src="img/tboi/options/on.png">
+        <img onload="loaded[0]++" src="img/tboi/options/slotAuto.png">
         <img onload="loaded[0]++" src="img/tboi/options/slotSFX.png">
         <img onload="loaded[0]++" src="img/tboi/slot/bomb.png">
         <img onload="loaded[0]++" src="img/tboi/slot/coin.png">
@@ -242,6 +313,7 @@
         <img onload="loaded[0]++" src="img/tboi/chargeBarFull6.png">
         <img onload="loaded[0]++" src="img/tboi/coinUI.png">
         <img onload="loaded[0]++" src="img/tboi/heartUI.png">
+        <img onload="loaded[0]++" src="img/tboi/logo.png">
         <img onload="loaded[0]++" src="img/tboi/refreshUI.png">
     </div>
     <script>
@@ -268,9 +340,7 @@
 
         let loadLoop = setInterval(function(){
             if (loaded[0] >= toload[0]){
-                document.querySelector(".loadText").innerHTML = "version " + version
-
-                console.log(realNodes.sfx)
+                document.querySelector(".loadText").innerHTML = "Touch to open atlas<br>VGG_BETA_" + version
 
                 realNodes.img.sort(function(a, b) {
                     return parseFloat(a.height) - parseFloat(b.height);
@@ -294,7 +364,7 @@
                 clearInterval(loadLoop)
                 return
             } else {
-                document.querySelector(".loadText").innerHTML = "loading gfx: " + loaded[0] + "/" + toload[0] + "<br>loading sfx: " + loaded[1] + "/" + toload[1] + "<br>version " + version
+                document.querySelector(".loadText").innerHTML = "loading gfx: " + loaded[0] + "/" + toload[0] + "<br>loading sfx: " + loaded[1] + "/" + toload[1] + "<br>VGG_BETA_" + version
             }
         }, 10)
     </script>
