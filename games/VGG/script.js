@@ -1,4 +1,4 @@
-let version = 7
+let version = 7.1
 
 let player = {
     "money": 10,

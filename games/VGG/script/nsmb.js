@@ -8,7 +8,7 @@ const nsmbPokerCards = [
 ]
 
 function nsmbStartPicturePoker(){
-    player.machines.nsmbPoker.bet = parseInt(prompt("Enter bet amount in coins (min 1)", 1))
+    player.machines.nsmbPoker.bet = Math.min(parseInt(prompt("Enter bet amount in coins (min 1, max 999999)", 1)), 999999)
     if (player.machines.nsmbPoker.bet <= 0 || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
         return
     }
