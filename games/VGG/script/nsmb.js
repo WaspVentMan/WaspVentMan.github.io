@@ -8,16 +8,17 @@ const nsmbPokerCards = [
 ]
 
 function nsmbStartPicturePoker(){
-    player.machines.nsmbPoker.bet = Math.min(parseInt(prompt("Enter bet amount in coins (min 1, max 999999)", 1)), 999999)
-    if (player.machines.nsmbPoker.bet <= 0 || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
-        return
-    }
-    player.money -= player.machines.nsmbPoker.bet*100
-    player.machines.nsmbPoker.played = false
+    player.machines.nsmbPoker.played = true
     document.querySelector(".nsmbPlayerCards").innerHTML = ""
     document.querySelector(".nsmbDealerCards").innerHTML = ""
     document.querySelector(".nsmbStartPoker").style.height = "0px"
     if (player.machines.nsmbPoker.hand.length == 0){
+        player.machines.nsmbPoker.dealerHand = []
+        player.machines.nsmbPoker.bet = Math.min(parseInt(prompt("Enter bet amount in coins (min 1, max 999999)", player.machines.nsmbPoker.bet)), 999999)
+        if (player.machines.nsmbPoker.bet <= 0 || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
+            return
+        }
+        player.money -= player.machines.nsmbPoker.bet*100
         nsmbRenderHierarchy([], [])
         for (let x = 0; x < 5; x++){
             player.machines.nsmbPoker.hand.push(randomListItem(nsmbPokerCards))
@@ -49,6 +50,12 @@ function nsmbStartPicturePoker(){
                 }, 150)
                 setTimeout(()=>{
                     document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + ".png)"
+                    if (x==4){
+                        setTimeout(()=>{
+                            player.machines.nsmbPoker.played = false
+                            playSound("sfx/nsmb/NCS_SE_MGM_L_PROMPT.wav")
+                        }, 100)
+                    }
                 }, 200)
             }, 250)
             playSound("sfx/nsmb/NCS_SE_MGM_C_KUBARU.wav")
@@ -164,7 +171,7 @@ function nsmbSort(){
     })
 
     let playerScore = {
-        "teir": 0,
+        "teir": 1,
         "score": 0,
         "tiebreaker": 0
     }
@@ -188,7 +195,9 @@ function nsmbSort(){
     }
 
     playerScore.score = 6-nsmbPokerCards.indexOf(items[0][0])
-    playerScore.tiebreaker = 6-nsmbPokerCards.indexOf(items[1][0])
+    if (items[1] != undefined){
+        playerScore.tiebreaker = 6-nsmbPokerCards.indexOf(items[1][0])
+    }
 
     let sortedHand = []
     for (let x = 0; x < items.length; x++){
@@ -213,16 +222,16 @@ function nsmbSort(){
         }, 200)
         setTimeout(()=>{
             document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/backFlip.png)"
-        }, 250)
-        setTimeout(()=>{
-            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/side.png)"
-        }, 300)
-        setTimeout(()=>{
-            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + "Flip.png)"
         }, 350)
         setTimeout(()=>{
-            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + ".png)"
+            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/side.png)"
         }, 400)
+        setTimeout(()=>{
+            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + "Flip.png)"
+        }, 450)
+        setTimeout(()=>{
+            document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + ".png)"
+        }, 500)
     }
 
     pokerCards = {}
@@ -242,7 +251,7 @@ function nsmbSort(){
     })
 
     let dealerScore = {
-        "teir": 0,
+        "teir": 1,
         "score": 0,
         "tiebreaker": 0
     }
@@ -266,7 +275,9 @@ function nsmbSort(){
     }
 
     dealerScore.score = 6-nsmbPokerCards.indexOf(items[0][0])
-    dealerScore.tiebreaker = 6-nsmbPokerCards.indexOf(items[1][0])
+    if (items[1] != undefined){
+        dealerScore.tiebreaker = 6-nsmbPokerCards.indexOf(items[1][0])
+    }
 
     let sortedDealerHand = []
     for (let x = 0; x < items.length; x++){
@@ -275,22 +286,25 @@ function nsmbSort(){
         }
     }
 
-    playSound("sfx/nsmb/NCS_SE_MGM_C_TURN_ALL2.wav")
+    playSound("sfx/nsmb/NCS_SE_MGM_C_TURN_ALL1.wav")
+    setTimeout(()=>{
+        playSound("sfx/nsmb/NCS_SE_MGM_C_TURN_ALL2.wav")
+    }, 300)
 
     for (let x = 0; x < 5; x++){
         setTimeout(()=>{
             player.machines.nsmbPoker.dealerHand[x] = sortedDealerHand[x]
             document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/backFlip.png)"
-        }, 250)
-        setTimeout(()=>{
-            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/side.png)"
-        }, 300)
-        setTimeout(()=>{
-            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.dealerHand[x] + "Flip.png)"
         }, 350)
         setTimeout(()=>{
-            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.dealerHand[x] + ".png)"
+            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/side.png)"
         }, 400)
+        setTimeout(()=>{
+            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.dealerHand[x] + "Flip.png)"
+        }, 450)
+        setTimeout(()=>{
+            document.querySelector(".nsmbDealerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.dealerHand[x] + ".png)"
+        }, 500)
     }
 
     setTimeout(()=>{
@@ -301,7 +315,7 @@ function nsmbSort(){
             if (playerScore.score > dealerScore.score){
                 win = 1
             } else if (playerScore.score == dealerScore.score){
-                if (playerScore.tiebreaker > dealerScore.tiebreaker){
+                if (playerScore.tiebreaker > dealerScore.tiebreaker && (playerScore.teir == 3 || playerScore.teir == 6)){
                     win = 1
                 } else if (playerScore.tiebreaker < dealerScore.tiebreaker && (playerScore.teir == 3 || playerScore.teir == 6)){
                     win = -1
@@ -352,6 +366,7 @@ function nsmbSort(){
         document.querySelector(".nsmbPlayerScore").style.width = "0px"
         document.querySelector(".nsmbDealerScore").style.width = "0px"
         document.querySelector(".nsmbWinnings").innerHTML = ""
+        document.querySelector(".nsmbHoldDrawButton").style.backgroundImage = "url(img/nsmb/hold.png)"
     }, 4000)
 }
 
@@ -373,3 +388,7 @@ function nsmbRenderHierarchy(red, green){
 }
 
 nsmbRenderHierarchy([], [])
+if (player.machines.nsmbPoker.hand != []){
+    player.money += player.machines.nsmbPoker.bet*100
+    player.machines.nsmbPoker.hand = []
+}
