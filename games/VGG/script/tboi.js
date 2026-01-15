@@ -8,6 +8,7 @@ function tboiSlotRoll(){
     }
     
     player.money --
+    refreshMoneyCount()
     player.machines.tboiSlot.held++
     player.machines.tboiSlot.last = Date.now()
 
@@ -37,6 +38,7 @@ function tboiSlotRoll(){
     player.machines.tboiSlot.spinning = true
     if (player.options.tboiSlotSFX){playSound("sfx/tboi/coin slot.wav", 25)}
     
+    let lastSpinningSymbol = [-1, -1, -1]
     let life = setInterval(()=>{
         if (!player.machines.tboiSlot.spinning){
             clearInterval(life)
@@ -45,14 +47,22 @@ function tboiSlotRoll(){
 
         let spinny = ""
         for (let x = 0; x < 3; x++){
+            let symbol = lastSpinningSymbol[x]
+            
+            while (symbol == lastSpinningSymbol[x]){
+                symbol = Math.ceil(Math.random()*6)
+            }
+
+            lastSpinningSymbol[x] = symbol
+            
             if (x >= drama){
-                spinny += `<div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/spin${Math.ceil(Math.random()*6)}.png); user-select: none;"></div>`
+                spinny += `<div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/spin${symbol}.png); user-select: none;"></div>`
             } else {
                 spinny += `<div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/${results[x]}.png); user-select: none;"></div>`
             }
         }
         document.querySelector(".tboiSlotSymbol").innerHTML = spinny
-    }, 0)
+    }, 25)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePull.png"}, 50)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePullFull.png"}, 100)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePull.png"}, 150)
@@ -107,6 +117,7 @@ function tboiSlotRoll(){
         document.querySelector(".tboiSlotSymbol").innerHTML = spinny
 
         player.money += change
+        refreshMoneyCount()
         
         document.querySelector(".tboiSlotOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
     }, 500)
@@ -129,6 +140,7 @@ function tboiBloodDonate(){
 
     let change = Math.ceil(Math.random()*10)
     player.money += change
+    refreshMoneyCount()
     player.machines.tboiBlood.last = Date.now()
     if (player.options.tboiDonoSFX){playSound("sfx/tboi/blood bank touched.wav", 25)}
     document.querySelector(".tboiBloodOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
@@ -141,6 +153,7 @@ function tboiClaw(){
 
     player.machines.tboiClaw.last = Date.now()
     player.money -= 5
+    refreshMoneyCount()
 
     let grab = Math.floor(Math.random()*4) == 0
 
@@ -250,6 +263,7 @@ function tboiClaw(){
         }
 
         player.money += change
+        refreshMoneyCount()
         
         document.querySelector(".tboiClawOut").innerHTML = textIcons.tboiCoin + renderString(change + "", "none", "isaacA")
     }, 2950)

@@ -11,14 +11,14 @@ function nsmbStartPicturePoker(){
     player.machines.nsmbPoker.played = true
     document.querySelector(".nsmbPlayerCards").innerHTML = ""
     document.querySelector(".nsmbDealerCards").innerHTML = ""
-    document.querySelector(".nsmbStartPoker").style.height = "0px"
     if (player.machines.nsmbPoker.hand.length == 0){
-        player.machines.nsmbPoker.dealerHand = []
-        player.machines.nsmbPoker.bet = Math.min(parseInt(prompt("Enter bet amount in coins (min 1, max 999999)", player.machines.nsmbPoker.bet)), 999999)
-        if (player.machines.nsmbPoker.bet <= 0 || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
+        if (player.machines.nsmbPoker.bet <= 0 || player.machines.nsmbPoker.bet == null || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
             return
         }
+        document.querySelector(".nsmbStartPoker").style.height = "0px"
+        player.machines.nsmbPoker.dealerHand = []
         player.money -= player.machines.nsmbPoker.bet*100
+        refreshMoneyCount()
         nsmbRenderHierarchy([], [])
         for (let x = 0; x < 5; x++){
             player.machines.nsmbPoker.hand.push(randomListItem(nsmbPokerCards))
@@ -342,11 +342,13 @@ function nsmbSort(){
 
         if (win == 1){
             player.money += player.machines.nsmbPoker.bet*playerScore.teir*100
+            refreshMoneyCount()
             document.querySelector(".nsmbWinnings").innerHTML = textIcons.nsmbCoin + renderString(player.machines.nsmbPoker.bet*playerScore.teir+"", "none", "nsmbPissSmall")
             playSound("sfx/nsmb/NCS_SE_MGM_CASINO_WIN.wav")
             playSound("sfx/nsmb/NCS_SE_MGM_L_CLAP.wav")
         } else if (win == 0){
             player.money += player.machines.nsmbPoker.bet*100
+            refreshMoneyCount()
             document.querySelector(".nsmbWinnings").innerHTML = textIcons.nsmbCoin + renderString(player.machines.nsmbPoker.bet+"", "none", "nsmbPissSmall")
             playSound("sfx/nsmb/NCS_SE_MGM_CASINO_DRAW.wav")
             playSound("sfx/nsmb/NCS_SE_MGM_L_DRAW.wav")
@@ -387,6 +389,22 @@ function nsmbRenderHierarchy(red, green){
     }
 }
 
+function nsmbBet(change){
+    if (typeof player.machines.nsmbPoker.bet != "number"){
+        player.machines.nsmbPoker.bet = 0
+    }
+
+    if (change > 0){
+        playSound("sfx/nsmb/NCS_SE_MGM_COIN_BET.wav")
+    } else if (change < 0){
+        playSound("sfx/nsmb/NCS_SE_MGM_COIN_BET.wav")
+    }
+
+    player.machines.nsmbPoker.bet = Math.min(Math.max(player.machines.nsmbPoker.bet + change, 1), 999)
+    document.querySelector(".nsmbBet").innerHTML = textIcons.nsmbCoin + renderString(player.machines.nsmbPoker.bet+"", "none", "nsmbBig")
+}
+
+nsmbBet(0)
 nsmbRenderHierarchy([], [])
 if (player.machines.nsmbPoker.hand != []){
     player.money += player.machines.nsmbPoker.bet*100
