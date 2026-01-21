@@ -1,4 +1,4 @@
-let version = 9
+let version = 10
 
 let player = {
     "money": 10,
@@ -27,6 +27,15 @@ let player = {
             "spinning": false,
             "last": ["sonic", "jackpot", "tails"],
             "held": 0
+        },
+        "mscRettipokka": {
+            "hand": [],
+            "discard": [false, false, false, false, false],
+            "dealerHand": [],
+            "played": false,
+            "bet": 0,
+            "pelit": 0,
+            "voitot": 0
         }
     },
     "upgrades": {
@@ -91,13 +100,6 @@ function randomListItem(list){
     return list[Math.floor(Math.random()*list.length)]
 }
 
-function poorFailsafe(){
-    if (player.money <= 0){
-        player.money++
-        refreshMoneyCount()
-    }
-}
-
 function loadBGs(){
     document.querySelector(".tboiBG").innerHTML = `
     <div style="width: 234px; height: 156px; background-image: url(img/tboi/bg/arcade${Math.floor(Math.random()*4)}.png);">
@@ -120,8 +122,10 @@ function refreshMoneyCount(){
     document.querySelector(".tboiExchangeCash").innerHTML = textIcons.tboiCoin + renderString(player.money + "", "none", "isaacA")
     document.querySelector(".nsmbCash").innerHTML = textIcons.nsmbCoin + renderString(Math.floor(player.money/100) + "", "none", "nsmbPissSmall") + textIcons.nsmbDecimal + renderString(["", "0"][(player.money - (Math.floor(player.money/100)*100) < 10) + 0] + (player.money - (Math.floor(player.money/100)*100)) + "", "none", "nsmbPissSuperSmall") + `</div>`
     document.querySelector(".nsmbExchangeCash").innerHTML = textIcons.nsmbCoin + renderString(Math.floor(player.money/100) + "", "none", "nsmbPissSmall") + textIcons.nsmbDecimal + renderString(["", "0"][(player.money - (Math.floor(player.money/100)*100) < 10) + 0] + (player.money - (Math.floor(player.money/100)*100)) + "", "none", "nsmbPissSuperSmall") + `</div>`
-    document.querySelector(".sonic2Cash").innerHTML = textIcons.sonic2RingText + renderString(Math.floor(player.money/100) + "", "none", "sonic2UI") + `</div>`
-    document.querySelector(".sonic2ExchangeCash").innerHTML = textIcons.sonic2Ring + renderString(Math.floor(player.money/100) + "", "none", "sonic2UI") + `</div>`
+    document.querySelector(".sonic2Cash").innerHTML = textIcons.sonic2RingText + renderString(Math.floor(player.money) + "", "none", "sonic2UI") + `</div>`
+    document.querySelector(".sonic2ExchangeCash").innerHTML = textIcons.sonic2RingText + renderString(Math.floor(player.money) + "", "none", "sonic2UI") + `</div>`
+    document.querySelector(".mscCash").innerHTML = `<div style="font-family: FugazOne; color: yellow; text-shadow: 1.5px 1.5px black; margin-right: 4px">MONEY</div><div style="background-color: black; color: white; font-family: FugazOne; padding-left: 2px; padding-right: 2px; min-width: 75px; text-align: left;">${Math.floor(player.money*0.0428)/100}</div>`
+    document.querySelector(".mscExchangeCash").innerHTML = `<div style="font-family: FugazOne; color: yellow; text-shadow: 1.5px 1.5px black; margin-right: 8px">MONEY</div><div style="background-color: black; color: white; font-family: FugazOne; padding-left: 2px; padding-right: 2px; min-width: 75px; text-align: left;">${Math.floor(player.money*0.0428)/100}</div>`
 }
 
 loadBGs()

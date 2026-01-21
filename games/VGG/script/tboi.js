@@ -62,7 +62,7 @@ function tboiSlotRoll(){
             }
         }
         document.querySelector(".tboiSlotSymbol").innerHTML = spinny
-    }, 25)
+    }, 100)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePull.png"}, 50)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePullFull.png"}, 100)
     setTimeout(()=>{document.querySelector(".tboiSlotMachine").style.backgroundImage = "url(img/tboi/slot/machinePull.png"}, 150)

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: FugazOne;
+    src: url(font/FugazOne-Regular.ttf);
+}
+
 * {
     margin: 0%;
     image-rendering: pixelated;
@@ -5,4 +10,84 @@
     user-select: none;
 
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.mscButton {
+    margin: 7px;
+    outline: 1px solid rgb(36, 36, 36);
+
+    width: 104px;
+    height: 75px;
+}
+
+.mscBet1MK {
+    background-image: url(img/msc/button/bet1mk.png);
+}
+
+.mscBet5MK {
+    background-image: url(img/msc/button/bet5mk.png);
+}
+
+.mscLukitus {
+    background-image: url(img/msc/button/lukitus.png);
+}
+
+.mscTuplaus {
+    background-image: url(img/msc/button/tuplaus.png);
+}
+
+.mscPieni {
+    background-image: url(img/msc/button/pieni.png);
+}
+
+.mscSuuri {
+    background-image: url(img/msc/button/suuri.png);
+}
+
+.mscPanos {
+    background-image: url(img/msc/button/panos.png);
+}
+
+.mscVoitonMaksu {
+    background-image: url(img/msc/button/voitonMaksu.png);
+}
+
+.mscJako {
+    background-image: url(img/msc/button/jako.png);
+}
+
+.mscBet1MK:hover {
+    background-image: url(img/msc/button/bet1mkLit.png);
+}
+
+.mscBet5MK:hover {
+    background-image: url(img/msc/button/bet5mkLit.png);
+}
+
+.mscLukitus:hover {
+    background-image: url(img/msc/button/lukitusLit.png);
+}
+
+.mscTuplaus:hover {
+    background-image: url(img/msc/button/tuplausLit.png);
+}
+
+.mscPieni:hover {
+    background-image: url(img/msc/button/pieniLit.png);
+}
+
+.mscSuuri:hover {
+    background-image: url(img/msc/button/suuriLit.png);
+}
+
+.mscPanos:hover {
+    background-image: url(img/msc/button/panosLit.png);
+}
+
+.mscVoitonMaksu:hover {
+    background-image: url(img/msc/button/voitonMaksuLit.png);
+}
+
+.mscJako:hover {
+    background-image: url(img/msc/button/jakoLit.png);
 }

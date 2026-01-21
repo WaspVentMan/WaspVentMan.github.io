@@ -10,8 +10,10 @@
     <script src="lib/audio.js"></script>
 </head>
 <body style="background-color: black; overflow-x: hidden;">
-    <div class="home" style="background-color: white; text-align: center; width: max-content; margin: auto; margin-bottom: 64px; border-radius: 16px;">
-        <h1 style="margin-top: 64px; padding: 16px;">VIDEO GAME GAMBLING</h1>
+    <div class="home" style="background-color: white; text-align: center; width: 100%; margin: auto; margin-bottom: 64px; padding-bottom: 16px;">
+        <h1 style="padding: 16px;">VIDEO GAME GAMBLING</h1>
+        <a href="https://discord.gg/8gzjP5bZ9R">Follow development<br>Join my Discord</a><br>
+        <br>
         <details>
             <summary>Credits</summary>
             <h3>Video Game Gambling</h3>
@@ -26,168 +28,236 @@
             <p>Amistech Games</p><br>
         </details>
         <br>
-        <a href="https://discord.gg/8gzjP5bZ9R">Follow development<br>Join my Discord</a><br>
-        <br>
         <details>
             <summary>Conversion & Money</summary>
             <p>All games use the same money</p>
             <br>
             <p>You have <b class="cash"></b> money, that equates to:</p>
             <p>The Binding Of Isaac</p>
+            <p>1 = 1</p>
             <div class="tboiExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 3;"></div>
-            <p>New Super Mario Bros.</p>
-            <div class="nsmbExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 2;"></div>
             <p>Sonic The Hedgehog 2</p>
+            <p>1 = 1</p>
             <div class="sonic2ExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 2;"></div>
+            <p>New Super Mario Bros.</p>
+            <p>1 = 10</p>
+            <div class="nsmbExchangeCash" style="padding: 4px; width: max-content; margin: auto; display: flex; zoom: 2;"></div>
+            <p>My Summer Car</p>
+            <p>1 = 2340</p>
+            <div class="mscExchangeCash" style="display: flex; width: max-content; margin: auto; padding: 4px;"></div>
         </details>
-        <br>
-        <h2>Games:</h2>
-        <a href="#tboi">
-            <img src="img/tboi/logo.png" alt="The Binding of Isaac: Repentance">
-        </a><br>
-        <a href="#nsmb">
-            <img src="img/nsmb/logo.png" alt="New Super Mario Bros.">
-        </a><br>
-        <a href="#sonic2">
-            <img src="img/sonic2/logo.png" alt="Sonic the Hedgehog 2">
-        </a><br>
-        <p>(My Summer Car REETIPOKKA coming eventually)</p>
-        <a href="#msc">
-            <img src="img/msc/logo.png" alt="My Summer Car" style="filter: grayscale(100%);">
-        </a><br>
         <br>
         <details class="achievements">
             <summary>Achievements</summary>
         </details>
+        <br>
+        <details>
+            <summary>Games</summary>
+            <div style="display: grid; flex-wrap: wrap;">
+                <a href="#tboi">
+                <img src="img/tboi/logo.png" alt="The Binding of Isaac: Repentance">
+                </a>
+                <a href="#nsmb">
+                    <img src="img/nsmb/logo.png" alt="New Super Mario Bros.">
+                </a>
+                <a href="#sonic2">
+                    <img src="img/sonic2/logo.png" alt="Sonic the Hedgehog 2">
+                </a>
+                <a href="#msc">
+                    <img src="img/msc/logo.png" alt="My Summer Car">
+                </a>
+            </div>
+        </details>
+        
     </div>
-    <div id="tboi" class="tboi" style="margin: auto; width: max-content; zoom: 2; height: 312px; width: 468px; margin-bottom: 64px;">
-        <div class="tboiBG" style="display: grid; grid-template-columns: 1fr 1fr; width: max-content; margin: auto; margin-bottom: -248px;"></div>
-        <div style="position: absolute; width: 468px;"><div class="tboiCash" style="padding-bottom: 4px; width: max-content; margin: auto; display: flex;"></div></div>
-        <div class="tboiMachines" style="display: flex; width: max-content; margin: auto; margin-top: 8px;">
-            <div class="tboiBlood" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
-                <div class="tboiBloodMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/blood/machine.png); cursor: pointer;" onclick="tboiBloodDonate()"></div>
-                <div class="tboiBloodOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
-                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
-                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar6.png);">
-                        <div class="tboiBloodTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull6.png); margin-left: 2px;"></div>
-                        <div class="tboiAutoBloodTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull6.png); margin-left: 2px; margin-top: -6px;"></div>
+    <details open>
+        <summary style="list-style-type: none"><h1 style="color: white; text-align: center;">Basic Games</h1></summary>
+        <div id="tboi" class="tboi" style="margin: auto; width: max-content; zoom: 2; height: 312px; width: 468px; margin-bottom: 64px;">
+            <div class="tboiBG" style="display: grid; grid-template-columns: 1fr 1fr; width: max-content; margin: auto; margin-bottom: -248px;"></div>
+            <div style="position: absolute; width: 468px;"><div class="tboiCash" style="padding-bottom: 4px; width: max-content; margin: auto; display: flex;"></div></div>
+            <div class="tboiMachines" style="display: flex; width: max-content; margin: auto; margin-top: 8px;">
+                <div class="tboiBlood" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                    <div class="tboiBloodMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/blood/machine.png); cursor: pointer;" onclick="tboiBloodDonate()"></div>
+                    <div class="tboiBloodOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                    <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                        <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar6.png);">
+                            <div class="tboiBloodTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull6.png); margin-left: 2px;"></div>
+                            <div class="tboiAutoBloodTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull6.png); margin-left: 2px; margin-top: -6px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tboiSlot" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                    <div class="tboiSlotMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/slot/machine.png); cursor: pointer;" onclick="tboiSlotRoll()">
+                        <div class="tboiSlotSymbol" style="padding-top: 23px; padding-left: 14px; width: 27px; height: 10px; display: flex; user-select: none;">
+                            <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/heart.png);"></div>
+                            <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/key.png);"></div>
+                            <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/bomb.png);"></div>
+                        </div>
+                    </div>
+                    <div class="tboiSlotOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                    <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                        <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar3.png);">
+                            <div class="tboiSlotTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull3.png); margin-left: 2px;"></div>
+                            <div class="tboiAutoSlotTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull3.png); margin-left: 2px; margin-top: -6px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tboiClaw" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
+                    <div class="tboiClawMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/claw/machine.png); cursor: pointer;" onclick="tboiClaw()">
+                        <div style="position: absolute; background-image: url(img/tboi/claw/slop.png); width: 29px; height: 8px; z-index: -3; margin-left: 12px; margin-top: 24px;"></div>
+                        <div class="tboiClawArm" style="position: absolute; background-image: url(img/tboi/claw/arm.png); width: 13px; height: 24px; z-index: -1; margin-left: 12px; margin-top: 0px; transition: margin-top 0.5s linear, margin-left 0.5s linear;"></div>
+                        <div class="tboiClawItem" style="position: absolute; background-image: url(img/tboi/claw/prize/coin.png); width: 15px; height: 15px; z-index: -2; margin-left: 20px; margin-top: 31px; transition: margin-top 0.5s linear, margin-left 0.5s linear;"></div>
+                    </div>
+                    <div class="tboiClawOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
+                    <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
+                        <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar5.png);">
+                            <div class="tboiClawTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull5.png); margin-left: 2px;"></div>
+                            <div class="tboiAutoClawTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull5.png); margin-left: 2px; margin-top: -6px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="tboiSlot" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
-                <div class="tboiSlotMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/slot/machine.png); cursor: pointer;" onclick="tboiSlotRoll()">
-                    <div class="tboiSlotSymbol" style="padding-top: 23px; padding-left: 14px; width: 27px; height: 10px; display: flex; user-select: none;">
-                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/heart.png);"></div>
-                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/key.png);"></div>
-                        <div style="width: 9px; height: 10px; background-image: url(img/tboi/slot/bomb.png);"></div>
+            <br><br>
+            <div class="tboiOptionsCont" style="position: absolute; width: 468px; overflow: hidden; height: 40px;">
+                <div class="tboiOptions" style="width: 220px; height: 230px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;">
+                    <div onclick="tboiOptions()" style="width: 220px; height: 40px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;"></div>
+                    <div onclick="tboiToggleOption('tboiDonoSFX')" style="display: flex; padding-top: 23px; width: max-content; margin: auto;">
+                        <div style="width: 96px; height: 18px; background-image: url(img/tboi/options/donoSFX.png);"></div>
+                        <div class="tboiDonoSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                     </div>
-                </div>
-                <div class="tboiSlotOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
-                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
-                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar3.png);">
-                        <div class="tboiSlotTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull3.png); margin-left: 2px;"></div>
-                        <div class="tboiAutoSlotTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull3.png); margin-left: 2px; margin-top: -6px;"></div>
+                    <div onclick="tboiToggleOption('tboiSlotSFX')" style="display: flex; width: max-content; margin: auto;">
+                        <div style="width: 90px; height: 18px; background-image: url(img/tboi/options/slotSFX.png);"></div>
+                        <div class="tboiSlotSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                     </div>
-                </div>
-            </div>
-            <div class="tboiClaw" style="width: max-content; margin: auto; width: 55px; height: 51px; padding: 4px; z-index: 100;">
-                <div class="tboiClawMachine" style="width: 55px; height: 51px; background-image: url(img/tboi/claw/machine.png); cursor: pointer;" onclick="tboiClaw()">
-                    <div style="position: absolute; background-image: url(img/tboi/claw/slop.png); width: 29px; height: 8px; z-index: -3; margin-left: 12px; margin-top: 24px;"></div>
-                    <div class="tboiClawArm" style="position: absolute; background-image: url(img/tboi/claw/arm.png); width: 13px; height: 24px; z-index: -1; margin-left: 12px; margin-top: 0px; transition: margin-top 0.5s linear, margin-left 0.5s linear;"></div>
-                    <div class="tboiClawItem" style="position: absolute; background-image: url(img/tboi/claw/prize/coin.png); width: 15px; height: 15px; z-index: -2; margin-left: 20px; margin-top: 31px; transition: margin-top 0.5s linear, margin-left 0.5s linear;"></div>
-                </div>
-                <div class="tboiClawOut" style="width: max-content; margin: auto; display: flex; padding: 2px;"></div>
-                <div style="display: flex; width: max-content; margin: auto; padding: 1px;">
-                    <div style="width: 27px; height: 6px; background-image: url(img/tboi/chargeBar5.png);">
-                        <div class="tboiClawTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeBarFull5.png); margin-left: 2px;"></div>
-                        <div class="tboiAutoClawTimer" style="width: 0px; height: 6px; background-image: url(img/tboi/chargeAutoBarFull5.png); margin-left: 2px; margin-top: -6px;"></div>
+                    <div onclick="tboiToggleOption('tboiClawSFX')" style="display: flex; width: max-content; margin: auto;">
+                        <div style="width: 98px; height: 18px; background-image: url(img/tboi/options/clawSFX.png);"></div>
+                        <div class="tboiClawSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
                     </div>
+                    <div class="tboiDonoAutoParent" onclick="tboiToggleOption('tboiDonoAuto')" style="display: flex; padding-top: 13px; width: max-content; margin: auto;">
+                        <div style="width: 100px; height: 18px; background-image: url(img/tboi/options/donoAuto.png);"></div>
+                        <div class="tboiDonoAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                    </div>
+                    <div class="tboiDonoAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
+                    <div class="tboiSlotAutoParent" onclick="tboiToggleOption('tboiSlotAuto')" style="display: flex; width: max-content; margin: auto;">
+                        <div style="width: 94px; height: 18px; background-image: url(img/tboi/options/slotAuto.png);"></div>
+                        <div class="tboiSlotAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                    </div>
+                    <div class="tboiSlotAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
+                    <div class="tboiClawAutoParent" onclick="tboiToggleOption('tboiClawAuto')" style="display: flex; width: max-content; margin: auto;">
+                        <div style="width: 102px; height: 18px; background-image: url(img/tboi/options/clawAuto.png);"></div>
+                        <div class="tboiClawAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                    </div>
+                    <div class="tboiClawAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
                 </div>
             </div>
         </div>
-        <br><br>
-        <div class="tboiOptionsCont" style="position: absolute; width: 468px; overflow: hidden; height: 40px;">
-            <div class="tboiOptions" style="width: 220px; height: 230px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;">
-                <div onclick="tboiOptions()" style="width: 220px; height: 40px; margin: auto; background-image: url(img/tboi/bg/optionsNoPaper.png); cursor: pointer;"></div>
-                <div onclick="tboiToggleOption('tboiDonoSFX')" style="display: flex; padding-top: 23px; width: max-content; margin: auto;">
-                    <div style="width: 96px; height: 18px; background-image: url(img/tboi/options/donoSFX.png);"></div>
-                    <div class="tboiDonoSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+        <div id="sonic2" class="sonic2" style="margin: auto; width: 352px; height: 400px; background-image: url(img/sonic2/bg.gif); margin-bottom: 64px; zoom: 2; overflow: hidden;" onclick="sonic2SlotRoll()">
+            <div class="sonic2Cash" style="padding: 4px; width: max-content; margin: auto; height: 0px; display: flex; margin-top: 96px;"></div>
+            <div style="width: 96px; height: 32px; margin: auto; margin-top: 152px; background-color: white; overflow: hidden; display: flex;">
+                <div class="sonic2Collumn0"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/sonic.png); user-select: none;"></div></div>
+                <div class="sonic2Collumn1"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/jackpot.png); user-select: none;"></div></div>
+                <div class="sonic2Collumn2"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/tails.png); user-select: none;"></div></div>
+            </div>
+            <div class="sonic2CashOut" style="padding: 4px; width: max-content; margin: auto; margin-top: 8px; height: 0px; display: flex;"></div>
+        </div>
+    </details>
+    <details open>
+        <summary style="list-style-type: none"><h1 style="color: white; text-align: center;">Advanced Games</h1></summary>
+        <div id="nsmb" class="nsmb" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png); margin-bottom: 64px; overflow: hidden;">
+            <div class="nsmbSide" style="height: 0px;">
+                <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; height: 15px; display: flex;"></div>
+                <div class="nsmbSymbols" style="margin: 10px; margin-left: 16px; width: max-content; background-image: url(img/nsmb/hierarchybg.png);"></div>
+                <div style="width: 72px; height: 96px; background-image: url(img/nsmb/value.png);"></div>
+            </div>
+            <div class="nsmbStartPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+                <div style="width: max-content; margin: auto; display: flex; margin-top: 16px;">
+                    <div onclick="nsmbBet(1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise1.png);"></div>
+                    <div onclick="nsmbBet(10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise10.png);"></div>
+                    <div onclick="nsmbBet(100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise100.png);"></div>
                 </div>
-                <div onclick="tboiToggleOption('tboiSlotSFX')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 90px; height: 18px; background-image: url(img/tboi/options/slotSFX.png);"></div>
-                    <div class="tboiSlotSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
+                <div class="nsmbBet" style="padding: 2px; display: flex; width: max-content; margin: auto;"></div>
+                <div style="width: max-content; margin: auto; display: flex;">
+                    <div onclick="nsmbBet(-1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower1.png);"></div>
+                    <div onclick="nsmbBet(-10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower10.png);"></div>
+                    <div onclick="nsmbBet(-100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower100.png);"></div>
                 </div>
-                <div onclick="tboiToggleOption('tboiClawSFX')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 98px; height: 18px; background-image: url(img/tboi/options/clawSFX.png);"></div>
-                    <div class="tboiClawSFX" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
-                </div>
-                <div class="tboiDonoAutoParent" onclick="tboiToggleOption('tboiDonoAuto')" style="display: flex; padding-top: 13px; width: max-content; margin: auto;">
-                    <div style="width: 100px; height: 18px; background-image: url(img/tboi/options/donoAuto.png);"></div>
-                    <div class="tboiDonoAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
-                </div>
-                <div class="tboiDonoAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
-                <div class="tboiSlotAutoParent" onclick="tboiToggleOption('tboiSlotAuto')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 94px; height: 18px; background-image: url(img/tboi/options/slotAuto.png);"></div>
-                    <div class="tboiSlotAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
-                </div>
-                <div class="tboiSlotAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
-                <div class="tboiClawAutoParent" onclick="tboiToggleOption('tboiClawAuto')" style="display: flex; width: max-content; margin: auto;">
-                    <div style="width: 102px; height: 18px; background-image: url(img/tboi/options/clawAuto.png);"></div>
-                    <div class="tboiClawAuto" style="width: 35px; height: 18px; margin-left: 9px; background-image: url(img/tboi/options/on.png);"></div>
-                </div>
-                <div class="tboiClawAutoLock" style="width: 189px; height: 4px; background-image: url(img/tboi/options/locked.png); margin: auto; margin-top: -11px; margin-bottom: 9px; filter: contrast(10%);"></div>
+                <div class="nsmbStart" onclick="nsmbStartPicturePoker()" style="width: 144px; height: 32px; margin: auto; margin-top: 16px; background-image: url(img/nsmb/start.png);"></div>
+            </div>
+            <div class="nsmbPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+                <div class="nsmbDealerCards" style="display: flex; height: 48px; width: max-content; margin: auto; margin-top: 24px; margin-bottom: 12px;"></div>
+                <div class="nsmbDealerScore" style="width: 0px; height: 15px; margin: auto; margin-top: -11px; margin-bottom: -4px; background-image: url(img/nsmb/scores/8.png);"></div>
+                <div class="nsmbHoldDrawButton" onclick="nsmbPlay()" style="width: 144px; height: 32px; margin: auto; background-image: url(img/nsmb/hold.png);"></div>
+                <div class="nsmbWinnings" style="width: max-content; margin: auto; height: 0px; display: flex; margin-bottom: 16px; margin-top: -16px;"></div>
+                <div class="nsmbPlayerScore" style="width: 0px; height: 15px; margin: auto; margin-top: 3px; margin-bottom: -18px; background-image: url(img/nsmb/scores/8.png);"></div>
+                <div class="nsmbPlayerCards" style="display: flex; width: 180px; margin: auto; margin-top: 20px;"></div>
             </div>
         </div>
-    </div>
-    <div id="nsmb" class="nsmb" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png); margin-bottom: 64px; overflow: hidden;">
-        <div class="nsmbSide" style="height: 0px;">
-            <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; height: 15px; display: flex;"></div>
-            <div class="nsmbSymbols" style="margin: 10px; margin-left: 16px; width: max-content; background-image: url(img/nsmb/hierarchybg.png);"></div>
-            <div style="width: 72px; height: 96px; background-image: url(img/nsmb/value.png);"></div>
-        </div>
-        <div class="nsmbStartPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
-            <div style="width: max-content; margin: auto; display: flex; margin-top: 16px;">
-                <div onclick="nsmbBet(1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise1.png);"></div>
-                <div onclick="nsmbBet(10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise10.png);"></div>
-                <div onclick="nsmbBet(100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise100.png);"></div>
+    </details>
+    <details>
+        <summary style="list-style-type: none;"><h1 style="color: white; text-align: center;">Indev Games</h1></summary>
+        <div id="msc" style="margin: auto; width: max-content;">
+            <div class="mscCash" style="display: flex; width: max-content; margin: auto; padding: 4px;">
+                <div style="font-family: FugazOne; color: yellow; text-shadow: 1.5px 1.5px black; margin-right: 4px">MONEY</div>
+                <div style="background-color: black; color: white; font-family: FugazOne; padding-left: 2px; padding-right: 2px; min-width: 75px; text-align: left;">0</div>
             </div>
-            <div class="nsmbBet" style="padding: 2px; display: flex; width: max-content; margin: auto;"></div>
-            <div style="width: max-content; margin: auto; display: flex;">
-                <div onclick="nsmbBet(-1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower1.png);"></div>
-                <div onclick="nsmbBet(-10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower10.png);"></div>
-                <div onclick="nsmbBet(-100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower100.png);"></div>
+            <div style="width: max-content; display: flex; margin: auto;">
+                <div class="mscButton mscBet1MK" onclick="mscStartReetipokka(1)" style="width: 134px; height: 96px; margin: 8px;"></div>
+                <div class="mscButton mscBet5MK" onclick="mscStartReetipokka(5)" style="width: 134px; height: 96px; margin: 8px;"></div>
             </div>
-            <div class="nsmbStart" onclick="nsmbStartPicturePoker()" style="width: 144px; height: 32px; margin: auto; margin-top: 16px; background-image: url(img/nsmb/start.png);"></div>
+            <div class="mscScreen" style="margin: auto; width: 320px; height: 240px; background-image: url(img/msc/Pokeri-TitleScreen-FinB.png); zoom: 2; overflow: hidden; filter: blur(0.5px); overflow: hidden;">
+                <div style="width: 320px; height: 240px; margin-bottom: -240px; mix-blend-mode: darken; background-image: url(img/msc/screenFilter.png); background-size: 2px; filter: blur(0.75px);"></div>
+                <div style="display: flex; height: 0px;">
+                    <div class="mscReetipokkaHeld" style="margin-top: 12px; margin-left: 62px; width: 48px; height: 12px;"></div>
+                    <div class="mscReetipokkaWon" style="margin-top: 12px; margin-left: 151px; width: 48px; height: 12px;"></div>
+                </div>
+                <div style="width: 128px; height: 128px; margin-top: 32px; margin-left: 8px;"></div>
+                <div class="mscHand" style="display: flex; margin: auto; width: max-content; margin-top: -8px;"></div>
+            </div>
+            <div style="font-family: FugazOne; color: yellow; text-align: center;">(WARNING) Straights and Tuplaatko do not work because I haven't written them yet, sorry :(</div>
+            <div style="width: max-content; display: flex; margin: auto;">
+                <div onclick="mscLukitus(0)" class="mscButton mscLukitus mscLukitus0" style="width: 104px; height: 75px; margin: 8px;"></div>
+                <div onclick="mscLukitus(1)" class="mscButton mscLukitus mscLukitus1" style="width: 104px; height: 75px; margin: 8px;"></div>
+                <div onclick="mscLukitus(2)" class="mscButton mscLukitus mscLukitus2" style="width: 104px; height: 75px; margin: 8px;"></div>
+                <div onclick="mscLukitus(3)" class="mscButton mscLukitus mscLukitus3" style="width: 104px; height: 75px; margin: 8px;"></div>
+                <div onclick="mscLukitus(4)" class="mscButton mscLukitus mscLukitus4" style="width: 104px; height: 75px; margin: 8px;"></div>
+            </div>
+            <div style="width: max-content; display: flex; margin: auto;">
+                <div class="mscButton mscTuplaus"></div>
+                <div class="mscButton mscPieni"></div>
+                <div class="mscButton mscSuuri"></div>
+                <div class="mscButton mscPanos" onclick="mscPanos()"></div>
+                <div class="mscButton mscVoitonMaksu" onclick="mscVoitonMaksu()"></div>
+                <div class="mscButton mscJako" onclick="mscJako()"></div>
+            </div>
         </div>
-        <div class="nsmbPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
-            <div class="nsmbDealerCards" style="display: flex; height: 48px; width: max-content; margin: auto; margin-top: 24px; margin-bottom: 12px;"></div>
-            <div class="nsmbDealerScore" style="width: 0px; height: 15px; margin: auto; margin-top: -11px; margin-bottom: -4px; background-image: url(img/nsmb/scores/8.png);"></div>
-            <div class="nsmbHoldDrawButton" onclick="nsmbPlay()" style="width: 144px; height: 32px; margin: auto; background-image: url(img/nsmb/hold.png);"></div>
-            <div class="nsmbWinnings" style="width: max-content; margin: auto; height: 0px; display: flex; margin-bottom: 16px; margin-top: -16px;"></div>
-            <div class="nsmbPlayerScore" style="width: 0px; height: 15px; margin: auto; margin-top: 3px; margin-bottom: -18px; background-image: url(img/nsmb/scores/8.png);"></div>
-            <div class="nsmbPlayerCards" style="display: flex; width: 180px; margin: auto; margin-top: 20px;"></div>
-        </div>
-    </div>
-    <div id="sonic2" class="sonic2" style="margin: auto; width: 352px; height: 400px; background-image: url(img/sonic2/bg.gif); margin-bottom: 64px; zoom: 2; overflow: hidden;" onclick="sonic2SlotRoll()">
-        <div class="sonic2Cash" style="padding: 4px; width: max-content; margin: auto; height: 0px; display: flex; margin-top: 96px;"></div>
-        <div style="width: 96px; height: 32px; margin: auto; margin-top: 152px; background-color: white; overflow: hidden; display: flex;">
-            <div class="sonic2Collumn0"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/sonic.png); user-select: none;"></div></div>
-            <div class="sonic2Collumn1"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/jackpot.png); user-select: none;"></div></div>
-            <div class="sonic2Collumn2"><div style="width: 32px; height: 32px; background-image: url(img/sonic2/symbol/tails.png); user-select: none;"></div></div>
-        </div>
-        <div class="sonic2CashOut" style="padding: 4px; width: max-content; margin: auto; margin-top: 8px; height: 0px; display: flex;"></div>
-    </div>
-    <div id="msc" class="msc" style="margin: auto; width: 320px; height: 240px; background-image: url(img/msc/Pokeri-TitleScreen-FinB.png); margin-bottom: 64px; zoom: 2; overflow: hidden;" onclick="alert('there is literally no code for this\nalso having this up breaks the sonic 2 slots lol')">
-    </div>
+    </details>
+    <div style="height: 256px;"></div>
+    <div style="width: max-content; margin: auto;"><img src="img/keepgambling.jpg"></div>
     
     <script src="script.js"></script>
     <script src="script/achievements.js"></script>
     <script src="script/tboi.js"></script>
     <script src="script/nsmb.js"></script>
     <script src="script/sonic2.js"></script>
+    <script src="script/msc.js"></script>
 
     <div class="loadText" onclick="document.querySelector('.loadZone').style.display = 'block'" style="position: fixed; left: -2px; top: -2px; background-color: white; padding: 4px; border-radius: 4px;"></div>
     <div class="loadZone" onclick="this.style.display = 'none'" style="position: fixed; width: 100vw; height: 100vh; overflow: scroll; top: 0px; background-color: white; z-index: 1000000; display: none;">
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri-DoubleFail_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet1.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet2.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet3.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet4.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet5.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card01_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card02_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Coin_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_GameOver_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Lose_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Win_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_button.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_cash_out.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_insert_coin.wav"></audio>
         <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_DOWN.wav"></audio>
         <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_KUBARU.wav"></audio>
         <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ALL1.wav"></audio>
@@ -221,45 +291,65 @@
         <img onload="loaded[0]++" src="img/font/default.png">
         <img onload="loaded[0]++" src="img/font/isaacA.png">
         <img onload="loaded[0]++" src="img/font/nsmbBig.png">
+        <img onload="loaded[0]++" src="img/font/mscReetipokkaBlue.png">
+        <img onload="loaded[0]++" src="img/font/mscReetipokkaYellow.png">
         <img onload="loaded[0]++" src="img/font/nsmbPissSmall.png">
         <img onload="loaded[0]++" src="img/font/nsmbPissSuperSmall.png">
         <img onload="loaded[0]++" src="img/font/nsmbSmall.png">
         <img onload="loaded[0]++" src="img/font/nsmbSuperSmall.png">
         <img onload="loaded[0]++" src="img/font/sonic2UI.png">
         <img onload="loaded[0]++" src="img/font/sonic2UISmall.png">
+        <img onload="loaded[0]++" src="img/msc/button/bet1mk.png">
+        <img onload="loaded[0]++" src="img/msc/button/bet1mkLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/bet5mk.png">
+        <img onload="loaded[0]++" src="img/msc/button/bet5mkLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/jako.png">
+        <img onload="loaded[0]++" src="img/msc/button/jakoLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/lukitus.png">
+        <img onload="loaded[0]++" src="img/msc/button/lukitusLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/panos.png">
+        <img onload="loaded[0]++" src="img/msc/button/panosLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/pieni.png">
+        <img onload="loaded[0]++" src="img/msc/button/pieniLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/suuri.png">
+        <img onload="loaded[0]++" src="img/msc/button/suuriLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/tuplaus.png">
+        <img onload="loaded[0]++" src="img/msc/button/tuplausLit.png">
+        <img onload="loaded[0]++" src="img/msc/button/voitonMaksu.png">
+        <img onload="loaded[0]++" src="img/msc/button/voitonMaksuLit.png">
+        <img onload="loaded[0]++" src="img/msc/card/suit/C.png">
+        <img onload="loaded[0]++" src="img/msc/card/suit/D.png">
+        <img onload="loaded[0]++" src="img/msc/card/suit/H.png">
+        <img onload="loaded[0]++" src="img/msc/card/suit/S.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/10B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/10R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/2B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/2R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/3B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/3R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/4B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/4R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/5B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/5R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/6B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/6R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/7B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/7R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/8B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/8R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/9B.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/9R.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/AB.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/AR.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/JB.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/JR.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/KB.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/KR.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/QB.png">
+        <img onload="loaded[0]++" src="img/msc/card/value/QR.png">
+        <img onload="loaded[0]++" src="img/msc/card/Card.png">
+        <img onload="loaded[0]++" src="img/msc/card/Cardback.png">
         <img onload="loaded[0]++" src="img/msc/logo.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-10-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-10-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-2-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-2-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-3-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-3-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-4-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-4-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-5-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-5-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-6-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-6-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-7-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-7-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-8-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-8-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-9-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-9-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-A-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-A-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Clubs.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Diamonds.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Hearts.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-J-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-J-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-K-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-K-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Q-Black.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Q-Red.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-Card-Spades.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-CardType01.png">
-        <img onload="loaded[0]++" src="img/msc/Pokeri-CardType02-backB.png">
         <img onload="loaded[0]++" src="img/msc/Pokeri-DoubleTakeWin-B-FIN.png">
         <img onload="loaded[0]++" src="img/msc/Pokeri-DoubleTakeWin-FIN.png">
         <img onload="loaded[0]++" src="img/msc/Pokeri-GameOver-FIN.png">
@@ -324,7 +414,14 @@
         <img onload="loaded[0]++" src="img/nsmb/hierarchybg.png">
         <img onload="loaded[0]++" src="img/nsmb/hold.png">
         <img onload="loaded[0]++" src="img/nsmb/logo.png">
+        <img onload="loaded[0]++" src="img/nsmb/lower.png">
+        <img onload="loaded[0]++" src="img/nsmb/lower1.png">
+        <img onload="loaded[0]++" src="img/nsmb/lower10.png">
+        <img onload="loaded[0]++" src="img/nsmb/lower100.png">
         <img onload="loaded[0]++" src="img/nsmb/raise.png">
+        <img onload="loaded[0]++" src="img/nsmb/raise1.png">
+        <img onload="loaded[0]++" src="img/nsmb/raise10.png">
+        <img onload="loaded[0]++" src="img/nsmb/raise100.png">
         <img onload="loaded[0]++" src="img/nsmb/table.png">
         <img onload="loaded[0]++" src="img/nsmb/value.png">
         <img onload="loaded[0]++" src="img/sonic2/symbol/bar.png">

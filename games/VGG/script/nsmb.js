@@ -13,6 +13,7 @@ function nsmbStartPicturePoker(){
     document.querySelector(".nsmbDealerCards").innerHTML = ""
     if (player.machines.nsmbPoker.hand.length == 0){
         if (player.machines.nsmbPoker.bet <= 0 || player.machines.nsmbPoker.bet == null || isNaN(player.machines.nsmbPoker.bet) || player.money < player.machines.nsmbPoker.bet*100){
+            playSound("sfx/nsmb/NCS_SE_MGM_C_DOWN.wav")
             return
         }
         document.querySelector(".nsmbStartPoker").style.height = "0px"
@@ -333,8 +334,6 @@ function nsmbSort(){
             nsmbRenderHierarchy([playerScore.score], [dealerScore.score])
         }
 
-        console.log(playerScore)
-        console.log(dealerScore)
         document.querySelector(".nsmbPlayerScore").style.width = "110px"
         document.querySelector(".nsmbDealerScore").style.width = "110px"
         document.querySelector(".nsmbPlayerScore").style.backgroundImage = `url(img/nsmb/scores/${playerScore.teir}.png)`
@@ -391,13 +390,15 @@ function nsmbRenderHierarchy(red, green){
 
 function nsmbBet(change){
     if (typeof player.machines.nsmbPoker.bet != "number"){
-        player.machines.nsmbPoker.bet = 0
+        player.machines.nsmbPoker.bet = 1
     }
 
-    if (change > 0){
+    if (change > 0 && player.machines.nsmbPoker.bet < 999){
         playSound("sfx/nsmb/NCS_SE_MGM_COIN_BET.wav")
-    } else if (change < 0){
+    } else if (change < 0 && player.machines.nsmbPoker.bet > 1){
         playSound("sfx/nsmb/NCS_SE_MGM_COIN_BET.wav")
+    } else if (change > 0 || change < 0){
+        playSound("sfx/nsmb/NCS_SE_MGM_C_DOWN.wav")
     }
 
     player.machines.nsmbPoker.bet = Math.min(Math.max(player.machines.nsmbPoker.bet + change, 1), 999)
@@ -405,8 +406,8 @@ function nsmbBet(change){
 }
 
 nsmbBet(0)
-nsmbRenderHierarchy([], [])
-if (player.machines.nsmbPoker.hand != []){
-    player.money += player.machines.nsmbPoker.bet*100
-    player.machines.nsmbPoker.hand = []
-}
+// nsmbRenderHierarchy([], [])
+// if (player.machines.nsmbPoker.hand != []){
+//     player.money += player.machines.nsmbPoker.bet*100
+//     player.machines.nsmbPoker.hand = []
+// }

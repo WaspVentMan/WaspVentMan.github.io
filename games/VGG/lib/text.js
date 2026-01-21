@@ -10,6 +10,8 @@ let fonts = {
     "nsmbPissSuperSmall": [8, 9],
     "sonic2UI": [8, 11, 1],
     "sonic2UISmall": [7, 7, 1],
+    "mscReetipokkaYellow": [8, 10],
+    "mscReetipokkaBlue": [8, 12],
 }
 
 /**

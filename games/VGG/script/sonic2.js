@@ -1,5 +1,5 @@
 function sonic2SlotRoll(){
-    if (player.money < 100){
+    if (player.money < 1){
         playSound("sfx/sonic2/S2_6D.wav", 25)
         return
     } else if (player.machines.sonic2Slot.spinning){
@@ -8,7 +8,7 @@ function sonic2SlotRoll(){
 
     player.machines.sonic2Slot.spinning = true
 
-    player.money -= 100
+    player.money -= 1
 
     const symbols = [
         "eggman",
@@ -98,16 +98,16 @@ function sonic2SlotRoll(){
             }
         } else if (results.includes("jackpot") && items[0][1] == 2){
             if (results.reduce((total,x) => total+(x=="jackpot"), 0) == 2){
-                if (player.money*3 > 99900){
+                if (player.money*3 > 999){
                     change = 999
                 } else {
-                    change = Math.ceil(player.money/100) * 4
+                    change = player.money * 4
                 }
             } else if (items[0][1] == 2){
-                if (player.money > 99900){
+                if (player.money > 999){
                     change = 999
                 } else {
-                    change = Math.ceil(player.money/100) * 2
+                    change = player.money * 2
                 }
             }
         } else if (results.includes("bar")){
@@ -126,7 +126,7 @@ function sonic2SlotRoll(){
             playSound("sfx/sonic2/S2_6D.wav", 25)
         }
 
-        player.money += change*100
+        player.money += change
         if (player.money < 0){
             player.money = 0
         }
