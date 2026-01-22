@@ -26,6 +26,11 @@ function nsmbStartPicturePoker(){
             player.machines.nsmbPoker.dealerHand.push(randomListItem(nsmbPokerCards))
         }
     }
+
+    if (player.machines.nsmbPoker.bet == 999){
+        unlockMedal(88017)
+    }
+
     for (let x = 0; x < 5; x++){
         document.querySelector(".nsmbPlayerCards").innerHTML += (textIcons.nsmbCard.start + `nsmbCardSelect(${x})" class="nsmbPlayerCard${x}` + textIcons.nsmbCard.mid + "back" + textIcons.nsmbCard.end)
         document.querySelector(".nsmbDealerCards").innerHTML += (textIcons.nsmbCard.start + `" class="nsmbDealerCard${x}` + textIcons.nsmbCard.mid + "back" + textIcons.nsmbCard.end)
@@ -340,6 +345,35 @@ function nsmbSort(){
         document.querySelector(".nsmbDealerScore").style.backgroundImage = `url(img/nsmb/scores/${dealerScore.teir}.png)`
 
         if (win == 1){
+            switch (playerScore.teir){
+                case 1:
+                    unlockMedal(87801)
+                    NGIO.postScore(15517, 1, function(){})
+                    break
+
+                case 2:
+                    NGIO.postScore(15523, 1, function(){}); break
+                
+                case 3:
+                    NGIO.postScore(15524, 1, function(){}); break
+
+                case 4:
+                    NGIO.postScore(15522, 1, function(){}); break
+
+                case 6:
+                    NGIO.postScore(15521, 1, function(){}); break
+
+                case 8:
+                    NGIO.postScore(15520, 1, function(){}); break
+
+                case 16:
+                    NGIO.postScore(15519, 1, function(){}); break
+            }
+
+            if (player.machines.nsmbPoker.bet*playerScore.teir == 15984){
+                unlockMedal(87803)
+            }
+            
             player.money += player.machines.nsmbPoker.bet*playerScore.teir*100
             refreshMoneyCount()
             document.querySelector(".nsmbWinnings").innerHTML = textIcons.nsmbCoin + renderString(player.machines.nsmbPoker.bet*playerScore.teir+"", "none", "nsmbPissSmall")

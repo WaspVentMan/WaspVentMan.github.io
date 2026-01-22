@@ -179,51 +179,66 @@ function mscJako(){
         let score = 0
         let jatkat_assat = ["A","K","Q","J"]
 
-        console.log(pokerValues)
-        console.log(pokerSuits)
+        let straight = false
+        let royal = false
+        let streak = 0
+        for (let x = 0; x < mscPokerValues.length+1; x++){
+            let good = false
+            for (let y = 0; y < 5; y++){
+                if (player.machines.mscRettipokka.hand[y][0].startsWith(mscPokerValues[x%mscPokerValues.length])){
+                    streak++
+                    good = true
 
-        if (pokerValues[0][1] == 2){
-            if (jatkat_assat.includes(pokerValues[0][0])){
-                score = 1
+                    if (streak >= 5){
+                        straight = true
+                        if (x < 5){
+                            royal = true
+                        }
+                    }
+                    break
+                }
             }
 
+            if (!good){
+                streak = 0
+            }
+        }
+
+        if (royal && pokerSuits[0][1] == 5){
+            score = 50
+            unlockMedal(88016)
+            NGIO.postScore(15518, 1, function(){})
+        } else if (straight && pokerSuits[0][1] == 5){
+            score = 30
+            NGIO.postScore(15525, 1, function(){})
+        } else if (pokerValues[0][1] == 4){
+            score = 15
+            NGIO.postScore(15526, 1, function(){})
+        } else if (pokerValues[0][1] == 3 && pokerValues[1][1] == 2){
+            score = 10
+            NGIO.postScore(15527, 1, function(){})
+        } else if (pokerSuits[0][1] == 5){
+            score = 7
+            NGIO.postScore(15528, 1, function(){})
+        } else if (straight){
+            score = 5
+            NGIO.postScore(15529, 1, function(){})
+        } else if (pokerValues[0][1] == 3){
+            score = 3
+            NGIO.postScore(15530, 1, function(){})
+        } else if (pokerValues[0][1] == 2){
             if (pokerValues[1][1] == 2){
                 score = 2
+                NGIO.postScore(15531, 1, function(){})
+            } else if (jatkat_assat.includes(pokerValues[0][0])){
+                score = 1
+                NGIO.postScore(15532, 1, function(){})
             }
         }
 
-        if (pokerValues[0][1] == 3){
-            score = 3
+        if (score != 0){
+            unlockMedal(88015)
         }
-
-        // STRAIGHT (HOW THE FUCK DO I MAKE THIS)
-        // if (pokerValues[0][1] == 3){
-        //     score = 5
-        // }
-
-        if (pokerSuits[0][1] == 5){
-            score = 7
-        }
-
-        if (pokerValues[0][1] == 3 && pokerValues[1][1] == 2){
-            score = 10
-        }
-
-        if (pokerValues[0][1] == 4){
-            score = 15
-        }
-
-        // STRAIGHT FLUSH (HOW THE FUCK DO I MAKE THIS)
-        // if (pokerValues[0][1] == 4){
-        //     score = 30
-        // }
-
-        // ROYAL FLUSH (HOW THE FUCK DO I MAKE THIS)
-        // if (pokerValues[0][1] == 4){
-        //     score = 50
-        // }
-
-        console.log(score)
 
         setTimeout(()=>{
             if (score != 0){
@@ -275,19 +290,20 @@ function mscVoitonMaksu(){
 
     player.money += Math.floor((player.machines.mscRettipokka.pelit+player.machines.mscRettipokka.voitot)/0.000428)
 
+    player.machines.mscRettipokka.pelit = 0
     player.machines.mscRettipokka.voitot = 0
 
     playSound("sfx/msc/slot_cash_out.wav")
     refreshMoneyCount()
+
+    document.querySelector(".mscReetipokkaHeld").innerHTML = renderString(player.machines.mscRettipokka.pelit+"", "", "mscReetipokkaBlue", "left")
+    document.querySelector(".mscReetipokkaWon").innerHTML = renderString(player.machines.mscRettipokka.voitot+"", "", "mscReetipokkaBlue", "left")
 
     if (player.machines.mscRettipokka.bet == 0){
         document.querySelector(".mscReetipokkaHeld").innerHTML = renderString("", "", "mscReetipokkaBlue", "left")
         document.querySelector(".mscReetipokkaWon").innerHTML = renderString("", "", "mscReetipokkaBlue", "left")
         document.querySelector(".mscScreen").style.backgroundImage = `url(img/msc/Pokeri-TitleScreen-FinB.png)`
         document.querySelector(".mscHand").innerHTML = ""
-    } else {
-        document.querySelector(".mscReetipokkaHeld").innerHTML = renderString(player.machines.mscRettipokka.pelit+"", "", "mscReetipokkaBlue", "left")
-        document.querySelector(".mscReetipokkaWon").innerHTML = renderString(player.machines.mscRettipokka.voitot+"", "", "mscReetipokkaBlue", "left")
     }
 }
 

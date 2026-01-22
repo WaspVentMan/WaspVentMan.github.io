@@ -12,6 +12,28 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+@keyframes ngEntice {
+    0% {outline-color: orangered;}
+    50% {outline-color: lightsalmon;}
+    100% {outline-color: orangered;}
+}
+
+.ngButton{
+    border-radius: 5px;
+    transition: background-color 0.25s;
+    outline: 2px solid;
+    outline-color: orangered;
+    margin: 8px;
+
+    animation: ngEntice 2s ease infinite;
+}
+
+.ngButton:hover{
+    background-color: orangered;
+    animation: none;
+    cursor: pointer;
+}
+
 .mscButton {
     margin: 7px;
     outline: 1px solid rgb(36, 36, 36);

@@ -86,6 +86,9 @@ function sonic2SlotRoll(){
             if (player.money < 0){
                 player.money = 0
             }
+            if (results[0] == results[1] && results[1] == results[2]){
+                unlockMedal(88019)
+            }
         } else if (results[0] == results[1] && results[1] == results[2]){
             if (results[0] == "sonic"){
                 change = 30
@@ -95,6 +98,7 @@ function sonic2SlotRoll(){
                 change = 20
             } else if (results[0] == "jackpot"){
                 change = 150
+                unlockMedal(88018)
             }
         } else if (results.includes("jackpot") && items[0][1] == 2){
             if (results.reduce((total,x) => total+(x=="jackpot"), 0) == 2){

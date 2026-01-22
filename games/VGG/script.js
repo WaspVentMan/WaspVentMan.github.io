@@ -1,4 +1,4 @@
-let version = 10
+let version = 11
 
 let player = {
     "money": 10,
@@ -96,6 +96,14 @@ if (saveData != null){
     }
 }
 
+const touchHandler = (ev) => {
+	ev.preventDefault() // Prevent text selection
+}
+document.addEventListener('touchstart', touchHandler, {passive:false})
+document.addEventListener('touchmove', touchHandler, {passive:false})
+document.addEventListener('touchend', touchHandler, {passive:false})
+document.addEventListener('touchcancel', touchHandler, {passive:false})
+
 function randomListItem(list){
     return list[Math.floor(Math.random()*list.length)]
 }
@@ -169,4 +177,7 @@ setInterval(()=>{
 
 setInterval(()=>{
     localStorage.setItem("VideoGameGambling", JSON.stringify(player))
-}, 1000)
+    if (!offline){
+        NGIO.postScore(15516, player.money, function(){})
+    }
+}, 10000)

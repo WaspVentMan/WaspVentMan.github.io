@@ -182,6 +182,10 @@ function tboiClaw(){
         banlist.push("clawRefresh")
     }
 
+    if (banlist.length == 4){
+        unlockMedal(87804)
+    }
+
     let prize = ""
 
     while (banlist.includes(prize)){
@@ -228,6 +232,9 @@ function tboiClaw(){
                 case "pill":
                     if (player.options.tboiClawSFX){playSound("sfx/tboi/i found pills 3.wav", 25)}
                     change = 5+Math.floor(Math.random()*96)
+                    if (change == 100){
+                        unlockMedal(88020)
+                    }
                     break
                 case "coin":
                     if (player.options.tboiClawSFX){playSound("sfx/tboi/penny pickup 1.wav", 25)}

@@ -6,18 +6,22 @@
     <title>Video Game Gambling</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
     <script src="lib/text.js"></script>
     <script src="lib/audio.js"></script>
 </head>
 <body style="background-color: black; overflow-x: hidden;">
     <div class="home" style="background-color: white; text-align: center; width: 100%; margin: auto; margin-bottom: 64px; padding-bottom: 16px;">
         <h1 style="padding: 16px;">VIDEO GAME GAMBLING</h1>
+        <div class="NewgroundsIO ngButton" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto; margin-top: 18px; margin-bottom: 18px;"></div>
         <a href="https://discord.gg/8gzjP5bZ9R">Follow development<br>Join my Discord</a><br>
         <br>
         <details>
             <summary>Credits</summary>
             <h3>Video Game Gambling</h3>
             <p>Jacob Taylor</p><br>
+            <h2>Game Credits</h2>
+            <h5>(ordered by date added)</h5><br>
             <h3>The Binding Of Isaac: Repentance</h3>
             <p>Edmund McMillen and Nicalis, Inc.</p><br>
             <h3>New Super Mario Bros.</h3>
@@ -205,7 +209,7 @@
                 <div class="mscButton mscBet5MK" onclick="mscStartReetipokka(5)" style="width: 134px; height: 96px; margin: 8px;"></div>
             </div>
             <div class="mscScreen" style="margin: auto; width: 320px; height: 240px; background-image: url(img/msc/Pokeri-TitleScreen-FinB.png); zoom: 2; overflow: hidden; filter: blur(0.5px); overflow: hidden;">
-                <div style="width: 320px; height: 240px; margin-bottom: -240px; mix-blend-mode: darken; background-image: url(img/msc/screenFilter.png); background-size: 2px; filter: blur(0.75px);"></div>
+                <div style="width: 320px; height: 240px; margin-bottom: -240px; mix-blend-mode: darken; background-image: url(img/msc/screenFilter.png); background-size: 2px; filter: blur(0.4px);"></div>
                 <div style="display: flex; height: 0px;">
                     <div class="mscReetipokkaHeld" style="margin-top: 12px; margin-left: 62px; width: 48px; height: 12px;"></div>
                     <div class="mscReetipokkaWon" style="margin-top: 12px; margin-left: 151px; width: 48px; height: 12px;"></div>
@@ -213,7 +217,7 @@
                 <div style="width: 128px; height: 128px; margin-top: 32px; margin-left: 8px;"></div>
                 <div class="mscHand" style="display: flex; margin: auto; width: max-content; margin-top: -8px;"></div>
             </div>
-            <div style="font-family: FugazOne; color: yellow; text-align: center;">(WARNING) Straights and Tuplaatko do not work because I haven't written them yet, sorry :(</div>
+            <div style="font-family: FugazOne; color: yellow; text-align: center;">(WARNING) Tuplaatko does not work because I haven't written it yet, sorry :(</div>
             <div style="width: max-content; display: flex; margin: auto;">
                 <div onclick="mscLukitus(0)" class="mscButton mscLukitus mscLukitus0" style="width: 104px; height: 75px; margin: 8px;"></div>
                 <div onclick="mscLukitus(1)" class="mscButton mscLukitus mscLukitus1" style="width: 104px; height: 75px; margin: 8px;"></div>
@@ -240,6 +244,7 @@
     <script src="script/nsmb.js"></script>
     <script src="script/sonic2.js"></script>
     <script src="script/msc.js"></script>
+    <script src="script/nginit.js"></script>
 
     <div class="loadText" onclick="document.querySelector('.loadZone').style.display = 'block'" style="position: fixed; left: -2px; top: -2px; background-color: white; padding: 4px; border-radius: 4px;"></div>
     <div class="loadZone" onclick="this.style.display = 'none'" style="position: fixed; width: 100vw; height: 100vh; overflow: scroll; top: 0px; background-color: white; z-index: 1000000; display: none;">

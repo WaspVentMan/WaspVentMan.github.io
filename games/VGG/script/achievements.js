@@ -6,7 +6,7 @@ const achievements = [
     },
     {
         "name": "I <3 Pills",
-        "img": "",
+        "img": "pill",
         "description": `<div style="width: max-content; display: flex; margin: auto;">Win the maximum amount (<div style="width: max-content; display: flex; margin: auto;"><div style="width: max-content; margin-top: 5px; margin-left: 1px;">${textIcons.tboiCoin}</div><div style="width: max-content; margin-top: 5px;">${renderString("100", "none", "isaacA")}</div></div>` + ") from</div>the pill in the TBOI claw machine"
     },
     {
@@ -33,6 +33,16 @@ const achievements = [
         "name": "King of Junk",
         "img": "kingofjunk",
         "description": "Win a game of Picture Poker with a junk hand"
+    },
+    {
+        "name": "Puhut nyt suomea.",
+        "img": "finland",
+        "description": "Pelaa Reetipokka ja voita."
+    },
+    {
+        "name": "Reeti!",
+        "img": "reeti",
+        "description": "Voita Reeti Poker kuningasvärisuoralla."
     }
 ]
 
