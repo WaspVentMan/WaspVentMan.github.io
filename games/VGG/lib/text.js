@@ -3,7 +3,11 @@ let charIndex = ` 0123456789abcdefghijklmnopqrstuvwxyz.,!?'-+$"~&/#%():[]|{}<>`
 let fonts = {
     "default": [8, 16, 0],
     "isaacA": [7, 9, -1],
+    "nsmbCredits": [11, 11],
+    "nsmbCreditsLightRed": [11, 11],
+    "nsmbCreditsBlue": [11, 11],
     "nsmbBig": [15, 15],
+    "nsmbMedium": [8, 11],
     "nsmbSmall": [8, 15],
     "nsmbSuperSmall": [8, 9],
     "nsmbPissSmall": [8, 15],

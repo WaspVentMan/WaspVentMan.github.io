@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Game Gambling</title>
 
+    <link rel="shortcut icon" href="img/keepgambling.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
     <script src="lib/text.js"></script>
     <script src="lib/audio.js"></script>
 </head>
-<body style="background-color: black; overflow-x: hidden;">
+<body style="background-color: black; overflow-x: hidden;" onclick="documentFocus = true">
     <div class="home" style="background-color: white; text-align: center; width: 100%; margin: auto; margin-bottom: 64px; padding-bottom: 16px;">
         <h1 style="padding: 16px;">VIDEO GAME GAMBLING</h1>
         <div class="NewgroundsIO ngButton" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto; margin-top: 18px; margin-bottom: 18px;"></div>
@@ -167,34 +168,44 @@
     </details>
     <details open>
         <summary style="list-style-type: none"><h1 style="color: white; text-align: center;">Advanced Games</h1></summary>
-        <div id="nsmb" class="nsmb" style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png); margin-bottom: 64px; overflow: hidden;">
-            <div class="nsmbSide" style="height: 0px;">
-                <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; height: 15px; display: flex;"></div>
-                <div class="nsmbSymbols" style="margin: 10px; margin-left: 16px; width: max-content; background-image: url(img/nsmb/hierarchybg.png);"></div>
-                <div style="width: 72px; height: 96px; background-image: url(img/nsmb/value.png);"></div>
-            </div>
-            <div class="nsmbStartPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
-                <div style="width: max-content; margin: auto; display: flex; margin-top: 16px;">
-                    <div onclick="nsmbBet(1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise1.png);"></div>
-                    <div onclick="nsmbBet(10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise10.png);"></div>
-                    <div onclick="nsmbBet(100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise100.png);"></div>
+        <div id="nsmb" class="nsmb" style="margin-bottom: 64px;">
+            <div style="margin: auto; zoom: 2; width: 256px; height: 192px; background-image: url(img/nsmb/table.png); overflow: hidden;">
+                <div class="nsmbSide" style="height: 0px;">
+                    <div class="nsmbCash" style="padding-top: 4px; margin-left: 5px; width: max-content; height: 15px; display: flex;"></div>
+                    <div class="nsmbSymbols" style="margin: 10px; margin-left: 16px; width: max-content; background-image: url(img/nsmb/hierarchybg.png);"></div>
+                    <div style="width: 72px; height: 96px; background-image: url(img/nsmb/value.png);"></div>
                 </div>
-                <div class="nsmbBet" style="padding: 2px; display: flex; width: max-content; margin: auto;"></div>
-                <div style="width: max-content; margin: auto; display: flex;">
-                    <div onclick="nsmbBet(-1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower1.png);"></div>
-                    <div onclick="nsmbBet(-10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower10.png);"></div>
-                    <div onclick="nsmbBet(-100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower100.png);"></div>
+                <div class="nsmbStartPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+                    <div style="width: max-content; margin: auto; display: flex; margin-top: 16px;">
+                        <div onclick="nsmbBet(1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise1.png);"></div>
+                        <div onclick="nsmbBet(10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise10.png);"></div>
+                        <div onclick="nsmbBet(100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/raise100.png);"></div>
+                    </div>
+                    <div class="nsmbBet" style="padding: 2px; display: flex; width: max-content; margin: auto;"></div>
+                    <div style="width: max-content; margin: auto; display: flex;">
+                        <div onclick="nsmbBet(-1)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower1.png);"></div>
+                        <div onclick="nsmbBet(-10)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower10.png);"></div>
+                        <div onclick="nsmbBet(-100)" style="width: 35px; height: 35px; background-image: url(img/nsmb/lower100.png);"></div>
+                    </div>
+                    <div class="nsmbStart" onclick="nsmbStartPicturePoker()" style="width: 144px; height: 32px; margin: auto; margin-top: 16px; background-image: url(img/nsmb/start.png);"></div>
                 </div>
-                <div class="nsmbStart" onclick="nsmbStartPicturePoker()" style="width: 144px; height: 32px; margin: auto; margin-top: 16px; background-image: url(img/nsmb/start.png);"></div>
+                <div class="nsmbPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
+                    <div class="nsmbDealerCards" style="display: flex; height: 48px; width: max-content; margin: auto; margin-top: 24px; margin-bottom: 12px;"></div>
+                    <div class="nsmbDealerScore" style="width: 0px; height: 15px; margin: auto; margin-top: -11px; margin-bottom: -4px; background-image: url(img/nsmb/scores/8.png);"></div>
+                    <div class="nsmbHoldDrawButton" onclick="nsmbPlay()" style="width: 144px; height: 32px; margin: auto; background-image: url(img/nsmb/hold.png);"></div>
+                    <div class="nsmbWinnings" style="width: max-content; margin: auto; height: 0px; display: flex; margin-bottom: 16px; margin-top: -16px;"></div>
+                    <div class="nsmbPlayerScore" style="width: 0px; height: 15px; margin: auto; margin-top: 3px; margin-bottom: -18px; background-image: url(img/nsmb/scores/8.png);"></div>
+                    <div class="nsmbPlayerCards" style="display: flex; width: 180px; margin: auto; margin-top: 20px;"></div>
+                </div>
             </div>
-            <div class="nsmbPoker" style="margin-left: 72px; height: 192px; overflow: hidden;">
-                <div class="nsmbDealerCards" style="display: flex; height: 48px; width: max-content; margin: auto; margin-top: 24px; margin-bottom: 12px;"></div>
-                <div class="nsmbDealerScore" style="width: 0px; height: 15px; margin: auto; margin-top: -11px; margin-bottom: -4px; background-image: url(img/nsmb/scores/8.png);"></div>
-                <div class="nsmbHoldDrawButton" onclick="nsmbPlay()" style="width: 144px; height: 32px; margin: auto; background-image: url(img/nsmb/hold.png);"></div>
-                <div class="nsmbWinnings" style="width: max-content; margin: auto; height: 0px; display: flex; margin-bottom: 16px; margin-top: -16px;"></div>
-                <div class="nsmbPlayerScore" style="width: 0px; height: 15px; margin: auto; margin-top: 3px; margin-bottom: -18px; background-image: url(img/nsmb/scores/8.png);"></div>
-                <div class="nsmbPlayerCards" style="display: flex; width: 180px; margin: auto; margin-top: 20px;"></div>
-            </div>
+            <details class="nsmbLeaderboardsParent" style="display: none;">
+                <summary style="color: yellow; text-align: center;"><img src="img/nsmb/leaderboards.png"></summary>
+                <div class="nsmbLeaderboards" onclick="nsmbLoadLeaderboards()">
+                    <div style="width: max-content; margin: auto;">
+                        <img src="img/nsmb/loadleaderboards.png">
+                    </div>
+                </div>
+            </details>
         </div>
     </details>
     <details>
@@ -208,14 +219,14 @@
                 <div class="mscButton mscBet1MK" onclick="mscStartReetipokka(1)" style="width: 134px; height: 96px; margin: 8px;"></div>
                 <div class="mscButton mscBet5MK" onclick="mscStartReetipokka(5)" style="width: 134px; height: 96px; margin: 8px;"></div>
             </div>
-            <div class="mscScreen" style="margin: auto; width: 320px; height: 240px; background-image: url(img/msc/Pokeri-TitleScreen-FinB.png); zoom: 2; overflow: hidden; filter: blur(0.5px); overflow: hidden;">
-                <div style="width: 320px; height: 240px; margin-bottom: -240px; mix-blend-mode: darken; background-image: url(img/msc/screenFilter.png); background-size: 2px; filter: blur(0.4px);"></div>
+            <div class="mscScreen" style="margin: auto; width: 320px; height: 240px; background-image: url(img/msc/Pokeri-TitleScreen-FinB.png); zoom: 2; overflow: hidden; filter: blur(0.75px); overflow: hidden; border-radius: 20%/20%; outline: 0.5px solid gray;">
+                <div style="width: 320px; height: 240px; margin-bottom: -240px; mix-blend-mode: darken; background-image: url(img/msc/screenFilter.png); background-size: 2px;"></div>
                 <div style="display: flex; height: 0px;">
                     <div class="mscReetipokkaHeld" style="margin-top: 12px; margin-left: 62px; width: 48px; height: 12px;"></div>
                     <div class="mscReetipokkaWon" style="margin-top: 12px; margin-left: 151px; width: 48px; height: 12px;"></div>
                 </div>
                 <div style="width: 128px; height: 128px; margin-top: 32px; margin-left: 8px;"></div>
-                <div class="mscHand" style="display: flex; margin: auto; width: max-content; margin-top: -8px;"></div>
+                <div class="mscHand" style="display: flex; margin: auto; width: max-content; margin-top: -8px; zoom: 1.5;"></div>
             </div>
             <div style="font-family: FugazOne; color: yellow; text-align: center;">(WARNING) Tuplaatko does not work because I haven't written it yet, sorry :(</div>
             <div style="width: max-content; display: flex; margin: auto;">
@@ -233,6 +244,12 @@
                 <div class="mscButton mscVoitonMaksu" onclick="mscVoitonMaksu()"></div>
                 <div class="mscButton mscJako" onclick="mscJako()"></div>
             </div>
+            <details class="mscLeaderboardsParent" style="display: none;">
+                <summary style="font-family: FugazOne; color: yellow; text-align: center;">Leaderboards</summary>
+                <div class="mscLeaderboards" onclick="mscLoadLeaderboards()">
+                    <h2 style="font-family: FugazOne; color: yellow; text-align: center;">Click to load leaderboards</h2>
+                </div>
+            </details>
         </div>
     </details>
     <div style="height: 256px;"></div>
@@ -248,56 +265,24 @@
 
     <div class="loadText" onclick="document.querySelector('.loadZone').style.display = 'block'" style="position: fixed; left: -2px; top: -2px; background-color: white; padding: 4px; border-radius: 4px;"></div>
     <div class="loadZone" onclick="this.style.display = 'none'" style="position: fixed; width: 100vw; height: 100vh; overflow: scroll; top: 0px; background-color: white; z-index: 1000000; display: none;">
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri-DoubleFail_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet1.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet2.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet3.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet4.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet5.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card01_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card02_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Coin_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_GameOver_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Lose_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Win_LOFI.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_button.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_cash_out.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_insert_coin.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_DOWN.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_KUBARU.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ALL1.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ALL2.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ONLY.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_UP.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_BAD.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_DRAW.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_WIN.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_COIN_BET.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_CLAP.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_DRAW.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_LOSE.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_PROMPT.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_3A.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_40.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_46.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_4E.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_6D.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/battery charge.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/blood bank touched.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/chest drop 1.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/coin slot.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/fart.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/holy!.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/i found pills 3.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/key drop 2.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/penny drop 1.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/superholy.wav"></audio>
-        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/thumbs down.wav"></audio>
+        <h1>GFX</h1>
+        <img onload="loaded[0]++" src="img/ach/badluck.png">
+        <img onload="loaded[0]++" src="img/ach/finland.png">
+        <img onload="loaded[0]++" src="img/ach/highstakes.png">
+        <img onload="loaded[0]++" src="img/ach/keepgambling.png">
+        <img onload="loaded[0]++" src="img/ach/kingofjunk.png">
+        <img onload="loaded[0]++" src="img/ach/neveragain.png">
+        <img onload="loaded[0]++" src="img/ach/pill.png">
+        <img onload="loaded[0]++" src="img/ach/reeti.png">
+        <img onload="loaded[0]++" src="img/ach/truebadluck.png">
         <img onload="loaded[0]++" src="img/font/default.png">
         <img onload="loaded[0]++" src="img/font/isaacA.png">
-        <img onload="loaded[0]++" src="img/font/nsmbBig.png">
         <img onload="loaded[0]++" src="img/font/mscReetipokkaBlue.png">
         <img onload="loaded[0]++" src="img/font/mscReetipokkaYellow.png">
+        <img onload="loaded[0]++" src="img/font/nsmbBig.png">
+        <img onload="loaded[0]++" src="img/font/nsmbCredits.png">
+        <img onload="loaded[0]++" src="img/font/nsmbCreditsBlue.png">
+        <img onload="loaded[0]++" src="img/font/nsmbCreditsLightRed.png">
         <img onload="loaded[0]++" src="img/font/nsmbPissSmall.png">
         <img onload="loaded[0]++" src="img/font/nsmbPissSuperSmall.png">
         <img onload="loaded[0]++" src="img/font/nsmbSmall.png">
@@ -418,6 +403,8 @@
         <img onload="loaded[0]++" src="img/nsmb/DSProd.png">
         <img onload="loaded[0]++" src="img/nsmb/hierarchybg.png">
         <img onload="loaded[0]++" src="img/nsmb/hold.png">
+        <img onload="loaded[0]++" src="img/nsmb/leaderboards.png">
+        <img onload="loaded[0]++" src="img/nsmb/loadleaderboards.png">
         <img onload="loaded[0]++" src="img/nsmb/logo.png">
         <img onload="loaded[0]++" src="img/nsmb/lower.png">
         <img onload="loaded[0]++" src="img/nsmb/lower1.png">
@@ -501,6 +488,52 @@
         <img onload="loaded[0]++" src="img/tboi/heartUI.png">
         <img onload="loaded[0]++" src="img/tboi/logo.png">
         <img onload="loaded[0]++" src="img/tboi/refreshUI.png">
+        <h1>SFX</h1>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri-DoubleFail_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet1.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet2.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet3.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet4.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Bet5.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card01_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Card02_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Coin_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_GameOver_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Lose_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/Pokeri_Win_LOFI.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_button.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_cash_out.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/msc/slot_insert_coin.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_DOWN.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_KUBARU.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ALL1.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ALL2.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_TURN_ONLY.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_C_UP.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_BAD.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_DRAW.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_CASINO_WIN.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_COIN_BET.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_CLAP.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_DRAW.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_LOSE.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/nsmb/NCS_SE_MGM_L_PROMPT.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_3A.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_40.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_46.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_4E.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/sonic2/S2_6D.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/battery charge.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/blood bank touched.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/chest drop 1.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/coin slot.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/fart.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/holy!.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/i found pills 3.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/key drop 2.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/penny drop 1.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/superholy.wav"></audio>
+        <audio controls oncanplaythrough="loaded[1]++" preload="auto" src="sfx/tboi/thumbs down.wav"></audio>
     </div>
     <script>
         let loaded = [0, 0]

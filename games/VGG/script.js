@@ -1,4 +1,4 @@
-let version = 11
+let version = 12
 
 let player = {
     "money": 10,
@@ -41,7 +41,8 @@ let player = {
     "upgrades": {
         "tboiDonoAuto": false,
         "tboiSlotAuto": false,
-        "tboiClawAuto": false
+        "tboiClawAuto": false,
+        "nsmbAutoPlay": false
     },
     "options": {
         "tboiDonoSFX": true,
@@ -49,7 +50,9 @@ let player = {
         "tboiClawSFX": true,
         "tboiDonoAuto": true,
         "tboiSlotAuto": true,
-        "tboiClawAuto": true
+        "tboiClawAuto": true,
+        "nsmbSFX": true,
+        "nsmbAutoPlay": true
     }
 }
 

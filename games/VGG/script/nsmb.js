@@ -60,6 +60,10 @@ function nsmbStartPicturePoker(){
                         setTimeout(()=>{
                             player.machines.nsmbPoker.played = false
                             playSound("sfx/nsmb/NCS_SE_MGM_L_PROMPT.wav")
+
+                            if (player.options.nsmbAutoPlay && player.upgrades.nsmbAutoPlay){
+                                nsmbPlay()
+                            }
                         }, 100)
                     }
                 }, 200)
@@ -95,7 +99,41 @@ function nsmbCardSelect(card){
 
 function nsmbPlay(){
     player.machines.nsmbPoker.played = true
+    
     document.querySelector(".nsmbHoldDrawButton").style.width = "0px"
+    
+    let pokerCards = {}
+    for (let x = 0; x < 6; x++){
+        let value = player.machines.nsmbPoker.hand.filter(y => y==nsmbPokerCards[x]).length
+        if (value != 0){
+            pokerCards[nsmbPokerCards[x]] = value
+        }
+    }
+
+    let playerItems = Object.keys(pokerCards).map(function(key) {
+        return [key, pokerCards[key]];
+    })
+
+    playerItems.sort(function(first, second) {
+        return second[1] - first[1];
+    })
+
+    pokerCards = {}
+    for (let x = 0; x < 6; x++){
+        let value = player.machines.nsmbPoker.dealerHand.filter(y => y==nsmbPokerCards[x]).length
+        if (value != 0){
+            pokerCards[nsmbPokerCards[x]] = value
+        }
+    }
+
+    let items = Object.keys(pokerCards).map(function(key) {
+        return [key, pokerCards[key]];
+    })
+
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    })
+    
     if (player.machines.nsmbPoker.discard.reduce((partialSum, a) => partialSum + a, 0) > 1){
         playSound("sfx/nsmb/NCS_SE_MGM_C_TURN_ALL1.wav")
         setTimeout(()=>{
@@ -108,7 +146,7 @@ function nsmbPlay(){
         }, 750)
     }
 
-    if (player.machines.nsmbPoker.discard.reduce((partialSum, a) => partialSum + a, 0) != 0){
+    if (player.machines.nsmbPoker.discard.reduce((partialSum, a) => partialSum + a, 0) != 0 || items[0][1] == 4 || (items[0][1] == 3 && items[1][1] != 2) || items[0][1] == 2 || items[0][1] == 1){
         setTimeout(()=>{
             playSound("sfx/nsmb/NCS_SE_MGM_C_KUBARU.wav")
         }, 500)
@@ -119,6 +157,85 @@ function nsmbPlay(){
     }, 950)
 
     for (let x = 0; x < 5; x++){
+        let dealerDiscard = false
+
+        if (player.options.nsmbAutoPlay && player.upgrades.nsmbAutoPlay){
+            if (playerItems[0][1] == 5){
+            } else if (playerItems[0][1] == 4){
+                if (player.machines.nsmbPoker.hand[x] != playerItems[0][0]){
+                    player.machines.nsmbPoker.discard[x] = true
+                }
+            } else if (playerItems[0][1] == 3){
+                if (playerItems[1][1] == 2){
+                    if (player.machines.nsmbPoker.hand[x] != playerItems[0][0] && player.machines.nsmbPoker.hand[x] != playerItems[1][0]){
+                        player.machines.nsmbPoker.discard[x] = true
+                    }
+                } else {
+                    if (player.machines.nsmbPoker.hand[x] != playerItems[0][0]){
+                        player.machines.nsmbPoker.discard[x] = true
+                    }
+                }
+            } else if (playerItems[0][1] == 2){
+                if (playerItems[1][1] == 2){
+                    if (player.machines.nsmbPoker.hand[x] != playerItems[0][0] && player.machines.nsmbPoker.hand[x] != playerItems[1][0]){
+                        player.machines.nsmbPoker.discard[x] = true
+                    }
+                } else {
+                    if (player.machines.nsmbPoker.hand[x] != playerItems[0][0]){
+                        player.machines.nsmbPoker.discard[x] = true
+                    }
+                }
+            } else {
+                player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                player.machines.nsmbPoker.discard[x] = true
+            }
+        }
+        
+        if (items[0][1] == 5){
+        } else if (items[0][1] == 4){
+            if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                dealerDiscard = true
+            }
+        } else if (items[0][1] == 3){
+            if (items[1][1] == 2){
+                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
+                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                    dealerDiscard = true
+                }
+            } else {
+                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                    dealerDiscard = true
+                }
+            }
+        } else if (items[0][1] == 2){
+            if (items[1][1] == 2){
+                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
+                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                    dealerDiscard = true
+                }
+            } else {
+                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                    dealerDiscard = true
+                }
+            }
+        } else {
+            player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+            dealerDiscard = true
+        }
+
+        if (dealerDiscard){
+            setTimeout(()=>{
+                document.querySelector(".nsmbDealerCard" + x).style.marginTop = "-72px"
+            }, 250)
+
+            setTimeout(()=>{
+                document.querySelector(".nsmbDealerCard" + x).style.marginTop = "0px"
+            }, 500)
+        }
+
         if (player.machines.nsmbPoker.discard[x]){
             setTimeout(()=>{
                 document.querySelector(".nsmbPlayerCard" + x).style.backgroundImage = "url(img/nsmb/card/" + player.machines.nsmbPoker.hand[x] + "Flip.png)"
@@ -139,6 +256,10 @@ function nsmbPlay(){
             setTimeout(()=>{
                 player.machines.nsmbPoker.hand[x] = randomListItem(nsmbPokerCards)
                 document.querySelector(".nsmbPlayerCard" + x).style.marginTop = "0px"
+
+                if (dealerDiscard){
+                    document.querySelector(".nsmbDealerCard" + x).style.marginTop = "0px"
+                }
             }, 500)
             setTimeout(()=>{
                 document.querySelector(".nsmbPlayerCard" + x).style.transition = "all 0.05s linear"
@@ -402,6 +523,10 @@ function nsmbSort(){
         document.querySelector(".nsmbDealerScore").style.width = "0px"
         document.querySelector(".nsmbWinnings").innerHTML = ""
         document.querySelector(".nsmbHoldDrawButton").style.backgroundImage = "url(img/nsmb/hold.png)"
+        
+        if (player.options.nsmbAutoPlay && player.upgrades.nsmbAutoPlay){
+            nsmbStartPicturePoker()
+        }
     }, 4000)
 }
 
@@ -439,9 +564,77 @@ function nsmbBet(change){
     document.querySelector(".nsmbBet").innerHTML = textIcons.nsmbCoin + renderString(player.machines.nsmbPoker.bet+"", "none", "nsmbBig")
 }
 
+function nsmbLoadLeaderboards(){
+    if (loadingBoard || offline){
+        return
+    }
+
+    const nsmbBoards = [
+        ["5 of a kind", 15519],
+        ["4 of a Kind", 15520],
+        ["Full House", 15521],
+        ["3 of a Kind", 15522],
+        ["2 Pair", 15524],
+        ["1 Pair", 15523],
+        ["Junk", 15517]
+    ]
+
+    let nsmbLeaderboards = document.querySelector(".nsmbLeaderboards")
+    nsmbLeaderboards.innerHTML = ""
+    for (let x = 0; x < nsmbBoards.length; x++){
+        setTimeout(()=>{
+            let options = {
+                "period": NGIO.PERIOD_ALL_TIME,
+                "limit": 10
+            }
+
+            let boardDiv = document.createElement("div")
+            boardDiv.innerHTML += `<div style="width: max-content; margin: auto; margin-top: 16px">${renderString(nsmbBoards[x][0]+" Wins", "", "nsmbCreditsBlue", "right")}</div>`
+    
+            NGIO.getScores(nsmbBoards[x][1], options, function(onlinescores, board, options){
+                for (let score = 0; score < onlinescores.length; score++){
+                    if (NGIO.user.name == onlinescores[score].user.name){
+                        boardDiv.innerHTML += `<div style="display: flex; width: max-content; margin: auto; padding: 4px;">`+
+                            `<div style="min-width: 150px; margin-right: 4px;">${renderString(onlinescores[score].user.name, "", "nsmbCreditsLightRed", "right")}</div>`+
+                            `<div style="margin-left: 4px; min-width: 150px;">${renderString(onlinescores[score].value+"", "", "nsmbCredits", "left")}</div>`+
+                        `</div>`
+                    } else {
+                        boardDiv.innerHTML += `<div style="display: flex; width: max-content; margin: auto; padding: 4px;">`+
+                            `<div style="min-width: 150px; margin-right: 4px;">${renderString(onlinescores[score].user.name, "", "nsmbCredits", "right")}</div>`+
+                            `<div style="margin-left: 4px; min-width: 150px;">${renderString(onlinescores[score].value+"", "", "nsmbCredits", "left")}</div>`+
+                        `</div>`
+                    }
+                    
+                }
+
+                document.querySelector(".nsmbLeaderboards").appendChild(boardDiv)
+            })
+
+            if (x == nsmbBoards.length-1){
+                loadingBoard = false
+            }
+        }, x*1000)
+    }
+}
+
 nsmbBet(0)
-// nsmbRenderHierarchy([], [])
-// if (player.machines.nsmbPoker.hand != []){
-//     player.money += player.machines.nsmbPoker.bet*100
-//     player.machines.nsmbPoker.hand = []
-// }
+
+setTimeout(()=>{
+    if (player.options.nsmbAutoPlay && player.upgrades.nsmbAutoPlay){
+        nsmbStartPicturePoker()
+    }
+}, 1000)
+
+nsmbRenderHierarchy([],[])
+if (player.machines.nsmbPoker.hand.length != 0){
+    document.querySelector(".nsmbStartPoker").style.height = "0px"
+
+    for (let x = 0; x < 5; x++){
+        document.querySelector(".nsmbPlayerCards").innerHTML += (textIcons.nsmbCard.start + `nsmbCardSelect(${x})" class="nsmbPlayerCard${x}` + textIcons.nsmbCard.mid + player.machines.nsmbPoker.hand[x] + textIcons.nsmbCard.end)
+        document.querySelector(".nsmbDealerCards").innerHTML += (textIcons.nsmbCard.start + `" class="nsmbDealerCard${x}` + textIcons.nsmbCard.mid + "back" + textIcons.nsmbCard.end)
+        document.querySelector(".nsmbPlayerCard" + x).style.marginTop = "0px"
+        document.querySelector(".nsmbDealerCard" + x).style.marginTop = "0px"
+        document.querySelector(".nsmbPlayerCard" + x).style.transition = "all 0.05s linear"
+        document.querySelector(".nsmbDealerCard" + x).style.transition = "all 0.25s linear"
+    }
+}

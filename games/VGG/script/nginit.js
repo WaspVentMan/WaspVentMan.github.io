@@ -1,4 +1,5 @@
 let offline = true
+let loadingBoard = false
 let processing = false
 
 // Set up the options for NGIO.
@@ -36,7 +37,7 @@ let ngLoop = setInterval(function(){
 
             // user needs to log in
             case NGIO.STATUS_LOGIN_REQUIRED:
-                document.querySelector(".NewgroundsIO").innerHTML = "<h2>Log into to NEWGROUNDS to earn achievements!</h2><div class=\"ngButton\" onclick=\"NGIO.openLoginPage()\"><h1>Yes, please!</h1></div><div class=\"ngButton\" onclick=\"NGIO.skipLogin()\"><h1>No, thanks!</h1></div>"
+                document.querySelector(".NewgroundsIO").innerHTML = `<h2 style="text-align: left;">Log into to NEWGROUNDS to:<br>- Earn achievements!<br>- Compete on leaderboards!<br>- Other things eventually!</h2><div class="ngButton" onclick="NGIO.openLoginPage()"><h1>Yes, please!</h1></div><div class="ngButton" onclick="NGIO.skipLogin()"><h1>No, thanks!</h1></div>`
 
                 // Show a "Log In" button that calls NGIO.openLoginPage();
                 // Show a "No Thanks" button that calls NGIO.skipLogin();
@@ -45,7 +46,7 @@ let ngLoop = setInterval(function(){
 
             // We are waiting for the user to log in (they should have a login page in a new browser tab)
             case NGIO.STATUS_WAITING_FOR_USER:
-                document.querySelector(".NewgroundsIO").innerHTML = "<h1>Connecting to NEWGROUNDS</h1><br><div class=\"ngButton\" onclick=\"NGIO.cancelLogin()\"><h1>Wait, no!</h1></div>"
+                document.querySelector(".NewgroundsIO").innerHTML = `<h1>Connecting to NEWGROUNDS</h1><br><div class="ngButton" onclick="NGIO.cancelLogin()"><h1>Wait, no!</h1></div>`
 
                 // Show a "Cancel Login" button that calls NGIO.cancelLogin();
                 
@@ -54,8 +55,10 @@ let ngLoop = setInterval(function(){
             // user needs to log in
             case NGIO.STATUS_READY:
                 document.querySelector(".NewgroundsIO").style.display = "none"
-                if (NGIO.user != null){
+                if (NGIO.hasUser){
                     offline = false
+                    document.querySelector(".nsmbLeaderboardsParent").style.display = "block"
+                    document.querySelector(".mscLeaderboardsParent").style.display = "block"
                 }
 
                 // If NGIO.hasUser is false, the user opted not to sign in, so you may

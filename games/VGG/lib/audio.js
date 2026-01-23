@@ -1,5 +1,10 @@
+let documentFocus = false
 let sounds = []
 function playSound(sound, vol = 100){
+    if (!document.hasFocus() || !documentFocus){
+        return
+    }
+    
     let a = new Audio(sound)
     a.play()
     try {
@@ -17,6 +22,10 @@ function playSound(sound, vol = 100){
 
 let music = []
 function playMusic(sound, vol = 100){
+    if (!document.hasFocus() || !documentFocus){
+        return
+    }
+
     let a = new Audio(sound)
     a.play()
     try {
