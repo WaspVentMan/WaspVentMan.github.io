@@ -11,7 +11,7 @@
     <script src="lib/text.js"></script>
     <script src="lib/audio.js"></script>
 </head>
-<body style="background-color: black; overflow-x: hidden;" onclick="documentFocus = true">
+<body style="background-color: black; overflow-x: hidden;" onclick="documentFocus = true; this.onclick = ''">
     <div class="home" style="background-color: white; text-align: center; width: 100%; margin: auto; margin-bottom: 64px; padding-bottom: 16px;">
         <h1 style="padding: 16px;">VIDEO GAME GAMBLING</h1>
         <div class="NewgroundsIO ngButton" style="border-radius: 10px; outline: 2px solid orangered; background-color: lightsalmon; padding: 8px; width: max-content; margin: auto; margin-top: 18px; margin-bottom: 18px;"></div>
@@ -199,7 +199,7 @@
                 </div>
             </div>
             <details class="nsmbLeaderboardsParent" style="display: none;">
-                <summary style="color: yellow; text-align: center;"><img src="img/nsmb/leaderboards.png"></summary>
+                <summary style="color: yellow; text-align: center; zoom: 2; margin-top: 4px;"><img src="img/nsmb/leaderboards.png"></summary>
                 <div class="nsmbLeaderboards" onclick="nsmbLoadLeaderboards()">
                     <div style="width: max-content; margin: auto;">
                         <img src="img/nsmb/loadleaderboards.png">

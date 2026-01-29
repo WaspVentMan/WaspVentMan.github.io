@@ -191,39 +191,41 @@ function nsmbPlay(){
             }
         }
         
-        if (items[0][1] == 5){
-        } else if (items[0][1] == 4){
-            if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+        if (Math.random()*999 < player.machines.nsmbPoker.bet){
+            if (items[0][1] == 5){
+            } else if (items[0][1] == 4){
+                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                    dealerDiscard = true
+                }
+            } else if (items[0][1] == 3){
+                if (items[1][1] == 2){
+                    if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
+                        player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                        dealerDiscard = true
+                    }
+                } else {
+                    if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                        player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                        dealerDiscard = true
+                    }
+                }
+            } else if (items[0][1] == 2){
+                if (items[1][1] == 2){
+                    if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
+                        player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                        dealerDiscard = true
+                    }
+                } else {
+                    if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
+                        player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
+                        dealerDiscard = true
+                    }
+                }
+            } else {
                 player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
                 dealerDiscard = true
             }
-        } else if (items[0][1] == 3){
-            if (items[1][1] == 2){
-                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
-                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
-                    dealerDiscard = true
-                }
-            } else {
-                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
-                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
-                    dealerDiscard = true
-                }
-            }
-        } else if (items[0][1] == 2){
-            if (items[1][1] == 2){
-                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0] && player.machines.nsmbPoker.dealerHand[x] != items[1][0]){
-                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
-                    dealerDiscard = true
-                }
-            } else {
-                if (player.machines.nsmbPoker.dealerHand[x] != items[0][0]){
-                    player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
-                    dealerDiscard = true
-                }
-            }
-        } else {
-            player.machines.nsmbPoker.dealerHand[x] = randomListItem(nsmbPokerCards)
-            dealerDiscard = true
         }
 
         if (dealerDiscard){
@@ -589,7 +591,7 @@ function nsmbLoadLeaderboards(){
             }
 
             let boardDiv = document.createElement("div")
-            boardDiv.innerHTML += `<div style="width: max-content; margin: auto; margin-top: 16px">${renderString(nsmbBoards[x][0]+" Wins", "", "nsmbCreditsBlue", "right")}</div>`
+            boardDiv.innerHTML += `<div style="width: max-content; margin: auto; margin-top: 4px">${renderString(nsmbBoards[x][0]+" Wins", "", "nsmbCreditsBlue", "right")}</div>`
     
             NGIO.getScores(nsmbBoards[x][1], options, function(onlinescores, board, options){
                 for (let score = 0; score < onlinescores.length; score++){
